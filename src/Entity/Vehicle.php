@@ -2,12 +2,20 @@
 
 namespace App\Entity;
 
-use App\Repository\VehicleRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\VehicleRepository;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 /**
+ * @ApiResource(
+ *  normalizationContext={
+ *      "groups"={"vehicles_read"}
+ *  }
+ * )
  * @ORM\Entity(repositoryClass=VehicleRepository::class)
  */
 class Vehicle
@@ -32,7 +40,7 @@ class Vehicle
         self::FUEL_TYPE_ID['HYBRID'] => [
             'LABEL' => 'hybride'
         ],
-    ]; 
+    ];
 
     const DRIVING_STYLE_ID = [
         'MODERATE' => 1,
@@ -53,7 +61,7 @@ class Vehicle
             'LABEL' => 'agressif',
             'DAMAGE_PERCENTAGE' => 1.4
         ]
-    ]; 
+    ];
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -62,41 +70,57 @@ class Vehicle
     private $id;
 
     /**
+     * @Groups({"vehicles_read"})
+     * @Groups({"users_read"})
      * @ORM\Column(type="string", length=200)
      */
     private $name;
 
     /**
+     * @Groups({"vehicles_read"})
+     * @Groups({"users_read"})
      * @ORM\Column(type="datetime")
      */
     private $dateReleased;
 
     /**
+     * @Groups({"vehicles_read"})
+     * @Groups({"users_read"})
      * @ORM\Column(type="float")
      */
     private $mileageGlobale;
 
     /**
+     * @Groups({"vehicles_read"})
+     * @Groups({"users_read"})
      * @ORM\Column(type="float")
      */
     private $mileageMensual;
 
     /**
+     * @Groups({"vehicles_read"})
+     * @Groups({"users_read"})
      * @ORM\Column(type="integer")
      */
     private $fuelType;
 
     /**
+     * @Groups({"vehicles_read"})
+     * @Groups({"users_read"})
      * @ORM\Column(type="string", length=50)
      */
     private $registration;
 
     /**
+     * @Groups({"vehicles_read"})
+     * @Groups({"users_read"})
      * @ORM\Column(type="integer")
      */
     private $drivingStyle;
 
     /**
+     * @Groups({"vehicles_read"})
+     * @Groups({"users_read"})
      * @ORM\ManyToOne(targetEntity=VehicleType::class, inversedBy="vehicleList")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -113,10 +137,18 @@ class Vehicle
     private $appointmentList;
 
     /**
+     * @Groups({"vehicles_read"})
+     * @Groups({"users_read"})
      * @ORM\ManyToOne(targetEntity=VehicleBrand::class, inversedBy="vehicleList")
      * @ORM\JoinColumn(nullable=false)
      */
     private $vehicleBrand;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="vehicleList")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
 
     public function __construct()
     {
@@ -293,6 +325,18 @@ class Vehicle
     public function setVehicleBrand(?VehicleBrand $vehicleBrand): self
     {
         $this->vehicleBrand = $vehicleBrand;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

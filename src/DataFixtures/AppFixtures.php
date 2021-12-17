@@ -2,21 +2,35 @@
 
 namespace App\DataFixtures;
 
+use DateTime;
+use App\Entity\User;
+use App\Entity\Garage;
 use App\Entity\Service;
 use App\Entity\Vehicle;
 use App\Entity\Appointment;
-use App\Entity\Garage;
+use App\Entity\VehiclePart;
 use App\Entity\VehicleType;
 use App\Entity\VehicleBrand;
 use App\Entity\ServiceCategory;
-use App\Entity\VehiclePart;
 use App\Entity\VehicleTypePart;
-use DateTime;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
+    private $userPasswordHasher;
+
+    /**
+     * Password encoder 
+     *
+     * @param UserPasswordHasherInterface $encoder
+     */
+    public function __construct(UserPasswordHasherInterface $userPasswordHasher)
+    {
+        $this->userPasswordHasher = $userPasswordHasher;
+    }
+
     public function load(ObjectManager $manager): void
     {
         $data = [
@@ -150,6 +164,13 @@ class AppFixtures extends Fixture
             ],
             'vehicles' => [
                 [
+                    'user' => [
+                        'first_name' => 'Jean Claude',
+                        'last_name' => 'Vandame',
+                        'phone' => '06 00 00 00 11',
+                        'mail' => 'jc.vd@mail.com',
+                        'password' => '1234'
+                    ],
                     'name' => 'Porsh carrera',
                     'fuel_type' => Vehicle::FUEL_TYPE_ID['DIESEL'],
                     'registration' => '455-SF-45',
@@ -166,6 +187,13 @@ class AppFixtures extends Fixture
                     ]
                 ],
                 [
+                    'user' => [
+                        'first_name' => 'Le mec',
+                        'last_name' => 'Sympa',
+                        'phone' => '06 00 00 00 22',
+                        'mail' => 'lemec.sympa@mail.com',
+                        'password' => '1234'
+                    ],
                     'name' => 'Citroen C3',
                     'fuel_type' => Vehicle::FUEL_TYPE_ID['ESCENCE'],
                     'registration' => '686-KJ-78',
@@ -182,6 +210,13 @@ class AppFixtures extends Fixture
                     ]
                 ],
                 [
+                    'user' => [
+                        'first_name' => 'Le gars',
+                        'last_name' => 'Vener',
+                        'phone' => '06 00 00 00 77',
+                        'mail' => 'legars.vener@mail.com',
+                        'password' => '1234'
+                    ],
                     'name' => 'Ford Couga',
                     'fuel_type' => Vehicle::FUEL_TYPE_ID['HYBRID'],
                     'registration' => '123-GM-98',
@@ -198,6 +233,13 @@ class AppFixtures extends Fixture
                     ]
                 ],
                 [
+                    'user' => [
+                        'first_name' => 'Usain',
+                        'last_name' => 'Bolt',
+                        'phone' => '06 00 00 00 55',
+                        'mail' => 'usain.bolt@mail.com',
+                        'password' => '1234'
+                    ],
                     'name' => 'Renault Picaso',
                     'fuel_type' => Vehicle::FUEL_TYPE_ID['ESCENCE'],
                     'registration' => '654-ML-18',
@@ -248,10 +290,10 @@ class AppFixtures extends Fixture
                         ->setService($service);
 
                     if (isset($vehicleTypeData['max_distance'])) {
-                        $vehicleTypePart->setCalculDurationChoice(VehicleTypePart::CALCUL_DURATION_CHOICE_ID['MILEAGE']); 
+                        $vehicleTypePart->setCalculDurationChoice(VehicleTypePart::CALCUL_DURATION_CHOICE_ID['MILEAGE']);
                         $vehicleTypePart->setMaxDistance($vehicleTypeData['max_distance']);
                     } else if (isset($vehicleTypeData['max_duration'])) {
-                        $vehicleTypePart->setCalculDurationChoice(VehicleTypePart::CALCUL_DURATION_CHOICE_ID['DURATION']); 
+                        $vehicleTypePart->setCalculDurationChoice(VehicleTypePart::CALCUL_DURATION_CHOICE_ID['DURATION']);
                         $vehicleTypePart->setMaxDuration($vehicleTypeData['max_duration']);
                     }
 
@@ -305,6 +347,16 @@ class AppFixtures extends Fixture
                 ->setVehicleType($vehicleType['voiture'])
                 ->setVehicleBrand($vehicleBrand[array_rand($vehicleBrand)]);
 
+            $user = new User();
+            $user
+                ->setEmail($vehicleData['user']['mail'])
+                ->setFirstName($vehicleData['user']['first_name'])
+                ->setLastName($vehicleData['user']['last_name'])
+                ->setPhone($vehicleData['user']['phone'])
+                ->setPassword($this->userPasswordHasher->hashPassword($user, $vehicleData['user']['password']))
+                ->addVehicleList($vehicle);
+
+            $manager->persist($user);
 
             // Create all vehicle Part for this user 
             foreach ($vehicle->getVehicleType()->getVehicleTypePartList() as $vehicleTypePart) {
@@ -343,7 +395,6 @@ class AppFixtures extends Fixture
                 }
                 $manager->persist($appointment);
             }
-
         }
 
         // Save all entities

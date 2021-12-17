@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\VehicleTypeRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\VehicleTypeRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=VehicleTypeRepository::class)
@@ -20,6 +21,8 @@ class VehicleType
     private $id;
 
     /**
+     * @Groups({"vehicles_read"})
+     * @Groups({"users_read"})
      * @ORM\Column(type="string", length=200)
      */
     private $name;
