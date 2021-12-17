@@ -5,7 +5,7 @@
 Weem est une carnet d'entretien de vehicule en ligne pour les automobilistes ne s'y connaissant pas en mécanique. L'application Weem permet d'avoir un carnet d'entretien numérique et de prendre rendez-vous avec des garagistes directement dans l'application. Weem permet de regrouper sur une même plateforme l'état actuel de votre véhicule et la prise de rendez-vous avec un professionel dans une seule application qui se veut être l'écosystème lié à votre voiture au sein de votre téléphone.
 </p>
 
-![Weem cover](https://drive.google.com/uc?export=view&id=1onkvmh6Jgnmg4ED09ujf1N4b53XQpADP)
+![Weem cover](https://doc-14-10-docs.googleusercontent.com/docs/securesc/raueve89t549pq9jfq5m3knr5mi1srmp/d081gsdc2e47sp7rh79aiv68kdll9c3c/1639744125000/08438103934182201254/10946612454472641324/1onkvmh6Jgnmg4ED09ujf1N4b53XQpADP?e=view&authuser=0&nonce=nnkripbkjibug&user=10946612454472641324&hash=6j0so01dpf8jqfm49a9hjbnb8qbaluvd)
 
 ### Stack technique
 
