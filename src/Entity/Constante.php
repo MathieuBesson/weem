@@ -10,16 +10,17 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ApiResource(
  *  itemOperations={
- *     "test"={
+ *  },
+ *  collectionOperations={
+ *    "all_constants"={
  *       "method"="get", 
  *       "path"="/constantes", 
  *       "controller"="App\Controller\ConstanteController", 
  *       "normalization_context"={"groups"={"constante_read"}},
  *       "defaults"={"identifiedBy"="id"},
  *       "read"=false
- *     }
- *  },
- *  collectionOperations={}
+ *    }
+ * }
  * )
  */
 class Constante
