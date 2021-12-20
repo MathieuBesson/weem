@@ -9,8 +9,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(
- *  itemOperations={
- *  },
+ *  itemOperations={},
  *  collectionOperations={
  *    "all_constants"={
  *       "method"="get", 
@@ -30,5 +29,4 @@ class Constante
      * @ApiProperty(identifier=true)
      */
     public $id;
-    
 }

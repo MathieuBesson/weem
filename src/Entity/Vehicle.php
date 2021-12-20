@@ -145,6 +145,7 @@ class Vehicle
     private $vehicleBrand;
 
     /**
+     * @Groups({"vehicles_read"})
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="vehicleList")
      * @ORM\JoinColumn(nullable=false)
      */

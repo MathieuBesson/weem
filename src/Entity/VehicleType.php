@@ -5,15 +5,22 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\VehicleTypeRepository;
 use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
+ * @ApiResource(
+ *  normalizationContext={
+ *      "groups"={"vehicleType_read"}
+ *  }
+ * )
  * @ORM\Entity(repositoryClass=VehicleTypeRepository::class)
  */
 class VehicleType
 {
     /**
+     * @Groups({"vehicleType_read"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -21,6 +28,7 @@ class VehicleType
     private $id;
 
     /**
+     * @Groups({"vehicleType_read"})
      * @Groups({"vehicles_read"})
      * @Groups({"users_read"})
      * @ORM\Column(type="string", length=200)
