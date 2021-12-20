@@ -2,12 +2,18 @@
 
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\VehicleTypePartRepository;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ApiResource(
+ *  normalizationContext={
+ *      "groups"={"vehicleType_read"}
+ *  }
+ * )
  * @ORM\Entity(repositoryClass=VehicleTypePartRepository::class)
  */
 class VehicleTypePart
@@ -53,21 +59,34 @@ class VehicleTypePart
 
     /**
      * @ORM\Column(type="string", length=200)
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 200,
+     *      minMessage = "Le nom du type de pièce de véhicule doit être une chaine et doit faire au minimum {{ limit }} caractères",
+     *      maxMessage = "Le nom du type de pièce de véhicule doit être une chaine et doit faire au maximum {{ limit }} caractères"
+     * )
+     * @Assert\NotBlank(message="Le nom du type de pièce de véhicule ne peut pas être vide")
      */
     private $name;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="L'importance ne peut pas être vide")
+     * @Assert\Choice(choices=VehicleTypePart::IMPORTANCE_ID, message="Choisissez une importance valide")
      */
     private $importance;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank(message="Le prix minimum ne peut pas être vide")
+     * @Assert\Positive(message="Le prix minimum doit être un entier ou flottant supérieur à 0")
      */
     private $priceMin;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank(message="Le prix maximum ne peut pas être vide")
+     * @Assert\Positive(message="Le prix maximum doit être un entier ou flottant supérieur à 0")
      */
     private $priceMax;
 
@@ -84,21 +103,26 @@ class VehicleTypePart
     /**
      * @ORM\ManyToOne(targetEntity=Service::class, inversedBy="vehicleTypePartList")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank(message="Le service ne peut pas être vide")
      */
     private $service;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Positive(message="La durée maximum doit être un entier ou flottant supérieur à 0")
      */
     private $maxDuration;
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Assert\Positive(message="La distance maximum doit être un entier ou flottant supérieur à 0")
      */
     private $maxDistance;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="Le choix du type de calcul ne peut pas être vide")
+     * @Assert\Choice(choices=VehicleTypePart::CALCUL_DURATION_CHOICE_ID, message="Choisissez un choix du type de calcul valide")
      */
     private $calculDurationChoice;
 

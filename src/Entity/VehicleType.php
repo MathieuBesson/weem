@@ -29,9 +29,16 @@ class VehicleType
 
     /**
      * @Groups({"vehicleType_read"})
-     * @Groups({"vehicles_read"})
-     * @Groups({"users_read"})
+     * @Groups({"vehicleList_read"})
+     * @Groups({"userList_read"})
      * @ORM\Column(type="string", length=200)
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 200,
+     *      minMessage = "Le nom du type de véhicule doit être une chaine et doit faire au minimum {{ limit }} caractères",
+     *      maxMessage = "Le nom du type de véhicule doit être une chaine et doit faire au maximum {{ limit }} caractères"
+     * )
+     * @Assert\NotBlank(message="Le nom du type de véhicule ne peut pas être vide")
      */
     private $name;
 

@@ -8,13 +8,15 @@ use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
  * @ApiResource(
  *  normalizationContext={
- *      "groups"={"vehicles_read"}
- *  }
+ *      "groups"={"vehicleList_read"}
+ *  },
+ *  denormalizationContext={"disable_type_enforcement"=true}
  * )
  * @ORM\Entity(repositoryClass=VehicleRepository::class)
  */
@@ -70,59 +72,84 @@ class Vehicle
     private $id;
 
     /**
-     * @Groups({"vehicles_read"})
-     * @Groups({"users_read"})
+     * @Groups({"vehicleList_read"})
+     * @Groups({"userList_read"})
      * @ORM\Column(type="string", length=200)
+     * @Assert\NotBlank(message="Le nom ne peut pas être vide")
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 300,
+     *      minMessage = "Le nom du véhicule doit être une chaine et doit faire au minimum {{ limit }} caractères",
+     *      maxMessage = "Le nom du véhicule doit être une chaine et doit faire au maximum {{ limit }} caractères"
+     * )
      */
     private $name;
 
     /**
-     * @Groups({"vehicles_read"})
-     * @Groups({"users_read"})
+     * @Groups({"vehicleList_read"})
+     * @Groups({"userList_read"})
      * @ORM\Column(type="datetime")
+     * @Assert\NotBlank(message="La date de création ne peut pas être vide")
+     * @Assert\DateTime(message="La date doit être un datetime valide")
      */
     private $dateReleased;
 
     /**
-     * @Groups({"vehicles_read"})
-     * @Groups({"users_read"})
+     * @Groups({"vehicleList_read"})
+     * @Groups({"userList_read"})
      * @ORM\Column(type="float")
+     * @Assert\NotBlank(message="Le kilometrage globale ne peut pas être vide")
+     * @Assert\Positive(message="Le kilometrage globale doit être un entier ou flottant supérieur à 0")
      */
     private $mileageGlobale;
 
     /**
-     * @Groups({"vehicles_read"})
-     * @Groups({"users_read"})
+     * @Groups({"vehicleList_read"})
+     * @Groups({"userList_read"})
      * @ORM\Column(type="float")
+     * @Assert\NotBlank(message="Le kilometrage mensuel ne peut pas être vide")
+     * @Assert\Positive(message="Le kilometrage mensuel doit être un entier ou flottant supérieur à 0")
      */
     private $mileageMensual;
 
     /**
-     * @Groups({"vehicles_read"})
-     * @Groups({"users_read"})
+     * @Groups({"vehicleList_read"})
+     * @Groups({"userList_read"})
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="Le type de carburant ne peut pas être vide")
+     * @Assert\Choice(choices=Vehicle::FUEL_TYPE_ID, message="Choisissez un type de carburant valide")
      */
     private $fuelType;
 
     /**
-     * @Groups({"vehicles_read"})
-     * @Groups({"users_read"})
+     * @Groups({"vehicleList_read"})
+     * @Groups({"userList_read"})
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank(message="L'immatriculation ne peut pas être vide")
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 50,
+     *      minMessage = "L'immatriculation doit faire au minimum {{ limit }} caractères",
+     *      maxMessage = "L'immatriculation doit faire au maximum {{ limit }} caractères"
+     * )
      */
     private $registration;
 
     /**
-     * @Groups({"vehicles_read"})
-     * @Groups({"users_read"})
+     * @Groups({"vehicleList_read"})
+     * @Groups({"userList_read"})
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="Le type de conduite ne peux pas être vide")
+     * @Assert\Choice(choices=Vehicle::DRIVING_STYLE_ID, message="Choisissez un type de conduite valide")
      */
     private $drivingStyle;
 
     /**
-     * @Groups({"vehicles_read"})
-     * @Groups({"users_read"})
+     * @Groups({"vehicleList_read"})
+     * @Groups({"userList_read"})
      * @ORM\ManyToOne(targetEntity=VehicleType::class, inversedBy="vehicleList")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank(message="Le type de vehicule ne peux pas être vide")
      */
     private $vehicleType;
 
@@ -137,16 +164,18 @@ class Vehicle
     private $appointmentList;
 
     /**
-     * @Groups({"vehicles_read"})
-     * @Groups({"users_read"})
+     * @Groups({"vehicleList_read"})
+     * @Groups({"userList_read"})
      * @ORM\ManyToOne(targetEntity=VehicleBrand::class, inversedBy="vehicleList")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank(message="La marque du véhicule ne peux pas être vide")
      */
     private $vehicleBrand;
 
     /**
-     * @Groups({"vehicles_read"})
+     * @Groups({"vehicleList_read"})
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="vehicleList")
+     * @Assert\NotBlank(message="L'utilisateur ne peux pas être vide")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
@@ -179,7 +208,7 @@ class Vehicle
         return $this->dateReleased;
     }
 
-    public function setDateReleased(\DateTimeInterface $dateReleased): self
+    public function setDateReleased($dateReleased): self
     {
         $this->dateReleased = $dateReleased;
 
@@ -191,7 +220,7 @@ class Vehicle
         return $this->mileageGlobale;
     }
 
-    public function setMileageGlobale(float $mileageGlobale): self
+    public function setMileageGlobale($mileageGlobale): self
     {
         $this->mileageGlobale = $mileageGlobale;
 
@@ -203,7 +232,7 @@ class Vehicle
         return $this->mileageMensual;
     }
 
-    public function setMileageMensual(float $mileageMensual): self
+    public function setMileageMensual($mileageMensual): self
     {
         $this->mileageMensual = $mileageMensual;
 

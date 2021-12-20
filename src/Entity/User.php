@@ -9,20 +9,28 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
  *  normalizationContext={
- *      "groups"={"users_read"}
- *  }
+ *      "groups"={"userList_read"}
+ *  },
+ *  denormalizationContext={"disable_type_enforcement"=true}
  * )
+ * @UniqueEntity("email", message="Un utilisateur ayant cette adresse email existe déjà")
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    // Minimum eight characters, at least one uppercase letter, one lowercase letter and one number
+    const REGEX_PASSWORD = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/"; 
+    const REGEX_PHONE_NUMBER = "/^\(0\)[0-9]*$/";
+
     /**
-     * @Groups({"users_read"})
+     * @Groups({"userList_read"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -30,13 +38,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $id;
 
     /**
-     * @Groups({"users_read"})
+     * @Groups({"userList_read"})
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\Email(message="L'adresse email doit être une chaine au format valide")
      */
     private $email;
 
     /**
-     * @Groups({"users_read"})
+     * @Groups({"userList_read"})
      * @ORM\Column(type="json")
      */
     private $roles = [];
@@ -44,29 +53,51 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\Regex(
+     *     pattern=User::REGEX_PASSWORD,
+     *     match=true,
+     *     message="Le mot de passe doit être une chaine au format valide"
+     * )
      */
     private $password;
 
     /**
-     * @Groups({"users_read"})
+     * @Groups({"userList_read"})
      * @ORM\Column(type="string", length=300)
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 300,
+     *      minMessage = "Votre prénom doit être une chaine et faire au minimum {{ limit }} caractères",
+     *      maxMessage = "Votre nom doit être une chaine et faire au maximum {{ limit }} caractères"
+     * )
      */
     private $firstName;
 
     /**
-     * @Groups({"users_read"})
+     * @Groups({"userList_read"})
      * @ORM\Column(type="string", length=300)
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 300,
+     *      minMessage = "Votre prénom doit être une chaine et faire au minimum {{ limit }} caractères",
+     *      maxMessage = "Votre nom doit être une chaine et faire au minimum {{ limit }} caractères"
+     * )
      */
     private $lastName;
 
     /**
-     * @Groups({"users_read"})
+     * @Groups({"userList_read"})
      * @ORM\Column(type="string", length=100, nullable=true)
+     * @Assert\Regex(
+     *     pattern=User::REGEX_PHONE_NUMBER,
+     *     match=true,
+     *     message="Votre numéro de téléphone doit être une chaine au format valide"
+     * )
      */
     private $phone;
 
     /**
-     * @Groups({"users_read"})
+     * @Groups({"userList_read"})
      * @ORM\OneToMany(targetEntity=Vehicle::class, mappedBy="user")
      */
     private $vehicleList;
