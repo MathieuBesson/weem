@@ -25,12 +25,18 @@ class VehicleSubscriber implements EventSubscriberInterface
         ];
     }
 
+    /**
+     * Set user current account to vehicle POST
+     *
+     * @param ViewEvent $event - Event subscriber catch 
+     * @return void
+     */
     public function setUserForVehicle(ViewEvent $event)
     {
         $vehicle = $event->getControllerResult();
         $method = $event->getRequest()->getMethod();
 
-        // On Vehicle post link his user 
+        // On Vehicle POST link his user 
         if ($vehicle instanceof Vehicle && $method === "POST") {
             $vehicle->setUser($this->security->getUser());
         }

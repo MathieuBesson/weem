@@ -26,6 +26,12 @@ class PasswordEncoderSubscriber implements EventSubscriberInterface
         ];
     }
 
+    /**
+     * Encode password on user creation PRE_WRITE
+     *
+     * @param ViewEvent $event - Event subscriber catch 
+     * @return void
+     */
     public function encodePassword(ViewEvent $event)
     {
         $user = $event->getControllerResult();

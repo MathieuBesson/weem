@@ -13,12 +13,10 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class VehicleVehiclePartSubscriber implements EventSubscriberInterface
 {
-    private $security;
     private $em;
 
-    public function __construct(Security $security, EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $em)
     {
-        $this->security = $security;
         $this->em = $em;
     }
 
@@ -29,11 +27,18 @@ class VehicleVehiclePartSubscriber implements EventSubscriberInterface
         ];
     }
 
+    /**
+     * Add vehicle part list on Vehicle POST 
+     *
+     * @param ViewEvent $event - Event subscriber catch 
+     * @return void
+     */
     public function createVehiclePartList(ViewEvent $event)
     {
         $vehicle = $event->getControllerResult();
         $method = $event->getRequest()->getMethod();
 
+        // On Vehicle POST create all vehicle part f° of VehicleTypePart
         if ($vehicle instanceof Vehicle && $method === "POST") {
             foreach ($vehicle->getVehicleType()->getVehicleTypePartList() as $vehicleTypePartItem) {
                 $vehiclePart = new VehiclePart(); 
