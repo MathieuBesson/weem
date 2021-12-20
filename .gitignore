@@ -22,3 +22,8 @@
 ###> lexik/jwt-authentication-bundle ###
 # /config/jwt/*.pem
 ###< lexik/jwt-authentication-bundle ###
+
+###> VSCode/PhpStorm IDE ###
+/.vscode
+/.idea
+###< VSCode/PhpStorm IDE ###
