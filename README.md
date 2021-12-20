@@ -34,7 +34,7 @@ Le projet d'organise en 2 niveaux :
 
 ### 1. Avec le Makefile (en 1 commande)
 
-Si vous n'avez pas make d'installer sur votre machine, vous pouvez le [télécharger ici](http://gnuwin32.sourceforge.net/packages/make.htm)
+Si vous n'avez pas make d'installé sur votre machine, vous pouvez le [télécharger ici](http://gnuwin32.sourceforge.net/packages/make.htm)
 
 ```shell
 make start
