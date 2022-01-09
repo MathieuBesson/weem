@@ -2,14 +2,14 @@
 
 namespace App\Events;
 
-use App\Entity\Vehicle;
+use App\Entity\Car;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use ApiPlatform\Core\EventListener\EventPriorities;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class VehicleSubscriber implements EventSubscriberInterface
+class CarSubscriber implements EventSubscriberInterface
 {
     private $security;
 
@@ -21,24 +21,24 @@ class VehicleSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            KernelEvents::VIEW => ['setUserForVehicle', EventPriorities::PRE_VALIDATE]
+            KernelEvents::VIEW => ['setUserForCar', EventPriorities::PRE_VALIDATE]
         ];
     }
 
     /**
-     * Set user current account to vehicle POST
+     * Set user current account to car POST
      *
      * @param ViewEvent $event - Event subscriber catch 
      * @return void
      */
-    public function setUserForVehicle(ViewEvent $event)
+    public function setUserForCar(ViewEvent $event)
     {
-        $vehicle = $event->getControllerResult();
+        $car = $event->getControllerResult();
         $method = $event->getRequest()->getMethod();
 
-        // On Vehicle POST link his user 
-        if ($vehicle instanceof Vehicle && $method === "POST") {
-            $vehicle->setUser($this->security->getUser());
+        // On Car POST link his user 
+        if ($car instanceof Car && $method === "POST") {
+            $car->setUser($this->security->getUser());
         }
     }
 }

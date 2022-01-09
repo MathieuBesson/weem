@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\VehicleRepository;
+use App\Repository\CarRepository;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -14,14 +14,16 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ApiResource(
  *  normalizationContext={
- *      "groups"={"vehicleList_read"}
+ *      "groups"={"carList_read"}
  *  },
  *  denormalizationContext={"disable_type_enforcement"=true}
  * )
- * @ORM\Entity(repositoryClass=VehicleRepository::class)
+ * @ORM\Entity(repositoryClass=CarRepository::class)
  */
-class Vehicle
+class Car
 {
+    const REGEX_COLOR_HEXA = "/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/";
+
     const FUEL_TYPE_ID = [
         'ELECTRIC' => 1,
         'ESCENCE' => 2,
@@ -64,6 +66,34 @@ class Vehicle
             'DAMAGE_PERCENTAGE' => 1.4
         ]
     ];
+
+
+    const MODEL_TYPE_ID = [
+        'COUPE' => 1,
+        'BERLINE' => 2,
+        'SUV' => 3,
+        'PICK_UP' => 4,
+        'BREAK' => 5
+    ];
+
+    const MODEL_TYPE = [
+        self::MODEL_TYPE_ID['COUPE'] => [
+            'LABEL' => 'coupé',
+        ],
+        self::MODEL_TYPE_ID['BERLINE'] => [
+            'LABEL' => 'berline',
+        ],
+        self::MODEL_TYPE_ID['SUV'] => [
+            'LABEL' => 'SUV',
+        ],
+        self::MODEL_TYPE_ID['PICK_UP'] => [
+            'LABEL' => 'pick-up',
+        ],
+        self::MODEL_TYPE_ID['BREAK'] => [
+            'LABEL' => 'break',
+        ]
+    ];
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -72,7 +102,7 @@ class Vehicle
     private $id;
 
     /**
-     * @Groups({"vehicleList_read"})
+     * @Groups({"carList_read"})
      * @Groups({"userList_read"})
      * @ORM\Column(type="string", length=200)
      * @Assert\NotBlank(message="Le nom ne peut pas être vide")
@@ -86,7 +116,7 @@ class Vehicle
     private $name;
 
     /**
-     * @Groups({"vehicleList_read"})
+     * @Groups({"carList_read"})
      * @Groups({"userList_read"})
      * @ORM\Column(type="datetime")
      * @Assert\NotBlank(message="La date de création ne peut pas être vide")
@@ -95,7 +125,7 @@ class Vehicle
     private $dateReleased;
 
     /**
-     * @Groups({"vehicleList_read"})
+     * @Groups({"carList_read"})
      * @Groups({"userList_read"})
      * @ORM\Column(type="float")
      * @Assert\NotBlank(message="Le kilometrage globale ne peut pas être vide")
@@ -104,7 +134,7 @@ class Vehicle
     private $mileageGlobale;
 
     /**
-     * @Groups({"vehicleList_read"})
+     * @Groups({"carList_read"})
      * @Groups({"userList_read"})
      * @ORM\Column(type="float")
      * @Assert\NotBlank(message="Le kilometrage mensuel ne peut pas être vide")
@@ -113,16 +143,16 @@ class Vehicle
     private $mileageMensual;
 
     /**
-     * @Groups({"vehicleList_read"})
+     * @Groups({"carList_read"})
      * @Groups({"userList_read"})
      * @ORM\Column(type="integer")
      * @Assert\NotBlank(message="Le type de carburant ne peut pas être vide")
-     * @Assert\Choice(choices=Vehicle::FUEL_TYPE_ID, message="Choisissez un type de carburant valide")
+     * @Assert\Choice(choices=Car::FUEL_TYPE_ID, message="Choisissez un type de carburant valide")
      */
     private $fuelType;
 
     /**
-     * @Groups({"vehicleList_read"})
+     * @Groups({"carList_read"})
      * @Groups({"userList_read"})
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank(message="L'immatriculation ne peut pas être vide")
@@ -136,54 +166,60 @@ class Vehicle
     private $registration;
 
     /**
-     * @Groups({"vehicleList_read"})
+     * @Groups({"carList_read"})
      * @Groups({"userList_read"})
      * @ORM\Column(type="integer")
      * @Assert\NotBlank(message="Le type de conduite ne peux pas être vide")
-     * @Assert\Choice(choices=Vehicle::DRIVING_STYLE_ID, message="Choisissez un type de conduite valide")
+     * @Assert\Choice(choices=Car::DRIVING_STYLE_ID, message="Choisissez un type de conduite valide")
      */
     private $drivingStyle;
 
     /**
-     * @Groups({"vehicleList_read"})
+     * @Groups({"carList_read"})
      * @Groups({"userList_read"})
-     * @ORM\ManyToOne(targetEntity=VehicleType::class, inversedBy="vehicleList")
-     * @ORM\JoinColumn(nullable=false)
-     * @Assert\NotBlank(message="Le type de vehicule ne peux pas être vide")
+     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Choice(choices=Car::MODEL_TYPE_ID, message="Choisissez un model valide")
      */
-    private $vehicleType;
+    private $modelType;
 
     /**
-     * @ORM\OneToMany(targetEntity=VehiclePart::class, mappedBy="vehicle")
-     */
-    private $vehiclePartList;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Appointment::class, mappedBy="vehicle")
-     */
-    private $appointmentList;
-
-    /**
-     * @Groups({"vehicleList_read"})
+     * @Groups({"carList_read"})
      * @Groups({"userList_read"})
-     * @ORM\ManyToOne(targetEntity=VehicleBrand::class, inversedBy="vehicleList")
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Regex(
+     *     pattern=Car::REGEX_COLOR_HEXA,
+     *     match=true,
+     *     message="La couleur doit être au format hexadecimal"
+     * )
+     */
+    private $color;
+
+    /**
+     * @Groups({"carList_read"})
+     * @Groups({"userList_read"})
+     * @ORM\ManyToOne(targetEntity=CarBrand::class, inversedBy="carList")
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotBlank(message="La marque du véhicule ne peux pas être vide")
      */
-    private $vehicleBrand;
+    private $carBrand;
 
     /**
-     * @Groups({"vehicleList_read"})
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="vehicleList")
+     * @Groups({"carList_read"})
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="carList")
      * @Assert\NotBlank(message="L'utilisateur ne peux pas être vide")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
+    /**
+     * @ORM\OneToMany(targetEntity=CarPart::class, mappedBy="car")
+     */
+    private $carPartList;
+
     public function __construct()
     {
-        $this->vehiclePartList = new ArrayCollection();
-        $this->appointmentList = new ArrayCollection();
+        $this->carPartList = new ArrayCollection();
+        $this->carStandardPartList = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -275,86 +311,38 @@ class Vehicle
         return $this;
     }
 
-    public function getVehicleType(): ?VehicleType
+    public function getColor(): ?string
     {
-        return $this->vehicleType;
+        return $this->color;
     }
 
-    public function setVehicleType(?VehicleType $vehicleType): self
+    public function setColor(string $color): self
     {
-        $this->vehicleType = $vehicleType;
+        $this->color = $color;
 
         return $this;
     }
 
-    /**
-     * @return Collection|VehiclePart[]
-     */
-    public function getVehiclePartList(): Collection
+    public function getModelType(): ?int
     {
-        return $this->vehiclePartList;
+        return $this->modelType;
     }
 
-    public function addVehiclePartList(VehiclePart $vehiclePartList): self
+    public function setModelType(string $modelType): self
     {
-        if (!$this->vehiclePartList->contains($vehiclePartList)) {
-            $this->vehiclePartList[] = $vehiclePartList;
-            $vehiclePartList->setVehicle($this);
-        }
+        $this->modelType = $modelType;
 
         return $this;
     }
 
-    public function removeVehiclePartList(VehiclePart $vehiclePartList): self
+    public function getCarBrand(): ?CarBrand
     {
-        if ($this->vehiclePartList->removeElement($vehiclePartList)) {
-            // set the owning side to null (unless already changed)
-            if ($vehiclePartList->getVehicle() === $this) {
-                $vehiclePartList->setVehicle(null);
-            }
-        }
-
-        return $this;
+        return $this->carBrand;
     }
 
-    /**
-     * @return Collection|Appointment[]
-     */
-    public function getAppointmentList(): Collection
+    public function setCarBrand(?CarBrand $carBrand): self
     {
-        return $this->appointmentList;
-    }
-
-    public function addAppointmentList(Appointment $appointmentList): self
-    {
-        if (!$this->appointmentList->contains($appointmentList)) {
-            $this->appointmentList[] = $appointmentList;
-            $appointmentList->setVehicle($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAppointmentList(Appointment $appointmentList): self
-    {
-        if ($this->appointmentList->removeElement($appointmentList)) {
-            // set the owning side to null (unless already changed)
-            if ($appointmentList->getVehicle() === $this) {
-                $appointmentList->setVehicle(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getVehicleBrand(): ?VehicleBrand
-    {
-        return $this->vehicleBrand;
-    }
-
-    public function setVehicleBrand(?VehicleBrand $vehicleBrand): self
-    {
-        $this->vehicleBrand = $vehicleBrand;
+        $this->carBrand = $carBrand;
 
         return $this;
     }
@@ -367,6 +355,36 @@ class Vehicle
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CarPart[]
+     */
+    public function getCarPartList(): Collection
+    {
+        return $this->carPartList;
+    }
+
+    public function addCarPartList(CarPart $carPartList): self
+    {
+        if (!$this->carPartList->contains($carPartList)) {
+            $this->carPartList[] = $carPartList;
+            $carPartList->setCar($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCarPartList(CarPart $carPartList): self
+    {
+        if ($this->carPartList->removeElement($carPartList)) {
+            // set the owning side to null (unless already changed)
+            if ($carPartList->getCar() === $this) {
+                $carPartList->setCar(null);
+            }
+        }
 
         return $this;
     }

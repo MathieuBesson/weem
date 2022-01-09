@@ -3,9 +3,8 @@
 namespace App\Doctrine;
 
 use App\Entity\User;
-use App\Entity\Vehicle;
-use App\Entity\Appointment;
-use App\Entity\VehiclePart;
+use App\Entity\Car;
+use App\Entity\CarPart;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Security\Core\Security;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
@@ -38,9 +37,9 @@ class CurrentUserExtension implements QueryCollectionExtensionInterface, QueryIt
 
         // Get entity directly linked with User 
         if (
-            ($resourceClass === Vehicle::class ||
-                $resourceClass === VehiclePart::class ||
-                $resourceClass === Appointment::class
+            (
+                $resourceClass === Car::class ||
+                $resourceClass === CarPart::class
             )
             && !$this->auth->isGranted('ROLE_ADMIN')
             && $user instanceof User
@@ -49,13 +48,12 @@ class CurrentUserExtension implements QueryCollectionExtensionInterface, QueryIt
 
             // Get only entities linked with current user 
             switch ($resourceClass) {
-                case Appointment::class:
-                case VehiclePart::class:
+                case CarPart::class:
                     $queryBuilder
-                        ->join("$rootAlias.vehicle", "v")
+                        ->join("$rootAlias.car", "v")
                         ->andWhere("v.user = :user");
                     break;
-                case Vehicle::class:
+                case Car::class:
                     $queryBuilder->andWhere("$rootAlias.user = :user");
                     break;
             }

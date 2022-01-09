@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\VehicleBrandRepository;
+use App\Repository\CarBrandRepository;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -13,16 +13,16 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ApiResource(
  *  normalizationContext={
- *      "groups"={"vehicleBrand_read"}
+ *      "groups"={"carBrand_read"}
  *  },
  *  denormalizationContext={"disable_type_enforcement"=true}
  * )
- * @ORM\Entity(repositoryClass=VehicleBrandRepository::class)
+ * @ORM\Entity(repositoryClass=CarBrandRepository::class)
  */
-class VehicleBrand
+class CarBrand
 {
     /**
-     * @Groups({"vehicleBrand_read"})
+     * @Groups({"carBrand_read"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -30,28 +30,28 @@ class VehicleBrand
     private $id;
 
     /**
-     * @Groups({"vehicleBrand_read"})
-     * @Groups({"vehicleList_read"})
+     * @Groups({"carBrand_read"})
+     * @Groups({"carList_read"})
      * @Groups({"userList_read"})
      * @ORM\Column(type="string", length=200)
      * @Assert\Length(
      *      min = 3,
      *      max = 200,
      *      minMessage = "Le nom de la marque doit être une chaine et doit faire au minimum {{ limit }} caractères",
-     *      maxMessage = "Le nom du véhicule doit être une chaine et doit faire au maximum {{ limit }} caractères"
+     *      maxMessage = "Le nom de la marque doit être une chaine et doit faire au maximum {{ limit }} caractères"
      * )
      * @Assert\NotBlank(message="Le nom de la marque ne peut pas être vide")
      */
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Vehicle::class, mappedBy="vehicleBrand")
+     * @ORM\OneToMany(targetEntity=Car::class, mappedBy="carBrand")
      */
-    private $vehicleList;
+    private $carList;
 
     public function __construct()
     {
-        $this->vehicleList = new ArrayCollection();
+        $this->carList = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -72,29 +72,29 @@ class VehicleBrand
     }
 
     /**
-     * @return Collection|Vehicle[]
+     * @return Collection|Car[]
      */
-    public function getVehicleList(): Collection
+    public function getCarList(): Collection
     {
-        return $this->vehicleList;
+        return $this->carList;
     }
 
-    public function addVehicleList(Vehicle $vehicleList): self
+    public function addCarList(Car $carList): self
     {
-        if (!$this->vehicleList->contains($vehicleList)) {
-            $this->vehicleList[] = $vehicleList;
-            $vehicleList->setVehicleBrand($this);
+        if (!$this->carList->contains($carList)) {
+            $this->carList[] = $carList;
+            $carList->setCarBrand($this);
         }
 
         return $this;
     }
 
-    public function removeVehicleList(Vehicle $vehicleList): self
+    public function removeCarList(Car $carList): self
     {
-        if ($this->vehicleList->removeElement($vehicleList)) {
+        if ($this->carList->removeElement($carList)) {
             // set the owning side to null (unless already changed)
-            if ($vehicleList->getVehicleBrand() === $this) {
-                $vehicleList->setVehicleBrand(null);
+            if ($carList->getCarBrand() === $this) {
+                $carList->setCarBrand(null);
             }
         }
 

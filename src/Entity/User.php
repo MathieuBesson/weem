@@ -41,12 +41,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Groups({"userList_read"})
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\Email(message="L'adresse email doit être une chaine au format valide")
+     * @Assert\NotBlank(message="L'email ne peux pas être vide")
      */
     private $email;
 
     /**
      * @Groups({"userList_read"})
      * @ORM\Column(type="json")
+     * @Assert\NotBlank(message="Le rôle ne peux pas être vide")
      */
     private $roles = [];
 
@@ -58,6 +60,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *     match=true,
      *     message="Le mot de passe doit être une chaine au format valide"
      * )
+     * @Assert\NotBlank(message="Le mot de passe ne peux pas être vide")
      */
     private $password;
 
@@ -67,23 +70,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Assert\Length(
      *      min = 3,
      *      max = 300,
-     *      minMessage = "Votre prénom doit être une chaine et faire au minimum {{ limit }} caractères",
+     *      minMessage = "Votre nom doit être une chaine et faire au minimum {{ limit }} caractères",
      *      maxMessage = "Votre nom doit être une chaine et faire au maximum {{ limit }} caractères"
      * )
+     * @Assert\NotBlank(message="Le nom ne peux pas être vide")
      */
-    private $firstName;
-
-    /**
-     * @Groups({"userList_read"})
-     * @ORM\Column(type="string", length=300)
-     * @Assert\Length(
-     *      min = 3,
-     *      max = 300,
-     *      minMessage = "Votre prénom doit être une chaine et faire au minimum {{ limit }} caractères",
-     *      maxMessage = "Votre nom doit être une chaine et faire au minimum {{ limit }} caractères"
-     * )
-     */
-    private $lastName;
+    private $name;
 
     /**
      * @Groups({"userList_read"})
@@ -98,13 +90,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @Groups({"userList_read"})
-     * @ORM\OneToMany(targetEntity=Vehicle::class, mappedBy="user")
+     * @ORM\Column(type="boolean", nullable=true)
+     * @Assert\Choice({true, false})
      */
-    private $vehicleList;
+    private $notification;
+
+    /**
+     * @Groups({"userList_read"})
+     * @ORM\OneToMany(targetEntity=Car::class, mappedBy="user")
+     */
+    private $carList;
 
     public function __construct()
     {
-        $this->vehicleList = new ArrayCollection();
+        $this->carList = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -176,6 +175,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getNotification(): bool
+    {
+        return $this->notification;
+    }
+
+    public function setNotification(bool $notification): self
+    {
+        $this->notification = $notification;
+
+        return $this;
+    }
+
     /**
      * Returning a salt is only needed, if you are not using a modern
      * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
@@ -196,26 +207,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function getFirstName(): ?string
+    public function getName(): ?string
     {
-        return $this->firstName;
+        return $this->name;
     }
 
-    public function setFirstName(string $firstName): self
+    public function setName(string $name): self
     {
-        $this->firstName = $firstName;
-
-        return $this;
-    }
-
-    public function getLastName(): ?string
-    {
-        return $this->lastName;
-    }
-
-    public function setLastName(string $lastName): self
-    {
-        $this->lastName = $lastName;
+        $this->name = $name;
 
         return $this;
     }
@@ -233,29 +232,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection|Vehicle[]
+     * @return Collection|Car[]
      */
-    public function getVehicleList(): Collection
+    public function getCarList(): Collection
     {
-        return $this->vehicleList;
+        return $this->carList;
     }
 
-    public function addVehicleList(Vehicle $vehicleList): self
+    public function addCarList(Car $carList): self
     {
-        if (!$this->vehicleList->contains($vehicleList)) {
-            $this->vehicleList[] = $vehicleList;
-            $vehicleList->setUser($this);
+        if (!$this->carList->contains($carList)) {
+            $this->carList[] = $carList;
+            $carList->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeVehicleList(Vehicle $vehicleList): self
+    public function removeCarList(Car $carList): self
     {
-        if ($this->vehicleList->removeElement($vehicleList)) {
+        if ($this->carList->removeElement($carList)) {
             // set the owning side to null (unless already changed)
-            if ($vehicleList->getUser() === $this) {
-                $vehicleList->setUser(null);
+            if ($carList->getUser() === $this) {
+                $carList->setUser(null);
             }
         }
 
