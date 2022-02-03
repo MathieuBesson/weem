@@ -7,4 +7,8 @@ api_platform:
         versions: [3]
     collection:
         pagination:
-            enabled: false
+            enabled: true
+            client_enabled: true
+            items_per_page: 30
+            client_items_per_page: true
+            items_per_page_parameter_name: "count"

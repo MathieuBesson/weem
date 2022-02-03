@@ -2,27 +2,47 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use DateTime;
+use App\Filter\SearchFilter2;
+use App\Entity\CarStandardPart;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CarPartRepository;
-use App\Entity\CarStandardPart;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\ExistsFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 
 
 /**
  * @ApiResource(
+ *  collectionOperations={"GET", "POST", 
+ *    "test"={
+ *       "method"="get", 
+ *       "path"="/car_test", 
+ *       "controller"="App\Controller\CartPartByTimeToChangeController", 
+ *       "normalization_context"={"groups"={"carPart_read"}},
+ *       "defaults"={"identifiedBy"="id"},
+ *       "read"=false
+ *    }
+ * },
+ *  itemOperations={"GET", "PATCH"},
  *  normalizationContext={
  *      "groups"={"carPart_read"}
  *  },
- *  denormalizationContext={"disable_type_enforcement"=true}
+ *  denormalizationContext={"disable_type_enforcement"=true},
  * )
+ * @ApiFilter(OrderFilter::class, properties={"id"}, arguments={"orderParameterName"="order"})
  * @ORM\Entity(repositoryClass=CarPartRepository::class)
  */
 class CarPart extends AbstractCarStandardPart
 {
     /**
+     * @Groups({"carPart_read"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -30,6 +50,7 @@ class CarPart extends AbstractCarStandardPart
     private $id;
 
     /**
+     * @Groups({"carPart_read"})
      * @ORM\Column(type="string", length=200, nullable=true)
      * @Assert\Length(
      *      min = 3,
@@ -41,51 +62,67 @@ class CarPart extends AbstractCarStandardPart
     private $name;
 
     /**
+     * @Groups({"carPart_read"})
      * @ORM\Column(type="integer", nullable=true)
      * @Assert\Choice(choices=AbstractCarStandardPart::IMPORTANCE_ID, message="Choisissez une importance valide")
      */
     private $importance;
 
     /**
+     * @Groups({"carPart_read"})
      * @ORM\Column(type="integer", nullable=true)
      * @Assert\Positive(message="La durée maximum doit être un entier ou flottant supérieur à 0")
      */
     private $maxDuration;
 
     /**
+     * @Groups({"carPart_read"})
      * @ORM\Column(type="float", nullable=true)
      * @Assert\Positive(message="La distance maximum doit être un entier ou flottant supérieur à 0")
      */
     private $maxDistance;
 
     /**
+     * @Groups({"carPart_read"})
      * @ORM\Column(type="integer", nullable=true)
      * @Assert\Choice(choices=AbstractCarStandardPart::CALCUL_DURATION_CHOICE_ID, message="Choisissez un choix du type de calcul valide")
      */
     private $calculDurationChoice;
 
     /**
+     * @Groups({"carPart_read"})
      * @ORM\Column(type="boolean", nullable=true)
      * @Assert\Choice({true, false})
      */
     private $notification;
 
     /**
+     * @Groups({"carPart_read"})
      * @ORM\ManyToOne(targetEntity=CarStandardPart::class, inversedBy="carPartList")
      */
     private $carStandardPart;
 
     /**
+     * @Groups({"carPart_read"})
      * @ORM\OneToMany(targetEntity=CarPartMaintenance::class, mappedBy="carPart")
      */
     private $carPartMaintenanceList;
 
     /**
+     * @Groups({"carPart_read"})
      * @ORM\ManyToOne(targetEntity=Car::class, inversedBy="carPartList")
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotBlank(message="La pièce doit être lié à un voiture")
      */
     private $car;
+
+    /**
+     * @Groups({"carPart_read"})
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $unused;
+
+    private $timeToChangeInMonth;
 
     public function __construct()
     {
@@ -221,5 +258,90 @@ class CarPart extends AbstractCarStandardPart
         $this->car = $car;
 
         return $this;
+    }
+
+    public function getUnused(): ?bool
+    {
+        return $this->unused;
+    }
+
+    public function setUnused(?bool $unused): self
+    {
+        $this->unused = $unused;
+
+        return $this;
+    }
+
+    /**
+     * @Groups({"carPart_read"})
+     */
+    public function getTimeToChangeInMonth()
+    {
+        return $this->timeToChangeInMonth; 
+    }
+
+    public function updateTimeToChangeInMonth()
+    {
+        $timeToChange = null;
+
+        $lastCarPartMaintenance = null;
+        foreach ($this->getCarPartMaintenances() as $carPartMaintenance) {
+            if ($lastCarPartMaintenance === null) {
+                $lastCarPartMaintenance = $carPartMaintenance;
+            } else if ($carPartMaintenance->getDateLastChange() > $lastCarPartMaintenance->getDateLastChange()) {
+                $lastCarPartMaintenance = $carPartMaintenance;
+            }
+        }
+
+        switch (true) {
+            case $this->unused && $lastCarPartMaintenance:
+                $timeToChange = $this->getTimeFromChange();
+                break;
+            case $lastCarPartMaintenance:
+                $timeToChange = $this->getTimeFromChange($lastCarPartMaintenance->getDateLastChange());
+                break;
+            default:
+                $timeToChange = null;
+                break;
+        }
+
+        $this->timeToChangeInMonth = (int) $timeToChange;
+    }
+
+    private function getTimeFromChange($dateReference = null)
+    {
+        if (!$dateReference) {
+            $dateReference = $this->getCar()->getDateReleased();
+        }
+
+        $durationTimeToChange = null;
+        switch ($this->calculDurationChoice) {
+            case CarPart::CALCUL_DURATION_CHOICE_ID['MILEAGE']:
+                $durationTimeToChange =
+                    (new DateTime())
+                    ->diff(
+                        $dateReference->modify('+' . (int) ($this->maxDistance * 30 / $this->getCar()->getMileageMensual()) . ' days')
+                    )->format("%m");
+                break;
+            case CarPart::CALCUL_DURATION_CHOICE_ID['DURATION']:
+                $durationTimeToChange = (new DateTime())->diff($dateReference->modify('+' . $this->maxDuration . ' days'))->format("%m");
+                break;
+            case CarPart::CALCUL_DURATION_CHOICE_ID['BOTH']:
+
+                $durationTimeToChangeFromMileage =
+                    (new DateTime())
+                    ->diff(
+                        $dateReference->modify('+' . (int) ($this->maxDistance * 30 / $this->getCar()->getMileageMensual()) . ' days')
+                    )->format("%m");
+
+                $durationTimeToChangeFromDuration = (new DateTime())->diff($dateReference->modify('+' . $this->maxDuration . ' days'))->format("%m");
+
+                $durationTimeToChange = $durationTimeToChangeFromMileage > $durationTimeToChangeFromDuration ?
+                    $durationTimeToChangeFromMileage : $durationTimeToChangeFromDuration;
+
+                break;
+        }
+
+        return $durationTimeToChange;
     }
 }

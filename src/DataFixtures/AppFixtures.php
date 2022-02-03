@@ -172,6 +172,12 @@ class AppFixtures extends Fixture
             foreach ($carStandardPartList as $carStandardPart) {
                 $carPart = new CarPart();
                 $carPart->setCarStandardPart($carStandardPart);
+                $carPart->setName($carStandardPart->getName());
+                $carPart->setImportance($carStandardPart->getImportance());
+                $carPart->setMaxDuration($carStandardPart->getMaxDuration());
+                $carPart->setMaxDistance($carStandardPart->getMaxDistance());
+                $carPart->setCalculDurationChoice($carStandardPart->getCalculDurationChoice());
+                $carPart->setNotification(true);
 
                 for($i = 0; $i <= mt_rand(0, 3); $i++){
 

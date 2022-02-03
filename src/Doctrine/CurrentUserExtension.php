@@ -2,10 +2,11 @@
 
 namespace App\Doctrine;
 
-use App\Entity\User;
 use App\Entity\Car;
+use App\Entity\User;
 use App\Entity\CarPart;
 use Doctrine\ORM\QueryBuilder;
+use App\Entity\CarPartMaintenance;
 use Symfony\Component\Security\Core\Security;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryItemExtensionInterface;
@@ -30,7 +31,7 @@ class CurrentUserExtension implements QueryCollectionExtensionInterface, QueryIt
      * @param  string $resourceClass       - Name of the entity class used by query builder 
      * @return void
      */
-    private function addWhere(QueryBuilder $queryBuilder, string $resourceClass)
+    public function addWhere(QueryBuilder $queryBuilder, string $resourceClass)
     {
         // Get current user data
         $user = $this->security->getUser();
@@ -39,7 +40,8 @@ class CurrentUserExtension implements QueryCollectionExtensionInterface, QueryIt
         if (
             (
                 $resourceClass === Car::class ||
-                $resourceClass === CarPart::class
+                $resourceClass === CarPart::class ||
+                $resourceClass === CarPartMaintenance::class
             )
             && !$this->auth->isGranted('ROLE_ADMIN')
             && $user instanceof User
@@ -48,10 +50,16 @@ class CurrentUserExtension implements QueryCollectionExtensionInterface, QueryIt
 
             // Get only entities linked with current user 
             switch ($resourceClass) {
+                case CarPartMaintenance::class:
+                    $queryBuilder
+                        ->join("$rootAlias.carPart", "cp")
+                        ->join("cp.car", "c")
+                        ->andWhere("c.user = :user");
+                    break;
                 case CarPart::class:
                     $queryBuilder
-                        ->join("$rootAlias.car", "v")
-                        ->andWhere("v.user = :user");
+                        ->join("$rootAlias.car", "c")
+                        ->andWhere("c.user = :user");
                     break;
                 case Car::class:
                     $queryBuilder->andWhere("$rootAlias.user = :user");

@@ -15,6 +15,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
+ *  itemOperations={"GET"},
+ *  collectionOperations={"GET", "POST"},
  *  normalizationContext={
  *      "groups"={"userList_read"}
  *  },
@@ -27,7 +29,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     // Minimum eight characters, at least one uppercase letter, one lowercase letter and one number
     const REGEX_PASSWORD = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/"; 
-    const REGEX_PHONE_NUMBER = "/^\(0\)[0-9]*$/";
+    const REGEX_PHONE_NUMBER = "/^((\+)33|0)[1-9](\d{2}){4}$/";
 
     /**
      * @Groups({"userList_read"})
@@ -48,7 +50,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @Groups({"userList_read"})
      * @ORM\Column(type="json")
-     * @Assert\NotBlank(message="Le rôle ne peux pas être vide")
      */
     private $roles = [];
 
@@ -100,6 +101,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\OneToMany(targetEntity=Car::class, mappedBy="user")
      */
     private $carList;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $darkTheme = false;
 
     public function __construct()
     {
@@ -257,6 +263,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $carList->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDarkTheme(): ?bool
+    {
+        return $this->darkTheme;
+    }
+
+    public function setDarkTheme(bool $darkTheme): self
+    {
+        $this->darkTheme = $darkTheme;
 
         return $this;
     }

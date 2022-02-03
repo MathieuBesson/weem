@@ -12,6 +12,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
+ *  collectionOperations={"GET"},
+ *  itemOperations={"GET"},
  *  normalizationContext={
  *      "groups"={"carBrand_read"}
  *  },

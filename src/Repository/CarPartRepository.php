@@ -3,8 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\CarPart;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Doctrine\CurrentUserExtension;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method CarPart|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,8 +16,22 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class CarPartRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private CurrentUserExtension $currentUserExtension;
+    public function __construct(ManagerRegistry $registry, CurrentUserExtension $currentUserExtension)
     {
         parent::__construct($registry, CarPart::class);
+
+        $this->currentUserExtension = $currentUserExtension;
+    }
+
+    public function findByLastChangeAndUser()
+    {
+        $qb = $this->createQueryBuilder("cp")
+            ->join("cp.carPartMaintenanceList", "cpm")
+            ->orderBy("cpm.dateLastChange");
+
+        $this->currentUserExtension->addWhere($qb, CarPart::class);
+
+        return $qb->getQuery()->getResult();
     }
 }

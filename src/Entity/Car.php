@@ -13,6 +13,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
+ *  collectionOperations={"GET", "POST"},
+ *  itemOperations={"GET"},
  *  normalizationContext={
  *      "groups"={"carList_read"}
  *  },
@@ -103,7 +105,6 @@ class Car
 
     /**
      * @Groups({"carList_read"})
-     * @Groups({"userList_read"})
      * @ORM\Column(type="string", length=200)
      * @Assert\NotBlank(message="Le nom ne peut pas être vide")
      * @Assert\Length(
@@ -117,7 +118,6 @@ class Car
 
     /**
      * @Groups({"carList_read"})
-     * @Groups({"userList_read"})
      * @ORM\Column(type="datetime")
      * @Assert\NotBlank(message="La date de création ne peut pas être vide")
      * @Assert\DateTime(message="La date doit être un datetime valide")
@@ -126,7 +126,6 @@ class Car
 
     /**
      * @Groups({"carList_read"})
-     * @Groups({"userList_read"})
      * @ORM\Column(type="float")
      * @Assert\NotBlank(message="Le kilometrage globale ne peut pas être vide")
      * @Assert\Positive(message="Le kilometrage globale doit être un entier ou flottant supérieur à 0")
@@ -135,7 +134,6 @@ class Car
 
     /**
      * @Groups({"carList_read"})
-     * @Groups({"userList_read"})
      * @ORM\Column(type="float")
      * @Assert\NotBlank(message="Le kilometrage mensuel ne peut pas être vide")
      * @Assert\Positive(message="Le kilometrage mensuel doit être un entier ou flottant supérieur à 0")
@@ -144,7 +142,6 @@ class Car
 
     /**
      * @Groups({"carList_read"})
-     * @Groups({"userList_read"})
      * @ORM\Column(type="integer")
      * @Assert\NotBlank(message="Le type de carburant ne peut pas être vide")
      * @Assert\Choice(choices=Car::FUEL_TYPE_ID, message="Choisissez un type de carburant valide")
@@ -153,7 +150,6 @@ class Car
 
     /**
      * @Groups({"carList_read"})
-     * @Groups({"userList_read"})
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank(message="L'immatriculation ne peut pas être vide")
      * @Assert\Length(
@@ -167,7 +163,6 @@ class Car
 
     /**
      * @Groups({"carList_read"})
-     * @Groups({"userList_read"})
      * @ORM\Column(type="integer")
      * @Assert\NotBlank(message="Le type de conduite ne peux pas être vide")
      * @Assert\Choice(choices=Car::DRIVING_STYLE_ID, message="Choisissez un type de conduite valide")
@@ -176,7 +171,6 @@ class Car
 
     /**
      * @Groups({"carList_read"})
-     * @Groups({"userList_read"})
      * @ORM\Column(type="integer", nullable=true)
      * @Assert\Choice(choices=Car::MODEL_TYPE_ID, message="Choisissez un model valide")
      */
@@ -184,7 +178,6 @@ class Car
 
     /**
      * @Groups({"carList_read"})
-     * @Groups({"userList_read"})
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Regex(
      *     pattern=Car::REGEX_COLOR_HEXA,
@@ -196,7 +189,6 @@ class Car
 
     /**
      * @Groups({"carList_read"})
-     * @Groups({"userList_read"})
      * @ORM\ManyToOne(targetEntity=CarBrand::class, inversedBy="carList")
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotBlank(message="La marque du véhicule ne peux pas être vide")

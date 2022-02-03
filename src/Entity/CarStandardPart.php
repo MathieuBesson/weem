@@ -7,15 +7,10 @@ use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\CarStandardPartRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ApiResource(
- *  normalizationContext={
- *      "groups"={"carStandardPart_read"}
- *  },
- *  denormalizationContext={"disable_type_enforcement"=true}
- * )
  * @ORM\Entity(repositoryClass=CarStandardPartRepository::class)
  */
 class CarStandardPart extends AbstractCarStandardPart
@@ -67,6 +62,7 @@ class CarStandardPart extends AbstractCarStandardPart
     private $calculDurationChoice;
 
     /**
+     * @Groups({"carPart_read"})
      * @ORM\Column(type="float")
      * @Assert\NotBlank(message="Le prix minimum ne peut pas être vide")
      * @Assert\Positive(message="Le prix minimum doit être un entier ou flottant supérieur à 0")
@@ -74,6 +70,7 @@ class CarStandardPart extends AbstractCarStandardPart
     private $priceMin;
 
     /**
+     * @Groups({"carPart_read"})
      * @ORM\Column(type="float")
      * @Assert\NotBlank(message="Le prix maximum ne peut pas être vide")
      * @Assert\Positive(message="Le prix maximum doit être un entier ou flottant supérieur à 0")

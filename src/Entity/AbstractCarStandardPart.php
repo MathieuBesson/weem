@@ -30,7 +30,8 @@ abstract class AbstractCarStandardPart
 
     const CALCUL_DURATION_CHOICE_ID = [
         'MILEAGE' => 1,
-        'DURATION' => 2
+        'DURATION' => 2,
+        'BOTH' => 3
     ];
 
     const CALCUL_DURATION_CHOICE = [
@@ -39,6 +40,9 @@ abstract class AbstractCarStandardPart
         ],
         self::CALCUL_DURATION_CHOICE_ID['DURATION'] => [
             'LABEL' => 'durée'
+        ],
+        self::CALCUL_DURATION_CHOICE_ID['BOTH'] => [
+            'LABEL' => 'les deux'
         ],
     ];
 }
