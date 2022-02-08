@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *  itemOperations={"GET"},
  *  collectionOperations={"GET", "POST"},
  *  normalizationContext={
- *      "groups"={"userList_read"}
+ *      "groups"={"users_read"}
  *  },
  *  denormalizationContext={"disable_type_enforcement"=true}
  * )
@@ -32,7 +32,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     const REGEX_PHONE_NUMBER = "/^((\+)33|0)[1-9](\d{2}){4}$/";
 
     /**
-     * @Groups({"userList_read"})
+     * @Groups({"users_read"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -40,7 +40,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $id;
 
     /**
-     * @Groups({"userList_read"})
+     * @Groups({"users_read"})
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\Email(message="L'adresse email doit être une chaine au format valide")
      * @Assert\NotBlank(message="L'email ne peux pas être vide")
@@ -48,7 +48,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $email;
 
     /**
-     * @Groups({"userList_read"})
+     * @Groups({"users_read"})
      * @ORM\Column(type="json")
      */
     private $roles = [];
@@ -66,7 +66,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $password;
 
     /**
-     * @Groups({"userList_read"})
+     * @Groups({"users_read"})
      * @ORM\Column(type="string", length=300)
      * @Assert\Length(
      *      min = 3,
@@ -79,7 +79,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $name;
 
     /**
-     * @Groups({"userList_read"})
+     * @Groups({"users_read"})
      * @ORM\Column(type="string", length=100, nullable=true)
      * @Assert\Regex(
      *     pattern=User::REGEX_PHONE_NUMBER,
@@ -90,17 +90,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $phone;
 
     /**
-     * @Groups({"userList_read"})
+     * @Groups({"users_read"})
      * @ORM\Column(type="boolean", nullable=true)
      * @Assert\Choice({true, false})
      */
     private $notification;
 
     /**
-     * @Groups({"userList_read"})
+     * @Groups({"users_read"})
      * @ORM\OneToMany(targetEntity=Car::class, mappedBy="user")
      */
-    private $carList;
+    private $cars;
 
     /**
      * @ORM\Column(type="boolean")
@@ -109,7 +109,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __construct()
     {
-        $this->carList = new ArrayCollection();
+        $this->cars = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -240,27 +240,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection|Car[]
      */
-    public function getCarList(): Collection
+    public function getCars(): Collection
     {
-        return $this->carList;
+        return $this->cars;
     }
 
-    public function addCarList(Car $carList): self
+    public function addCar(Car $cars): self
     {
-        if (!$this->carList->contains($carList)) {
-            $this->carList[] = $carList;
-            $carList->setUser($this);
+        if (!$this->cars->contains($cars)) {
+            $this->cars[] = $cars;
+            $cars->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeCarList(Car $carList): self
+    public function removeCar(Car $cars): self
     {
-        if ($this->carList->removeElement($carList)) {
+        if ($this->cars->removeElement($cars)) {
             // set the owning side to null (unless already changed)
-            if ($carList->getUser() === $this) {
-                $carList->setUser(null);
+            if ($cars->getUser() === $this) {
+                $cars->setUser(null);
             }
         }
 

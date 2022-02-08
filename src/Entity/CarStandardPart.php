@@ -80,12 +80,12 @@ class CarStandardPart extends AbstractCarStandardPart
     /**
      * @ORM\OneToMany(targetEntity=CarPart::class, mappedBy="carStandardPart")
      */
-    private $carPartList;
+    private $carParts;
 
     public function __construct()
     {
-        $this->carPartList = new ArrayCollection();
-        $this->carList = new ArrayCollection();
+        $this->carParts = new ArrayCollection();
+        $this->cars = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -180,27 +180,27 @@ class CarStandardPart extends AbstractCarStandardPart
     /**
      * @return Collection|CarPart[]
      */
-    public function getCarPartList(): Collection
+    public function getCarParts(): Collection
     {
-        return $this->carPartList;
+        return $this->carParts;
     }
 
-    public function addCarPartList(CarPart $carPartList): self
+    public function addCarPart(CarPart $carPart): self
     {
-        if (!$this->carPartList->contains($carPartList)) {
-            $this->carPartList[] = $carPartList;
-            $carPartList->setCarStandardPart($this);
+        if (!$this->carParts->contains($carPart)) {
+            $this->carParts[] = $carPart;
+            $carPart->setCarStandardPart($this);
         }
 
         return $this;
     }
 
-    public function removeCarPartList(CarPart $carPartList): self
+    public function removeCarPart(CarPart $carPart): self
     {
-        if ($this->carPartList->removeElement($carPartList)) {
+        if ($this->carParts->removeElement($carPart)) {
             // set the owning side to null (unless already changed)
-            if ($carPartList->getCarStandardPart() === $this) {
-                $carPartList->setCarStandardPart(null);
+            if ($carPart->getCarStandardPart() === $this) {
+                $carPart->setCarStandardPart(null);
             }
         }
 

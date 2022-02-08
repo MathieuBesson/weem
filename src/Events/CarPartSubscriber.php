@@ -48,7 +48,7 @@ class CarPartSubscriber implements EventSubscriberInterface
                 $carPart->setCarStandardPart($carStandardPartItem);
 
                 $this->em->persist($carPart);
-                $car->addCarPartList($carPart);
+                $car->addCarPart($carPart);
             }
         }
     }

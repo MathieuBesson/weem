@@ -33,8 +33,8 @@ class CarBrand
 
     /**
      * @Groups({"carBrand_read"})
-     * @Groups({"carList_read"})
-     * @Groups({"userList_read"})
+     * @Groups({"cars_read"})
+     * @Groups({"users_read"})
      * @ORM\Column(type="string", length=200)
      * @Assert\Length(
      *      min = 3,
@@ -49,11 +49,11 @@ class CarBrand
     /**
      * @ORM\OneToMany(targetEntity=Car::class, mappedBy="carBrand")
      */
-    private $carList;
+    private $cars;
 
     public function __construct()
     {
-        $this->carList = new ArrayCollection();
+        $this->cars = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -76,27 +76,27 @@ class CarBrand
     /**
      * @return Collection|Car[]
      */
-    public function getCarList(): Collection
+    public function getCars(): Collection
     {
-        return $this->carList;
+        return $this->cars;
     }
 
-    public function addCarList(Car $carList): self
+    public function addCar(Car $car): self
     {
-        if (!$this->carList->contains($carList)) {
-            $this->carList[] = $carList;
-            $carList->setCarBrand($this);
+        if (!$this->cars->contains($car)) {
+            $this->cars[] = $car;
+            $car->setCarBrand($this);
         }
 
         return $this;
     }
 
-    public function removeCarList(Car $carList): self
+    public function removeCar(Car $car): self
     {
-        if ($this->carList->removeElement($carList)) {
+        if ($this->cars->removeElement($car)) {
             // set the owning side to null (unless already changed)
-            if ($carList->getCarBrand() === $this) {
-                $carList->setCarBrand(null);
+            if ($car->getCarBrand() === $this) {
+                $car->setCarBrand(null);
             }
         }
 

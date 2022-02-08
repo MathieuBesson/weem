@@ -9,21 +9,21 @@ use App\Repository\CarPartMaintenanceRepository;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\NumericFilter;
-
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 
 /**
  * @ApiResource(
  *  collectionOperations={"GET","POST",
- *   "test"={
+ *   "CartPartMaintenanceOnCar"={
  *       "method"="get", 
- *       "path"="/car_maintenance_test/{id}", 
- *       "controller"="App\Controller\CartPartMaintenanceLastOnCar", 
+ *       "path"="/car_part_maintenances_by_car/car_id={id}/count={count}", 
+ *       "controller"="App\Controller\CartPartMaintenanceByCarController", 
  *       "normalization_context"={"groups"={"carPartMaintenance_read"}},
  *       "defaults"={"identifiedBy"="id"},
  *       "read"=false
  *    }
  * },
- *  itemOperations={"GET"},
+ *  itemOperations={"GET","PATCH"},
  *  normalizationContext={
  *      "groups"={"carPartMaintenance_read"}
  *  },
@@ -34,7 +34,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\NumericFilter;
 class CarPartMaintenance
 {
     /**
-     * @Groups({"carPartMaintenance_read"})
+     * @Groups({"carPartMaintenance_read","carPart_read"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -42,14 +42,14 @@ class CarPartMaintenance
     private $id;
 
     /**
-     * @Groups({"carPartMaintenance_read"})
+     * @Groups({"carPartMaintenance_read","carPart_read"})
      * @ORM\Column(type="float", nullable=true)
      * @Assert\Positive(message="Le kilometrage doit être un entier ou flottant supérieur à 0")
      */
     private $mileage;
 
     /**
-     * @Groups({"carPartMaintenance_read"})
+     * @Groups({"carPartMaintenance_read","carPart_read"})
      * @ORM\Column(type="datetime", nullable=true)
      * @Assert\DateTime(message="La date de dernier changement doit être un datetime valide")
      */
@@ -57,7 +57,7 @@ class CarPartMaintenance
 
     /**
      * @Groups({"carPartMaintenance_read"})
-     * @ORM\ManyToOne(targetEntity=CarPart::class, inversedBy="carPartMaintenanceList")
+     * @ORM\ManyToOne(targetEntity=CarPart::class, inversedBy="carPartMaintenance")
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotBlank(message="L'entretien doit être lié à une voiture")
      */

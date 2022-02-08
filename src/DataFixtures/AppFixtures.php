@@ -163,8 +163,8 @@ class AppFixtures extends Fixture
                 ->setName($carData['user']['name'])
                 ->setPhone($carData['user']['phone'])
                 ->setPassword($this->userPasswordHasher->hashPassword($user, $carData['user']['password']))
-                ->setNotification((bool)rand(0,1))
-                ->addCarList($car);
+                ->setNotification((bool)rand(0, 1))
+                ->addCar($car);
 
             $manager->persist($user);
 
@@ -179,19 +179,18 @@ class AppFixtures extends Fixture
                 $carPart->setCalculDurationChoice($carStandardPart->getCalculDurationChoice());
                 $carPart->setNotification(true);
 
-                for($i = 0; $i <= mt_rand(0, 3); $i++){
+                for ($i = 0; $i <= mt_rand(0, 3); $i++) {
 
-                    $carPartMaintenance = new CarPartMaintenance(); 
-                    $carPartMaintenance->setCarPart($carPart); 
+                    $carPartMaintenance = new CarPartMaintenance();
+                    $carPartMaintenance->setCarPart($carPart);
                     if ($carStandardPart->getCalculDurationChoice() === AbstractCarStandardPart::CALCUL_DURATION_CHOICE_ID['MILEAGE']) {
-                        $carPartMaintenance->setMileage(mt_rand(1000, 350000)); 
-                    } elseif ($carStandardPart->getCalculDurationChoice() === AbstractCarStandardPart::CALCUL_DURATION_CHOICE_ID['DURATION']) {
-                        $carPartMaintenance->setDateLastChange($this->randomDateInRange($car->getDateReleased(), new DateTime)); 
+                        $carPartMaintenance->setMileage(mt_rand(1000, 350000));
                     }
-                    $manager->persist($carPartMaintenance); 
+                    $carPartMaintenance->setDateLastChange($this->randomDateInRange($car->getDateReleased(), new DateTime));
+                    $manager->persist($carPartMaintenance);
                 }
 
-                $car->addCarPartList($carPart);
+                $car->addCarPart($carPart);
                 $manager->persist($carPart);
             }
             $manager->persist($car);

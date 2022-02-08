@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *  collectionOperations={"GET", "POST"},
  *  itemOperations={"GET"},
  *  normalizationContext={
- *      "groups"={"carList_read"}
+ *      "groups"={"cars_read"}
  *  },
  *  denormalizationContext={"disable_type_enforcement"=true}
  * )
@@ -104,7 +104,7 @@ class Car
     private $id;
 
     /**
-     * @Groups({"carList_read"})
+     * @Groups({"cars_read"})
      * @ORM\Column(type="string", length=200)
      * @Assert\NotBlank(message="Le nom ne peut pas être vide")
      * @Assert\Length(
@@ -117,7 +117,7 @@ class Car
     private $name;
 
     /**
-     * @Groups({"carList_read"})
+     * @Groups({"cars_read"})
      * @ORM\Column(type="datetime")
      * @Assert\NotBlank(message="La date de création ne peut pas être vide")
      * @Assert\DateTime(message="La date doit être un datetime valide")
@@ -125,7 +125,7 @@ class Car
     private $dateReleased;
 
     /**
-     * @Groups({"carList_read"})
+     * @Groups({"cars_read"})
      * @ORM\Column(type="float")
      * @Assert\NotBlank(message="Le kilometrage globale ne peut pas être vide")
      * @Assert\Positive(message="Le kilometrage globale doit être un entier ou flottant supérieur à 0")
@@ -133,7 +133,7 @@ class Car
     private $mileageGlobale;
 
     /**
-     * @Groups({"carList_read"})
+     * @Groups({"cars_read"})
      * @ORM\Column(type="float")
      * @Assert\NotBlank(message="Le kilometrage mensuel ne peut pas être vide")
      * @Assert\Positive(message="Le kilometrage mensuel doit être un entier ou flottant supérieur à 0")
@@ -141,7 +141,7 @@ class Car
     private $mileageMensual;
 
     /**
-     * @Groups({"carList_read"})
+     * @Groups({"cars_read"})
      * @ORM\Column(type="integer")
      * @Assert\NotBlank(message="Le type de carburant ne peut pas être vide")
      * @Assert\Choice(choices=Car::FUEL_TYPE_ID, message="Choisissez un type de carburant valide")
@@ -149,7 +149,7 @@ class Car
     private $fuelType;
 
     /**
-     * @Groups({"carList_read"})
+     * @Groups({"cars_read"})
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank(message="L'immatriculation ne peut pas être vide")
      * @Assert\Length(
@@ -162,7 +162,7 @@ class Car
     private $registration;
 
     /**
-     * @Groups({"carList_read"})
+     * @Groups({"cars_read"})
      * @ORM\Column(type="integer")
      * @Assert\NotBlank(message="Le type de conduite ne peux pas être vide")
      * @Assert\Choice(choices=Car::DRIVING_STYLE_ID, message="Choisissez un type de conduite valide")
@@ -170,14 +170,14 @@ class Car
     private $drivingStyle;
 
     /**
-     * @Groups({"carList_read"})
+     * @Groups({"cars_read"})
      * @ORM\Column(type="integer", nullable=true)
      * @Assert\Choice(choices=Car::MODEL_TYPE_ID, message="Choisissez un model valide")
      */
     private $modelType;
 
     /**
-     * @Groups({"carList_read"})
+     * @Groups({"cars_read"})
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Regex(
      *     pattern=Car::REGEX_COLOR_HEXA,
@@ -188,16 +188,16 @@ class Car
     private $color;
 
     /**
-     * @Groups({"carList_read"})
-     * @ORM\ManyToOne(targetEntity=CarBrand::class, inversedBy="carList")
+     * @Groups({"cars_read"})
+     * @ORM\ManyToOne(targetEntity=CarBrand::class, inversedBy="cars")
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotBlank(message="La marque du véhicule ne peux pas être vide")
      */
     private $carBrand;
 
     /**
-     * @Groups({"carList_read"})
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="carList")
+     * @Groups({"cars_read"})
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="cars")
      * @Assert\NotBlank(message="L'utilisateur ne peux pas être vide")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -206,12 +206,11 @@ class Car
     /**
      * @ORM\OneToMany(targetEntity=CarPart::class, mappedBy="car")
      */
-    private $carPartList;
+    private $carParts;
 
     public function __construct()
     {
-        $this->carPartList = new ArrayCollection();
-        $this->carStandardPartList = new ArrayCollection();
+        $this->carParts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -354,27 +353,27 @@ class Car
     /**
      * @return Collection|CarPart[]
      */
-    public function getCarPartList(): Collection
+    public function getCarParts(): Collection
     {
-        return $this->carPartList;
+        return $this->carParts;
     }
 
-    public function addCarPartList(CarPart $carPartList): self
+    public function addCarPart(CarPart $carPart): self
     {
-        if (!$this->carPartList->contains($carPartList)) {
-            $this->carPartList[] = $carPartList;
-            $carPartList->setCar($this);
+        if (!$this->carParts->contains($carPart)) {
+            $this->carParts[] = $carPart;
+            $carPart->setCar($this);
         }
 
         return $this;
     }
 
-    public function removeCarPartList(CarPart $carPartList): self
+    public function removeCarPart(CarPart $carPart): self
     {
-        if ($this->carPartList->removeElement($carPartList)) {
+        if ($this->carParts->removeElement($carPart)) {
             // set the owning side to null (unless already changed)
-            if ($carPartList->getCar() === $this) {
-                $carPartList->setCar(null);
+            if ($carPart->getCar() === $this) {
+                $carPart->setCar(null);
             }
         }
 

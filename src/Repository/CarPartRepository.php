@@ -24,11 +24,18 @@ class CarPartRepository extends ServiceEntityRepository
         $this->currentUserExtension = $currentUserExtension;
     }
 
-    public function findByLastChangeAndUser()
+    public function findByLastChangeAndUser($carId, $cost)
     {
         $qb = $this->createQueryBuilder("cp")
-            ->join("cp.carPartMaintenanceList", "cpm")
-            ->orderBy("cpm.dateLastChange");
+        ->join("cp.carPartMaintenance", "cpm")
+        ->orderBy("cpm.dateLastChange")
+        ->where("c.id = :id")
+        ->setParameter("id", $carId);
+        
+
+        if ($cost) {
+            $qb->andWhere("cp.carStandardPart IS NOT NULL");
+        }
 
         $this->currentUserExtension->addWhere($qb, CarPart::class);
 

@@ -20,17 +20,17 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 
 /**
  * @ApiResource(
- *  collectionOperations={"GET", "POST", 
- *    "test"={
+ *  collectionOperations={"GET"={"normalization_context"={"groups"={"carPart_read_short"}}}, "POST", 
+ *    "CartPartByTimeToChangeController"={
  *       "method"="get", 
- *       "path"="/car_test", 
+ *       "path"="/cart_parts_by_time_to_change/car_id={id}/cost={cost}", 
  *       "controller"="App\Controller\CartPartByTimeToChangeController", 
  *       "normalization_context"={"groups"={"carPart_read"}},
  *       "defaults"={"identifiedBy"="id"},
  *       "read"=false
  *    }
  * },
- *  itemOperations={"GET", "PATCH"},
+ *  itemOperations={"GET","PATCH"},
  *  normalizationContext={
  *      "groups"={"carPart_read"}
  *  },
@@ -42,7 +42,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 class CarPart extends AbstractCarStandardPart
 {
     /**
-     * @Groups({"carPart_read"})
+     * @Groups({"carPart_read","carPart_read_short"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -50,7 +50,7 @@ class CarPart extends AbstractCarStandardPart
     private $id;
 
     /**
-     * @Groups({"carPart_read"})
+     * @Groups({"carPart_read","carPart_read_short"})
      * @ORM\Column(type="string", length=200, nullable=true)
      * @Assert\Length(
      *      min = 3,
@@ -62,55 +62,55 @@ class CarPart extends AbstractCarStandardPart
     private $name;
 
     /**
-     * @Groups({"carPart_read"})
+     * @Groups({"carPart_read","carPart_read_short"})
      * @ORM\Column(type="integer", nullable=true)
      * @Assert\Choice(choices=AbstractCarStandardPart::IMPORTANCE_ID, message="Choisissez une importance valide")
      */
     private $importance;
 
     /**
-     * @Groups({"carPart_read"})
+     * @Groups({"carPart_read","carPart_read_short"})
      * @ORM\Column(type="integer", nullable=true)
      * @Assert\Positive(message="La durée maximum doit être un entier ou flottant supérieur à 0")
      */
     private $maxDuration;
 
     /**
-     * @Groups({"carPart_read"})
+     * @Groups({"carPart_read","carPart_read_short"})
      * @ORM\Column(type="float", nullable=true)
      * @Assert\Positive(message="La distance maximum doit être un entier ou flottant supérieur à 0")
      */
     private $maxDistance;
 
     /**
-     * @Groups({"carPart_read"})
+     * @Groups({"carPart_read","carPart_read_short"})
      * @ORM\Column(type="integer", nullable=true)
      * @Assert\Choice(choices=AbstractCarStandardPart::CALCUL_DURATION_CHOICE_ID, message="Choisissez un choix du type de calcul valide")
      */
     private $calculDurationChoice;
 
     /**
-     * @Groups({"carPart_read"})
+     * @Groups({"carPart_read","carPart_read_short"})
      * @ORM\Column(type="boolean", nullable=true)
      * @Assert\Choice({true, false})
      */
     private $notification;
 
     /**
-     * @Groups({"carPart_read"})
-     * @ORM\ManyToOne(targetEntity=CarStandardPart::class, inversedBy="carPartList")
+     * @Groups({"carPart_read","carPart_read_short"})
+     * @ORM\ManyToOne(targetEntity=CarStandardPart::class, inversedBy="carParts")
      */
     private $carStandardPart;
 
     /**
-     * @Groups({"carPart_read"})
+     * @Groups({"carPart_read","carPart_read_short"})
      * @ORM\OneToMany(targetEntity=CarPartMaintenance::class, mappedBy="carPart")
      */
-    private $carPartMaintenanceList;
+    private $carPartMaintenances;
 
     /**
-     * @Groups({"carPart_read"})
-     * @ORM\ManyToOne(targetEntity=Car::class, inversedBy="carPartList")
+     * @Groups({"carPart_read","carPart_read_short"})
+     * @ORM\ManyToOne(targetEntity=Car::class, inversedBy="carParts")
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotBlank(message="La pièce doit être lié à un voiture")
      */
@@ -223,13 +223,13 @@ class CarPart extends AbstractCarStandardPart
      */
     public function getCarPartMaintenances(): Collection
     {
-        return $this->carPartMaintenanceList;
+        return $this->carPartMaintenances;
     }
 
     public function addCarPartMaintenance(CarPartMaintenance $carPartMaintenance): self
     {
-        if (!$this->carPartMaintenanceList->contains($carPartMaintenance)) {
-            $this->carPartMaintenanceList[] = $carPartMaintenance;
+        if (!$this->carPartMaintenances->contains($carPartMaintenance)) {
+            $this->carPartMaintenances[] = $carPartMaintenance;
             $carPartMaintenance->setCarPart($this);
         }
 
@@ -238,7 +238,7 @@ class CarPart extends AbstractCarStandardPart
 
     public function removeCarPartMaintenance(CarPartMaintenance $carPartMaintenance): self
     {
-        if ($this->carPartMaintenanceList->removeElement($carPartMaintenance)) {
+        if ($this->carPartMaintenances->removeElement($carPartMaintenance)) {
             // set the owning side to null (unless already changed)
             if ($carPartMaintenance->getCarPart() === $this) {
                 $carPartMaintenance->setCarPart(null);

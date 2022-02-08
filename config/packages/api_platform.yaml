@@ -9,6 +9,6 @@ api_platform:
         pagination:
             enabled: true
             client_enabled: true
-            items_per_page: 30
+            items_per_page: 40
             client_items_per_page: true
             items_per_page_parameter_name: "count"
