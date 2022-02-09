@@ -50,7 +50,7 @@ class CarPartMaintenance
 
     /**
      * @Groups({"carPartMaintenance_read","carPart_read"})
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime")
      * @Assert\DateTime(message="La date de dernier changement doit être un datetime valide")
      */
     private $dateLastChange;
@@ -62,6 +62,11 @@ class CarPartMaintenance
      * @Assert\NotBlank(message="L'entretien doit être lié à une voiture")
      */
     private $carPart;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $note;
 
     public function getId(): ?int
     {
@@ -100,6 +105,18 @@ class CarPartMaintenance
     public function setCarPart(?CarPart $carPart): self
     {
         $this->carPart = $carPart;
+
+        return $this;
+    }
+
+    public function getNote(): ?string
+    {
+        return $this->note;
+    }
+
+    public function setNote(?string $note): self
+    {
+        $this->note = $note;
 
         return $this;
     }

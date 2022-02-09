@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ApiResource(
  *  collectionOperations={"GET", "POST"},
- *  itemOperations={"GET"},
+ *  itemOperations={"GET","PATCH"},
  *  normalizationContext={
  *      "groups"={"cars_read"}
  *  },
@@ -120,7 +120,6 @@ class Car
      * @Groups({"cars_read"})
      * @ORM\Column(type="datetime")
      * @Assert\NotBlank(message="La date de création ne peut pas être vide")
-     * @Assert\DateTime(message="La date doit être un datetime valide")
      */
     private $dateReleased;
 
@@ -172,7 +171,6 @@ class Car
     /**
      * @Groups({"cars_read"})
      * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Choice(choices=Car::MODEL_TYPE_ID, message="Choisissez un model valide")
      */
     private $modelType;
 
