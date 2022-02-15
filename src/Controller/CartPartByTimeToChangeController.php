@@ -23,16 +23,6 @@ class CartPartByTimeToChangeController extends AbstractController
 
     public function __invoke($id, int $cost)
     {
-        $carParts = $this->carPartRepository->findByLastChangeAndUser($id, (bool) $cost); 
-
-        foreach ($carParts as $carPart) {
-            $carPart->updateTimeToChangeInMonth();
-        }
-
-        usort($carParts, function ($a, $b) {
-            return ($a->getTimeToChangeInMonth() < $b->getTimeToChangeInMonth()) ? -1 : 1;
-        });
-
-        return $carParts;
+        return $this->carPartRepository->findByLastChangeAndUser($id, (bool) $cost);
     }
 }

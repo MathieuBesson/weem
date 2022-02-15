@@ -9,5 +9,9 @@ return array(
   'CORS_ALLOW_ORIGIN' => '^https?://(localhost|127\\.0\\.0\\.1)(:[0-9]+)?$',
   'JWT_SECRET_KEY' => '%kernel.project_dir%/config/jwt/private.pem',
   'JWT_PUBLIC_KEY' => '%kernel.project_dir%/config/jwt/public.pem',
-  'JWT_PASSPHRASE' => '832f972f628ed90c179aca761d1bbe74'
+  'JWT_PASSPHRASE' => '832f972f628ed90c179aca761d1bbe74',
+  'MERCURE_URL' => "http://192.168.88.188:5000/.well-known/mercure",
+  'MERCURE_PUBLIC_URL' => "http://192.168.88.188:5000/.well-known/mercure",
+  'MERCURE_PUBLISH_URL' => "http://192.168.88.188:5000/.well-known/mercure",
+  'MERCURE_JWT_SECRET' => "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXJjdXJlIjp7InN1YnNjcmliZSI6WyIqIl0sInB1Ymxpc2giOlsiKiJdfX0.M1yJUov4a6oLrigTqBZQO_ohWUsg3Uz1bnLD4MIyWLo"
 );
