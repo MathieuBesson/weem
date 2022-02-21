@@ -36,4 +36,14 @@ class CarPartMaintenanceRepository extends ServiceEntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    public function findOnlyByCar($carId){
+        return $this->createQueryBuilder("cpm")
+        ->join("cpm.carPart", "carPart")
+        ->join("carPart.car", "car")
+        ->where("car.id = :id")
+        ->setParameter("id", $carId)
+        ->orderBy("cpm.dateLastChange")
+        ->getQuery()->getResult();
+    }
 }
