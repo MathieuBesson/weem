@@ -178,6 +178,7 @@ class AppFixtures extends Fixture
                 $carPart->setMaxDistance($carStandardPart->getMaxDistance());
                 $carPart->setCalculDurationChoice($carStandardPart->getCalculDurationChoice());
                 $carPart->setNotification(true);
+                $car->addCarPart($carPart);
 
                 for ($i = 0; $i <= mt_rand(0, 3); $i++) {
 
@@ -187,10 +188,18 @@ class AppFixtures extends Fixture
                         $carPartMaintenance->setMileage(mt_rand(1000, 350000));
                     }
                     $carPartMaintenance->setDateLastChange($this->randomDateInRange($car->getDateReleased(), new DateTime));
+
+                    $minDateOfFutureChange = null;
+                    $currentDateOfFutureChange = $carPart->getUpdateFutureChange($carPartMaintenance);
+                    if (is_null($minDateOfFutureChange) || $currentDateOfFutureChange < $minDateOfFutureChange) {
+                        $minDateOfFutureChange = $currentDateOfFutureChange;
+                    }
+
                     $manager->persist($carPartMaintenance);
                 }
 
-                $car->addCarPart($carPart);
+                $carPart->setFutureChangeDate($minDateOfFutureChange);
+
                 $manager->persist($carPart);
             }
             $manager->persist($car);
@@ -202,9 +211,15 @@ class AppFixtures extends Fixture
 
     private function randomDateInRange(DateTime $start, DateTime $end)
     {
+
         $randomTimestamp = mt_rand($start->getTimestamp(), $end->getTimestamp());
         $randomDate = new DateTime();
         $randomDate->setTimestamp($randomTimestamp);
+
+        dump($randomDate);
+        if ($randomDate > (new DateTime)) {
+            dd($randomDate);
+        }
         return $randomDate;
     }
 }

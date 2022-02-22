@@ -64,7 +64,7 @@ class DownloadController extends AbstractController
             throw new NotFoundHttpException();
         }
 
-        $carMaintenances = $this->carPartMaintenanceRepository->findOnlyByCar($carId);
+        $carMaintenances = $this->carPartMaintenanceRepository->findByCar($carId);
 
         // Generate HTML recap
         $html = $this->renderView('default/maintenance_summary.html.twig', [

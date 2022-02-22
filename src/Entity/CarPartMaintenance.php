@@ -8,27 +8,18 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\CarPartMaintenanceRepository;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\NumericFilter;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * @ApiResource(
- *  collectionOperations={"GET","POST",
- *   "CartPartMaintenanceOnCar"={
- *       "method"="get", 
- *       "path"="/car_part_maintenances_by_car/car_id={id}/count={count}", 
- *       "controller"="App\Controller\CartPartMaintenanceByCarController", 
- *       "normalization_context"={"groups"={"carPartMaintenance_read"}},
- *       "defaults"={"identifiedBy"="id"},
- *       "read"=false
- *    }
- * },
+ *  collectionOperations={"GET","POST"},
  *  itemOperations={"GET","PATCH"},
  *  normalizationContext={
  *      "groups"={"carPartMaintenance_read"}
  *  },
  *  denormalizationContext={"disable_type_enforcement"=true}
  * )
+ * @ApiFilter(SearchFilter::class, properties={"carPart.car.id": "exact"})
  * @ORM\Entity(repositoryClass=CarPartMaintenanceRepository::class)
  */
 class CarPartMaintenance
@@ -51,7 +42,7 @@ class CarPartMaintenance
     /**
      * @Groups({"carPartMaintenance_read","carPart_read"})
      * @ORM\Column(type="datetime")
-     * @Assert\DateTime(message="La date de dernier changement doit être un datetime valide")
+     * @Assert\NotBlank(message="La date de dernier changement ne peux pas être null")
      */
     private $dateLastChange;
 

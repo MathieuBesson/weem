@@ -3,7 +3,6 @@
 namespace App\Repository;
 
 use App\Entity\CarPartMaintenance;
-use App\Doctrine\CurrentUserExtension;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
@@ -15,35 +14,31 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
  */
 class CarPartMaintenanceRepository extends ServiceEntityRepository
 {
-    private CurrentUserExtension $currentUserExtension;
-    public function __construct(ManagerRegistry $registry, CurrentUserExtension $currentUserExtension)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, CarPartMaintenance::class);
-
-        $this->currentUserExtension = $currentUserExtension;
     }
 
-    public function findByCar($carId, $count){
-        $qb = $this->createQueryBuilder("cpm")
-        ->join("cpm.carPart", "carPart")
-        ->join("carPart.car", "car")
-        ->where("car.id = :id")
-        ->setParameter("id", $carId)
-        ->orderBy("cpm.dateLastChange")
-        ->setMaxResults($count);
-
-        $this->currentUserExtension->addWhere($qb, CarPartMaintenance::class);
-
-        return $qb->getQuery()->getResult();
-    }
-
-    public function findOnlyByCar($carId){
+    public function findByCar($carId)
+    {
         return $this->createQueryBuilder("cpm")
-        ->join("cpm.carPart", "carPart")
-        ->join("carPart.car", "car")
-        ->where("car.id = :id")
-        ->setParameter("id", $carId)
-        ->orderBy("cpm.dateLastChange")
-        ->getQuery()->getResult();
+            ->join("cpm.carPart", "carPart")
+            ->join("carPart.car", "car")
+            ->where("car.id = :id")
+            ->setParameter("id", $carId)
+            ->orderBy("cpm.dateLastChange")
+            ->getQuery()->getResult();
+    }
+
+    public function getLastByCarPart($carPartId)
+    {
+        return $this->createQueryBuilder("cpm")
+            ->join("cpm.carPart", "cp")
+            ->where("cp.id = :car_part_id")
+            ->setParameter("car_part_id", $carPartId)
+            ->orderBy("cpm.dateLastChange", "DESC")
+            ->getQuery()
+            ->setMaxResults(1)
+            ->getOneOrNullResult();
     }
 }
