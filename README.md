@@ -24,10 +24,11 @@ Le projet d'organise en 2 niveaux :
     - Et d'une BDD [MariaDb](https://mariadb.com/kb/fr/documentation-de-mariadb/) 
 
 - La partie frontend composé de : 
-    -  ...
+    - Du framework ReactJS (https://fr.reactjs.org/)
+    - 
 
 - La partie mobile composé de : 
-    - ...
+    - Du framework Capacitor (https://capacitorjs.com/)
 
 ## Lancement de la partie API Backend (2 choix possibles)
 
