@@ -1,0 +1,23 @@
+.dataCar__carburant{
+    width: 75%;
+}
+
+ul{
+    list-style-type: none;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+li {
+    display: inline-block;
+  }
+
+  input{
+    display: none;
+  }
+
+  :checked+label::before {
+    content: "✓";
+    transform: scale(1);
+  }
