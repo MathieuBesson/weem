@@ -215,11 +215,6 @@ class AppFixtures extends Fixture
         $randomTimestamp = mt_rand($start->getTimestamp(), $end->getTimestamp());
         $randomDate = new DateTime();
         $randomDate->setTimestamp($randomTimestamp);
-
-        dump($randomDate);
-        if ($randomDate > (new DateTime)) {
-            dd($randomDate);
-        }
         return $randomDate;
     }
 }
