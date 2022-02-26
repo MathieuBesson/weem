@@ -25,8 +25,7 @@ const Login = (props) => {
     //   }
 
     return(
-        <div>
-            <img src={img} className='login__img'/>
+        <div className="background__welcome">
             <LoginForm />
         </div>
     )

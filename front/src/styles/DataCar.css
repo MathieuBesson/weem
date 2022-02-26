@@ -13,10 +13,6 @@ li {
     display: inline-block;
   }
 
-  input{
-    display: none;
-  }
-
   :checked+label::before {
     content: "✓";
     transform: scale(1);

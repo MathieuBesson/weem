@@ -7,8 +7,8 @@ import DataCar from './FirstCar/DataCar';
 
 function App() {
   return (
-    // <Login/>
-    <Register/>
+    <Login/>
+    // <Register/>
     // <Welcome/>
     // <DataCar/>
   );

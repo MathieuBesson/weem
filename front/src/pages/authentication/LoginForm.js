@@ -51,12 +51,6 @@ const LoginForm = (props) => {
 
       </form>
 
-      <div>
-        {/* A remplacer par des imgs */}
-        <a>Facebook</a>
-        <a>Google</a>
-      </div>
-
       <a href="www.google.com">S'inscrire ></a>
     </div>
   );
