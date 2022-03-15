@@ -5,6 +5,7 @@ namespace App\Command;
 
 use App\Repository\CarPartRepository;
 use Symfony\Component\Console\Command\Command;
+use App\Repository\CarPartMaintenanceRepository;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -15,10 +16,10 @@ class SendMercureNotification extends Command
     private CarPartRepository $carPartRepository;
 
     public function __construct(
-        CarPartRepository $carPartRepository
+        CarPartMaintenanceRepository $carPartMaintenanceRepository
     ) {
         parent::__construct();
-        $this->carPartRepository = $carPartRepository;
+        $this->carPartMaintenanceRepository = $carPartMaintenanceRepository;
     }
 
     protected function configure(): void
@@ -28,11 +29,28 @@ class SendMercureNotification extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $carParts = $this->carPartRepository->findAllWithTimeToChange();
+        $carParts = $this->carPartMaintenanceRepository->findAllWithTimeToChange();
+
+        $filteredCarPartMaintencances = []; 
+        
+        
+        foreach($carParts as $carPart){
+
+        
+            // On garde seulement 
+            // Si la date de changement dans 1 mois dans 20 jours 10 jours
+            if($carPart->getDateLastChange()){
+
+            }
+            // $filteredCarPartMaintencances
+
+            
+            
+            // dump($carPart->getCarPart()); 
+        }
 
         dd($carParts);
 
-        // Si la date de changement dans 1 mois dans 20 jours 10 jours
 
         // On fait un tableau de pièces à changer pour chaque user que l'on scan user_id => [carPartName, durée]
 

@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use DateTime;
 use App\Entity\CarPartMaintenance;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -40,5 +41,25 @@ class CarPartMaintenanceRepository extends ServiceEntityRepository
             ->getQuery()
             ->setMaxResults(1)
             ->getOneOrNullResult();
+    }
+
+
+    public function findAllWithTimeToChange()
+    {
+        // Récupération de toutes les maintenances datant de - de 1 mois 
+        $datePlusOnMonth = (new DateTime)->modify("+ 1 month"); 
+
+        $qb = $this->createQueryBuilder("cpm")
+            ->join("cpm.carPart", "cp")
+            ->join("cp.car", "c")
+            ->join("c.user", "u")
+            ->where("cp.futureChangeDate BETWEEN :date_now AND :date_plus_one_month")
+            ->setParameter("date_now", new DateTime)
+            ->setParameter("date_plus_one_month", $datePlusOnMonth)
+            ->orderBy("cpm.dateLastChange");
+
+        $carParts = $qb->getQuery()->getResult();
+
+        return $carParts;
     }
 }
