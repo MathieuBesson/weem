@@ -1,0 +1,36 @@
+.btn {
+    padding: 20px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    border: 1px solid;
+    margin: 5px 0;
+    cursor: pointer;
+}
+
+.btn-primary {
+    color: white;
+    background-color: #16db93;
+    border-color: transparent;
+    transition: all ease 0.3s;
+    &:hover {
+        color: #16db93;
+        background-color: transparent;
+        border-color: #16db93;
+        transition: all ease 0.3s;
+    }
+}
+
+.btn-thirdary {
+    color: #16db93;
+    background-color: transparent;
+    border-color: #16db93;
+    transition: all ease 0.3s;
+    &:hover {
+        color: white;
+        background-color: #16db93;
+        border-color: transparent;
+        transition: all ease 0.3s;
+    }
+}

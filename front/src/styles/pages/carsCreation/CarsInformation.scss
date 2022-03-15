@@ -1,0 +1,129 @@
+.car-informations {
+    width: 375px;
+    margin: auto;
+    &__title {
+        font-weight: bold;
+        font-size: 24px;
+        margin: 30px 0;
+    }
+
+    &__form {
+        &-group {
+            display: flex;
+            flex-direction: column;
+            margin-top: 16px;
+            &-label {
+                margin-bottom: 10px;
+                font-size: 14px;
+                font-weight: bold;
+            }
+
+            &-title {
+                font-size: 16px;
+                font-weight: 700;
+                margin-bottom: 10px;
+            }
+
+            &-range-labels {
+                display: flex;
+                justify-content: space-between;
+                margin: 10px 0 15px 0;
+                span {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    em {
+                        margin-bottom: 7px;
+                    }
+                }
+            }
+            &-radio {
+                display: flex;
+                justify-content: space-between;
+                div {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    position: relative;
+                }
+
+                &-diesel,
+                &-essence,
+                &-hybride,
+                &-electric,
+                &-other {
+                    border-radius: 50%;
+                    &-input {
+                        cursor: pointer;
+                        -webkit-appearance: none;
+                        appearance: none;
+                        margin: 0;
+                        font: inherit;
+                        &::before {
+                            content: "";
+                            color: #2f3348;
+                            width: 50px;
+                            height: 50px;
+                            border: 2px solid #2f3348;
+                            border-radius: 50%;
+                            transform: translateY(1.5em) scale(0);
+                            display: grid;
+                            place-content: center;
+                            margin: auto;
+                        }
+                        &:checked::before {
+                            transform: scale(1);
+                        }
+                    }
+                    &-label {
+                        cursor: pointer;
+                        position: absolute;
+                        font-size: 10px;
+                        font-weight: bold;
+                        text-transform: uppercase;
+                        margin: 0 5px;
+                        text-align: center;
+                        word-break: break-all;
+                    }
+                }
+
+                &-essence,
+                &-hybride,
+                &-electric,
+                &-other {
+                    color: white;
+                }
+
+                &-diesel{
+                    color: #2F3348;
+                }
+
+                &-diesel {
+                    background-color: #f4dd04;
+                }
+                &-essence {
+                    background-color: #8fbc21;
+                }
+                &-hybride {
+                    background-color: #24ba96;
+                }
+                &-electric {
+                    background-color: #3fafbe;
+                }
+                &-other {
+                    background-color: #6B75A6;
+                }
+            }
+
+        }
+        &-disclaimer {
+            margin-top: 25px;
+        }
+        &-buttons {
+            display: flex;
+            flex-direction: column;
+            margin: 25px 0 50px 0;
+        }
+    }
+}

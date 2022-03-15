@@ -30,7 +30,8 @@ class Car
         'ELECTRIC' => 1,
         'ESCENCE' => 2,
         'DIESEL' => 3,
-        'HYBRID' => 4
+        'HYBRID' => 4,
+        'OTHER' => 5,
     ];
 
     const FUEL_TYPE = [
@@ -46,25 +47,28 @@ class Car
         self::FUEL_TYPE_ID['HYBRID'] => [
             'LABEL' => 'hybride'
         ],
+        self::FUEL_TYPE_ID['OTHER'] => [
+            'LABEL' => 'Autre'
+        ],
     ];
 
     const DRIVING_STYLE_ID = [
         'MODERATE' => 1,
-        'SPORTIF' => 2,
+        'SPORTIVE' => 2,
         'AGRESSIVE' => 3
     ];
 
     const DRIVING_STYLE = [
-        self::DRIVING_STYLE_ID['MODERATE'] => [
-            'LABEL' => 'modéré',
+        self::DRIVING_STYLE_ID['SOFT'] => [
+            'LABEL' => 'souple',
             'DAMAGE_PERCENTAGE' => 1
         ],
-        self::DRIVING_STYLE_ID['SPORTIF'] => [
-            'LABEL' => 'sportif',
+        self::DRIVING_STYLE_ID['NEUTRAL'] => [
+            'LABEL' => 'neutre',
             'DAMAGE_PERCENTAGE' => 1.2
         ],
-        self::DRIVING_STYLE_ID['AGRESSIVE'] => [
-            'LABEL' => 'agressif',
+        self::DRIVING_STYLE_ID['SPORTIVE'] => [
+            'LABEL' => 'sportive',
             'DAMAGE_PERCENTAGE' => 1.4
         ]
     ];

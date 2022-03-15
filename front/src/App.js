@@ -1,13 +1,13 @@
 import './App.css';
-import Login from './Login/Login';
-import Register from './Register/Register'
-import Welcome from './FirstCar/Welcome';
-import DataCar from './FirstCar/DataCar';
+// import Login from './Login/Login';
+import CarsInformation from './pages/carsCreation/CarsInformation'
+import './styles/app.scss';
 
 
 function App() {
   return (
-    <Login/>
+    <CarsInformation></CarsInformation>
+    // <Login/>
     // <Register/>
     // <Welcome/>
     // <DataCar/>
