@@ -10,26 +10,26 @@
 }
 
 .btn-primary {
-    color: white;
-    background-color: #16db93;
+    color: $white-primary;
+    background-color: $green-primary;
     border-color: transparent;
     transition: all ease 0.3s;
     &:hover {
-        color: #16db93;
+        color: $green-primary;
         background-color: transparent;
-        border-color: #16db93;
+        border-color: $green-primary;
         transition: all ease 0.3s;
     }
 }
 
 .btn-thirdary {
-    color: #16db93;
+    color: $green-primary;
     background-color: transparent;
-    border-color: #16db93;
+    border-color: $green-primary;
     transition: all ease 0.3s;
     &:hover {
-        color: white;
-        background-color: #16db93;
+        color: $white-primary;
+        background-color: $green-primary;
         border-color: transparent;
         transition: all ease 0.3s;
     }

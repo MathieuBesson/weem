@@ -1,16 +1,16 @@
 .input {
     &-standard {
-        background-color: #e4e7f8;
+        background-color: $grey-primary;
         border: 0;
         padding: 15px;
         border-radius: 12px;
-        color: #6a729e;
-        font-size: 14px;
+        color: $blue-primary;
+        font-size: $font-small;
         font-weight: 400;
         &::placeholder {
-            font-size: 14px;
+            font-size: $font-small;
             font-weight: 400;
-            color: #6a729e;
+            color: $blue-primary;
             opacity: 1;
         }
     }
@@ -21,10 +21,10 @@
         &-plus {
             position: absolute;
             top: -7px;
-            font-size: 32px;
+            font-size: $font-mega-large;
             cursor: pointer;
             padding: 10px 10px;
-            color: #16db93;
+            color: $green-primary;
             user-select: none;
         }
         &-plus {
@@ -43,7 +43,7 @@
         -webkit-appearance: none;
         width: 100%;
         height: 4px;
-        background: #e4e7f8;
+        background: $grey-primary;
         outline: none;
         opacity: 0.7;
         -webkit-transition: 0.2s;
@@ -54,7 +54,7 @@
             appearance: none;
             width: 20px;
             height: 20px;
-            background: #16db93;
+            background: $green-primary;
             cursor: pointer;
         }
     
@@ -63,12 +63,12 @@
             border: none;
             width: 20px;
             height: 20px;
-            background: #16db93;
+            background: $green-primary;
             cursor: pointer;
         }
     }
 
     &-required {
-        color: #16db93;
+        color: $green-primary;
     }
 }

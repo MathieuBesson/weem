@@ -1,9 +1,7 @@
 .car-informations {
-    width: 375px;
-    margin: auto;
     &__title {
-        font-weight: bold;
-        font-size: 24px;
+        font-weight: $font-bold;
+        font-size: $font-extra-large;
         margin: 30px 0;
     }
 
@@ -14,13 +12,13 @@
             margin-top: 16px;
             &-label {
                 margin-bottom: 10px;
-                font-size: 14px;
-                font-weight: bold;
+                font-size: $font-small;
+                font-weight: $font-bold;
             }
 
             &-title {
-                font-size: 16px;
-                font-weight: 700;
+                font-size: $font-normal;
+                font-weight: $font-bold;
                 margin-bottom: 10px;
             }
 
@@ -62,10 +60,10 @@
                         font: inherit;
                         &::before {
                             content: "";
-                            color: #2f3348;
+                            color: $blue-secondary;
                             width: 50px;
                             height: 50px;
-                            border: 2px solid #2f3348;
+                            border: 2px solid $blue-secondary;
                             border-radius: 50%;
                             transform: translateY(1.5em) scale(0);
                             display: grid;
@@ -79,8 +77,8 @@
                     &-label {
                         cursor: pointer;
                         position: absolute;
-                        font-size: 10px;
-                        font-weight: bold;
+                        font-size: $font-extra-small; 
+                        font-weight: $font-bold;
                         text-transform: uppercase;
                         margin: 0 5px;
                         text-align: center;
@@ -92,27 +90,27 @@
                 &-hybride,
                 &-electric,
                 &-other {
-                    color: white;
+                    color: $white-primary;
                 }
 
                 &-diesel{
-                    color: #2F3348;
+                    color: $blue-secondary;
                 }
 
                 &-diesel {
-                    background-color: #f4dd04;
+                    background-color: $yellow-primary;
                 }
                 &-essence {
-                    background-color: #8fbc21;
+                    background-color: $green-secondary;
                 }
                 &-hybride {
-                    background-color: #24ba96;
+                    background-color: $green-thirdary;
                 }
                 &-electric {
-                    background-color: #3fafbe;
+                    background-color: $blue-thirdary;
                 }
                 &-other {
-                    background-color: #6B75A6;
+                    background-color: $blue-fourth;
                 }
             }
 
