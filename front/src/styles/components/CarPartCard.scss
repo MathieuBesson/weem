@@ -1,0 +1,26 @@
+@import "./../app.scss";
+
+.car-part-card {
+    // padding: 18px 10px;
+    display: block;
+    width: 48%;
+    // border-radius: 12px;
+    // border: none;
+    // background-color: $blue-secondary;
+    // color: $white-primary;
+    // font-weight: $font-weight-bold;
+    // margin-bottom: 12px;
+
+    &__img-block{
+        background-color: $grey-primary;
+        width: 100%;
+        padding: 20px;
+        border-radius: 24px;
+    }
+
+    &__title{
+        margin-top:8px;
+        font-weight: $font-weight-bold;
+        font-size: $font-size-normal;
+    }
+}

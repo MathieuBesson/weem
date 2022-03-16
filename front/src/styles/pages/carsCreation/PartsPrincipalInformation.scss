@@ -1,0 +1,57 @@
+@import "./../../app.scss";
+
+.parts-principal-information {
+    margin-top: 40px;
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        &-title {
+            width: 75%;
+        }
+    }
+
+    .btn-fourth {
+        color: $green-primary;
+        background-color: transparent;
+        border-color: $green-primary;
+        transition: all ease 0.3s;
+        &:hover {
+            color: $white-primary;
+            background-color: $green-primary;
+            border-color: transparent;
+            transition: all ease 0.3s;
+        }
+    }
+
+    &__part {
+        &-recurrent, &-principal{
+            &-title{
+                margin-top: 35px;
+                font-size: $font-size-medium;
+                font-weight: $font-weight-bold;
+                margin-bottom: 15px;
+            }
+        }
+
+        &-recurrent-group {
+            &-btn {
+                padding: 18px 10px;
+                display: block;
+                width: 48%;
+                border-radius: 12px;
+                border: none;
+                background-color: $blue-secondary;
+                color: $white-primary;
+                font-weight: $font-weight-bold;
+                font-size: 12px;
+                margin-bottom: 12px;
+            }
+        }
+    }
+
+    &__disclaimer{
+        margin-top: 25px;
+        font-size: $font-size-small;
+    }
+}

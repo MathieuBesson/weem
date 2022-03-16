@@ -108,7 +108,7 @@ const CarsInformation = () => {
                         <span className="input-number-plus">+</span>
                     </div>
                 </div>
-                <div className="car-informations__form-group">
+                <div className="car-informations__form-group fuel-type-block">
                     <h3 className="car-informations__form-group-title">
                         Type de carburant<em className="input-required">*</em>
                     </h3>
@@ -196,7 +196,7 @@ const CarsInformation = () => {
                         </div>
                     </div>
                 </div>
-                <div className="car-informations__form-group">
+                <div className="car-informations__form-group driving-style-block">
                     <h3 className="car-informations__form-group-title">
                         Style de conduite<em className="input-required">*</em>
                     </h3>

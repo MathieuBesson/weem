@@ -1,0 +1,18 @@
+.icon {
+    height: 28px;
+    width: 28px;
+    object-fit: contain;
+    content: "";
+    display: block;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.icon-back{
+    background-color: $grey-primary;
+    height: 45px;
+    width: 45px;
+    background-size: 40% 40%;
+    border-radius: 50%;
+}

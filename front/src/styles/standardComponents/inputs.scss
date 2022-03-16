@@ -5,10 +5,10 @@
         padding: 15px;
         border-radius: 12px;
         color: $blue-primary;
-        font-size: $font-small;
+        font-size: $font-size-small;
         font-weight: 400;
         &::placeholder {
-            font-size: $font-small;
+            font-size: $font-size-small;
             font-weight: 400;
             color: $blue-primary;
             opacity: 1;
@@ -20,8 +20,8 @@
         &-moins,
         &-plus {
             position: absolute;
-            top: -7px;
-            font-size: $font-mega-large;
+            top: -11px;
+            font-size: $font-size-mega-large;
             cursor: pointer;
             padding: 10px 10px;
             color: $green-primary;
@@ -34,7 +34,7 @@
             right: 47px;
         }
         .input-standard {
-            width: 92%;
+            width: 100%;
             -moz-appearance: textfield;
         }
     }

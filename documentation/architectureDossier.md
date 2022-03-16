@@ -60,6 +60,7 @@ Inplentation:
 →components
     →FlashMessage.js (Bandeau infos/confirmation)
             Route:
+    →CarPartCard.js (Card de rensignement des piece)
             
     →modals
         →PartsDetails.js (Pop-up infos pièces)
