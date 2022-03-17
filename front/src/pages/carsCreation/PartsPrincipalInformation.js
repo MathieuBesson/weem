@@ -1,8 +1,10 @@
 import react, { useState } from "react";
 import iconBack from "./../../assets/images/icons/back.svg";
+import carWithMountain from "./../../assets/images/background/car-with-mountain.jpg";
 
 import "./../../styles/pages/carsCreation/PartsPrincipalInformation.scss";
 import CarPartCard from "./../../components/CarPartCard";
+import InfoMessage from "./../../components/InfoMessage";
 
 const PartsPrincipalInformation = () => {
     return (
@@ -16,6 +18,11 @@ const PartsPrincipalInformation = () => {
                     Renseignements des pièces et des entretiens
                 </h2>
             </div>
+            <InfoMessage 
+                title="Plus qu'une étape" 
+                message="Maintenant que vous avez créé votre véhicule, il ne vous reste plus qu’à remplir les données à propos des différentes pièces !"
+                img={carWithMountain}
+            />
             <div className="parts-principal-information__part-recurrent">
                 <h3 className="parts-principal-information__part-recurrent-title">
                     Entretiens récurrents

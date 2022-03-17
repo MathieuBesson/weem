@@ -22,7 +22,7 @@ Inplentation:
             Route:
 
     →carsCreation
-        →PartsPrincipalInformation.js (Renseignements de pièces
+        →PartsPrincipalInformation.js (Renseignements de pièces)
             Route:
         →PartsSecondaryInformation.js (Renseignements de pièces secondaires)
             Route:
@@ -64,6 +64,8 @@ Inplentation:
             
     →modals
         →PartsDetails.js (Pop-up infos pièces)
+            Route:
+        →InfoMessage.js (Pop-up info -> Plus qu'une étape)
             Route:
         →AddMaintenance.js (Ajouter un changement)
             Route:
