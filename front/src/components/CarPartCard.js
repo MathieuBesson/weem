@@ -9,8 +9,8 @@ const CarPartCard = ({carPartImg, carPartName}) => {
         <div className="car-part-card">
             <div className="car-part-card__img-block selected">
                 <span 
-                className="icon icon-tick"
-                style={{ backgroundImage: `url(${tick})` }}
+                className="icon icon-tick-green"
+                style={{ maskImage: `url(${tick})` }}
                 ></span>
                 <img src={carPartImg} className="img-fluid"/>
             </div>

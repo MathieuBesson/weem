@@ -9,6 +9,7 @@ import carWithMountain from "./../../assets/images/background/car-with-mountain.
 import CarPartCard from "./../../components/CarPartCard";
 import InfoMessage from "./../../components/InfoMessage";
 import PartsDetails from "./../../components/PartsDetails";
+import FlashMessage from "./../../components/FlashMessage";
 
 // Styles
 import "./../../styles/pages/carsCreation/PartsPrincipalInformation.scss";
@@ -87,7 +88,11 @@ const PartsPrincipalInformation = () => {
                         style={{ backgroundImage: `url(${iconNext})` }}
                     ></span>
                 </p>
-            </InfoMessage> */}
+            </InfoMessage> 
+            <FlashMessage type="success" active={true}>
+                Changements enregistrés, vous pouvez les modifier à tout moment depuis la tab-bar
+            </FlashMessage>
+            */}
         </div>
     );
 };

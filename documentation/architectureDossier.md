@@ -59,20 +59,12 @@ Inplentation:
 
 →components
     →FlashMessage.js (Bandeau infos/confirmation)
-            Route:
     →CarPartCard.js (Card de rensignement des piece)
-            
-    →modals
-        →PartsDetails.js (Pop-up infos pièces)
-            Route:
-        →InfoMessage.js (Pop-up info -> Plus qu'une étape)
-            Route:
-        →AddMaintenance.js (Ajouter un changement)
-            Route:
-        →SwitchCars.js (Switch)
-            Route:
-        →AddCars.js (Ajout nouvelle voiture)
-            Route:
+    →PartsDetails.js (Pop-up infos pièces)
+    →InfoMessage.js (Pop-up info -> Plus qu'une étape)
+    →AddMaintenance.js (Ajouter un changement)
+    →SwitchCars.js (Switch)
+    →AddCars.js (Ajout nouvelle voiture)
 
 →styles
 

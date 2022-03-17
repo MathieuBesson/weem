@@ -12,11 +12,9 @@
         &.selected{
             background-color: $green-fourth;
             position: relative;
-            .icon-tick{
+            .icon-tick-green{
                 position: absolute;
                 display: block;
-                width: 20px;
-                height: 20px;
                 top: 14px;
                 left: 14px;
             }

@@ -6,6 +6,7 @@
     display: block;
     background-position: center center;
     background-repeat: no-repeat;
+    mask-repeat: no-repeat;
 }
 
 .icon-back {
@@ -29,4 +30,16 @@
     background-size: 60% 60%;
     background-position: center center;
     transform: rotate(180deg);
+}
+
+.icon-tick{
+    width: 20px;
+    height: 20px;
+    &-green{
+        background-color: $green-primary;
+    }
+
+    &-white{
+        background-color: $white-primary;
+    }
 }

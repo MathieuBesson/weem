@@ -1,0 +1,32 @@
+@import "./../app.scss";
+
+.flash-message{
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 45px 36px 12px 36px;
+    width: $screen-max-width;
+    margin: auto !important;
+    color: $white-primary;
+    font-weight: $font-weight-normal;
+    font-size: $font-size-normal;
+    transform: translateY(-100%);
+    transition: all ease-in 0.5s;
+    &.success{
+        background-color: $green-primary;
+    }
+    &.danger{
+        background-color: $red-primary;
+    }
+    &.active{
+        transform: translateY(0%);
+        transition: all ease-in 0.5s;
+    }
+    &__content{
+        margin-bottom: 0;
+    }
+}
