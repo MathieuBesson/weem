@@ -6,12 +6,14 @@ import PartsPrincipalInformation from './pages/carsCreation/PartsPrincipalInform
 
 function App() {
   return (
-    // <CarsInformation></CarsInformation>
-    <PartsPrincipalInformation></PartsPrincipalInformation>
-    // <Login/>
-    // <Register/>
-    // <Welcome/>
-    // <DataCar/>
+    <main>
+      {/* <CarsInformation></CarsInformation> */}
+      <PartsPrincipalInformation></PartsPrincipalInformation>
+      {/* <Login/> */}
+      {/* <Register/> */}
+      {/* <Welcome/> */}
+      {/* <DataCar/> */}
+    </main>
   );
 }
 

@@ -1,7 +1,8 @@
 @import "./../../app.scss";
 
 .parts-principal-information {
-    margin-top: 40px;
+    padding-top: 40px;
+    padding-bottom: 5px;
     &__header {
         display: flex;
         justify-content: space-between;

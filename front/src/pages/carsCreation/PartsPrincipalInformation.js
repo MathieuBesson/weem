@@ -1,10 +1,17 @@
 import react, { useState } from "react";
+
+// Pictures 
 import iconBack from "./../../assets/images/icons/back.svg";
+import iconNext from "./../../assets/images/icons/next.svg";
 import carWithMountain from "./../../assets/images/background/car-with-mountain.jpg";
 
-import "./../../styles/pages/carsCreation/PartsPrincipalInformation.scss";
+// COmponents
 import CarPartCard from "./../../components/CarPartCard";
 import InfoMessage from "./../../components/InfoMessage";
+import PartsDetails from "./../../components/PartsDetails";
+
+// Styles
+import "./../../styles/pages/carsCreation/PartsPrincipalInformation.scss";
 
 const PartsPrincipalInformation = () => {
     return (
@@ -18,11 +25,6 @@ const PartsPrincipalInformation = () => {
                     Renseignements des pièces et des entretiens
                 </h2>
             </div>
-            <InfoMessage 
-                title="Plus qu'une étape" 
-                message="Maintenant que vous avez créé votre véhicule, il ne vous reste plus qu’à remplir les données à propos des différentes pièces !"
-                img={carWithMountain}
-            />
             <div className="parts-principal-information__part-recurrent">
                 <h3 className="parts-principal-information__part-recurrent-title">
                     Entretiens récurrents
@@ -68,6 +70,24 @@ const PartsPrincipalInformation = () => {
             <div className="car-informations__form-buttons d-flex">
                 <button className="btn btn-primary col-12">Suivant</button>
             </div>
+            {/* <PartsDetails 
+                title="Courroie de distribution"
+                content="Une courroie de distribution permet de distribuer la puissance du moteur aux quatres roues grâce à une bande en caoutchouc appelée “Courroie”. En moyenne, une courroie de distribution tient 120 000km."
+            />
+            <InfoMessage title="Plus qu'une étape">
+                <p className="info-message-block__content">Maintenant que vous avez créé votre véhicule, il ne vous reste plus qu’à remplir les données à propos des différentes pièces !</p>
+                <p className="info-message-block__content">Vous pouvez également en savoir plus sur l’utilité des pièces en restant appuyé sur une des pièces !</p>
+                <img className="info-message-block__img" src={carWithMountain} />
+                <p className="info-message-block__next-block">
+                    <span className="info-message-block__next-block-content">
+                        Continuer
+                    </span>
+                    <span
+                        className="icon icon-next"
+                        style={{ backgroundImage: `url(${iconNext})` }}
+                    ></span>
+                </p>
+            </InfoMessage> */}
         </div>
     );
 };
