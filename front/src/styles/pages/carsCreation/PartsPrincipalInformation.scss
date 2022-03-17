@@ -12,19 +12,6 @@
         }
     }
 
-    .btn-fourth {
-        color: $green-primary;
-        background-color: transparent;
-        border-color: $green-primary;
-        transition: all ease 0.3s;
-        &:hover {
-            color: $white-primary;
-            background-color: $green-primary;
-            border-color: transparent;
-            transition: all ease 0.3s;
-        }
-    }
-
     &__part {
         &-recurrent, &-principal{
             &-title{

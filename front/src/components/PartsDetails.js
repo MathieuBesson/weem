@@ -1,12 +1,20 @@
 import react, { useState } from "react";
-import InfoMessage from "./InfoMessage";
 
-const PartsDetails = ({ title, content }) => {
+import "./../styles/components/PartsDetails.scss";
+
+
+const PartsDetails = ({ title, active }) => {
     return (
-        <InfoMessage title={title}>
-            <p className="info-message-block__content">{content}</p>
-            <button className="btn btn-primary w-100">Compris!</button>
-        </InfoMessage>
+        <div className={`part-detail ${active && 'active'}`}>
+            <h3 className="part-detail__title">{title}</h3>
+            <input type="date" className="part-detail__input input-secondary"/>
+            <input 
+                className="part-detail__input input-secondary"
+                type="number"
+                placeholder="Kilométrage actuel de la voiture*"
+            />
+            <button className="btn btn-secondary w-100">Valider</button>
+        </div>
     );
 };
 

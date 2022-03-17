@@ -61,6 +61,7 @@ Inplentation:
     →FlashMessage.js (Bandeau infos/confirmation)
     →CarPartCard.js (Card de rensignement des piece)
     →PartsDetails.js (Pop-up infos pièces)
+    →PartsExplanation.js (Pop-up infos pièces)
     →InfoMessage.js (Pop-up info -> Plus qu'une étape)
     →AddMaintenance.js (Ajouter un changement)
     →SwitchCars.js (Switch)

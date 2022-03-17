@@ -8,8 +8,9 @@ import carWithMountain from "./../../assets/images/background/car-with-mountain.
 // COmponents
 import CarPartCard from "./../../components/CarPartCard";
 import InfoMessage from "./../../components/InfoMessage";
-import PartsDetails from "./../../components/PartsDetails";
+import PartsExplanation from "../../components/PartsExplanation";
 import FlashMessage from "./../../components/FlashMessage";
+import PartsDetails from "./../../components/PartsDetails";
 
 // Styles
 import "./../../styles/pages/carsCreation/PartsPrincipalInformation.scss";
@@ -71,7 +72,7 @@ const PartsPrincipalInformation = () => {
             <div className="car-informations__form-buttons d-flex">
                 <button className="btn btn-primary col-12">Suivant</button>
             </div>
-            {/* <PartsDetails 
+            {/* <PartsExplanation 
                 title="Courroie de distribution"
                 content="Une courroie de distribution permet de distribuer la puissance du moteur aux quatres roues grâce à une bande en caoutchouc appelée “Courroie”. En moyenne, une courroie de distribution tient 120 000km."
             />
@@ -92,7 +93,8 @@ const PartsPrincipalInformation = () => {
             <FlashMessage type="success" active={true}>
                 Changements enregistrés, vous pouvez les modifier à tout moment depuis la tab-bar
             </FlashMessage>
-            */}
+            <PartsDetails title="Pneus avant" active={true} />
+        */}
         </div>
     );
 };

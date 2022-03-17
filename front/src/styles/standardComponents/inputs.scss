@@ -1,17 +1,32 @@
 .input {
-    &-standard {
-        background-color: $grey-primary;
-        border: 0;
+    &-standard, &-secondary {
         padding: 15px;
         border-radius: 12px;
-        color: $blue-primary;
         font-size: $font-size-small;
         font-weight: 400;
+        width: 100%;
         &::placeholder {
             font-size: $font-size-small;
             font-weight: 400;
-            color: $blue-primary;
             opacity: 1;
+        }
+    }
+
+    &-standard {
+        background-color: $grey-primary;
+        border: 0;
+        color: $blue-primary;
+        &::placeholder {
+            color: $blue-primary;
+        }
+    }
+
+    &-secondary{
+        background-color: transparent;
+        border: 1px solid $blue-primary;
+        color: $blue-primary;
+        &::placeholder {
+            color: $blue-primary;
         }
     }
 

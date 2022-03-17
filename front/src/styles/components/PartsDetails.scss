@@ -1,0 +1,26 @@
+@import "./../app.scss";
+
+.part-detail {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 35px 36px 20px 36px;
+    width: $screen-max-width;
+    margin: auto !important;
+    background-color: $grey-primary;
+    &__title {
+        font-weight: $font-weight-bold;
+        font-size: $font-size-medium;
+        margin-bottom: 15px;
+    }
+    &__input {
+        margin-bottom: 12px;
+    }
+    transform: translateY(100%);
+    transition: all ease-in 0.5s;
+    &.active{
+        transform: translateY(0%);
+        transition: all ease-in 0.5s;
+    }
+}
