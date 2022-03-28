@@ -29,7 +29,7 @@ Inplentation:
         →CarsInformation.js (Renseignement du véhicule)
             Route:
 
-    →homeEntretien
+    →homeMaintenance
         →Home.js (Home)
             Route:
         →MaintenanceBook.js (Carnet d'entretien)

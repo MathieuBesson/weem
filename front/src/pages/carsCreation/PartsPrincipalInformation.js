@@ -5,7 +5,7 @@ import iconBack from "./../../assets/images/icons/back.svg";
 import iconNext from "./../../assets/images/icons/next.svg";
 import carWithMountain from "./../../assets/images/background/car-with-mountain.jpg";
 
-// COmponents
+// Components
 import CarPartCard from "./../../components/CarPartCard";
 import InfoMessage from "./../../components/InfoMessage";
 import PartsExplanation from "../../components/PartsExplanation";
