@@ -1,0 +1,29 @@
+@import "./../app.scss";
+
+.car-part-card {
+    display: block;
+    width: 48%;
+    
+    &__img-block{
+        background-color: $grey-primary;
+        width: 100%;
+        padding: 20px;
+        border-radius: 24px;
+        &.selected{
+            background-color: $green-fourth;
+            position: relative;
+            .icon-tick-green{
+                position: absolute;
+                display: block;
+                top: 14px;
+                left: 14px;
+            }
+        }
+    }
+
+    &__title{
+        margin-top:8px;
+        font-weight: $font-weight-bold;
+        font-size: $font-size-normal;
+    }
+}

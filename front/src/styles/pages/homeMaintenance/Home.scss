@@ -1,0 +1,16 @@
+@import './../../app.scss';
+
+.home{
+    &__header{
+        padding-top: 45px;
+        padding-bottom: 20px;
+        &-title{
+            font-weight: $font-weight-bold;
+            display: flex;
+            flex-direction: column;
+        }
+        .button-icon{
+            margin: 0 3px;
+        }
+    }
+}

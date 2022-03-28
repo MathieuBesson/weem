@@ -20,19 +20,4 @@ class CarPartRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, CarPart::class);
     }
-
-    public function findAllWithTimeToChange()
-    {
-        $qb = $this->createQueryBuilder("cp")
-        ->join("cp.carPartMaintenances", "cpm")
-        ->orderBy("cpm.dateLastChange");
-
-        // $carParts = $qb->getQuery()->getResult();
-
-        // foreach ($carParts as $carPart) {
-        //     $carPart->updateTimeToChangeInMonth();
-        // }
-
-        // return $carParts;
-    }
 }

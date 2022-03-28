@@ -1,0 +1,25 @@
+@import "./../app.scss";
+
+.button-icon{
+    padding: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    &.light{
+        background-color: $grey-primary;
+        .icon{
+            background-color: $blue-secondary;
+        }
+    }
+    &.dark{
+        background-color: $blue-secondary;
+        .icon{
+            background-color: white;
+        }
+    }
+
+    .icon{
+        width: 20px;
+        height: 20px;
+        background-position: center center;
+    }
+}

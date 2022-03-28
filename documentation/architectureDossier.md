@@ -22,14 +22,14 @@ Inplentation:
             Route:
 
     →carsCreation
-        →PartsPrincipalInformation.js (Renseignements de pièces
+        →PartsPrincipalInformation.js (Renseignements de pièces)
             Route:
         →PartsSecondaryInformation.js (Renseignements de pièces secondaires)
             Route:
         →CarsInformation.js (Renseignement du véhicule)
             Route:
 
-    →homeEntretien
+    →homeMaintenance
         →Home.js (Home)
             Route:
         →MaintenanceBook.js (Carnet d'entretien)
@@ -59,17 +59,13 @@ Inplentation:
 
 →components
     →FlashMessage.js (Bandeau infos/confirmation)
-            Route:
-            
-    →modals
-        →PartsDetails.js (Pop-up infos pièces)
-            Route:
-        →AddMaintenance.js (Ajouter un changement)
-            Route:
-        →SwitchCars.js (Switch)
-            Route:
-        →AddCars.js (Ajout nouvelle voiture)
-            Route:
+    →CarPartCard.js (Card de rensignement des piece)
+    →PartsDetails.js (Pop-up infos pièces)
+    →PartsExplanation.js (Pop-up infos pièces)
+    →InfoMessage.js (Pop-up info -> Plus qu'une étape)
+    →AddMaintenance.js (Ajouter un changement)
+    →SwitchCars.js (Switch)
+    →AddCars.js (Ajout nouvelle voiture)
 
 →styles
 

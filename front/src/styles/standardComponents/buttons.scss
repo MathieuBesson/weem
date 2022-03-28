@@ -1,0 +1,50 @@
+.btn {
+    padding: 15px 20px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    border: 1px solid;
+    margin: 5px 0;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.btn-primary {
+    color: $white-primary;
+    background-color: $green-primary;
+    border-color: transparent;
+    transition: all ease 0.3s;
+    &:hover {
+        color: $green-primary;
+        background-color: transparent;
+        border-color: $green-primary;
+        transition: all ease 0.3s;
+    }
+}
+
+.btn-thirdary {
+    color: $green-primary;
+    background-color: transparent;
+    border-color: $green-primary;
+    transition: all ease 0.3s;
+    &:hover {
+        color: $white-primary;
+        background-color: $green-primary;
+        border-color: transparent;
+        transition: all ease 0.3s;
+    }
+}
+
+.btn-secondary {
+    color: $white-primary;
+    background-color: $blue-secondary;
+    border-color: transparent;
+    transition: all ease 0.3s;
+    &:hover {
+        color: $blue-secondary;
+        background-color: transparent;
+        border-color: $blue-secondary;
+        transition: all ease 0.3s;
+    }
+}

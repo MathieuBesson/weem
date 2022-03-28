@@ -1,0 +1,45 @@
+@import "./../../app.scss";
+
+.parts-principal-information {
+    padding-top: 40px;
+    padding-bottom: 5px;
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        &-title {
+            width: 75%;
+        }
+    }
+
+    &__part {
+        &-recurrent, &-principal{
+            &-title{
+                margin-top: 35px;
+                font-size: $font-size-medium;
+                font-weight: $font-weight-bold;
+                margin-bottom: 15px;
+            }
+        }
+
+        &-recurrent-group {
+            &-btn {
+                padding: 18px 10px;
+                display: block;
+                width: 48%;
+                border-radius: 12px;
+                border: none;
+                background-color: $blue-secondary;
+                color: $white-primary;
+                font-weight: $font-weight-bold;
+                font-size: 12px;
+                margin-bottom: 12px;
+            }
+        }
+    }
+
+    &__disclaimer{
+        margin-top: 25px;
+        font-size: $font-size-small;
+    }
+}
