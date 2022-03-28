@@ -1074,6 +1074,11 @@
   "resolved" "https://registry.npmjs.org/@capacitor/android/-/android-3.4.1.tgz"
   "version" "3.4.1"
 
+"@capacitor/browser@^1.0.7":
+  "integrity" "sha512-ni8IjsPyFUYqQ2JxBwzI7VpJUZHPr7QiRds5hQWM/1cpfH0+DWvjWHwzxQXuSbW0h+QGXGSJ/vwqjRns7NzLfQ=="
+  "resolved" "https://registry.npmjs.org/@capacitor/browser/-/browser-1.0.7.tgz"
+  "version" "1.0.7"
+
 "@capacitor/cli@^3.4.1":
   "integrity" "sha512-48MA50ExfMJgndunsoh9kI3ItNJDwJrl6+DNocdEZfnIw45IUtmmeu+V3JsoDM2LfwxG9tamJV4zXWM0o4MSOw=="
   "resolved" "https://registry.npmjs.org/@capacitor/cli/-/cli-3.4.1.tgz"
@@ -1096,10 +1101,10 @@
     "tslib" "^2.1.0"
     "xml2js" "^0.4.23"
 
-"@capacitor/core@^3.4.0", "@capacitor/core@^3.4.1":
-  "integrity" "sha512-BwN925gwXGEVAhnnVAXH57cp+/YW5PhFZloGYaN3Sm8eKcYDNeti38lV9DQ8A/T5PYkJw/+TSu8SsuoEQD0vwQ=="
-  "resolved" "https://registry.npmjs.org/@capacitor/core/-/core-3.4.1.tgz"
-  "version" "3.4.1"
+"@capacitor/core@^3.0.0", "@capacitor/core@^3.4.0", "@capacitor/core@^3.4.3":
+  "integrity" "sha512-drfu0IiDMyeJtL4QALQgNFqdgN19DZJkbKh945eXyK44Sk2YkFXUs7Ewq1ZlVI30QF79mHGuM13oZeki0gv5Tw=="
+  "resolved" "https://registry.npmjs.org/@capacitor/core/-/core-3.4.3.tgz"
+  "version" "3.4.3"
   dependencies:
     "tslib" "^2.1.0"
 
@@ -7430,6 +7435,13 @@
   dependencies:
     "history" "^5.2.0"
     "react-router" "6.2.1"
+
+"react-router@^6.2.2":
+  "integrity" "sha512-/MbxyLzd7Q7amp4gDOGaYvXwhEojkJD5BtExkuKmj39VEE0m3l/zipf6h2WIB2jyAO0lI6NGETh4RDcktRm4AQ=="
+  "resolved" "https://registry.npmjs.org/react-router/-/react-router-6.2.2.tgz"
+  "version" "6.2.2"
+  dependencies:
+    "history" "^5.2.0"
 
 "react-router@6.2.1":
   "integrity" "sha512-2fG0udBtxou9lXtK97eJeET2ki5//UWfQSl1rlJ7quwe6jrktK9FCCc8dQb5QY6jAv3jua8bBQRhhDOM/kVRsg=="

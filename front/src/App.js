@@ -1,13 +1,27 @@
 import './App.css';
-import Login from './Login/Login';
-import Register from './Register/Register'
-import Welcome from './FirstCar/Welcome';
-import DataCar from './FirstCar/DataCar';
-
+import {Route} from 'react-router-dom';
+import Login from './pages/authentication/Login';
+// import Register from './Register/Register'
+// import Welcome from './FirstCar/Welcome';
+// import DataCar from './FirstCar/DataCar';
+import InscriptionChoice from './pages/authentication/InscriptionChoice'
 
 function App() {
   return (
-    <Login/>
+    <div>
+      {/* <Route path="/e">
+        <InscriptionChoice />
+
+      </Route>
+
+      <Route path="/login">
+        <Login/>
+      </Route> */}
+        {/* <InscriptionChoice /> */}
+
+      <Login />
+
+    </div>
     // <Register/>
     // <Welcome/>
     // <DataCar/>

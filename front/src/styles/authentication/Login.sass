@@ -1,0 +1,75 @@
+// $ColorLabel: #ffff
+
+.login__template
+    display: flex
+    // align-self: flex-end
+    flex-direction: column
+    // flex-wrap: nowrap
+    justify-content: end
+    // align-items: flex-start
+    // align-content: stretch
+    // padding: 2rem
+    height: 100vh
+
+.test
+    // height: 100%
+    padding: 2.25rem
+
+
+.login__input
+    height: 2.75rem
+    width: 18.75rem
+    padding-left: 1rem
+    border: 1px solid #A4A9C4
+    background: transparent
+    border-radius: 12px
+    color: white
+
+    &::placeholder
+        color: #A4A9C4
+
+.login__password
+    margin-top: 4px
+
+.login__forgetPasswordDiv
+    text-align: right
+    margin-top: 12px
+
+.login__forgetPassword
+    color: white
+
+.login__passwordDiv
+    display: flex
+
+.login__passwordShown
+    margin-left: 17.5rem
+    margin-top: 1rem
+    // background-color: blue
+    position: absolute
+
+.login__connect
+    display: flex
+    justify-content: center
+    margin-top: 1.25rem
+    margin-bottom: 7.5rem
+
+.login__divRegister
+    display: flex
+    flex-direction: row
+    margin-left: 2rem
+    justify-content: center
+    margin: auto
+
+.login__register
+    display: flex
+    color: white
+
+.login__errorMessage
+    font-size: 0.75rem
+    text-align: center
+    color: red
+    margin-top: 0.5rem
+    visibility: hidden
+
+.login__errorMessage.invalid
+    visibility: visible
