@@ -1,8 +1,8 @@
 import react, { useState } from "react";
 
 // Pictures 
-import iconBack from "./../../assets/images/icons/back.svg";
-import iconNext from "./../../assets/images/icons/next.svg";
+import iconBackArrow from "./../../assets/images/icons/back-arrow.svg";
+import iconNextArrow from "./../../assets/images/icons/next-arrow.svg";
 import carWithMountain from "./../../assets/images/background/car-with-mountain.jpg";
 
 // Components
@@ -14,19 +14,12 @@ import PartsDetails from "./../../components/PartsDetails";
 
 // Styles
 import "./../../styles/pages/carsCreation/PartsPrincipalInformation.scss";
+import HeaderGoToBack from "../../components/HeaderGotToBack";
 
 const PartsPrincipalInformation = () => {
     return (
         <div className="parts-principal-information">
-            <div className="parts-principal-information__header">
-                <span
-                    className="icon icon-back"
-                    style={{ backgroundImage: `url(${iconBack})` }}
-                ></span>
-                <h2 className="parts-principal-information__header-title">
-                    Renseignements des pièces et des entretiens
-                </h2>
-            </div>
+            <HeaderGoToBack>Renseignements des pièces et des entretiens</HeaderGoToBack>
             <div className="parts-principal-information__part-recurrent">
                 <h3 className="parts-principal-information__part-recurrent-title">
                     Entretiens récurrents
@@ -86,7 +79,7 @@ const PartsPrincipalInformation = () => {
                     </span>
                     <span
                         className="icon icon-next"
-                        style={{ backgroundImage: `url(${iconNext})` }}
+                        style={{ backgroundImage: `url(${iconNextArrow})` }}
                     ></span>
                 </p>
             </InfoMessage> 

@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import eye from "../../assets/eye-outline.webp";
 
-import "../../styles/authentication/Login.sass";
+// import "../../styles/authentication/Login.sass";
 
 const Login = (props) => {
   const [enteredUsername, setEnteredUsername] = useState("");

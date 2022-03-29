@@ -1,0 +1,23 @@
+@import './../app.scss';
+
+.car-part-preview{
+    background-color: $grey-primary;
+    padding: 14px;
+    border-radius: 12px;
+    margin: 12px 0;
+    &__content-name{
+        font-weight: $font-weight-bold;
+        font-size: $font-size-normal;
+        margin-bottom: 2px;
+    }
+    &__content-time{
+        font-style: normal;
+        font-size: $font-size-small;
+        font-weight: $font-weight-bold;
+    }
+    &__img{
+        height: 48px;
+        width: 48px;
+        margin-right: 25px;
+    }
+}

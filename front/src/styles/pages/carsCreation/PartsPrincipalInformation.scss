@@ -1,16 +1,7 @@
 @import "./../../app.scss";
 
 .parts-principal-information {
-    padding-top: 40px;
     padding-bottom: 5px;
-    &__header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        &-title {
-            width: 75%;
-        }
-    }
 
     &__part {
         &-recurrent, &-principal{

@@ -3,12 +3,14 @@ import react, { useState } from "react";
 // Pictures
 import wheel from "./../../assets/images/icons/wheel.svg";
 import night from "./../../assets/images/icons/night.svg";
-import bgMaintenance from "./../../assets/images/background/bg-maintenance.jpg";
+import bgMaintenance from "./../../assets/images/background/bg-maintenance.png";
 
 // Components
 import ButtonIcon from "./../../components/ButtonIcon";
 import MaintenanceUpcoming from "./../../components/MaintenanceUpcoming";
 import ArticlePreview from "./../../components/ArticlePreview";
+import InvoicePreview from './../../components/InvoicePreview'
+import BlogPreview from "./../../components/BlogPreview"
 
 // Styles
 import "./../../styles/pages/homeMaintenance/Home.scss";
@@ -30,29 +32,8 @@ const Home = () => {
                 Ajouter un nouveau changement
             </button>
             <MaintenanceUpcoming />
-            <div className="home__invoice-preview">
-                <h3 className="home__invoice-preview-title">
-                    Vous avez 1 entretien sans factures associée
-                </h3>
-                <div className="home__invoice-preview-car-part-list">
-                    <section className="home__invoice-preview-car-part-list-item">
-                        <h4 className="home__invoice-preview-car-part-list-item-title">
-                            Entretien : Pneus avants
-                        </h4>
-                        <button className="home__invoice-preview-car-part-list-item-btn">
-                            Ajouter la facture
-                        </button>
-                    </section>
-                </div>
-            </div>
-            <div className="home__blog-preview">
-                <h3 className="home__blog-preview-title">
-                    Nos derniers conseils pour votre entretien !
-                </h3>
-                <div className="home__blog-preview-article-list">
-                    <ArticlePreview bgImage={bgMaintenance} title="Quand faut-il changer un filtre à huile" newArticle={true}/>
-                </div>
-            </div>
+            <InvoicePreview carPartNames={['Pneus avants', 'Filtre à air']}/>
+            <BlogPreview />
         </div>
     );
 };

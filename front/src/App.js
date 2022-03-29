@@ -6,12 +6,13 @@ import {Route} from 'react-router-dom';
 // import DataCar from './FirstCar/DataCar';
 // import InscriptionChoice from './pages/authentication/InscriptionChoice'
 // import CarsInformation from './pages/carsCreation/CarsInformation';
-// import PartsPrincipalInformation from './pages/carsCreation/PartsPrincipalInformation';
+import PartsPrincipalInformation from './pages/carsCreation/PartsPrincipalInformation';
 import Home from './pages/homeMaintenance/Home';
+import MaintenanceBook from './pages/homeMaintenance/MaintenanceBook';
 
 function App() {
   return (
-    <div>
+    <main>
       {/* <Route path="/e">
         <InscriptionChoice />
 
@@ -21,11 +22,14 @@ function App() {
         <Login/>
       </Route> */}
         {/* <InscriptionChoice /> */}
-        <Home/>
+        {/* <Home/> */}
+        <MaintenanceBook />
+      
+        {/* <PartsPrincipalInformation /> */}
       {/* <Login /> */}
 
-    </div>
-    // <Register/>
+      {/* <Register/> */}
+    </main>
     // <Welcome/>
     // <DataCar/>
   );

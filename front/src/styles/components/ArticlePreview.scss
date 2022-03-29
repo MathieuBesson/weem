@@ -1,0 +1,31 @@
+@import "./../app.scss";
+
+.article-preview{
+    width: 220px;
+    height: 308px;
+    flex: 0 0 auto;
+    margin-right: 12px;
+    margin-bottom: 25px;
+    position: relative;
+    border-radius: 24px;
+    &__new{
+        position: absolute;
+        background-color: $green-primary;
+        color: $white-primary;
+        border-radius: 25px;
+        border: 0;
+        padding: 8px 16px;
+        text-transform: uppercase;
+        font-size: $font-size-small;
+        font-weight: $font-weight-normal;
+        margin: 24px;
+    }
+    &__title{
+        position: absolute;
+        bottom: 24px;
+        margin: 0 24px;
+        font-size: $font-size-normal;
+        font-weight: $font-weight-bold;
+        color: $white-primary;
+    }
+}

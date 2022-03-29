@@ -7,7 +7,7 @@ const ArticlePreview = ({ bgImage, title, newArticle }) => {
         <section
             className="article-preview"
             style={{
-                backgroundImage: `url(${bgImage})`,
+                backgroundImage: `linear-gradient(180deg, rgba(47, 51, 72, 0.4) 0%, #2F3348 100%), url(${bgImage})`,
             }}
         >
             {newArticle && (

@@ -1,6 +1,4 @@
 import react, { useState } from "react";
-import tick from "./../assets/images/icons/tick.svg";
-import iconNext from "./../assets/images/icons/next.svg";
 import iconCross from "./../assets/images/icons/cross.svg";
 
 import "./../styles/components/InfoMessage.scss";

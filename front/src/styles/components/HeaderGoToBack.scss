@@ -1,0 +1,8 @@
+.header-go-to-back {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &__title {
+        width: 75%;
+    }
+}

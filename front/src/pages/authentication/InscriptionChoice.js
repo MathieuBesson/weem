@@ -3,8 +3,8 @@ import Logo from "../../assets/logo.png";
 import {BrowserRouter as Router} from 'react-router-dom'
 import ButtonWeem from "../../components/ButtonWeem";
 
-import "../../styles/authentication/Authentication.sass";
-import "../../styles/authentication/InscriptionChoice.sass";
+// import "../../styles/authentication/Authentication.sass";
+// import "../../styles/authentication/InscriptionChoice.sass";
 
 const InscriptionChoice = () => {
   return (

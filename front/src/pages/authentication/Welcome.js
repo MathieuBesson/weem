@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import './Welcome.css'
+// import './Welcome.css'
 
 const Welcome = () => {
     return(

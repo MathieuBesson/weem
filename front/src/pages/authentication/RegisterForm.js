@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import "./RegisterForm.css";
+// import "./RegisterForm.css";
 
 const RegisterForm = (props) => {
 

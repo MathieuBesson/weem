@@ -18,10 +18,17 @@
 }
 
 .icon-next {
+    background-color: $blue-secondary;
     height: 20px;
     width: 20px;
     background-size: 80% 80%;
-    transform: rotate(180deg);
+}
+
+.icon-bottom {
+    height: 20px;
+    width: 20px;
+    background-size: 80% 80%;
+    transform: rotate(90deg);
 }
 
 .icon-cross {

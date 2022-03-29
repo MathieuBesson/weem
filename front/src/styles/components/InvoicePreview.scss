@@ -1,12 +1,13 @@
 @import './../app.scss';
 
-.maintenance-upcomming{
-    margin-top: 20px;
+.invoice-preview{
+    margin-top: 36px;
     background-color: $grey-primary;
-    border-radius: 25px;
+    border-radius: 12px;
     padding: 24px;
     &__title{
         font-size: $font-size-medium;
         font-weight: $font-weight-bold;
+        margin-bottom: 15px;
     }
 }

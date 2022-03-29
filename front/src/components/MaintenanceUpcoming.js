@@ -12,14 +12,19 @@ const MaintenanceUpcoming = () => {
             </h3>
             <div className="maintenance-upcomming__car-part-group">
                 <CarPartPreview
-                    carPartIcon={pneuAvant}
-                    carPartName="Pneus avants"
-                    carPartTime="2 mois restants"
+                    icon={pneuAvant}
+                    name="Pneus avants"
+                    time={1}
                 />
                 <CarPartPreview
-                    carPartIcon={pneuAvant}
-                    carPartName="Pneus avants"
-                    carPartTime="2 mois restants"
+                    icon={pneuAvant}
+                    name="Pneus avants"
+                    time={3}
+                />
+                <CarPartPreview
+                    icon={pneuAvant}
+                    name="Pneus avants"
+                    time={10}
                 />
             </div>
             <button className="btn btn-thirdary w-100">
