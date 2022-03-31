@@ -7,7 +7,7 @@ import bgMaintenance from "./../../assets/images/background/bg-maintenance.png";
 
 // Components
 import ButtonIcon from "./../../components/ButtonIcon";
-import MaintenanceUpcoming from "./../../components/MaintenanceUpcoming";
+import MaintenanceUpcomingPreview from "./../../components/MaintenanceUpcomingPreview";
 import ArticlePreview from "./../../components/ArticlePreview";
 import InvoicePreview from './../../components/InvoicePreview'
 import BlogPreview from "./../../components/BlogPreview"
@@ -31,7 +31,7 @@ const Home = () => {
             <button className="btn btn-secondary w-100">
                 Ajouter un nouveau changement
             </button>
-            <MaintenanceUpcoming />
+            <MaintenanceUpcomingPreview />
             <InvoicePreview carPartNames={['Pneus avants', 'Filtre à air']}/>
             <BlogPreview />
         </div>

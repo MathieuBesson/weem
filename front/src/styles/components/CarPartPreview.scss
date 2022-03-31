@@ -2,7 +2,7 @@
 
 .car-part-preview{
     background-color: $grey-primary;
-    padding: 14px;
+    padding: 15px 20px;
     border-radius: 12px;
     margin: 12px 0;
     &__content-name{
@@ -19,5 +19,8 @@
         height: 48px;
         width: 48px;
         margin-right: 25px;
+    }
+    .icon-next{
+        cursor: pointer;
     }
 }

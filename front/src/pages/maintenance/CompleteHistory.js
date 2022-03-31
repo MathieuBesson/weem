@@ -4,7 +4,7 @@ import react, { useState } from "react";
 import iconShare from "./../../assets/images/icons/share.svg";
 
 // Components
-import MaintenanceUpcoming from "./../../components/MaintenanceUpcoming";
+import MaintenanceUpcomingPreview from "./../../components/MaintenanceUpcomingPreview";
 import HeaderGoToBack from "./../../components/HeaderGotToBack";
 import MaintenanceHistoryItem from "./../../components/MaintenanceHistoryItem";
 

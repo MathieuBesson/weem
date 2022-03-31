@@ -5,7 +5,7 @@ import iconBack from "./../../assets/images/icons/next.svg";
 import iconShare from "./../../assets/images/icons/share.svg";
 
 // Components
-import MaintenanceUpcoming from "./../../components/MaintenanceUpcoming";
+import MaintenanceUpcomingPreview from "./../../components/MaintenanceUpcomingPreview";
 import CostEstimation from "./../../components/CostEstimation";
 import MaintenanceHistory from "./../../components/MaintenanceHistory";
 
@@ -31,7 +31,7 @@ const MaintenanceBook = () => {
             <button className="btn btn-secondary w-100">
                 Ajouter un nouveau changement
             </button>
-            <MaintenanceUpcoming />
+            <MaintenanceUpcomingPreview />
             <CostEstimation />
             <MaintenanceHistory />
             <button className="btn btn-thirdary w-100">
