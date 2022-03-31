@@ -18,7 +18,7 @@ const MaintenanceUpcoming = () => {
             <CarPartPreview icon={pneuAvant} name="Pneus avants" time={1} />
             <CarPartPreview icon={pneuAvant} name="Pneus avants" time={2} />
             <CarPartPreview icon={pneuAvant} name="Pneus avants" time={6} />
-            <CarPartPreview icon={pneuAvant} name="Pneus avants" time={10} />
+            <CarPartPreview icon={pneuAvant} name="Pneus avants" time={10} active={false}/>
         </div>
     );
 };

@@ -11,6 +11,7 @@ import Home from './pages/homeMaintenance/Home';
 import MaintenanceBook from './pages/homeMaintenance/MaintenanceBook';
 import CompleteHistory from './pages/maintenance/CompleteHistory';
 import MaintenanceUpcoming from './pages/homeMaintenance/MaintenanceUpcoming';
+import ListMaintenanceParts from './pages/maintenance/ListMaintenanceParts';
 
 function App() {
   return (
@@ -31,8 +32,10 @@ function App() {
         {/* <PartsPrincipalInformation /> */}
         {/* <CarsInformation /> */}
         {/* <CompleteHistory /> */}
-        <MaintenanceUpcoming />
+        {/* <MaintenanceUpcoming /> */}
 
+
+        <ListMaintenanceParts />
       {/* <Login /> */}
       {/* <Register/> */}
     </main>

@@ -5,6 +5,7 @@
     padding: 15px 20px;
     border-radius: 12px;
     margin: 12px 0;
+    border: solid 2px transparent;
     &__content-name{
         font-weight: $font-weight-bold;
         font-size: $font-size-normal;
@@ -22,5 +23,9 @@
     }
     .icon-next{
         cursor: pointer;
+    }
+    &.active{
+        border: dashed 2px $grey-primary;
+        background-color: transparent;
     }
 }

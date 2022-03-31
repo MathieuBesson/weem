@@ -3,7 +3,7 @@ import react, { useState, useEffect } from "react";
 import "./../styles/components/CarPartPreview.scss";
 import iconNext from "./../assets/images/icons/next.svg";
 
-const CarPartPreview = ({ icon, name, time }) => {
+const CarPartPreview = ({ icon, name, time, active = true }) => {
     const [colorAlert, setColorAlert] = useState("green");
 
     useEffect(() => {
@@ -21,7 +21,7 @@ const CarPartPreview = ({ icon, name, time }) => {
     }, []);
 
     return (
-        <section className="car-part-preview d-flex justify-content-between align-items-center">
+        <section className={`car-part-preview ${!active && 'active'} d-flex justify-content-between align-items-center`}>
             <div className="d-flex">
                 <img className="car-part-preview__img" src={icon} />
                 <div className="car-part-preview__content">

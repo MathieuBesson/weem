@@ -1,8 +1,12 @@
+@import './../app.scss';
+
 .header-go-to-back {
     display: flex;
     justify-content: space-between;
     align-items: center;
     &__title {
+        font-size: $font-size-extra-large;
+        font-weight: $font-weight-bold;
         width: 75%;
     }
 }
