@@ -12,6 +12,12 @@ import MaintenanceBook from './pages/homeMaintenance/MaintenanceBook';
 import CompleteHistory from './pages/maintenance/CompleteHistory';
 import MaintenanceUpcoming from './pages/homeMaintenance/MaintenanceUpcoming';
 import ListMaintenanceParts from './pages/maintenance/ListMaintenanceParts';
+import UpdateMaintenance from './pages/maintenance/UpdateMaintenance';
+import Updatepart from './pages/part/Updatepart';
+import DetailPart from './pages/part/DetailPart';
+import AddMaintenance from './components/AddMaintenance';
+
+
 
 function App() {
   return (
@@ -35,7 +41,11 @@ function App() {
         {/* <MaintenanceUpcoming /> */}
 
 
-        <ListMaintenanceParts />
+        {/* <ListMaintenanceParts /> */}
+        {/* <Updatepart /> */}
+        {/* <DetailPart name="Courroie de disctribution"/> */}
+        {/* <UpdateMaintenance /> */}
+        <AddMaintenance />
       {/* <Login /> */}
       {/* <Register/> */}
     </main>

@@ -40,9 +40,9 @@ Inplentation:
     →parts
         →DetailPart.js (Pièce détail)
             Route:
-        →CreatePart.js (Création de la pièce / entretien)
+        X →CreatePart.js === Updatepart (Création de la pièce / entretien)
             Route:
-        →Updateparts.js (Modifier un entretien)
+        X →Updatepart.js (Modifier un entretien)
             Route:
 
     →maintenance
@@ -60,7 +60,7 @@ Inplentation:
 →components
     →FlashMessage.js (Bandeau infos/confirmation)
     →CarPartCard.js (Card de rensignement des piece)
-    →PartsDetails.js (Pop-up infos pièces)
+    →PartsDetailsPopUp.js (Pop-up infos pièces)
     →PartsExplanation.js (Pop-up infos pièces)
     →InfoMessage.js (Pop-up info -> Plus qu'une étape)
     →AddMaintenance.js (Ajouter un changement)

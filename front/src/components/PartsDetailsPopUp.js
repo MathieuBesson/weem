@@ -1,9 +1,9 @@
 import react, { useState } from "react";
 
-import "./../styles/components/PartsDetails.scss";
+import "./../styles/components/PartsDetailsPopUp.scss";
 
 
-const PartsDetails = ({ title, active }) => {
+const PartsDetailsPopUp = ({ title, active }) => {
     return (
         <div className={`part-detail ${active && 'active'}`}>
             <h3 className="part-detail__title">{title}</h3>
@@ -18,4 +18,4 @@ const PartsDetails = ({ title, active }) => {
     );
 };
 
-export default PartsDetails;
+export default PartsDetailsPopUp;

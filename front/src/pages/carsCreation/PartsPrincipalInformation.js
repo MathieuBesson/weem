@@ -10,7 +10,7 @@ import CarPartCard from "./../../components/CarPartCard";
 import InfoMessage from "./../../components/InfoMessage";
 import PartsExplanation from "../../components/PartsExplanation";
 import FlashMessage from "./../../components/FlashMessage";
-import PartsDetails from "./../../components/PartsDetails";
+import PartsDetailsPopUp from "./../../components/PartsDetailsPopUp";
 
 // Styles
 import "./../../styles/pages/carsCreation/PartsPrincipalInformation.scss";
@@ -86,7 +86,7 @@ const PartsPrincipalInformation = () => {
             <FlashMessage type="success" active={true}>
                 Changements enregistrés, vous pouvez les modifier à tout moment depuis la tab-bar
             </FlashMessage>
-            <PartsDetails title="Pneus avant" active={true} />
+            <PartsDetailsPopUp title="Pneus avant" active={true} />
         */}
         </div>
     );

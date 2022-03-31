@@ -47,3 +47,16 @@
         transition: all ease 0.3s;
     }
 }
+
+.btn-danger {
+    color: $red-primary;
+    background-color: transparent;
+    border-color: $red-primary;
+    transition: all ease 0.3s;
+    &:hover {
+        color: $white-primary;
+        background-color: $red-primary;
+        border-color: transparent;
+        transition: all ease 0.3s;
+    }
+}
