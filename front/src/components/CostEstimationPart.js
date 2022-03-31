@@ -31,7 +31,7 @@ const CostEstimationPart = ({
     return (
         <div className="cost-estimation-part d-flex align-items-center justify-content-between">
             <div className="d-flex col-8 align-items-center">
-                <img class="cost-estimation-part__img" src={icon} />
+                <img className="cost-estimation-part__img" src={icon} />
                 <h4 className="cost-estimation-part__title">{carPartName}</h4>
             </div>
             <div className="cost-estimation-part__content d-flex flex-column">

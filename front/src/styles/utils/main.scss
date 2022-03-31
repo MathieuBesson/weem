@@ -4,4 +4,5 @@ main {
     width: $screen-max-width;
     padding: 45px 36px;
     margin: auto !important;
+    min-height: 100vh;
 }

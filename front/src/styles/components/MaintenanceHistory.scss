@@ -1,0 +1,13 @@
+@import './../app.scss';
+
+.maintenance-history{
+    margin-top: 40px;
+    &__title{
+        font-size: $font-size-medium;
+        font-weight: $font-weight-bold;
+        margin-bottom: 20px;
+    }
+    .btn-primary{
+        margin-top: 20px;
+    }
+}

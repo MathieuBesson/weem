@@ -1,0 +1,24 @@
+@import './../../app.scss';
+
+.complete-history{
+    &__list{
+        margin-top: 30px;
+    }
+    .btn-primary{
+        margin-top: 20px;
+        text-align: left;
+        padding-left: 13px;
+        position: relative;
+        .icon{
+            position: absolute;
+            right: 15px;
+            top: 28%;
+            background-color: $white-primary;
+            transform: rotate(0deg);
+            transition: background-color ease 0.3s;
+        }
+        &:hover .icon{
+            background-color: $green-primary;
+        }
+    }
+}

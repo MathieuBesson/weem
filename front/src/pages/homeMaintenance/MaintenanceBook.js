@@ -2,13 +2,10 @@ import react, { useState } from "react";
 
 // Pictures
 import iconBack from "./../../assets/images/icons/next.svg";
+import iconShare from "./../../assets/images/icons/share.svg";
 
 // Components
-import ButtonIcon from "./../../components/ButtonIcon";
 import MaintenanceUpcoming from "./../../components/MaintenanceUpcoming";
-import ArticlePreview from "./../../components/ArticlePreview";
-import InvoicePreview from "./../../components/InvoicePreview";
-import BlogPreview from "./../../components/BlogPreview";
 import CostEstimation from "./../../components/CostEstimation";
 import MaintenanceHistory from "./../../components/MaintenanceHistory";
 
@@ -39,6 +36,10 @@ const MaintenanceBook = () => {
             <MaintenanceHistory />
             <button className="btn btn-thirdary w-100">
                 Exporter le carnet d'entretien
+                <span
+                    className="icon icon-bottom"
+                    style={{ maskImage: `url(${iconShare})` }}
+                ></span>
             </button>
         </div>
     );

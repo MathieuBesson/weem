@@ -4,11 +4,12 @@ import {Route} from 'react-router-dom';
 // import Register from './Register/Register'
 // import Welcome from './FirstCar/Welcome';
 // import DataCar from './FirstCar/DataCar';
-// import InscriptionChoice from './pages/authentication/InscriptionChoice'
-// import CarsInformation from './pages/carsCreation/CarsInformation';
+import InscriptionChoice from './pages/authentication/InscriptionChoice'
+import CarsInformation from './pages/carsCreation/CarsInformation';
 import PartsPrincipalInformation from './pages/carsCreation/PartsPrincipalInformation';
 import Home from './pages/homeMaintenance/Home';
 import MaintenanceBook from './pages/homeMaintenance/MaintenanceBook';
+import CompleteHistory from './pages/maintenance/CompleteHistory';
 
 function App() {
   return (
@@ -22,12 +23,15 @@ function App() {
         <Login/>
       </Route> */}
         {/* <InscriptionChoice /> */}
-        {/* <Home/> */}
-        <MaintenanceBook />
-      
-        {/* <PartsPrincipalInformation /> */}
-      {/* <Login /> */}
 
+
+        {/* <Home/> */}
+        {/* <MaintenanceBook /> */}
+        {/* <PartsPrincipalInformation /> */}
+        {/* <CarsInformation /> */}
+        <CompleteHistory />
+
+      {/* <Login /> */}
       {/* <Register/> */}
     </main>
     // <Welcome/>
