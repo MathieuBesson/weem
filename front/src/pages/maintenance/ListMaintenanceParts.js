@@ -4,7 +4,6 @@ import react, { useState } from "react";
 import pneuAvant from "./../../assets/images/icons/pneu-avant.svg";
 
 // Components
-import ButtonIcon from "./../../components/ButtonIcon";
 import HeaderGoToBack from "./../../components/HeaderGotToBack";
 import CarPartPreview from "./../../components/CarPartPreview";
 
