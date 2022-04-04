@@ -10,14 +10,12 @@ import MaintenanceHistoryItem from "./../../components/MaintenanceHistoryItem";
 
 const UpdateMaintenance = () => {
     return (
-        <div className="update_maintenance">
-            <HeaderGoToBack>
-                Renseignements des pièces et des entretiens
-            </HeaderGoToBack>
+        <div className="update-maintenance">
+            <HeaderGoToBack>Modifier le changement</HeaderGoToBack>
 
-            <form className="update_maintenance__form">
-                <div className="update_maintenance__form-group">
-                    <h2>Changement du 02/08/2021</h2>
+            <h2 className="update-maintenance__date">Changement du 02/08/2021</h2>
+            <form className="update-maintenance__form">
+                <div className="update-maintenance__form-group">
                     <div className="input-date">
                         <input
                             className="input-standard"
@@ -41,12 +39,14 @@ const UpdateMaintenance = () => {
                         placeholder="Note sur le changement"
                     ></textarea>
                 </div>
-                <button className="btn btn-primary w-100 text-center">
-                    Valider les modifications
-                </button>
-                <button className="btn btn-danger w-100 text-center">
-                    Supprimer ce changement
-                </button>
+                <div className="update-maintenance__form-btns">
+                    <button className="btn btn-primary w-100 text-center">
+                        Valider les modifications
+                    </button>
+                    <button className="btn btn-danger w-100 text-center">
+                        Supprimer ce changement
+                    </button>
+                </div>
             </form>
         </div>
     );

@@ -1,0 +1,23 @@
+.update-maintenance{
+    &__date{
+        margin: 36px 0 12px 0;
+        font-size: $font-size-medium;
+        font-weight: $font-weight-bold;
+    }
+
+    .input-standard{
+        margin-bottom: 12px;
+    }
+
+    .btn{
+        margin-bottom: 12px;
+    }
+
+    .input-date .icon{
+        top: 18%;
+    }
+
+    &__form-btns{
+        margin-top: 40px;
+    }
+}

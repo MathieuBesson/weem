@@ -29,6 +29,7 @@ const AddMaintenance = ({ }) => {
                 id="mainteance-note"
                 cols="30"
                 rows="10"
+                placeholder="Note sur le changement"
             ></textarea>
             <button className="btn btn-secondary w-100">Valider</button>
         </div>
