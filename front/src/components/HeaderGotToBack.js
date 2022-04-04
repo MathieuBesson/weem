@@ -1,8 +1,6 @@
 import react, { useState } from "react";
 import iconBackArrow from "./../assets/images/icons/back-arrow.svg";
 
-import "./../styles/components/HeaderGoToBack.scss";
-
 const HeaderGoToBack = ({children}) => {
     return (
         <div className="header-go-to-back">

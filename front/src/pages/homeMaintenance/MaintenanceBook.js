@@ -9,9 +9,6 @@ import MaintenanceUpcomingPreview from "./../../components/MaintenanceUpcomingPr
 import CostEstimation from "./../../components/CostEstimation";
 import MaintenanceHistory from "./../../components/MaintenanceHistory";
 
-// Styles
-import "./../../styles/pages/homeMaintenance/MaintenanceBook.scss";
-
 const MaintenanceBook = () => {
     return (
         <div className="maintenance-book">

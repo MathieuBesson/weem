@@ -6,9 +6,6 @@ import bgMaintenance from "./../assets/images/background/bg-maintenance.png";
 // import ButtonIcon from "./../../components/ButtonIcon";
 import ArticlePreview from "./ArticlePreview";
 
-// Styles
-import "./../styles/components/BlogPreview.scss";
-
 const BlogPreview = () => {
     return (
         <div className="blog-preview">

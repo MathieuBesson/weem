@@ -1,9 +1,7 @@
-@import './../app.scss';
-
 .maintenance-history-item{
     margin: 20px 0;
-    font-size: $font-size-normal;
-    font-weight: $font-weight-normal;
+    // font-size: $font-size-normal;
+    // font-weight: $font-weight-normal;
     position: relative;
     &__date{
         margin-right: 35px;
@@ -12,7 +10,7 @@
         position: absolute;
         top: 30%;
         right: 0px;
-        background-color: $green-primary;
+        // background-color: $green-primary;
         transform: rotate(0deg);
     }
 }

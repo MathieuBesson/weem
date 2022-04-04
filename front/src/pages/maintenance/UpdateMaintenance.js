@@ -8,17 +8,15 @@ import MaintenanceUpcomingPreview from "./../../components/MaintenanceUpcomingPr
 import HeaderGoToBack from "./../../components/HeaderGotToBack";
 import MaintenanceHistoryItem from "./../../components/MaintenanceHistoryItem";
 
-// Styles
-import "./../../styles/pages/maintenance/CompleteHistory.scss";
 const UpdateMaintenance = () => {
     return (
-        <div className="complete-history">
+        <div className="update_maintenance">
             <HeaderGoToBack>
                 Renseignements des pièces et des entretiens
             </HeaderGoToBack>
 
-            <form className="complete-history__form">
-                <div className="complete-history__form-group">
+            <form className="update_maintenance__form">
+                <div className="update_maintenance__form-group">
                     <h2>Changement du 02/08/2021</h2>
                     <div className="input-date">
                         <input

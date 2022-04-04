@@ -1,4 +1,6 @@
 import './App.css';
+import './styles/app.scss';
+
 import {Route} from 'react-router-dom';
 // import Login from './pages/authentication/Login';
 // import Register from './Register/Register'
@@ -42,10 +44,11 @@ function App() {
 
 
         {/* <ListMaintenanceParts /> */}
-        {/* <Updatepart /> */}
+        <Updatepart />
         {/* <DetailPart name="Courroie de disctribution"/> */}
         {/* <UpdateMaintenance /> */}
-        <AddMaintenance />
+        {/* <AddMaintenance /> */}
+
       {/* <Login /> */}
       {/* <Register/> */}
     </main>

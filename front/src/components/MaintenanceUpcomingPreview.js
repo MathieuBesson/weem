@@ -1,6 +1,5 @@
 import react, { useState } from "react";
 
-import "./../styles/components/MaintenanceUpcomingPreview.scss";
 import CarPartPreview from "./CarPartPreview";
 import pneuAvant from "./../assets/images/icons/pneu-avant.svg";
 

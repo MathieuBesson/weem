@@ -1,8 +1,6 @@
 import react, { useState } from "react";
 import iconFile from "./../assets/images/icons/file.svg";
 
-import "./../styles/components/InvoicePreviewItem.scss";
-
 const InvoicePreviewItem = ({ carPartName }) => {
     return (
         <section className="invoice-preview-item">

@@ -12,9 +12,6 @@ import ArticlePreview from "./../../components/ArticlePreview";
 import InvoicePreview from './../../components/InvoicePreview'
 import BlogPreview from "./../../components/BlogPreview"
 
-// Styles
-import "./../../styles/pages/homeMaintenance/Home.scss";
-
 const Home = () => {
     return (
         <div className="home">

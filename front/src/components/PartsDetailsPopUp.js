@@ -1,8 +1,5 @@
 import react, { useState } from "react";
 
-import "./../styles/components/PartsDetailsPopUp.scss";
-
-
 const PartsDetailsPopUp = ({ title, active }) => {
     return (
         <div className={`part-detail ${active && 'active'}`}>

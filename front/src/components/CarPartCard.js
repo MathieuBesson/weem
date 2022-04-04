@@ -2,7 +2,6 @@ import react, { useState } from "react";
 import tick from "./../assets/images/icons/tick.svg";
 
 
-import "./../styles/components/CarPartCard.scss"
 
 const CarPartCard = ({carPartImg, carPartName}) => {
     return (

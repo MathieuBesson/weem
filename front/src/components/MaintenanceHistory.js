@@ -1,6 +1,5 @@
 import react, { useState } from "react";
 
-import "./../styles/components/MaintenanceHistory.scss";
 import MaintenanceHistoryItem from "./../components/MaintenanceHistoryItem"
 
 const MaintenanceHistory = ({ items }) => {

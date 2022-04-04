@@ -1,6 +1,48 @@
-@import './utils/variables.scss';
-@import './utils/main.scss';
-@import './standardComponents/inputs.scss';
-@import './standardComponents/icons.scss';
-@import './standardComponents/buttons.scss';
-@import './standardComponents/colors.scss';
+@import './utils/variables';
+@import './utils/main';
+@import './standardComponents/inputs';
+@import './standardComponents/icons';
+@import './standardComponents/buttons';
+@import './standardComponents/colors';
+
+
+// Pages 
+@import "./pages/part/Updatepart";
+@import "./pages/carsCreation/CarsInformation";
+@import "./pages/carsCreation/PartsPrincipalInformation";
+@import "./pages/homeMaintenance/Home";
+@import "./pages/homeMaintenance/MaintenanceBook";
+@import "./pages/homeMaintenance/MaintenanceBook";
+@import "./pages/maintenance/CompleteHistory";
+@import "./pages/maintenance/ListMaintenanceParts";
+@import "./pages/maintenance/ListMaintenanceParts";
+@import "./pages/part/DetailPart";
+
+
+// Components 
+@import "./components/AddMaintenance";
+@import "./components/ArticlePreview";
+@import "./components/BlogPreview";
+@import "./components/ButtonIcon";
+@import "./components/CarPartCard";
+@import "./components/CarPartPreview";
+@import "./components/CostEstimation";
+@import "./components/CostEstimationPart";
+@import "./components/FlashMessage";
+@import "./components/HeaderGoToBack";
+@import "./components/InfoMessage";
+@import "./components/InvoicePreview";
+@import "./components/InvoicePreviewItem";
+@import "./components/MaintenanceHistory";
+@import "./components/MaintenanceHistoryItem";
+@import "./components/MaintenanceUpcomingPreview";
+@import "./components/PartsDetailsPopUp";
+
+
+
+
+
+
+
+
+

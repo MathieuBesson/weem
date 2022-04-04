@@ -1,6 +1,5 @@
 import react, { useState, useEffect } from "react";
 
-import "./../styles/components/CarPartPreview.scss";
 import iconNext from "./../assets/images/icons/next.svg";
 
 const CarPartPreview = ({ icon, name, time, active = true }) => {

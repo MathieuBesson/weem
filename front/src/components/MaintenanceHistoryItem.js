@@ -2,8 +2,6 @@ import react, { useState } from "react";
 
 import iconNext from "./../assets/images/icons/next.svg";
 
-import "./../styles/components/MaintenanceHistoryItem.scss";
-
 const MaintenanceHistoryItem = ({ date }) => {
     return (
         <div className="maintenance-history-item d-flex justify-content-between">

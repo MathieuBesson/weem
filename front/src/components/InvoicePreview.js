@@ -1,7 +1,6 @@
 import react, { useState } from "react";
 import iconCross from "./../assets/images/icons/cross.svg";
 
-import "./../styles/components/InvoicePreview.scss";
 import InvoicePreviewItem from "./InvoicePreviewItem"
 
 const InvoicePreview = ({ carPartNames }) => {

@@ -8,9 +8,6 @@ import iconSettings from "./../../assets/images/icons/settings.svg";
 import HeaderGoToBack from "./../../components/HeaderGotToBack";
 import MaintenanceHistoryItem from "./../../components/MaintenanceHistoryItem";
 
-// Styles
-import "./../../styles/pages/part/DetailPart.scss";
-
 const DetailPart = ({ name }) => {
     return (
         <div className="detail-part">

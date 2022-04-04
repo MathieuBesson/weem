@@ -5,7 +5,7 @@ import iconEdit from "./../../assets/images/icons/edit.svg";
 
 import HeaderGoToBack from "./../../components/HeaderGotToBack";
 
-import "./../../styles/pages/part/Updatepart.scss";
+// import "./../../styles/pages/part/Updatepart.scss";
 
 const Updatepart = ({ create = true }) => {
     return (
@@ -54,7 +54,7 @@ const Updatepart = ({ create = true }) => {
                             value="huey"
                             checked
                         />
-                        <label for="huey">Durée</label>
+                        <label htmlFor="huey">Durée</label>
                     </div>
 
                     <div>
@@ -64,7 +64,7 @@ const Updatepart = ({ create = true }) => {
                             name="drone"
                             value="dewey"
                         />
-                        <label for="dewey">Kilométrage</label>
+                        <label htmlFor="dewey">Kilométrage</label>
                     </div>
 
                     <div>
@@ -74,7 +74,7 @@ const Updatepart = ({ create = true }) => {
                             name="drone"
                             value="louie"
                         />
-                        <label for="louie">Les deux</label>
+                        <label htmlFor="louie">Les deux</label>
                     </div>
                 </div>
 

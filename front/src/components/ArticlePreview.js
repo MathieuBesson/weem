@@ -1,7 +1,5 @@
 import react, { useState } from "react";
 
-import "./../styles/components/ArticlePreview.scss";
-
 const ArticlePreview = ({ bgImage, title, newArticle }) => {
     return (
         <section

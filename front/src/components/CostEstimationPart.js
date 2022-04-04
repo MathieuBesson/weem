@@ -1,6 +1,5 @@
 import react, { useState, useEffect } from "react";
 
-import "./../styles/components/CostEstimationPart.scss";
 import pneuAvant from "./../assets/images/icons/pneu-avant.svg";
 
 const CostEstimationPart = ({

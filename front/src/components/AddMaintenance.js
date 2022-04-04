@@ -1,7 +1,6 @@
 import react, { useState } from "react";
 
 import iconDate from "./../assets/images/icons/date.svg";
-import "./../styles/components/AddMaintenance.scss";
 
 const AddMaintenance = ({ }) => {
     return (

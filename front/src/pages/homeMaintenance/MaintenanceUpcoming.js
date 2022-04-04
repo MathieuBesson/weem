@@ -8,9 +8,6 @@ import ButtonIcon from "./../../components/ButtonIcon";
 import HeaderGoToBack from "./../../components/HeaderGotToBack";
 import CarPartPreview from "./../../components/CarPartPreview";
 
-// Styles
-import "./../../styles/pages/homeMaintenance/Home.scss";
-
 const MaintenanceUpcoming = () => {
     return (
         <div className="maintenance-upcomming">

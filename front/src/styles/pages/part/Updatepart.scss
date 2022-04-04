@@ -1,1 +1,18 @@
 
+.update-part{
+    display: flex;
+    flex-direction: column;
+    &__img{
+        width: 45%;
+        align-self: center;
+        margin-top: 35px;
+    }
+
+    &__form-group{
+        margin-top: 37px;
+        &-label{
+            font-weight: $font-weight-bold;
+            // font-size: $font-size-medium;
+        }
+    }
+}

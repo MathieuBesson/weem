@@ -1,8 +1,6 @@
 import react, { useState } from "react";
 import iconCross from "./../assets/images/icons/cross.svg";
 
-import "./../styles/components/InfoMessage.scss";
-
 const InfoMessage = ({ title, children }) => {
     return (
         <div className="info-message">

@@ -4,8 +4,6 @@ import iconBus from "./../../assets/images/icons/bus.svg";
 import iconCar from "./../../assets/images/icons/car.svg";
 import iconF1 from "./../../assets/images/icons/f1.svg";
 
-import "./../../styles/pages/carsCreation/CarsInformation.scss";
-
 const CarsInformation = () => {
     return (
         <div className="car-informations">

@@ -11,9 +11,6 @@ import InfoMessage from "./../../components/InfoMessage";
 import PartsExplanation from "../../components/PartsExplanation";
 import FlashMessage from "./../../components/FlashMessage";
 import PartsDetailsPopUp from "./../../components/PartsDetailsPopUp";
-
-// Styles
-import "./../../styles/pages/carsCreation/PartsPrincipalInformation.scss";
 import HeaderGoToBack from "../../components/HeaderGotToBack";
 
 const PartsPrincipalInformation = () => {

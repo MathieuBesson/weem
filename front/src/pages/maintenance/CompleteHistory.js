@@ -8,8 +8,6 @@ import MaintenanceUpcomingPreview from "./../../components/MaintenanceUpcomingPr
 import HeaderGoToBack from "./../../components/HeaderGotToBack";
 import MaintenanceHistoryItem from "./../../components/MaintenanceHistoryItem";
 
-// Styles
-import "./../../styles/pages/maintenance/CompleteHistory.scss"
 const CompleteHistory = () => {
     return (
         <div className="complete-history">

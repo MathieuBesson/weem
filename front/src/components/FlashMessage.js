@@ -2,8 +2,6 @@ import react, { useState } from "react";
 import tick from "./../assets/images/icons/tick.svg";
 import cross from "./../assets/images/icons/cross.svg";
 
-import "./../styles/components/FlashMessage.scss";
-
 const FlashMessage = ({ type, active, children }) => {
     return (
         <div className={`flash-message ${type} row align-items-center ${active && 'active'}`}>

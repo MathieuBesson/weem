@@ -7,9 +7,6 @@ import pneuAvant from "./../../assets/images/icons/pneu-avant.svg";
 import HeaderGoToBack from "./../../components/HeaderGotToBack";
 import CarPartPreview from "./../../components/CarPartPreview";
 
-// Styles
-import "./../../styles/pages/maintenance/ListMaintenanceParts.scss";
-
 const ListMaintenanceParts = () => {
     return (
         <div className="list-maintenance-parts">
