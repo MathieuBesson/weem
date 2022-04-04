@@ -44,8 +44,8 @@ function App() {
 
 
         {/* <ListMaintenanceParts /> */}
-        <Updatepart />
-        {/* <DetailPart name="Courroie de disctribution"/> */}
+        {/* <Updatepart /> */}
+        <DetailPart name="Courroie de disctribution"/>
         {/* <UpdateMaintenance /> */}
         {/* <AddMaintenance /> */}
 

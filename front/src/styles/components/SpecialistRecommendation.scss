@@ -1,0 +1,36 @@
+.specialist-recommendation {
+    background-color: $grey-primary;
+    padding: 16px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+
+    &__title {
+        font-size: $font-size-extra-semi-small;
+        font-weight: $font-weight-bold;
+        margin-bottom: 15px;
+    }
+
+    &__info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        &-link {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: $blue-secondary;
+            font-weight: $font-weight-normal;
+            font-size: $font-size-small;
+            .icon{
+                background-color: $blue-secondary;
+                width: 14px;
+                height: 14px;
+                margin-left: 11px;
+            }
+
+            .icon, em{
+                display: inline-block;
+            }
+        }
+    }
+}
