@@ -5,8 +5,6 @@ import iconEdit from "./../../assets/images/icons/edit.svg";
 
 import HeaderGoToBack from "./../../components/HeaderGotToBack";
 
-// import "./../../styles/pages/part/Updatepart.scss";
-
 const Updatepart = ({ create = true }) => {
     return (
         <div className="update-part">
@@ -32,10 +30,12 @@ const Updatepart = ({ create = true }) => {
                             placeholder="Nom de l'entretien*"
                             required
                         ></input>
-                        <span
-                            className="icon icon-edit"
-                            style={{ backgroundImage: `url(${iconEdit})` }}
-                        ></span>
+                        {!create && (
+                            <span
+                                className="icon icon-edit"
+                                style={{ backgroundImage: `url(${iconEdit})` }}
+                            ></span>
+                        )}
                     </div>
                 </div>
                 <div className="update-part__form-group">
@@ -46,47 +46,59 @@ const Updatepart = ({ create = true }) => {
                         Récurrence de l'entretien*
                     </label>
 
-                    <div>
+                    <div className="update-part__form-group-item radio-group">
                         <input
+                            className="update-part__form-group-item-input radio-group-input"
                             type="radio"
-                            id="huey"
-                            name="drone"
-                            value="huey"
+                            id="diesel"
+                            name="fuel-type"
+                            value="diesel"
+                            required
                             checked
                         />
-                        <label htmlFor="huey">Durée</label>
+                        <label
+                            className="update-part__form-group-item-label radio-group-label"
+                            htmlFor="diesel"
+                        >
+                            Durée
+                        </label>
                     </div>
-
-                    <div>
+                    <div className="update-part__form-group-item radio-group">
                         <input
+                            className="update-part__form-group-item-input radio-group-input"
                             type="radio"
-                            id="dewey"
-                            name="drone"
-                            value="dewey"
+                            id="diesel"
+                            name="fuel-type"
+                            value="diesel"
+                            required
                         />
-                        <label htmlFor="dewey">Kilométrage</label>
+                        <label
+                            className="update-part__form-group-item-label radio-group-label"
+                            htmlFor="diesel"
+                        >
+                            Kilométrage
+                        </label>
                     </div>
-
-                    <div>
+                    <div className="update-part__form-group-item radio-group">
                         <input
+                            className="update-part__form-group-item-input radio-group-input"
                             type="radio"
-                            id="louie"
-                            name="drone"
-                            value="louie"
+                            id="diesel"
+                            name="fuel-type"
+                            value="diesel"
+                            required
                         />
-                        <label htmlFor="louie">Les deux</label>
+                        <label
+                            className="update-part__form-group-item-label radio-group-label"
+                            htmlFor="diesel"
+                        >
+                            Les deux
+                        </label>
                     </div>
                 </div>
 
                 <div className="update-part__form-group">
                     <div className="input-date">
-                        <label
-                            className="update-part__form-group-label"
-                            htmlFor="car-part-recurrence"
-                        >
-                            Récurrence de l'entretien*
-                        </label>
-
                         <input
                             className="input-standard"
                             type="date"
@@ -100,8 +112,6 @@ const Updatepart = ({ create = true }) => {
                             style={{ backgroundImage: `url(${iconDate})` }}
                         ></span>
                     </div>
-                </div>
-                <div className="update-part__form-group">
                     <div className="input-number">
                         <input
                             className="input-standard"
@@ -118,7 +128,7 @@ const Updatepart = ({ create = true }) => {
                 </div>
                 <button className="btn btn-primary">
                     {create
-                        ? "Continuer et compléter l'entretien"
+                        ? "Continuer & compléter l'entretien"
                         : "Valider ces changements"}
                 </button>
             </form>
