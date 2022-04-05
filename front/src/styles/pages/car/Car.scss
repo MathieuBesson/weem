@@ -1,0 +1,23 @@
+.car {
+    &__title {
+        color: $green-primary;
+        display: flex;
+        align-items: center;
+        font-size: $font-size-medium;
+        font-weight: $font-weight-semi-bold;
+        .icon-bottom {
+            background-color: $green-primary;
+            margin-top: 10px;
+            mask-size: 50% 50%;
+        }
+    }
+
+    &__customize {
+        background-color: $grey-primary;
+        padding: 24px;
+        &-car-choice-title {
+            font-size: $font-size-medium;
+            font-weight: $font-weight-semi-bold;
+        }
+    }
+}

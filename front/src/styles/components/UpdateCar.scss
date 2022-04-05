@@ -1,0 +1,129 @@
+.update-car{
+    &__form {
+        &-group {
+            display: flex;
+            flex-direction: column;
+            margin-top: 16px;
+    
+            &.fuel-type-block, &.driving-style-block {
+                margin-top: 40px;
+            }
+    
+            &-label {
+                margin-bottom: 10px;
+                font-size: $font-size-small;
+                font-weight: $font-weight-bold;
+            }
+    
+            &-title {
+                font-size: $font-size-normal;
+                font-weight: $font-weight-bold;
+                margin-bottom: 10px;
+            }
+    
+            &-range-labels {
+                display: flex;
+                justify-content: space-between;
+                margin: 10px 0 15px 0;
+                span {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    em {
+                        margin-bottom: 7px;
+                    }
+                }
+            }
+            &-radio {
+                display: flex;
+                justify-content: space-between;
+                div {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    position: relative;
+                }
+    
+                &-diesel,
+                &-essence,
+                &-hybride,
+                &-electric,
+                &-other {
+                    border-radius: 50%;
+                    &-input {
+                        cursor: pointer;
+                        -webkit-appearance: none;
+                        appearance: none;
+                        margin: 0;
+                        font: inherit;
+                        &::before {
+                            content: "";
+                            color: $blue-secondary;
+                            width: 50px;
+                            height: 50px;
+                            border: 2px solid $blue-secondary;
+                            border-radius: 50%;
+                            transform: translateY(1.5em) scale(0);
+                            display: grid;
+                            place-content: center;
+                            margin: auto;
+                        }
+                        &:checked::before {
+                            transform: scale(1);
+                        }
+                    }
+                    &-label {
+                        cursor: pointer;
+                        position: absolute;
+                        font-size: 9px; 
+                        font-weight: $font-weight-bold;
+                        text-transform: uppercase;
+                        margin: 0 5px;
+                        text-align: center;
+                        word-break: break-all;
+                    }
+                }
+    
+                &-essence,
+                &-hybride,
+                &-electric,
+                &-other {
+                    color: $white-primary;
+                }
+    
+                &-diesel{
+                    color: $blue-secondary;
+                }
+    
+                &-diesel {
+                    background-color: $yellow-primary;
+                }
+                &-essence {
+                    background-color: $green-secondary;
+                }
+                &-hybride {
+                    background-color: $green-thirdary;
+                }
+                &-electric {
+                    background-color: $blue-thirdary;
+                }
+                &-other {
+                    background-color: $blue-fourth;
+                }
+            }
+    
+        }
+        &-disclaimer {
+            margin-top: 25px;
+        }
+        &-buttons {
+            display: flex;
+            flex-direction: column;
+            margin: 25px 0 50px 0;
+            .btn{
+                margin-top: 10px;
+            }
+        }
+    }
+}

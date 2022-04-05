@@ -78,8 +78,7 @@ class Car
         'COUPE' => 1,
         'BERLINE' => 2,
         'SUV' => 3,
-        'PICK_UP' => 4,
-        'BREAK' => 5
+        'CITADINE' => 4,
     ];
 
     const MODEL_TYPE = [
@@ -92,11 +91,8 @@ class Car
         self::MODEL_TYPE_ID['SUV'] => [
             'LABEL' => 'SUV',
         ],
-        self::MODEL_TYPE_ID['PICK_UP'] => [
-            'LABEL' => 'pick-up',
-        ],
-        self::MODEL_TYPE_ID['BREAK'] => [
-            'LABEL' => 'break',
+        self::MODEL_TYPE_ID['CITADINE'] => [
+            'LABEL' => 'citadine',
         ]
     ];
 

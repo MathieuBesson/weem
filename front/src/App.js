@@ -15,9 +15,10 @@ import CompleteHistory from './pages/maintenance/CompleteHistory';
 import MaintenanceUpcoming from './pages/homeMaintenance/MaintenanceUpcoming';
 import ListMaintenanceParts from './pages/maintenance/ListMaintenanceParts';
 import UpdateMaintenance from './pages/maintenance/UpdateMaintenance';
-import Updatepart from './pages/part/Updatepart';
+import UpdatePart from './pages/part/UpdatePart';
 import DetailPart from './pages/part/DetailPart';
 import AddMaintenance from './components/AddMaintenance';
+import Car from './pages/car/Car';
 
 
 
@@ -44,10 +45,12 @@ function App() {
 
 
         {/* <ListMaintenanceParts /> */}
-        {/* <Updatepart /> */}
+        {/* <UpdatePart /> */}
         {/* <DetailPart name="Courroie de disctribution"/> */}
         {/* <UpdateMaintenance /> */}
-        <AddMaintenance />
+        {/* <AddMaintenance /> */}
+
+        <Car />
 
       {/* <Login /> */}
       {/* <Register/> */}

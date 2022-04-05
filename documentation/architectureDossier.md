@@ -5,7 +5,7 @@ Dossier
         →Fichier.js (Nom de la page sur Figma)
             -Route: back
 
-Inplentation:
+Implentation:
 →assets
 
 →pages
@@ -37,7 +37,7 @@ Inplentation:
         →MaintenanceUpcoming.js (Entretiens à venir)
             Route:
 
-    →parts
+    →part
         →DetailPart.js (Pièce détail)
             Route:
         X →CreatePart.js === Updatepart (Création de la pièce / entretien)
@@ -53,8 +53,8 @@ Inplentation:
         →UpdateMaintenance.js (Modifications détail)
             Route:
 
-    →cars
-        →cars.js (Véhicules)
+    →car
+        →Car.js (Véhicules)
             Route:
 
 →components

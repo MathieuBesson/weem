@@ -3,9 +3,9 @@ import pneuAvant from "./../../assets/images/icons/pneu-avant.svg";
 import iconDate from "./../../assets/images/icons/date.svg";
 import iconEdit from "./../../assets/images/icons/edit.svg";
 
-import HeaderGoToBack from "./../../components/HeaderGotToBack";
+import HeaderGoToBack from "../../components/HeaderGotToBack";
 
-const Updatepart = ({ create = true }) => {
+const UpdatePart = ({ create = true }) => {
     return (
         <div className="update-part">
             <HeaderGoToBack>
@@ -38,15 +38,12 @@ const Updatepart = ({ create = true }) => {
                         )}
                     </div>
                 </div>
-                <div className="update-part__form-group">
-                    <label
-                        className="update-part__form-group-label"
-                        htmlFor="car-part-recurrence"
-                    >
+                <div className="update-part__form-group radio-group">
+                    <label className="update-part__form-group-label">
                         Récurrence de l'entretien*
                     </label>
 
-                    <div className="update-part__form-group-item radio-group">
+                    <div className="update-part__form-group-item">
                         <input
                             className="update-part__form-group-item-input radio-group-input"
                             type="radio"
@@ -63,7 +60,7 @@ const Updatepart = ({ create = true }) => {
                             Durée
                         </label>
                     </div>
-                    <div className="update-part__form-group-item radio-group">
+                    <div className="update-part__form-group-item">
                         <input
                             className="update-part__form-group-item-input radio-group-input"
                             type="radio"
@@ -79,7 +76,7 @@ const Updatepart = ({ create = true }) => {
                             Kilométrage
                         </label>
                     </div>
-                    <div className="update-part__form-group-item radio-group">
+                    <div className="update-part__form-group-item">
                         <input
                             className="update-part__form-group-item-input radio-group-input"
                             type="radio"
@@ -136,4 +133,4 @@ const Updatepart = ({ create = true }) => {
     );
 };
 
-export default Updatepart;
+export default UpdatePart;

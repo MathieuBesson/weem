@@ -7,7 +7,7 @@
 
 
 // Pages 
-@import "./pages/part/Updatepart";
+@import "./pages/part/UpdatePart";
 @import "./pages/part/DetailPart";
 @import "./pages/carsCreation/CarsInformation";
 @import "./pages/carsCreation/PartsPrincipalInformation";
@@ -18,6 +18,7 @@
 @import "./pages/maintenance/ListMaintenanceParts";
 @import "./pages/maintenance/ListMaintenanceParts";
 @import "./pages/maintenance/UpdateMaintenance";
+@import "./pages/car/Car";
 
 
 // Components 
@@ -39,6 +40,7 @@
 @import "./components/MaintenanceUpcomingPreview";
 @import "./components/PartsDetailsPopUp";
 @import "./components/SpecialistRecommendation";
+@import "./components/UpdateCar";
 
 
 
