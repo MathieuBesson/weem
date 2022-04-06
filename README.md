@@ -25,7 +25,6 @@ Le projet d'organise en 2 niveaux :
 
 - La partie frontend composé de : 
     - Du framework ReactJS (https://fr.reactjs.org/)
-    - 
 
 - La partie mobile composé de : 
     - Du framework Capacitor (https://capacitorjs.com/)
