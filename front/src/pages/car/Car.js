@@ -27,6 +27,9 @@ const Car = () => {
             name: "berline",
         },
     };
+
+    const colorsList = ["yellow", "red", "green", "blue", "violet"];
+
     return (
         <div className="car">
             <h1 className="car__title">
@@ -37,23 +40,36 @@ const Car = () => {
                 ></span>
             </h1>
             <div className="car__customize">
-                <div className="car__customize-car-choice">
-                    <h2 className="car__customize-car-choice-title">
+                <div className="car__customize-choice">
+                    <h2 className="car__customize-choice-title">
                         Profil du véhicule
                     </h2>
-                    <img src={iconCoupe} />
+                    <span
+                        className="car__customize-choice-car icon"
+                        style={{ maskImage: `url(${iconCoupe})` }}
+                    ></span>
+                    {/* <img
+                        src={iconCoupe}
+                        
+                    /> */}
                 </div>
                 <div className="car__customize-car-icon">
                     <h3 className="car__customize-car-icon-title">
                         Icône du véhicule
                     </h3>
 
-                    {Object.keys(carTypeList).map((carType, key) => (
-                        <div
-                            className="car__customize-car-icon-group radio-group"
-                            key={key}
-                        >
-                            <div className="car__customize-car-icon-group-item">
+                    <div className="car__customize-car-icon-group radio-group">
+                        {Object.keys(carTypeList).map((carType, key) => (
+                            <div
+                                className="car__customize-car-icon-group-item"
+                                key={key}
+                            >
+                                <label
+                                    className="car__customize-car-icon-group-item-label radio-group-label"
+                                    htmlFor="diesel"
+                                >
+                                    <img src={carTypeList[carType].icon} />
+                                </label>
                                 <input
                                     className="car__customize-car-icon-group-item-input radio-group-input"
                                     type="radio"
@@ -61,36 +77,39 @@ const Car = () => {
                                     name="car-type"
                                     value={carTypeList[carType].name}
                                     required
+                                    checked={key === 0 ? "checked" : ""}
                                 />
-                                <label
-                                    className="car__customize-car-icon-group-item-label radio-group-label"
-                                    htmlFor="diesel"
-                                >
-                                    <img src={carTypeList[carType].icon} />
-                                </label>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
                 <div className="car__customize-car-color">
-                    <h3>Couleur du véhicule</h3>
+                    <h3 className="car__customize-car-color-title">
+                        Couleur du véhicule
+                    </h3>
 
                     <div className="car__customize-car-color-group radio-group">
-                        <div className="car__customize-car-color-group-item">
-                            <input
-                                className="ucar__customize-car-color-group-item-input radio-group-input"
-                                type="radio"
-                                id="diesel"
-                                name="fuel-type"
-                                value="diesel"
-                                required
-                            />
-                        </div>
+                        {colorsList.map((color, id) => (
+                            <div
+                                className="car__customize-car-color-group-item"
+                                key={id}
+                            >
+                                <input
+                                    className={`car__customize-car-color-group-item-input radio-group-input bg-${color}`}
+                                    type="radio"
+                                    id="diesel"
+                                    name="fuel-type"
+                                    value="diesel"
+                                    required
+                                    checked={id === 0 ? true : false}
+                                />
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
-            <div className="car__customize-form">
-                <h2 className="car__customize-form-title">
+            <div className="car__form">
+                <h2 className="car__form-title">
                     Caractéristique du véhicule
                 </h2>
                 <UpdateCar />
