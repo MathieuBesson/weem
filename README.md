@@ -13,7 +13,6 @@ Weem est une carnet d'entretien de vehicule en ligne pour les automobilistes ne 
  - [Node >= 17.2.0](https://nodejs.org/en/docs/)
  - [Npm >= 8.1.4](https://nodejs.org/en/docs/)
  - [ReactJs](https://fr.reactjs.org/)
- - [Cordova](https://cordova.apache.org/)
 
 ## Présentation technique 
 
