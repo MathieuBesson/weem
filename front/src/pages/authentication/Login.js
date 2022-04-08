@@ -1,9 +1,5 @@
-/* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
 import eye from "../../assets/eye-outline.webp";
-
-// import "../../styles/authentication/Login.sass";
 
 const Login = (props) => {
   const [enteredUsername, setEnteredUsername] = useState("");
@@ -40,15 +36,15 @@ const Login = (props) => {
   };
 
   return (
-    <div className="login__template">
-      <div className="test">
-        <h1 className="">Se connecter</h1>
+    <div className="login">
+      <div>
+        <h1 className="login-title">Se connecter</h1>
         <form onSubmit={formSubmitHandler}>
           <div>
             <input
               type="text"
               placeholder="Téléphone ou adresse mail*"
-              className="login__input"
+              className="login__inputBox"
               value={enteredUsername}
               onChange={usernameChangeHandler}
             />
@@ -57,18 +53,18 @@ const Login = (props) => {
             <input
               type={passwordShown ? "text" : "password"}
               placeholder="Mot de passe *"
-              className="login__input login__password"
+              className="login__inputBox login__passwordDiv-password"
               value={enteredPassword}
               onChange={passwordChangeHandler}
             />
-            <a onClick={togglePassword} className="login__passwordShown">
+            <a onClick={togglePassword} className="login__passwordDiv-passwordShown">
               <img src={eye} />
             </a>
           </div>
 
-          <div className="">
+          <div>
             <div className="login__forgetPasswordDiv">
-              <a href="" className="login__forgetPassword">
+              <a href="" className="login__forgetPasswordDiv-forgetPassword">
                 Mot de passe oublié ?
               </a>
             </div>
@@ -78,14 +74,14 @@ const Login = (props) => {
             </div>
 
             <div className="login__connect">
-              <button type="submit" className="">
+              <button type="submit">
                 Se connecter
               </button>
             </div>
           </div>
         </form>
         <div className="login__divRegister">
-          <a href="www.google.com" className="login__register">
+          <a href="www.google.com" className="login__divRegister-register">
             S'inscrire
           </a>
           ➜
