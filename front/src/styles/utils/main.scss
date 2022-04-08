@@ -1,5 +1,7 @@
 main {
-    background-color: #F5F7FF;
+    background-image: url("../../assets/background_welcome.webp");
+    background-size: cover;
+    // background-color: #F5F7FF;
     color: #2f3348;
     width: $screen-max-width;
     padding: 45px 36px;

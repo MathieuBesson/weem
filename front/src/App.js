@@ -33,7 +33,7 @@ function App() {
       <Route path="/login">
         <Login/>
       </Route> */}
-        {/* <InscriptionChoice /> */}
+        <InscriptionChoice />
 
 
         {/* <Home/> */}
@@ -50,7 +50,7 @@ function App() {
         {/* <UpdateMaintenance /> */}
         {/* <AddMaintenance /> */}
 
-        <Car />
+        {/* <Car /> */}
 
       {/* <Login /> */}
       {/* <Register/> */}

@@ -6,7 +6,8 @@
 @import './standardComponents/colors';
 
 
-// Pages 
+// Pages
+@import "./pages/authentication/InscriptionChoice";
 @import "./pages/part/UpdatePart";
 @import "./pages/part/DetailPart";
 @import "./pages/carsCreation/CarsInformation";
@@ -21,7 +22,7 @@
 @import "./pages/car/Car";
 
 
-// Components 
+// Components
 @import "./components/AddMaintenance";
 @import "./components/ArticlePreview";
 @import "./components/BlogPreview";

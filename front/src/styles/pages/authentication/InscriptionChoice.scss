@@ -1,0 +1,40 @@
+.inscriptionChoice {
+  display: flex;
+  flex-direction: column;
+  color: $white-primary;
+
+  &__logo {
+    margin-top: 8rem;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &__container {
+    margin-top: 17.6rem;
+
+
+    &-title {
+      font-size: $font-size-medium;
+      font-weight: $font-weight-bold;
+    }
+
+    &-desc {
+      font-weight: $font-weight-bold;
+      font-size: $font-size-extra-large;
+    }
+
+    &-btnRegister {
+      border: 1px solid $green-primary;
+      background: $green-primary;
+      margin-top: 2.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    &-btnConnect {
+      border: 1px solid $green-primary;
+      background: rgb(0, 0, 0, 0);
+      color: $green-primary;
+    }
+  }
+}
