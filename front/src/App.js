@@ -2,7 +2,7 @@ import './App.css';
 import './styles/app.scss';
 
 import {Route} from 'react-router-dom';
-// import Login from './pages/authentication/Login';
+import Login from './pages/authentication/Login';
 // import Register from './Register/Register'
 // import Welcome from './FirstCar/Welcome';
 // import DataCar from './FirstCar/DataCar';
@@ -33,7 +33,8 @@ function App() {
       <Route path="/login">
         <Login/>
       </Route> */}
-        <InscriptionChoice />
+      <Login/>
+        {/* <InscriptionChoice /> */}
 
 
         {/* <Home/> */}
