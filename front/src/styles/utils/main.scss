@@ -1,15 +1,28 @@
 main {
-//   background-image: url("../../assets/background_welcome.webp");
-//   background-size: cover;
-  background-color: #F5F7FF;
-  color: #2f3348;
-  width: $screen-max-width;
-  padding: 45px 36px;
-  margin: auto !important;
-  min-height: 100vh;
+    // background-color: #f5f7ff;
+    color: #2f3348;
+    width: $screen-max-width;
+    padding: 45px 36px;
+    margin: auto !important;
+    min-height: 100vh;
+    position: relative;
 
-  @font-face {
-      font-family: OBJECTSANS ;
-      src: url('../../assets/font-weem/OBJECTSANS-REGULAR.OTF');
-  }
+    * {
+        font-family: "object-sans", sans-serif;
+    }
+}
+
+
+
+.bg-cover{
+    object-fit: cover;
+    &__img {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: -40;
+    }
 }

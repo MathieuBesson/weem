@@ -1,73 +1,68 @@
 .register {
-  display: flex;
-  flex-direction: column;
-  justify-content: end;
-  height: 85vh;
-  color: $white-primary;
-
-  &-title {
-    font-size: $font-size-mega-large;
-    font-weight: $font-weight-bold;
-    margin-bottom: 1rem;
-  }
-
-  &__inputBox {
-    height: 3rem;
-    width: 18.75rem;
-    padding-left: 1rem;
-    border: 1px solid $grey-secondary;
-    background: transparent;
-    border-radius: 12px;
-    color: white;
-    margin-bottom: 4px;
-
-    &::placeholder {
-      color: $grey-secondary;
-    }
-  }
-
-  &__passwordDiv {
     display: flex;
+    flex-direction: column;
+    justify-content: end;
+    height: 85vh;
+    color: $white-primary;
 
-    &-passwordShown {
-      margin-left: 16.5rem;
-      margin-top: 0.5rem;
-      // background-color: blue
-      position: absolute;
+    input::placeholder {
+        font-size: $font-size-small;
     }
-  }
 
-
-
-  &__regist {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 4.5rem;
-    margin-top: 3rem;
-  }
-
-  &__divRegister {
-    display: flex;
-    flex-direction: row;
-    margin-left: 2rem;
-    justify-content: center;
-    margin: auto;
-
-    &-register {
-      display: flex;
-      color: white;
+    &-title {
+        font-size: $font-size-mega-large;
+        font-weight: $font-weight-bold;
+        margin-bottom: 1rem;
     }
-  }
 
-  &__errorMessage {
-    font-size: 0.75rem;
-    text-align: center;
-    color: red;
-    margin-top: 0.5rem;
-    visibility: hidden;
-  }
-  &__errorMessage.invalid {
-    visibility: visible;
-    margin-bottom: 1.5rem;
-  }
+    &__input-box {
+        height: 3rem;
+        width: 18.75rem;
+        padding-left: 1rem;
+        border: 1px solid $grey-secondary;
+        background: transparent;
+        border-radius: 12px;
+        color: white;
+        margin-bottom: 4px;
+
+        &::placeholder {
+            color: $grey-secondary;
+        }
+    }
+
+    &__password {
+        &-div {
+            display: flex;
+
+            &-password-shown {
+                margin-left: 16.5rem;
+                margin-top: 0.5rem;
+                // background-color: blue
+                position: absolute;
+            }
+        }
+        &-forgot-password{
+          color: $white-primary;
+          font-size: $font-size-small;
+          font-weight: $font-weight-normal;
+          float:right;
+          margin-top: 12px;
+        }
+    }
+
+    &__error-message {
+        font-size: 0.75rem;
+        text-align: center;
+        color: red;
+        margin-top: 0.5rem;
+        visibility: hidden;
+    }
+    &__error-message.invalid {
+        visibility: visible;
+        margin-bottom: 1.5rem;
+    }
+    
+    .btn-primary{
+      margin-top: 24px;
+    }
 }

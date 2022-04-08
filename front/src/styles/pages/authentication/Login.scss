@@ -1,91 +1,73 @@
 .login {
-  display: flex;
-  // align-self: flex-end
-  flex-direction: column;
-  // flex-wrap: nowrap
-  justify-content: end;
-  // align-items: flex-start
-  // align-content: stretch
-  // padding: 2rem
-  height: 85vh;
-  color: $white-primary;
-
-  &-title {
-    font-size: $font-size-mega-large;
-    font-weight: $font-weight-bold;
-    margin-bottom: 1rem;
-  }
-
-  &__inputBox {
-    height: 3rem;
-    width: 18.75rem;
-    padding-left: 1rem;
-    border: 1px solid $grey-secondary;
-    background: transparent;
-    border-radius: 12px;
-    color: white;
-
-    &::placeholder {
-      color: $grey-secondary;
-    }
-  }
-
-  &__passwordDiv {
     display: flex;
+    flex-direction: column;
+    justify-content: end;
+    height: 85vh;
+    color: $white-primary;
 
-    &-password {
-      margin-top: 4px;
+    input::placeholder {
+        font-size: $font-size-small;
     }
 
-    &-passwordShown {
-      margin-left: 16.5rem;
-      margin-top: 0.75rem;
-      // background-color: blue
-      position: absolute;
+    &-title {
+        font-size: $font-size-mega-large;
+        font-weight: $font-weight-bold;
+        margin-bottom: 1rem;
     }
-  }
 
-  &__forgetPasswordDiv {
-    text-align: right;
-    margin-top: 12px;
+    &__input-box {
+        height: 3rem;
+        width: 18.75rem;
+        padding-left: 1rem;
+        border: 1px solid $grey-secondary;
+        background: transparent;
+        border-radius: 12px;
+        color: white;
 
-    &-forgetPassword {
-      color: white;
+        &::placeholder {
+            color: $grey-secondary;
+        }
     }
-  }
 
-  &__connect {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 4.5rem;
-  }
+    &__password-div {
+        display: flex;
 
-  &__divRegister {
-    display: flex;
-    flex-direction: row;
-    margin-left: 2rem;
-    justify-content: center;
-    margin: auto;
+        &-password {
+            margin-top: 6px;
+        }
 
-    &-register {
-      display: flex;
-      color: white;
+        &-password-shown {
+            margin-left: 16.5rem;
+            margin-top: 1rem;
+            // background-color: blue
+            position: absolute;
+        }
     }
-  }
 
-  &__errorMessage {
-    font-size: 0.75rem;
-    text-align: center;
-    color: red;
-    margin-top: 0.5rem;
-    visibility: hidden;
-  }
-  &__errorMessage.invalid {
-    visibility: visible;
-    margin-bottom: 1.5rem;
+    &__forget-password-div {
+        text-align: right;
+        margin-top: 12px;
 
-  }
+        &-forget-password {
+            color: white;
+        }
+    }
 
+    &__connect {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 4.5rem;
+    }
+
+    &__error-message {
+        font-size: 0.75rem;
+        text-align: center;
+        color: red;
+        margin-top: 0.5rem;
+        visibility: hidden;
+    }
+    &__error-message.invalid {
+        visibility: visible;
+        margin-bottom: 1.5rem;
+    }
 }
-
-

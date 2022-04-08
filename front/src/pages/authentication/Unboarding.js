@@ -19,7 +19,7 @@ const Unboarding = (props) => {
         fonctionnalités de l'application.
       </div>
 
-      <button>Créer vorte premier véhicule</button>
+      <button className="btn btn-primary">Créer vorte premier véhicule</button>
     </div>
   );
 };

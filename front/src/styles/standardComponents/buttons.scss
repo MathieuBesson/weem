@@ -15,7 +15,9 @@
     background-color: $green-primary;
     border-color: transparent;
     transition: all ease 0.3s;
-    &:hover {
+    &:hover,
+    &:focus,
+    &:active {
         color: $green-primary;
         background-color: transparent;
         border-color: $green-primary;
@@ -28,7 +30,9 @@
     background-color: transparent;
     border-color: $green-primary;
     transition: all ease 0.3s;
-    &:hover {
+    &:hover,
+    &:focus,
+    &:active {
         color: $white-primary;
         background-color: $green-primary;
         border-color: transparent;
@@ -41,7 +45,9 @@
     background-color: $blue-secondary;
     border-color: transparent;
     transition: all ease 0.3s;
-    &:hover {
+    &:hover,
+    &:focus,
+    &:active {
         color: $blue-secondary;
         background-color: transparent;
         border-color: $blue-secondary;
@@ -54,10 +60,22 @@
     background-color: transparent;
     border-color: $red-primary;
     transition: all ease 0.3s;
-    &:hover {
+    &:hover,
+    &:focus,
+    &:active {
         color: $white-primary;
         background-color: $red-primary;
         border-color: transparent;
         transition: all ease 0.3s;
     }
+}
+
+.btn-transparent,
+.btn-transparent:hover .btn-transparent:focus .btn-transparent:active {
+    margin-top: 15px;
+    color: $white-primary;
+    border: 0;
+    font-size: $font-size-normal;
+    font-weight: $font-weight-normal;
+    text-decoration: underline;
 }
