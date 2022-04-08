@@ -1,0 +1,56 @@
+.nav-bar {
+    display: flex;
+    list-style: none;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+    background-color: $grey-primary;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 12px 28px;
+    &__item-car {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    &__item{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        opacity: 0.3;
+
+        &.active{
+            opacity: 1;
+        }
+
+        &-nav, &-car-nav{
+            border-radius: 10px;
+            height: 40px;
+            width: 40px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            &-icon {
+                max-width: 30px;
+            }
+        }
+        &-nav {
+            background-color: $grey-secondary;
+        }
+
+        &-car-nav{
+            border: 2px solid $green-primary;
+            .icon{
+                mask-size: 100% 100%;
+            }
+        }
+
+        &-label{
+            font-weight: $font-weight-normal;
+            font-size: $font-size-extra-small;
+        }
+    }
+}

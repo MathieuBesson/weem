@@ -18,6 +18,7 @@ import UpdatePart from "./pages/part/UpdatePart";
 import DetailPart from "./pages/part/DetailPart";
 import AddMaintenance from "./components/AddMaintenance";
 import CarSwitcher from "./components/CarSwitcher";
+import NavBar from "./components/NavBar";
 import Car from "./pages/car/Car";
 
 function App() {
@@ -52,7 +53,8 @@ function App() {
 
 
         <Car />
-        <CarSwitcher />
+        {/* <CarSwitcher /> */}
+        <NavBar />
       {/* <Car /> */}
 
       {/* <Login /> */}
