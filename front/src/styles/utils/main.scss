@@ -7,4 +7,9 @@ main {
   padding: 45px 36px;
   margin: auto !important;
   min-height: 100vh;
+
+  @font-face {
+      font-family: OBJECTSANS ;
+      src: url('../font-weem/OBJECTSANS-REGULAR.OTF');
+  }
 }

@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 
-// import './Welcome.css'
 
-const Welcome = () => {
+const Unboarding = () => {
     return(
 
         <div className='welcome__container'>
@@ -23,4 +22,4 @@ const Welcome = () => {
     )
 }
 
-export default Welcome
+export default Unboarding

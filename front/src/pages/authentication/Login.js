@@ -38,7 +38,7 @@ const Login = (props) => {
   return (
     <div className="login">
       <div>
-        <h1 className="login-title">Se connecter</h1>
+        <div className="login-title">Se connecter</div>
         <form onSubmit={formSubmitHandler}>
           <div>
             <input

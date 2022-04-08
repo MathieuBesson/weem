@@ -1,12 +1,7 @@
-.login {
+.register {
   display: flex;
-  // align-self: flex-end
   flex-direction: column;
-  // flex-wrap: nowrap
   justify-content: end;
-  // align-items: flex-start
-  // align-content: stretch
-  // padding: 2rem
   height: 85vh;
   color: $white-primary;
 
@@ -24,6 +19,7 @@
     background: transparent;
     border-radius: 12px;
     color: white;
+    margin-bottom: 4px;
 
     &::placeholder {
       color: $grey-secondary;
@@ -33,31 +29,21 @@
   &__passwordDiv {
     display: flex;
 
-    &-password {
-      margin-top: 4px;
-    }
-
     &-passwordShown {
       margin-left: 16.5rem;
-      margin-top: 0.75rem;
+      margin-top: 0.5rem;
       // background-color: blue
       position: absolute;
     }
   }
 
-  &__forgetPasswordDiv {
-    text-align: right;
-    margin-top: 12px;
 
-    &-forgetPassword {
-      color: white;
-    }
-  }
 
-  &__connect {
+  &__regist {
     display: flex;
     justify-content: center;
     margin-bottom: 4.5rem;
+    margin-top: 3rem;
   }
 
   &__divRegister {
@@ -83,9 +69,5 @@
   &__errorMessage.invalid {
     visibility: visible;
     margin-bottom: 1.5rem;
-
   }
-
 }
-
-

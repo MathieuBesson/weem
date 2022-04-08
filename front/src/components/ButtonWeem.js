@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 
-import "../styles/modals/ButtonWeem.sass";
+// import "../styles/modals/ButtonWeem.sass";
 
 const ButtonWeem = ({ lien }, props) => {
   const classes = "buttonWeem__button " + props.className;
