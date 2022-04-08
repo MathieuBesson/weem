@@ -1,25 +1,27 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 
+import carsImg from "../../assets/images/specialists/Unboarding.webp";
 
-const Unboarding = () => {
-    return(
+const Unboarding = (props) => {
+  const name = "Théo";
 
-        <div className='welcome__container'>
-            <h2>
-                Bienvenue <span className='welcome__span'>prénom</span>
-            </h2>
+  return (
+    <div className="unboarding">
+      <div className="unboarding-title">
+        Bienvenue <span className="unboarding-title-name">{name}</span>
+      </div>
 
-            <img/>
+      <img className="unboarding-img" src={carsImg} />
 
-            <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sodales morbi lorem justo, quis sollicitudin. Viverra tempus risus nascetur non eu odio diam commodo sed. Pretium nulla cursus adipiscing eget in est. Sagittis cursus a, lectus egestas. Magna at feugiat.
-            </p>
+      <div className="unboarding-text">
+        Pour commencer à utiliser l'application, vous devez d'abord créer votre
+        premier véhicule ! Vous pourrez ensuite profiter pleinement des
+        fonctionnalités de l'application.
+      </div>
 
-            <button>Créer vorte premier véhicule</button>
+      <button>Créer vorte premier véhicule</button>
+    </div>
+  );
+};
 
-        </div>
-
-    )
-}
-
-export default Unboarding
+export default Unboarding;

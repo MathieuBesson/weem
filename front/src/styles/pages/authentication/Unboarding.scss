@@ -1,0 +1,23 @@
+.unboarding {
+  &-title {
+    color: $blue-secondary;
+    font-size: $font-size-extra-large;
+    font-weight: $font-weight-bold;
+
+    &-name {
+      color: $green-primary;
+    }
+  }
+
+  &-img {
+    margin-top: 1.25rem;
+    margin-bottom: 2.25rem;
+    height: 26.25rem;
+  }
+
+  &-text {
+    font-size: $font-size-normal;
+    font-weight: $font-weight-normal;
+    margin-bottom: 1.5rem;
+  }
+}

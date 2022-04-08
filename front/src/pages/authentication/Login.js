@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import eye from "../../assets/eye-outline.webp";
+import eye from "../../assets/images/icons/eye-outline.webp";
 
 const Login = (props) => {
   const [enteredUsername, setEnteredUsername] = useState("");

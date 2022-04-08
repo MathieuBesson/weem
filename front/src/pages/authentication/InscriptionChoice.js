@@ -1,10 +1,7 @@
 import React from "react";
-import Logo from "../../assets/logo.png";
+import Logo from "../../assets/images/icons/logo.svg";
 import { BrowserRouter as Router } from "react-router-dom";
 import ButtonWeem from "../../components/ButtonWeem";
-
-// import "../../styles/authentication/Authentication.sass";
-// import "../../styles/authentication/InscriptionChoice.scss";
 
 const InscriptionChoice = () => {
   return (
