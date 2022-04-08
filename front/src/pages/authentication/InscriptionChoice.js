@@ -1,14 +1,11 @@
 import React from "react";
-import Logo from "../../assets/logo.png";
-import {BrowserRouter as Router} from 'react-router-dom'
+import Logo from "../../assets/images/icons/logo.svg";
+import { BrowserRouter as Router } from "react-router-dom";
 import ButtonWeem from "../../components/ButtonWeem";
-
-// import "../../styles/authentication/Authentication.sass";
-// import "../../styles/authentication/InscriptionChoice.sass";
 
 const InscriptionChoice = () => {
   return (
-    <div className="inscriptionChoice__div">
+    <div className="inscriptionChoice">
       <img
         className="inscriptionChoice__logo"
         src={Logo}
@@ -16,20 +13,19 @@ const InscriptionChoice = () => {
       />
 
       <div className="inscriptionChoice__container">
-        <div className="inscriptionChoice__title">Commençons</div>
-        <div className="inscriptionChoice__desc">
+        <h2 className="inscriptionChoice__container-title">Commençons</h2>
+        <div className="inscriptionChoice__container-desc">
           Suivez l'entretien de <br /> votre véhicule et stocker <br /> vos
           documents <br />
           importants
         </div>
 
-          <ButtonWeem lien={'login.js'} className="inscriptionChoice__btnRegister">
+        {/* <ButtonWeem lien={'login.js'} className="inscriptionChoice__inscriptionChoice__container-btnRegister">
               S'inscrire
           </ButtonWeem>
-          <ButtonWeem className="inscriptionChoice__btnConnect">
+          <ButtonWeem className="inscriptionChoice__inscriptionChoice__container-btnConnect">
             Se connecter
-          </ButtonWeem>
-
+          </ButtonWeem> */}
       </div>
     </div>
   );
