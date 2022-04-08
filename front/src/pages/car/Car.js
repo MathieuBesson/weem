@@ -45,7 +45,7 @@ const Car = () => {
                         Profil du véhicule
                     </h2>
                     <span
-                        className="car__customize-choice-car icon"
+                        className="car__customize-choice-car icon mask-green"
                         style={{ maskImage: `url(${iconCoupe})` }}
                     ></span>
                     {/* <img
@@ -95,7 +95,7 @@ const Car = () => {
                                 key={id}
                             >
                                 <input
-                                    className={`car__customize-car-color-group-item-input radio-group-input bg-${color}`}
+                                    className={`car__customize-car-color-group-item-input radio-group-input border-${color}`}
                                     type="radio"
                                     id="diesel"
                                     name="fuel-type"

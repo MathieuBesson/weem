@@ -18,6 +18,7 @@ import UpdateMaintenance from './pages/maintenance/UpdateMaintenance';
 import UpdatePart from './pages/part/UpdatePart';
 import DetailPart from './pages/part/DetailPart';
 import AddMaintenance from './components/AddMaintenance';
+import CarSwitcher from './components/CarSwitcher';
 import Car from './pages/car/Car';
 
 
@@ -51,6 +52,7 @@ function App() {
         {/* <AddMaintenance /> */}
 
         <Car />
+        <CarSwitcher />
 
       {/* <Login /> */}
       {/* <Register/> */}

@@ -9,3 +9,40 @@
 .red{
     color: $red-primary
 }
+
+
+.border {
+    &-yellow::before {
+        border-color: $yellow-secondary;
+    }
+    &-red::before {
+        border-color: $red-secondary;
+    }
+    &-green::before {
+        border-color: $green-primary;
+    }
+    &-blue::before {
+        border-color: $blue-five;
+    }
+    &-violet::before {
+        border-color: $violet-primary;
+    }
+}
+
+.mask {
+    &-yellow {
+        background-color: $yellow-secondary;
+    }
+    &-red {
+        background-color: $red-secondary;
+    }
+    &-green {
+        background-color: $green-primary;
+    }
+    &-blue {
+        background-color: $blue-five;
+    }
+    &-violet {
+        background-color: $violet-primary;
+    }
+}

@@ -47,14 +47,16 @@
             color: $blue-secondary;
             width: 24px;
             height: 24px;
-            border: 3px solid $blue-secondary;
+            border-style: solid;
+            border-width: 3px;
             border-radius: 50%;
             display: grid;
             place-content: center;
             margin: auto;
         }
         &:checked::before {
-            border: 8px solid $blue-secondary;
+            border-style: solid;
+            border-width: 8px;
         }
     }
 }

@@ -1,9 +1,9 @@
 @import './utils/variables';
+@import './standardComponents/colors';
 @import './utils/main';
 @import './standardComponents/inputs';
 @import './standardComponents/icons';
 @import './standardComponents/buttons';
-@import './standardComponents/colors';
 
 
 // Pages 
@@ -41,6 +41,7 @@
 @import "./components/PartsDetailsPopUp";
 @import "./components/SpecialistRecommendation";
 @import "./components/UpdateCar";
+@import "./components/CarSwitcher";
 
 
 
