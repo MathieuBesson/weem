@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import carsImg from "../../assets/images/specialists/Onboarding.webp";
+import carsImg from "../../assets/images/background/car-with-mountain.jpg";
 
 const Onboarding = (props) => {
   const name = "Théo";

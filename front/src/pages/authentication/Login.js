@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import eye from "../../assets/images/icons/eye-outline.webp";
-import bgImageWelcome from "./../../assets/images/background/background_welcome.webp";
+import bgImageWelcome from "./../../assets/images/background/background-welcome.webp";
 
 const Login = (props) => {
     const [enteredUsername, setEnteredUsername] = useState("");
