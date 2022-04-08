@@ -1,11 +1,45 @@
-.car-switcher{
-
-
+.car-switcher {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 35px 36px 20px 36px;
+    width: $screen-max-width;
+    background-color: $grey-primary;
     &-icon {
         width: 100%;
         height: 40px;
         mask-size: 100% 100%;
         margin: auto;
         background-color: red;
+    }
+
+    &__title {
+        font-size: $font-size-medium;
+        font-weight: $font-weight-bold;
+    }
+
+
+    &__car-list {
+        &-item {
+            &.not-selected{
+                opacity: 0.5;
+            }
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+            padding: 20px 20px;
+            background-color: $white-secondary;
+            border-radius: 10px;
+            &-label {
+                display: flex;
+            }
+        }
+    }
+
+    &__icon{
+        width: 60px;
+        height: 30px;
+        mask-size: 100% 100%;
     }
 }
