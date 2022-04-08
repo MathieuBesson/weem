@@ -6,7 +6,6 @@ Dossier
             -Route: back
 
 Implentation:
-→assets
 
 →pages
     →authentication
@@ -14,17 +13,15 @@ Implentation:
             Route:
         →InscriptionChoice.js (Choix inscription/connexion)
             Route:
-        →Connection.js (Connexion)
+        →Login.js (Connexion)
             Route:
-        →Incription.js (Inscription)
+        →Register.js (Inscription)
             Route:
-        →Unboarding.js (Onboarding 1)
+        →Onboarding.js (Onboarding)
             Route:
 
     →carsCreation
         →PartsPrincipalInformation.js (Renseignements de pièces)
-            Route:
-        →PartsSecondaryInformation.js (Renseignements de pièces secondaires)
             Route:
         →CarsInformation.js (Renseignement du véhicule)
             Route:
@@ -58,6 +55,8 @@ Implentation:
             Route:
 
 →components
+
+    // Composants avec des écrans dédiés sur Figma
     →FlashMessage.js (Bandeau infos/confirmation)
     →CarPartCard.js (Card de rensignement des piece)
     →PartsDetailsPopUp.js (Pop-up infos pièces)
@@ -67,7 +66,23 @@ Implentation:
     →SwitchCars.js (Switch)
     →AddCars.js (Ajout nouvelle voiture)
 
-→styles
+    // Composants sans écrans dédiés sur Figma
+    →ArticlePreview.js
+    →BlogPreview.js
+    →ButtonIcon.js
+    →CarPartPreview.js
+    →CarSwitcher.js
+    →CostEstimationPart.js
+    →HeaderGotToBack.js
+    →InvoicePreview.js
+    →InvoicePreviewItem.js
+    →MaintenanceHistory.js
+    →MaintenanceHistoryItem.js
+    →MaintenanceUpcomingPreview.js
+    →NavBar.js
+    →SpecialistRecommendation.js
+    →UpdateCar.js
+
 
 A voir a la fin:
 →Blog

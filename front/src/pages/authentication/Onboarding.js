@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
-import carsImg from "../../assets/images/specialists/Unboarding.webp";
+import carsImg from "../../assets/images/specialists/Onboarding.webp";
 
-const Unboarding = (props) => {
+const Onboarding = (props) => {
   const name = "Théo";
 
   return (
@@ -24,4 +24,4 @@ const Unboarding = (props) => {
   );
 };
 
-export default Unboarding;
+export default Onboarding;

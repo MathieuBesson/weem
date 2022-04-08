@@ -4,7 +4,7 @@ import "./styles/app.scss";
 import { Route } from "react-router-dom";
 import Login from "./pages/authentication/Login";
 import Register from './pages/authentication/Register'
-import Unboarding from './pages/authentication/Unboarding'
+import Onboarding from './pages/authentication/Onboarding'
 import InscriptionChoice from "./pages/authentication/InscriptionChoice";
 import CarsInformation from "./pages/carsCreation/CarsInformation";
 import PartsPrincipalInformation from "./pages/carsCreation/PartsPrincipalInformation";
@@ -36,7 +36,7 @@ function App() {
       {/* <Login/> */}
       {/* <Register/> */}
 
-      {/* <Unboarding/> */}
+      {/* <Onboarding/> */}
 
       {/* <Home/> */}
       {/* <MaintenanceBook /> */}
