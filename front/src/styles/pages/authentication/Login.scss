@@ -61,13 +61,17 @@
 
     &__error-message {
         font-size: 0.75rem;
-        text-align: center;
+        text-align: left;
         color: red;
         margin-top: 0.5rem;
-        visibility: hidden;
+        display: none;
     }
     &__error-message.invalid {
-        visibility: visible;
+        display: block;
         margin-bottom: 1.5rem;
+    }
+
+    .btn-primary{
+        margin-top: 24px;
     }
 }

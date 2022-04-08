@@ -10,7 +10,7 @@ import MaintenanceHistoryItem from "./../../components/MaintenanceHistoryItem";
 
 const CompleteHistory = () => {
     return (
-        <div className="complete-history">
+        <main className="complete-history">
             <HeaderGoToBack>
                 Renseignements des pièces et des entretiens
             </HeaderGoToBack>
@@ -27,7 +27,7 @@ const CompleteHistory = () => {
                     style={{ maskImage: `url(${iconShare})` }}
                 ></span>
             </button>
-        </div>
+        </main>
     );
 };
 

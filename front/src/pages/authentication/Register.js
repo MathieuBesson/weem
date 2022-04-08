@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import eye from "../../assets/images/icons/eye-outline.webp";
 import bgImageWelcome from "./../../assets/images/background/background-welcome.webp";
+import { Link } from "react-router-dom";
+
 
 const Register = (props) => {
     const [enteredUsername, setEnteredUsername] = useState("");
@@ -57,7 +59,7 @@ const Register = (props) => {
     };
 
     return (
-        <div className="register bg-cover">
+        <main className="register bg-cover">
             <img className="bg-cover__img" src={bgImageWelcome} />
             <div>
                 <div className="register-title">S'inscrire</div>
@@ -119,9 +121,9 @@ const Register = (props) => {
 
                     <button className="btn btn-primary">S'inscrire</button>
                 </form>
-                <a className="btn btn-transparent">S'inscrire &nbsp;➜</a>
+                <Link to="/connexion" className="btn btn-transparent">Se connecter &nbsp;➜</Link>
             </div>
-        </div>
+        </main>
     );
 };
 

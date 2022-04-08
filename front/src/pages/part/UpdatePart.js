@@ -7,7 +7,7 @@ import HeaderGoToBack from "../../components/HeaderGotToBack";
 
 const UpdatePart = ({ create = true }) => {
     return (
-        <div className="update-part">
+        <main className="update-part">
             <HeaderGoToBack>
                 {create ? "Créer un pièece personnalisé" : "Modifier la pièce"}
             </HeaderGoToBack>
@@ -129,7 +129,7 @@ const UpdatePart = ({ create = true }) => {
                         : "Valider ces changements"}
                 </button>
             </form>
-        </div>
+        </main>
     );
 };
 

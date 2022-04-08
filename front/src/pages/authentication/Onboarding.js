@@ -6,21 +6,21 @@ const Onboarding = (props) => {
   const name = "Théo";
 
   return (
-    <div className="unboarding">
-      <div className="unboarding-title">
-        Bienvenue <span className="unboarding-title-name">{name}</span>
+    <main className="onboarding">
+      <div className="onboarding-title">
+        Bienvenue <span className="onboarding-title-name">{name}</span>
       </div>
 
-      <img className="unboarding-img" src={carsImg} />
+      <img className="onboarding-img" src={carsImg} />
 
-      <div className="unboarding-text">
+      <div className="onboarding-text">
         Pour commencer à utiliser l'application, vous devez d'abord créer votre
         premier véhicule ! Vous pourrez ensuite profiter pleinement des
         fonctionnalités de l'application.
       </div>
 
       <button className="btn btn-primary">Créer vorte premier véhicule</button>
-    </div>
+    </main>
   );
 };
 

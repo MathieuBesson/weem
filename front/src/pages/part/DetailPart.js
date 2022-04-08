@@ -11,7 +11,7 @@ import SpecialistRecommendation from "./../../components/SpecialistRecommendatio
 
 const DetailPart = ({ name }) => {
     return (
-        <div className="detail-part">
+        <main className="detail-part">
             <div className="detail-part__group-top">
                 <HeaderGoToBack>{name}</HeaderGoToBack>
                 <div className="detail-part__group-top-info">
@@ -49,7 +49,7 @@ const DetailPart = ({ name }) => {
                     Ajouter un nouveau changement
                 </button>
             </div>
-        </div>
+        </main>
     );
 };
 

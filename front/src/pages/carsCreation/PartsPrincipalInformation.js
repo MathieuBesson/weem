@@ -15,7 +15,7 @@ import HeaderGoToBack from "../../components/HeaderGotToBack";
 
 const PartsPrincipalInformation = () => {
     return (
-        <div className="parts-principal-information">
+        <main className="parts-principal-information">
             <HeaderGoToBack>Renseignements des pièces et des entretiens</HeaderGoToBack>
             <div className="parts-principal-information__part-recurrent">
                 <h3 className="parts-principal-information__part-recurrent-title">
@@ -85,7 +85,7 @@ const PartsPrincipalInformation = () => {
             </FlashMessage>
             <PartsDetailsPopUp title="Pneus avant" active={true} />
         */}
-        </div>
+        </main>
     );
 };
 

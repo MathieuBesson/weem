@@ -71,7 +71,9 @@
 }
 
 .btn-transparent,
-.btn-transparent:hover .btn-transparent:focus .btn-transparent:active {
+.btn-transparent:hover,
+.btn-transparent:focus,
+.btn-transparent:active {
     margin-top: 15px;
     color: $white-primary;
     border: 0;

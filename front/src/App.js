@@ -22,46 +22,53 @@ import NavBar from "./components/NavBar";
 import Car from "./pages/car/Car";
 
 function App() {
+
+
+  // Connecté ? 
+  // ---> OUI 
+    // ---> Home 
+  // ---> NON
+    // ---> Création du compte 
+
   return (
-    <main>
-      {/* <Route path="/e">
-        <InscriptionChoice />
+    <>
+    
+    <InscriptionChoice />
+    {/* <Route path="/e">
 
-      </Route>
+    </Route>
 
-      <Route path="/login">
-        <Login/>
-      </Route> */}
-      <InscriptionChoice />
-      {/* <Login/> */}
-      {/* <Register/> */}
+    <Route path="/login">
+      <Login/>
+    </Route> */}
+    {/* <InscriptionChoice /> */}
+    {/* <Login/> */}
+    {/* <Register/> */}
 
-      {/* <Onboarding/> */}
+    {/* <Onboarding/> */}
 
-      {/* <Home/> */}
-      {/* <MaintenanceBook /> */}
-      {/* <PartsPrincipalInformation /> */}
-      {/* <CarsInformation /> */}
-      {/* <CompleteHistory /> */}
-      {/* <MaintenanceUpcoming /> */}
+    {/* <Home/> */}
+    {/* <MaintenanceBook /> */}
+    {/* <PartsPrincipalInformation /> */}
+    {/* <CarsInformation /> */}
+    {/* <CompleteHistory /> */}
+    {/* <MaintenanceUpcoming /> */}
 
-      {/* <ListMaintenanceParts /> */}
-      {/* <UpdatePart /> */}
-      {/* <DetailPart name="Courroie de disctribution"/> */}
-      {/* <UpdateMaintenance /> */}
-      {/* <AddMaintenance /> */}
+    {/* <ListMaintenanceParts /> */}
+    {/* <UpdatePart /> */}
+    {/* <DetailPart name="Courroie de disctribution"/> */}
+    {/* <UpdateMaintenance /> */}
+    {/* <AddMaintenance /> */}
 
 
-        {/* <Car /> */}
-        {/* <CarSwitcher /> */}
-        {/* <NavBar /> */}
       {/* <Car /> */}
+      {/* <CarSwitcher /> */}
+      {/* <NavBar /> */}
+    {/* <Car /> */}
 
-      {/* <Login /> */}
-      {/* <Register/> */}
-    </main>
-    // <Welcome/>
-    // <DataCar/>
+    {/* <Login /> */}
+    {/* <Register/> */}
+    </>
   );
 }
 

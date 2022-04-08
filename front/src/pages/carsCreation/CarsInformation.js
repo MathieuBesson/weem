@@ -5,12 +5,12 @@ import UpdateCar from "./../../components/UpdateCar"
 
 const CarsInformation = () => {
     return (
-        <div className="car-informations">
+        <main className="car-informations">
             <h2 className="car-informations__title">
                 Renseignements du véhicule
             </h2>
             <UpdateCar />
-        </div>
+        </main>
     );
 };
 

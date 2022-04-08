@@ -10,7 +10,7 @@ import MaintenanceHistoryItem from "./../../components/MaintenanceHistoryItem";
 
 const UpdateMaintenance = () => {
     return (
-        <div className="update-maintenance">
+        <main className="update-maintenance">
             <HeaderGoToBack>Modifier le changement</HeaderGoToBack>
 
             <h2 className="update-maintenance__date">Changement du 02/08/2021</h2>
@@ -48,7 +48,7 @@ const UpdateMaintenance = () => {
                     </button>
                 </div>
             </form>
-        </div>
+        </main>
     );
 };
 

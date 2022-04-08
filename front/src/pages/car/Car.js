@@ -31,7 +31,7 @@ const Car = () => {
     const colorsList = ["yellow", "red", "green", "blue", "violet"];
 
     return (
-        <div className="car">
+        <main className="car">
             <h1 className="car__title">
                 Peugot 407
                 <span
@@ -114,7 +114,7 @@ const Car = () => {
                 </h2>
                 <UpdateCar />
             </div>
-        </div>
+        </main>
     );
 };
 

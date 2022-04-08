@@ -1,12 +1,13 @@
 import React from "react";
 import Logo from "../../assets/images/icons/logo.svg";
 import { BrowserRouter as Router } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import bgImageWelcome from "./../../assets/images/background/background-welcome.webp";
 
 const InscriptionChoice = () => {
     return (
-        <div className="inscription-choice bg-cover">
+        <main className="inscription-choice bg-cover">
             <img className="inscription-choice__bg bg-cover__img" src={bgImageWelcome} />
             <img
                 className="inscription-choice__logo"
@@ -24,10 +25,10 @@ const InscriptionChoice = () => {
                     importants
                 </div>
 
-                <button className="btn btn-primary">S'inscrire</button>
-                <button className="btn btn-thirdary">Se connecter</button>
+                <Link to="/inscription" className="btn btn-primary">S'inscrire</Link>
+                <Link to="/connexion" className="btn btn-thirdary">Se connecter</Link>
             </div>
-        </div>
+        </main>
     );
 };
 export default InscriptionChoice;

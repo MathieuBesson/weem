@@ -11,7 +11,7 @@ import MaintenanceHistory from "./../../components/MaintenanceHistory";
 
 const MaintenanceBook = () => {
     return (
-        <div className="maintenance-book">
+        <main className="maintenance-book">
             <header className="maintenance-book__header">
                 <h2 className="maintenance-book__header-title">
                     Votre carnet d'entretien
@@ -38,7 +38,7 @@ const MaintenanceBook = () => {
                     style={{ maskImage: `url(${iconShare})` }}
                 ></span>
             </button>
-        </div>
+        </main>
     );
 };
 

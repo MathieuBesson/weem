@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import eye from "../../assets/images/icons/eye-outline.webp";
 import bgImageWelcome from "./../../assets/images/background/background-welcome.webp";
+import { Link } from "react-router-dom";
 
 const Login = (props) => {
     const [enteredUsername, setEnteredUsername] = useState("");
@@ -37,11 +38,8 @@ const Login = (props) => {
     };
 
     return (
-        <div className="login bg-cover">
-            <img
-                className="bg-cover__img"
-                src={bgImageWelcome}
-            />
+        <main className="login bg-cover">
+            <img className="bg-cover__img" src={bgImageWelcome} />
 
             <div>
                 <div className="login-title">Se connecter</div>
@@ -71,6 +69,13 @@ const Login = (props) => {
                         </a>
                     </div>
 
+                    <div
+                        className={`login__error-message ${
+                            !isValid ? "invalid" : ""
+                        }`}
+                    >
+                        Téléphone / adresse mail ou mot de passe incorrect !
+                    </div>
                     <div className="login__forget-password">
                         <div className="login__forget-password-div">
                             <a
@@ -80,23 +85,14 @@ const Login = (props) => {
                                 Mot de passe oublié ?
                             </a>
                         </div>
-
-                        <div
-                            className={`login__error-message ${
-                                !isValid ? "invalid" : ""
-                            }`}
-                        >
-                            Téléphone / Adresse mail ou Mot de passe incorrect !
-                        </div>
-
-                        <a href="#" className="btn btn-primary">Se connecter</a>
-                        <a href="#" className="btn btn-transparent">
-                            S'inscrire &nbsp;➜
-                        </a>
                     </div>
+                    <button className="btn btn-primary">Se connecter</button>
+                    <Link to="/inscription" className="btn btn-transparent">
+                        S'inscrire &nbsp;➜
+                    </Link>
                 </form>
             </div>
-        </div>
+        </main>
     );
 };
 

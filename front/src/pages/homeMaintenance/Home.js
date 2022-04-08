@@ -14,7 +14,7 @@ import BlogPreview from "./../../components/BlogPreview"
 
 const Home = () => {
     return (
-        <div className="home">
+        <main className="home">
             <header className="home__header d-flex justify-content-between">
                 <h2 className="home__header-title">
                     <span>Bonjour,</span>
@@ -31,7 +31,7 @@ const Home = () => {
             <MaintenanceUpcomingPreview />
             <InvoicePreview carPartNames={['Pneus avants', 'Filtre à air']}/>
             <BlogPreview />
-        </div>
+        </main>
     );
 };
 
