@@ -13,6 +13,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use App\Entity\CarPartMaintenance; 
 use DateTimeInterface;
 
 /**
@@ -93,12 +94,6 @@ class CarPart extends AbstractCarStandardPart
 
     /**
      * @Groups({"carPart_read"})
-     * @ORM\OneToMany(targetEntity=CarPartMaintenance::class, mappedBy="carPart")
-     */
-    private $carPartMaintenances;
-
-    /**
-     * @Groups({"carPart_read"})
      * @ORM\ManyToOne(targetEntity=Car::class, inversedBy="carParts")
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotBlank(message="La pièce doit être lié à un voiture")
@@ -117,10 +112,11 @@ class CarPart extends AbstractCarStandardPart
      */
     private $futureChangeDate;
 
-    public function __construct()
-    {
-        $this->carPartMaintenances = new ArrayCollection();
-    }
+    /**
+     * @Groups({"carPart_read"})
+     * @ORM\OneToMany(targetEntity=CarPartMaintenance::class, mappedBy="carPart")
+     */
+    private $carPartMaintenances;
 
     public function getId(): ?int
     {
@@ -207,36 +203,6 @@ class CarPart extends AbstractCarStandardPart
     public function setCarStandardPart(?CarStandardPart $carStandardPart): self
     {
         $this->carStandardPart = $carStandardPart;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|CarPartMaintenance[]
-     */
-    public function getCarPartMaintenances(): Collection
-    {
-        return $this->carPartMaintenances;
-    }
-
-    public function addCarPartMaintenance(CarPartMaintenance $carPartMaintenance): self
-    {
-        if (!$this->carPartMaintenances->contains($carPartMaintenance)) {
-            $this->carPartMaintenances[] = $carPartMaintenance;
-            $carPartMaintenance->setCarPart($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCarPartMaintenance(CarPartMaintenance $carPartMaintenance): self
-    {
-        if ($this->carPartMaintenances->removeElement($carPartMaintenance)) {
-            // set the owning side to null (unless already changed)
-            if ($carPartMaintenance->getCarPart() === $this) {
-                $carPartMaintenance->setCarPart(null);
-            }
-        }
 
         return $this;
     }
@@ -345,5 +311,35 @@ class CarPart extends AbstractCarStandardPart
     public function getDaysBeforeFutureChange(): int
     {
         return (int) (new DateTime)->diff($this->futureChangeDate)->format("%m");
+    }
+
+    /**
+     * @return Collection|CarPartMaintenance[]
+     */
+    public function getCarPartMaintenances(): Collection
+    {
+        return $this->carPartMaintenances;
+    }
+
+    public function addCarPartMaintenance(CarPartMaintenance $carPartMaintenance): self
+    {
+        if (!$this->carPartMaintenances->contains($carPartMaintenance)) {
+            $this->carPartMaintenances[] = $carPartMaintenance;
+            $carPartMaintenance->setCarPart($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCarPartMaintenance(CarPartMaintenance $carPartMaintenance): self
+    {
+        if ($this->carPartMaintenances->removeElement($carPartMaintenance)) {
+            // set the owning side to null (unless already changed)
+            if ($carPartMaintenance->getCarPart() === $this) {
+                $carPartMaintenance->setCarPart(null);
+            }
+        }
+
+        return $this;
     }
 }

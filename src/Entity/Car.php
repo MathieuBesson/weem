@@ -53,9 +53,9 @@ class Car
     ];
 
     const DRIVING_STYLE_ID = [
-        'MODERATE' => 1,
-        'SPORTIVE' => 2,
-        'AGRESSIVE' => 3
+        'SOFT' => 1,
+        'NEUTRAL' => 2,
+        'SPORTIVE' => 3,
     ];
 
     const DRIVING_STYLE = [

@@ -9,6 +9,7 @@ use App\Repository\CarPartMaintenanceRepository;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use App\Entity\CarPart; 
 
 /**
  * @ApiResource(
@@ -47,17 +48,17 @@ class CarPartMaintenance
     private $dateLastChange;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $note;
+
+    /**
      * @Groups({"carPartMaintenance_read"})
-     * @ORM\ManyToOne(targetEntity=CarPart::class, inversedBy="carPartMaintenance")
+     * @ORM\ManyToOne(targetEntity=CarPart::class, inversedBy="carPartMaintenances")
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotBlank(message="L'entretien doit être lié à une voiture")
      */
     private $carPart;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $note;
 
     public function getId(): ?int
     {
@@ -88,17 +89,17 @@ class CarPartMaintenance
         return $this;
     }
 
-    public function getCarPart(): ?CarPart
-    {
-        return $this->carPart;
-    }
+    // public function getCarPart(): ?CarPart
+    // {
+    //     return $this->carPart;
+    // }
 
-    public function setCarPart(?CarPart $carPart): self
-    {
-        $this->carPart = $carPart;
+    // public function setCarPart(?CarPart $carPart): self
+    // {
+    //     $this->carPart = $carPart;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getNote(): ?string
     {
@@ -108,6 +109,18 @@ class CarPartMaintenance
     public function setNote(?string $note): self
     {
         $this->note = $note;
+
+        return $this;
+    }
+
+    public function getCarPart(): ?CarPart
+    {
+        return $this->carPart;
+    }
+
+    public function setCarPart(?CarPart $carPart): self
+    {
+        $this->carPart = $carPart;
 
         return $this;
     }
