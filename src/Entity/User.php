@@ -27,8 +27,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    // Minimum eight characters, at least one uppercase letter, one lowercase letter and one number
-    const REGEX_PASSWORD = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/"; 
+    // eight characters, at least one letter and one number
+    const REGEX_PASSWORD = "/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/"; 
     const REGEX_PHONE_NUMBER = "/^((\+)33|0)[1-9](\d{2}){4}$/";
 
     /**

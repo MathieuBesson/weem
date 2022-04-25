@@ -3,51 +3,71 @@ import eye from "../../assets/images/icons/eye-outline.webp";
 import bgImageWelcome from "./../../assets/images/background/background-welcome.webp";
 import { Link } from "react-router-dom";
 
-
 const Register = (props) => {
     const [enteredUsername, setEnteredUsername] = useState("");
     const [enteredNumberMail, setEnteredNumberMail] = useState("");
     const [enteredPassword, setEnteredPassword] = useState("");
     const [enteredConfirmPassword, setEnteredConfirmPassword] = useState("");
-    const [isValid, setIsValid] = useState(true);
+    const [isValid, setIsValid] = useState({
+        username: true,
+        numberMail: true,
+        password: true,
+        confirmPassword: true,
+    });
     const [passwordShown, setPasswordShown] = useState(false);
     const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
 
-    let username = "test";
+    const REGEX_MAIL = new RegExp("^[A-Za-z0-9+_.-]+@(.+)$");
+    const REGEX_PHONE_NUMBER = new RegExp("(0|(\\+33)|(0033))[1-9][0-9]{8}");
+    const REGEX_PASSWORD = new RegExp("^([A-Za-z]|[0-9]){8,}$");
+
+    const validOrNotInput = (condition, varName) => {
+        setIsValid({
+            ...isValid,
+            [varName]: condition,
+        });
+    };
 
     const usernameChangeHandler = (event) => {
-        if (event.target.value.trim().length > 0) {
-            setIsValid(true);
-        }
+        validOrNotInput(event.target.value.trim().length > 0, "username");
         setEnteredUsername(event.target.value);
     };
 
     const numberMailChangeHandler = (event) => {
-        if (event.target.value.trim().length > 0) {
-            setIsValid(true);
-        }
-        setEnteredNumberMail(event.target.value);
+        const numberMail = event.target.value.trim();
+        console.log(REGEX_MAIL.test(numberMail));
+        validOrNotInput(
+            REGEX_PHONE_NUMBER.test(numberMail) || REGEX_MAIL.test(numberMail),
+            "numberMail"
+        );
+        setEnteredNumberMail(numberMail);
     };
 
     const passwordChangeHandler = (event) => {
+        validOrNotInput(REGEX_PASSWORD.test(event.target.value), "password");
         setEnteredPassword(event.target.value);
     };
 
     const confirmPasswordChangeHandler = (event) => {
-        setEnteredConfirmPassword(event.target.value);
+        const confirmPassword = event.target.value;
+        validOrNotInput(
+            REGEX_PASSWORD.test(confirmPassword) &&
+                confirmPassword == enteredPassword,
+            "confirmPassword"
+        );
+        setEnteredConfirmPassword(confirmPassword);
     };
 
-    const formSubmitHandler = (event) => {
-        event.preventDefault();
-        if (enteredUsername !== username) {
-            setIsValid(false);
-            return console.log("Invalid");
-        }
+    const formSubmitHandler = (e) => {
+        e.preventDefault(); 
 
-        setEnteredUsername("");
-        setEnteredNumberMail("");
-        setEnteredPassword("");
-        setEnteredConfirmPassword("");
+        const allAreValid = Object.values(isValid).every(
+            (value, index, arr) => value === true && value !== ""
+        );
+
+        if(allAreValid){
+            // Save to Api and connect men 
+        }
     };
 
     const togglePassword = () => {
@@ -63,7 +83,7 @@ const Register = (props) => {
             <img className="bg-cover__img" src={bgImageWelcome} />
             <div>
                 <div className="register-title">S'inscrire</div>
-                <form onSubmit={formSubmitHandler}>
+                <form>
                     <div>
                         <input
                             type="text"
@@ -72,6 +92,13 @@ const Register = (props) => {
                             value={enteredUsername}
                             onChange={usernameChangeHandler}
                         />
+                        <p
+                            className={`register__error-message ${
+                                !isValid.username && "invalid"
+                            }`}
+                        >
+                            Votre nom doit faire au minimum 1 caractère
+                        </p>
                     </div>
 
                     <div>
@@ -82,46 +109,77 @@ const Register = (props) => {
                             value={enteredNumberMail}
                             onChange={numberMailChangeHandler}
                         />
+                        <p
+                            className={`register__error-message ${
+                                !isValid.numberMail && "invalid"
+                            }`}
+                        >
+                            Votre mail ou téléphone n'est pas valide
+                        </p>
                     </div>
                     <div className="register__password-div">
-                        <input
-                            type={passwordShown ? "text" : "password"}
-                            placeholder="Mot de passe *"
-                            className="register__input-box"
-                            value={enteredPassword}
-                            onChange={passwordChangeHandler}
-                        />
-                        <a
-                            onClick={togglePassword}
-                            className="register__password-div-password-shown"
-                        >
-                            <img src={eye} />
-                        </a>
+                        <div>
+                            <input
+                                type={passwordShown ? "text" : "password"}
+                                placeholder="Mot de passe *"
+                                className="register__input-box"
+                                value={enteredPassword}
+                                onChange={passwordChangeHandler}
+                            />
+
+                            <a
+                                onClick={togglePassword}
+                                className="register__password-div-password-shown"
+                            >
+                                <img className="eye" src={eye} />
+                            </a>
+                            <p
+                                className={`register__error-message ${
+                                    !isValid.password && "invalid"
+                                }`}
+                            >
+                                Votre mot de passe doit faire 8 caractère dont
+                                une lettre et un nombre
+                            </p>
+                        </div>
                     </div>
 
                     <div className="register__password-div">
-                        <input
-                            type={confirmPasswordShown ? "text" : "password"}
-                            placeholder="Confirmation du mot de passe *"
-                            className="register__input-box"
-                            value={enteredConfirmPassword}
-                            onChange={confirmPasswordChangeHandler}
-                        />
-                        <a
-                            onClick={toggleConfirmPassword}
-                            className="register__password-div-password-shown"
-                        >
-                            <img src={eye} />
-                        </a>
+                        <div>
+                            <input
+                                type={
+                                    confirmPasswordShown ? "text" : "password"
+                                }
+                                placeholder="Confirmation du mot de passe *"
+                                className="register__input-box"
+                                value={enteredConfirmPassword}
+                                onChange={confirmPasswordChangeHandler}
+                            />
+                            <a
+                                onClick={toggleConfirmPassword}
+                                className="register__password-div-password-shown"
+                            >
+                                <img className="eye" src={eye} />
+                            </a>
+                            <p
+                                className={`register__error-message ${
+                                    !isValid.confirmPassword && "invalid"
+                                }`}
+                            >
+                                La confirmation du mot de passe doit être identique au mot de passe
+                            </p>
+                        </div>
                     </div>
 
                     <a href="#" className="register__password-forgot-password">
                         Mot de passe oublié ?
                     </a>
 
-                    <button className="btn btn-primary">S'inscrire</button>
+                    <button className="btn btn-primary" onClick={formSubmitHandler}>S'inscrire</button>
                 </form>
-                <Link to="/connexion" className="btn btn-transparent">Se connecter &nbsp;➜</Link>
+                <Link to="/connexion" className="btn btn-transparent">
+                    Se connecter &nbsp;➜
+                </Link>
             </div>
         </main>
     );

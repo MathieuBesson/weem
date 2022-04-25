@@ -22,14 +22,6 @@ import NavBar from "./components/NavBar";
 import Car from "./pages/car/Car";
 
 function App() {
-
-
-  // Connecté ? 
-  // ---> OUI 
-    // ---> Home 
-  // ---> NON
-    // ---> Création du compte 
-
   return (
     <>
     
