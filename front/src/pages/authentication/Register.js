@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import eye from "../../assets/images/icons/eye-outline.webp";
 import bgImageWelcome from "./../../assets/images/background/background-welcome.webp";
 import { Link } from "react-router-dom";
+import { register } from "../../utils/api.js";
 
 const Register = (props) => {
+    console.log(register);
     const [enteredUsername, setEnteredUsername] = useState("");
     const [enteredNumberMail, setEnteredNumberMail] = useState("");
     const [enteredPassword, setEnteredPassword] = useState("");
@@ -29,7 +31,7 @@ const Register = (props) => {
     };
 
     const usernameChangeHandler = (event) => {
-        validOrNotInput(event.target.value.trim().length > 0, "username");
+        validOrNotInput(event.target.value.trim().length > 3, "username");
         setEnteredUsername(event.target.value);
     };
 
@@ -59,14 +61,24 @@ const Register = (props) => {
     };
 
     const formSubmitHandler = (e) => {
-        e.preventDefault(); 
+        e.preventDefault();
 
         const allAreValid = Object.values(isValid).every(
             (value, index, arr) => value === true && value !== ""
         );
 
-        if(allAreValid){
-            // Save to Api and connect men 
+        if (allAreValid) {
+            // Save to Api and connect men
+            register(
+                enteredUsername,
+                enteredPassword,
+                REGEX_PHONE_NUMBER.test(enteredNumberMail)
+                    ? enteredNumberMail
+                    : null,
+                REGEX_MAIL.test(enteredNumberMail) ? enteredNumberMail : null
+            ).then(
+                login(enteredUsername, )
+            );
         }
     };
 
@@ -166,7 +178,8 @@ const Register = (props) => {
                                     !isValid.confirmPassword && "invalid"
                                 }`}
                             >
-                                La confirmation du mot de passe doit être identique au mot de passe
+                                La confirmation du mot de passe doit être
+                                identique au mot de passe
                             </p>
                         </div>
                     </div>
@@ -175,7 +188,12 @@ const Register = (props) => {
                         Mot de passe oublié ?
                     </a>
 
-                    <button className="btn btn-primary" onClick={formSubmitHandler}>S'inscrire</button>
+                    <button
+                        className="btn btn-primary"
+                        onClick={formSubmitHandler}
+                    >
+                        S'inscrire
+                    </button>
                 </form>
                 <Link to="/connexion" className="btn btn-transparent">
                     Se connecter &nbsp;➜
