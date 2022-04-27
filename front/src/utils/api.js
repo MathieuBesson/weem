@@ -1,25 +1,29 @@
-const defaultHeaders =  new Headers({
+import { post } from "./request";
+
+const defaultHeaders = new Headers({
     "Content-Type": "application/json",
-}); 
+});
 
-export function register(username, password, number = null, mail = null) {
-
-    var raw = JSON.stringify({
+export const register = (username, password, number = null, mail = null) => {
+    return post("http://weem.com/api/users", {
         email: mail,
         password: password,
         name: username,
         phone: number,
+    }).then((result) => {
+        login(mail, password);
     });
+};
 
-    var requestOptions = {
-        method: "POST",
-        headers: defaultHeaders,
-        body: raw,
-        redirect: "follow",
-    };
+export const login = (username, password) => {
+    return post("http://weem.com/api/login_check", {
+        username: username,
+        password: password,
+    }).then((result) => {
+        // On sauvegarde le token 
 
-    fetch("http://weem.com/api/users", requestOptions)
-        .then((response) => response.json())
-        .then((result) => console.log(result))
-        .catch((error) => console.log("error", error));
-}
+        // On récupère les infos du premier véhicule s'il existe 
+
+        // + les infos du user 
+    });
+};

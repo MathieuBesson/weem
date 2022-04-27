@@ -10,6 +10,7 @@ import {
 
 import Login from './pages/authentication/Login'
 import Register from "./pages/authentication/Register";
+import Onboarding from "./pages/authentication/Onboarding";
 
 const startApp = () => {
     ReactDOM.render(
@@ -18,6 +19,7 @@ const startApp = () => {
                 <Route exact path="/" element={<App />} />
                 <Route path="connexion" element={<Login />} />
                 <Route path="inscription" element={<Register />} />
+                <Route path="onboarding" element={<Onboarding />} />
             </Routes>
         </BrowserRouter>,
         document.getElementById("root")

@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import eye from "../../assets/images/icons/eye-outline.webp";
 import bgImageWelcome from "./../../assets/images/background/background-welcome.webp";
 import { Link } from "react-router-dom";
-import { register } from "../../utils/api.js";
+import { register, login } from "../../utils/api";
+import { useNavigate } from "react-router-dom";
 
 const Register = (props) => {
-    console.log(register);
+    const navigate = useNavigate();
     const [enteredUsername, setEnteredUsername] = useState("");
     const [enteredNumberMail, setEnteredNumberMail] = useState("");
     const [enteredPassword, setEnteredPassword] = useState("");
@@ -18,6 +19,7 @@ const Register = (props) => {
     });
     const [passwordShown, setPasswordShown] = useState(false);
     const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
+    const [errorApi, setErrorApi] = useState("");
 
     const REGEX_MAIL = new RegExp("^[A-Za-z0-9+_.-]+@(.+)$");
     const REGEX_PHONE_NUMBER = new RegExp("(0|(\\+33)|(0033))[1-9][0-9]{8}");
@@ -64,11 +66,15 @@ const Register = (props) => {
         e.preventDefault();
 
         const allAreValid = Object.values(isValid).every(
-            (value, index, arr) => value === true && value !== ""
+            (value, index, arr) => value === true
         );
 
-        if (allAreValid) {
-            // Save to Api and connect men
+        const allAreNotEmpty = [enteredUsername, enteredNumberMail, enteredPassword].every(
+            (value, index, arr) => value !== ""
+        );
+
+        if (allAreValid && allAreNotEmpty) {
+            // Save to Api and connect user
             register(
                 enteredUsername,
                 enteredPassword,
@@ -76,9 +82,13 @@ const Register = (props) => {
                     ? enteredNumberMail
                     : null,
                 REGEX_MAIL.test(enteredNumberMail) ? enteredNumberMail : null
-            ).then(
-                login(enteredUsername, )
-            );
+            ).catch((response) => {
+                response.json().then((json) => {setErrorApi(json.violations[0].message)});
+            }).then(() => {
+                setErrorApi('');
+                // Redirect to Onboarding
+                navigate("/onboarding");
+            })
         }
     };
 
@@ -96,6 +106,7 @@ const Register = (props) => {
             <div>
                 <div className="register-title">S'inscrire</div>
                 <form>
+                    {errorApi}
                     <div>
                         <input
                             type="text"
