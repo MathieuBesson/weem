@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, Component } from "react";
 import eye from "../../assets/images/icons/eye-outline.webp";
 import bgImageWelcome from "./../../assets/images/background/background-welcome.webp";
 import { Link } from "react-router-dom";
-import { register, login } from "../../utils/api";
+import { useFetch } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 
 const Register = (props) => {
+    const REGEX_MAIL = new RegExp("^[A-Za-z0-9+_.-]+@(.+)$");
+    const REGEX_PHONE_NUMBER = new RegExp("(0|(\\+33)|(0033))[1-9][0-9]{8}");
+    const REGEX_PASSWORD = new RegExp("^([A-Za-z]|[0-9]){8,}$");
+
     const navigate = useNavigate();
     const [enteredUsername, setEnteredUsername] = useState("");
     const [enteredNumberMail, setEnteredNumberMail] = useState("");
@@ -19,11 +23,27 @@ const Register = (props) => {
     });
     const [passwordShown, setPasswordShown] = useState(false);
     const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
-    const [errorApi, setErrorApi] = useState("");
+    const [isRegistrationLaunchOk, setIsRegistrationLaunchOk] = useState(false);
 
-    const REGEX_MAIL = new RegExp("^[A-Za-z0-9+_.-]+@(.+)$");
-    const REGEX_PHONE_NUMBER = new RegExp("(0|(\\+33)|(0033))[1-9][0-9]{8}");
-    const REGEX_PASSWORD = new RegExp("^([A-Za-z]|[0-9]){8,}$");
+    const registration = useFetch({
+        endpoint: "register",
+        launchRequest: isRegistrationLaunchOk,
+        dataBody: {
+            email: enteredNumberMail,
+            password: enteredPassword,
+            name: enteredUsername,
+        },
+    });
+
+    useEffect(() => {
+        if (registration.isSucceed) {
+            navigate("/onboarding");
+        }
+
+        if(registration.error !== null){
+            setIsRegistrationLaunchOk(false)
+        }
+    }, [registration.queryCounter]);
 
     const validOrNotInput = (condition, varName) => {
         setIsValid({
@@ -39,7 +59,6 @@ const Register = (props) => {
 
     const numberMailChangeHandler = (event) => {
         const numberMail = event.target.value.trim();
-        console.log(REGEX_MAIL.test(numberMail));
         validOrNotInput(
             REGEX_PHONE_NUMBER.test(numberMail) || REGEX_MAIL.test(numberMail),
             "numberMail"
@@ -66,30 +85,15 @@ const Register = (props) => {
         e.preventDefault();
 
         const allAreValid = Object.values(isValid).every(
-            (value, index, arr) => value === true
+            (value) => value === true
         );
+        const allAreNotEmpty = [
+            enteredUsername,
+            enteredNumberMail,
+            enteredPassword,
+        ].every((value) => value !== "");
 
-        const allAreNotEmpty = [enteredUsername, enteredNumberMail, enteredPassword].every(
-            (value, index, arr) => value !== ""
-        );
-
-        if (allAreValid && allAreNotEmpty) {
-            // Save to Api and connect user
-            register(
-                enteredUsername,
-                enteredPassword,
-                REGEX_PHONE_NUMBER.test(enteredNumberMail)
-                    ? enteredNumberMail
-                    : null,
-                REGEX_MAIL.test(enteredNumberMail) ? enteredNumberMail : null
-            ).catch((response) => {
-                response.json().then((json) => {setErrorApi(json.violations[0].message)});
-            }).then(() => {
-                setErrorApi('');
-                // Redirect to Onboarding
-                navigate("/onboarding");
-            })
-        }
+        setIsRegistrationLaunchOk(allAreValid && allAreNotEmpty);
     };
 
     const togglePassword = () => {
@@ -106,7 +110,7 @@ const Register = (props) => {
             <div>
                 <div className="register-title">S'inscrire</div>
                 <form>
-                    {errorApi}
+                    {registration.error}
                     <div>
                         <input
                             type="text"

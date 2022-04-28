@@ -2,19 +2,27 @@ const defaultHeaders = new Headers({
     "Content-Type": "application/json",
 });
 
-export const post = (url, data, headers = {}) => {
+export const request = (url, method, data = {}, headers = {}) => {
     for (const headerKey in headers) {
         defaultHeaders.append(headerKey, headers[headerKey]);
     }
 
     var requestOptions = {
-        method: "POST",
+        method: method,
         headers: defaultHeaders,
         body: JSON.stringify(data),
         redirect: "follow",
     };
 
     return fetch(url, requestOptions).then((response) =>
-        !response.ok ? Promise.reject(response) : response.json()
+    {
+        // console.log(response.text())
+        if(!response.ok){
+            return response.json().then(json => { throw new Error(JSON.stringify(json)) })
+        } else {
+            return response; 
+        }
+        // return !response.ok ? Promise.reject(response) : response.json()
+    }
     );
 };

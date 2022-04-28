@@ -3,8 +3,8 @@ import "./styles/app.scss";
 
 import { Route } from "react-router-dom";
 import Login from "./pages/authentication/Login";
-import Register from './pages/authentication/Register'
-import Onboarding from './pages/authentication/Onboarding'
+import Register from "./pages/authentication/Register";
+import Onboarding from "./pages/authentication/Onboarding";
 import InscriptionChoice from "./pages/authentication/InscriptionChoice";
 import CarsInformation from "./pages/carsCreation/CarsInformation";
 import PartsPrincipalInformation from "./pages/carsCreation/PartsPrincipalInformation";
@@ -22,46 +22,44 @@ import NavBar from "./components/NavBar";
 import Car from "./pages/car/Car";
 
 function App() {
-  return (
-    <>
-    
-    <InscriptionChoice />
-    {/* <Route path="/e">
+    return (
+        <>
+            <InscriptionChoice />
+            {/* <Route path="/e">
 
     </Route>
 
     <Route path="/login">
       <Login/>
     </Route> */}
-    {/* <InscriptionChoice /> */}
-    {/* <Login/> */}
-    {/* <Register/> */}
+            {/* <InscriptionChoice /> */}
+            {/* <Login/> */}
+            {/* <Register/> */}
 
-    {/* <Onboarding/> */}
+            {/* <Onboarding/> */}
 
-    {/* <Home/> */}
-    {/* <MaintenanceBook /> */}
-    {/* <PartsPrincipalInformation /> */}
-    {/* <CarsInformation /> */}
-    {/* <CompleteHistory /> */}
-    {/* <MaintenanceUpcoming /> */}
+            {/* <Home/> */}
+            {/* <MaintenanceBook /> */}
+            {/* <PartsPrincipalInformation /> */}
+            {/* <CarsInformation /> */}
+            {/* <CompleteHistory /> */}
+            {/* <MaintenanceUpcoming /> */}
 
-    {/* <ListMaintenanceParts /> */}
-    {/* <UpdatePart /> */}
-    {/* <DetailPart name="Courroie de disctribution"/> */}
-    {/* <UpdateMaintenance /> */}
-    {/* <AddMaintenance /> */}
+            {/* <ListMaintenanceParts /> */}
+            {/* <UpdatePart /> */}
+            {/* <DetailPart name="Courroie de disctribution"/> */}
+            {/* <UpdateMaintenance /> */}
+            {/* <AddMaintenance /> */}
 
+            {/* <Car /> */}
+            {/* <CarSwitcher /> */}
+            {/* <NavBar /> */}
+            {/* <Car /> */}
 
-      {/* <Car /> */}
-      {/* <CarSwitcher /> */}
-      {/* <NavBar /> */}
-    {/* <Car /> */}
-
-    {/* <Login /> */}
-    {/* <Register/> */}
-    </>
-  );
+            {/* <Login /> */}
+            {/* <Register/> */}
+        </>
+    );
 }
 
 export default App;

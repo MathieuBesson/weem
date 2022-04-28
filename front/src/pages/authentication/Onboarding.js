@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 import carsImg from "../../assets/images/background/car-with-mountain.jpg";
 
 const Onboarding = (props) => {
   const name = "Théo";
+
+  const user = useSelector((state) => console.log(JSON.stringify(state.user)))
 
   return (
     <main className="onboarding">
