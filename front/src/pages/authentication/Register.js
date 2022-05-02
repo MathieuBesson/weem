@@ -4,6 +4,8 @@ import bgImageWelcome from "./../../assets/images/background/background-welcome.
 import { Link } from "react-router-dom";
 import { useFetch } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setToken } from "./../../store/store";
 
 const Register = (props) => {
     const REGEX_MAIL = new RegExp("^[A-Za-z0-9+_.-]+@(.+)$");
@@ -11,6 +13,7 @@ const Register = (props) => {
     const REGEX_PASSWORD = new RegExp("^([A-Za-z]|[0-9]){8,}$");
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [enteredUsername, setEnteredUsername] = useState("");
     const [enteredNumberMail, setEnteredNumberMail] = useState("");
     const [enteredPassword, setEnteredPassword] = useState("");
@@ -24,6 +27,7 @@ const Register = (props) => {
     const [passwordShown, setPasswordShown] = useState(false);
     const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
     const [isRegistrationLaunchOk, setIsRegistrationLaunchOk] = useState(false);
+    const [isLoginLaunchOk, setIsLoginLaunchOk] = useState(false);
 
     const registration = useFetch({
         endpoint: "register",
@@ -35,15 +39,29 @@ const Register = (props) => {
         },
     });
 
-    useEffect(() => {
-        if (registration.isSucceed) {
-            navigate("/onboarding");
-        }
+    const login = useFetch({
+        endpoint: "login",
+        launchRequest: isLoginLaunchOk,
+        dataBody: {
+            username: enteredNumberMail,
+            password: enteredPassword
+        },
+    });
 
+    useEffect(() => {
         if(registration.error !== null){
             setIsRegistrationLaunchOk(false)
         }
-    }, [registration.queryCounter]);
+        
+        if(registration.isSucceed){
+            setIsLoginLaunchOk(true);
+        }
+
+        if(login.isSucceed){
+            dispatch(setToken(login.data.token))
+            navigate("/onboarding");
+        }
+    }, [registration.queryCounter, login.isSucceed]);
 
     const validOrNotInput = (condition, varName) => {
         setIsValid({

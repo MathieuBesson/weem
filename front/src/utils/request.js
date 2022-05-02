@@ -10,9 +10,13 @@ export const request = (url, method, data = {}, headers = {}) => {
     var requestOptions = {
         method: method,
         headers: defaultHeaders,
-        body: JSON.stringify(data),
         redirect: "follow",
     };
+
+    console.log(data!== {})
+    if(data !== null && Object.keys(data).length !== 0){
+        requestOptions.body = JSON.stringify(data); 
+    }
 
     return fetch(url, requestOptions).then((response) =>
     {

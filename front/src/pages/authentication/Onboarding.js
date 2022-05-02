@@ -6,7 +6,7 @@ import carsImg from "../../assets/images/background/car-with-mountain.jpg";
 const Onboarding = (props) => {
   const name = "Théo";
 
-  const user = useSelector((state) => console.log(JSON.stringify(state.user)))
+  const user = useSelector((state) => console.log(JSON.stringify(state.user), JSON.stringify(state.constantes)))
 
   return (
     <main className="onboarding">

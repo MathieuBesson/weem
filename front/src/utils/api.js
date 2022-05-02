@@ -1,12 +1,19 @@
 import { request } from "./request";
 import { useSelector, useDispatch } from "react-redux";
-import { setToken } from "./../store/store";
 import { useState, useEffect } from "react";
 
 export const apiEndPoint = {
     register: {
         method: "POST",
         url: "http://weem.com/api/users",
+    },
+    login: {
+        method: "POST",
+        url: "http://weem.com/api/login_check",
+    },
+    constantes: {
+        method: "GET",
+        url: "http://weem.com/api/constantes",
     },
 };
 
@@ -44,14 +51,13 @@ export const useFetch = ({ endpoint, launchRequest, dataQuery, dataBody}) => {
                     console.log("DO REQUEST");
                     const url = generateUrl(endPointInfo.url, dataQuery);
                     const res = await request(url, endPointInfo.method, dataBody);
-                    const resJson = await res.json();
-                    setData(resJson);
-                    dispatch(setToken("fgdf"))
+                    setData(await res.json());
                     setError(null);
                     setIsSucced(true);
                     setQueryCounter(queryCounter + 1); 
                 } catch (err) {
-                    setError(JSON.parse(err.message).violations[0].message);
+                    console.log(err.message)
+                    // setError(JSON.parse(err.message).violations[0].message);
                     setData({});
                     setIsSucced(false);
                     setQueryCounter(queryCounter + 1); 

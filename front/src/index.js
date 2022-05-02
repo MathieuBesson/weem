@@ -15,10 +15,7 @@ const startApp = () => {
         <Provider store={store}>
             <BrowserRouter>
                 <Routes>
-                    <Route exact path="/" element={<App />} />
-                    <Route path="connexion" element={<Login />} />
-                    <Route path="inscription" element={<Register />} />
-                    <Route path="onboarding" element={<Onboarding />} />
+                    <Route path="*" element={<App />}></Route>
                 </Routes>
             </BrowserRouter>
         </Provider>,
