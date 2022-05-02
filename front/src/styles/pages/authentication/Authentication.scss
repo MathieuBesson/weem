@@ -1,4 +1,4 @@
-.register {
+.authentication {
     display: flex;
     flex-direction: column;
     justify-content: end;
@@ -12,7 +12,7 @@
     &-title {
         font-size: $font-size-mega-large;
         font-weight: $font-weight-bold;
-        margin-bottom: 1rem;
+        margin-bottom: 1.2rem;
     }
 
     &__input-box {
@@ -30,28 +30,26 @@
         }
     }
 
-    &__password {
-        &-div {
-            display: flex;
+    &__password-div {
 
-            &-password-shown {
-                margin-left: 16.5rem;
-                margin-top: 0.5rem;
-                // background-color: blue
-                right: 53px;
-                position: absolute;
-            }
-            .eye{
-                cursor: pointer;
-            }
+        &-password-shown {
+            margin-left: 16.5rem;
+            margin-top: 0.5rem;
+            right: 53px;
+            position: absolute;
         }
-        &-forgot-password{
-          color: $white-primary;
-          font-size: $font-size-small;
-          font-weight: $font-weight-normal;
-          float:right;
-          margin-top: 12px;
+        .eye {
+            cursor: pointer;
         }
+
+    }
+    
+    &__forgot-password {
+        color: $white-primary;
+        font-size: $font-size-small;
+        font-weight: $font-weight-normal;
+        float: right;
+        margin-top: 12px;
     }
 
     &__error-message {
@@ -69,8 +67,8 @@
             height: 100%;
         }
     }
-    
-    .btn-primary{
-      margin-top: 24px;
+
+    .btn-primary {
+        margin-top: 24px;
     }
 }

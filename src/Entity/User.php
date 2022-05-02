@@ -28,8 +28,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     // eight characters, at least one letter and one number
-    const REGEX_PASSWORD = "/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/"; 
-    const REGEX_PHONE_NUMBER = "/^((\+)33|0)[1-9](\d{2}){4}$/";
+    const REGEX_PASSWORD = "^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"; 
+    const REGEX_PHONE_NUMBER = "^((\+)33|0)[1-9](\d{2}){4}$";
+    const REGEX_MAIL = "^[A-Za-z0-9+_.-]+@(.+)$";
+
+    const REGEX_PASSWORD_PHP = '/' . self::REGEX_PASSWORD . '/';
+    const REGEX_PHONE_NUMBER_PHP = '/' . self::REGEX_PHONE_NUMBER . '/';
+    const REGEX_MAIL_PHP = '/' . self::REGEX_MAIL . '/';
 
     /**
      * @Groups({"users_read"})
@@ -57,7 +62,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      * @ORM\Column(type="string")
      * @Assert\Regex(
-     *     pattern=User::REGEX_PASSWORD,
+     *     pattern=User::REGEX_PASSWORD_PHP,
      *     match=true,
      *     message="Le mot de passe doit être une chaine au format valide"
      * )
@@ -82,7 +87,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Groups({"users_read"})
      * @ORM\Column(type="string", length=100, nullable=true)
      * @Assert\Regex(
-     *     pattern=User::REGEX_PHONE_NUMBER,
+     *     pattern=User::REGEX_PHONE_NUMBER_PHP,
      *     match=true,
      *     message="Votre numéro de téléphone doit être une chaine au format valide"
      * )
