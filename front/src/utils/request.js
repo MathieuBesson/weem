@@ -1,10 +1,18 @@
-const defaultHeaders = new Headers({
+let defaultHeaders = new Headers({
     "Content-Type": "application/json",
 });
 
-export const request = (url, method, data = {}, headers = {}) => {
+export const request = ({url, method, token = null, data = {}, headers = {}}) => {
     for (const headerKey in headers) {
         defaultHeaders.append(headerKey, headers[headerKey]);
+    }
+
+    console.log(defaultHeaders)
+    if(token !== null){
+        defaultHeaders = new Headers({
+            "Authorization": "Bearer " + token,
+            ...defaultHeaders
+        });
     }
 
     var requestOptions = {
@@ -13,7 +21,7 @@ export const request = (url, method, data = {}, headers = {}) => {
         redirect: "follow",
     };
 
-    console.log(data!== {})
+    console.log(data)
     if(data !== null && Object.keys(data).length !== 0){
         requestOptions.body = JSON.stringify(data); 
     }

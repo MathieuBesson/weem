@@ -17,8 +17,11 @@ Pour récupérer des pièces, changements (maintenance) il faut préciser la voi
 
 - [X] Route de récupération des constantes
 	- GET /api/constantes
-- [X] Si l'user connecté -> récupération des infos du premier véhicule 
-	- GET /api/cars?count=1
+- [X] Si l'user connecté 
+	-> récupération des infos du premier véhicule
+		- GET /api/cars?count=1
+	-> récupération des infos de l'user
+		- GET /api/users/connected
 
 ### SE CONNECTER : 
 

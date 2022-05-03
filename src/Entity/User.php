@@ -15,8 +15,18 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
- *  itemOperations={"GET"},
- *  collectionOperations={"GET", "POST"},
+ *  itemOperations={
+ *      "GET"
+ *  },
+ *  collectionOperations={"GET", "POST",
+ *      "connected_user"={
+ *          "method"="get", 
+ *          "path"="/users/connected", 
+ *          "controller"="App\Controller\UserController",
+ *          "defaults"={"identifiedBy"="id"},
+ *          "read"=false
+ *      }
+ * },
  *  normalizationContext={
  *      "groups"={"users_read"}
  *  },

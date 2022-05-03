@@ -3,15 +3,13 @@ import { useSelector } from "react-redux";
 
 import carsImg from "../../assets/images/background/car-with-mountain.jpg";
 
-const Onboarding = (props) => {
-  const name = "Théo";
-
-  const user = useSelector((state) => console.log(JSON.stringify(state.user), JSON.stringify(state.constantes)))
+const Onboarding = () => {
+  const username = useSelector((state) => state.user.datas.name)
 
   return (
     <main className="onboarding">
       <div className="onboarding-title">
-        Bienvenue <span className="onboarding-title-name">{name}</span>
+        Bienvenue <span className="onboarding-title-name">{username}</span>
       </div>
 
       <img className="onboarding-img" src={carsImg} />

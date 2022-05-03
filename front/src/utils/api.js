@@ -6,14 +6,22 @@ export const apiEndPoint = {
     register: {
         method: "POST",
         url: "http://weem.com/api/users",
+        tokenRequired: false,
     },
     login: {
         method: "POST",
         url: "http://weem.com/api/login_check",
+        tokenRequired: false,
     },
     constantes: {
         method: "GET",
         url: "http://weem.com/api/constantes",
+        tokenRequired: false,
+    },
+    userConnected: {
+        method: "GET",
+        url: "http://weem.com/api/users/connected",
+        tokenRequired: true,
     },
 };
 
@@ -35,31 +43,37 @@ const generateUrl = (url, dataQuery = null) => {
     return url;
 };
 
-export const useFetch = ({ endpoint, launchRequest, dataQuery, dataBody}) => {
+export const useFetch = ({ endpoint, launchRequest, dataQuery, dataBody }) => {
     const [data, setData] = useState({});
     const [error, setError] = useState(null);
     const [isSucceed, setIsSucced] = useState(false);
     const [queryCounter, setQueryCounter] = useState(0);
     const dispatch = useDispatch();
+    const token = useSelector((state) => state.user.token);
 
-    const endPointInfo = apiEndPoint[endpoint]; 
+    const endPointInfo = apiEndPoint[endpoint];
 
     useEffect(() => {
         if (launchRequest) {
             (async () => {
                 try {
-                    console.log("DO REQUEST");
-                    const url = generateUrl(endPointInfo.url, dataQuery);
-                    const res = await request(url, endPointInfo.method, dataBody);
+                    console.log("DO REQUEST : " + endPointInfo.url);
+                    const res = await request({
+                        url: generateUrl(endPointInfo.url, dataQuery),
+                        method: endPointInfo.method,
+                        data: dataBody,
+                        token: token,
+                    });
                     setData(await res.json());
                     setError(null);
                     setIsSucced(true);
-                    setQueryCounter(queryCounter + 1); 
+                    setQueryCounter(queryCounter + 1);
                 } catch (err) {
+                    console.log(err.message);
                     setError(err.message);
                     setData({});
                     setIsSucced(false);
-                    setQueryCounter(queryCounter + 1); 
+                    setQueryCounter(queryCounter + 1);
                 }
             })();
         }

@@ -5,7 +5,7 @@ const userSlice = createSlice({
     name: "user",
     initialState: {
         token: "",
-        user: {},
+        datas: {},
     },
     reducers: {
         setToken (state, action){
@@ -18,6 +18,15 @@ const userSlice = createSlice({
                 token: action.payload
             }
             return state; 
+        }, 
+        setUserDatas (state, action){
+            console.log('On set le state')
+            console.log(action.payload); 
+            state = {
+                ...state, 
+                datas: action.payload
+            }
+            return state; 
         }
     }
 });
@@ -28,8 +37,6 @@ const constantesSlice = createSlice({
     initialState: {},
     reducers: {
         setConstantes (state, action){
-            console.log('On set le state')
-            console.log(action.payload); 
             state = {...action.payload}
             return state; 
         }
@@ -44,5 +51,5 @@ export const store = configureStore({
     }
 })
 
-export const {setToken} = userSlice.actions; 
+export const {setToken, setUserDatas} = userSlice.actions; 
 export const {setConstantes} = constantesSlice.actions; 

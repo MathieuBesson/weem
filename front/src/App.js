@@ -22,9 +22,9 @@ import NavBar from "./components/NavBar";
 import Car from "./pages/car/Car";
 
 import { useFetch } from "./utils/api";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { setConstantes, setToken } from "./store/store";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setConstantes, setToken, setUserDatas } from "./store/store";
 import { Routes, Route } from "react-router-dom";
 import { useGetAuthToken } from "./utils/auth";
 import { ROUTES } from "./utils/routes";
@@ -34,18 +34,36 @@ function App() {
         endpoint: "constantes",
         launchRequest: true,
     });
+
+    const [isLaunchRequestUser, setIsLaunchRequestUser] = useState(false);
+    const user = useFetch({
+        endpoint: "userConnected",
+        launchRequest: isLaunchRequestUser,
+    });
     const dispatch = useDispatch();
     const { haveStateToken, haveCookieToken, cookieToken } = useGetAuthToken();
+    const token = useSelector((state) => state.user.token)
 
     useEffect(() => {
-        // Save token in state if have token in cookies
-        console.log(haveCookieToken);
-        if (!haveStateToken && haveCookieToken) {
-            dispatch(setToken(cookieToken));
-        }
         // Load const of application
         dispatch(setConstantes(constanteRequest.data));
     }, [constanteRequest.data]);
+
+    useEffect(() => {
+        // Save token in state if have token in cookies
+        if (!haveStateToken && haveCookieToken) {
+            dispatch(setToken(cookieToken));
+            setIsLaunchRequestUser(true); 
+        }
+    }, [token]);
+
+
+    useEffect(() => {
+        // Save users datas in store
+        if(user.data !== {}){
+            dispatch(setUserDatas(user.data));
+        }
+    }, [user.data]);
 
     return (
         <>
