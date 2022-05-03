@@ -27,6 +27,7 @@ import { useDispatch } from "react-redux";
 import { setConstantes, setToken } from "./store/store";
 import { Routes, Route } from "react-router-dom";
 import { useGetAuthToken } from "./utils/auth";
+import { ROUTES } from "./utils/routes";
 
 function App() {
     const constanteRequest = useFetch({
@@ -34,12 +35,12 @@ function App() {
         launchRequest: true,
     });
     const dispatch = useDispatch();
-    const {haveStateToken, haveCookieToken, cookieToken} = useGetAuthToken(); 
+    const { haveStateToken, haveCookieToken, cookieToken } = useGetAuthToken();
 
     useEffect(() => {
         // Save token in state if have token in cookies
         console.log(haveCookieToken);
-        if(!haveStateToken && haveCookieToken){
+        if (!haveStateToken && haveCookieToken) {
             dispatch(setToken(cookieToken));
         }
         // Load const of application
@@ -50,14 +51,12 @@ function App() {
         <>
             <Routes>
                 <Route path="/" element={<InscriptionChoice />} />
-                <Route path="connexion" element={<Login />} />
-                <Route path="inscription" element={<Register />} />
-                <Route path="onboarding" element={<Onboarding />} />
+                <Route path={ROUTES.login.name} element={<Login />} />
+                <Route path={ROUTES.registration.name} element={<Register />} />
+                <Route path={ROUTES.onboarding.name} element={<Onboarding />} />
             </Routes>
             {/* <InscriptionChoice />
             {console.log(user)} */}
-
-
 
             {/* <InscriptionChoice /> */}
             {/* <Login/> */}

@@ -2,6 +2,7 @@ import React from "react";
 import Logo from "../../assets/images/icons/logo.svg";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { ROUTES } from "./../../utils/routes";
 
 import bgImageWelcome from "./../../assets/images/background/background-welcome.webp";
 
@@ -25,8 +26,8 @@ const InscriptionChoice = () => {
                     importants
                 </div>
 
-                <Link to="/inscription" className="btn btn-primary">S'inscrire</Link>
-                <Link to="/connexion" className="btn btn-thirdary">Se connecter</Link>
+                <Link to={ROUTES.registration.name} className="btn btn-primary">S'inscrire</Link>
+                <Link to={ROUTES.login.name} className="btn btn-thirdary">Se connecter</Link>
             </div>
         </main>
     );

@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useFetch } from "../../utils/api";
 import { setToken } from "./../../store/store";
 import { useGetAuthToken } from "./../../utils/auth";
+import { ROUTES } from "./../../utils/routes";
+
 
 const Login = (props) => {
     const dispatch = useDispatch();
@@ -33,11 +35,11 @@ const Login = (props) => {
 
     useEffect(() => {
         if (haveStateToken || haveCookieToken) {
-            navigate("/onboarding");
+            navigate(ROUTES.onboarding.name);
         }
         if (login.isSucceed) {
             dispatch(setToken(login.data.token));
-            navigate("/onboarding");
+            navigate(ROUTES.onboarding.name);
         }
     }, [login.isSucceed]);
 
@@ -139,7 +141,7 @@ const Login = (props) => {
                         Mot de passe oublié ?
                     </a>
                     <button className="btn btn-primary">Se connecter</button>
-                    <Link to="/inscription" className="btn btn-transparent">
+                    <Link to={ROUTES.registration.name} className="btn btn-transparent">
                         S'inscrire &nbsp;➜
                     </Link>
                 </form>

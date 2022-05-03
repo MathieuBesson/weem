@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setToken } from "./../../store/store";
 import { useGetAuthToken } from "./../../utils/auth";
+import { ROUTES } from "./../../utils/routes";
 
 const Register = (props) => {
     const constantes = useSelector((state) => state.constantes);
@@ -50,7 +51,7 @@ const Register = (props) => {
 
     useEffect(() => {
         if(haveStateToken || haveCookieToken){
-            navigate("/onboarding");
+            navigate(ROUTES.onboarding.name);
         }
 
         if (registration.error !== null) {
@@ -63,7 +64,7 @@ const Register = (props) => {
 
         if (login.isSucceed) {
             dispatch(setToken(login.data.token));
-            navigate("/onboarding");
+            navigate(ROUTES.onboarding.name);
         }
     }, [registration.queryCounter, login.isSucceed]);
 
