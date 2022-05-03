@@ -56,8 +56,7 @@ export const useFetch = ({ endpoint, launchRequest, dataQuery, dataBody}) => {
                     setIsSucced(true);
                     setQueryCounter(queryCounter + 1); 
                 } catch (err) {
-                    console.log(err.message)
-                    // setError(JSON.parse(err.message).violations[0].message);
+                    setError(err.message);
                     setData({});
                     setIsSucced(false);
                     setQueryCounter(queryCounter + 1); 

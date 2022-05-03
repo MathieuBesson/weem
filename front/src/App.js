@@ -22,10 +22,11 @@ import NavBar from "./components/NavBar";
 import Car from "./pages/car/Car";
 
 import { useFetch } from "./utils/api";
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { setConstantes } from "./store/store";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setConstantes, setToken } from "./store/store";
+import { Routes, Route } from "react-router-dom";
+import { useGetAuthToken } from "./utils/auth";
 
 function App() {
     const constanteRequest = useFetch({
@@ -33,8 +34,14 @@ function App() {
         launchRequest: true,
     });
     const dispatch = useDispatch();
+    const {haveStateToken, haveCookieToken, cookieToken} = useGetAuthToken(); 
 
     useEffect(() => {
+        // Save token in state if have token in cookies
+        console.log(haveCookieToken);
+        if(!haveStateToken && haveCookieToken){
+            dispatch(setToken(cookieToken));
+        }
         // Load const of application
         dispatch(setConstantes(constanteRequest.data));
     }, [constanteRequest.data]);

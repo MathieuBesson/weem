@@ -6,9 +6,11 @@ import { useFetch } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setToken } from "./../../store/store";
+import { useGetAuthToken } from "./../../utils/auth";
 
 const Register = (props) => {
     const constantes = useSelector((state) => state.constantes);
+    const {haveStateToken, haveCookieToken} = useGetAuthToken();
     const navigate = useNavigate();
     const dispatch = useDispatch();
     
@@ -47,6 +49,10 @@ const Register = (props) => {
     });
 
     useEffect(() => {
+        if(haveStateToken || haveCookieToken){
+            navigate("/onboarding");
+        }
+
         if (registration.error !== null) {
             setIsRegistrationLaunchOk(false);
         }
@@ -134,6 +140,13 @@ const Register = (props) => {
             <img className="bg-cover__img" src={bgImageWelcome} />
             <div>
                 <h1 className="authentication-title">S'inscrire</h1>
+                {registration.error !== null && (
+                    <div>
+                        <p className="authentication__error-message invalid text-left">
+                            {registration.error}
+                        </p>
+                    </div>
+                )}
                 <form>
                     <div>
                         <input

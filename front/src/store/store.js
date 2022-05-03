@@ -1,4 +1,5 @@
 import { createSlice, configureStore } from "@reduxjs/toolkit"; 
+import Cookies from 'universal-cookie';
 
 const userSlice = createSlice({
     name: "user",
@@ -9,7 +10,9 @@ const userSlice = createSlice({
     reducers: {
         setToken (state, action){
             console.log('On set le state')
-            console.log(state); 
+            console.log(action.payload); 
+            const cookies = new Cookies();
+            cookies.set('token', action.payload, { path: '/' });
             state = {
                 ...state, 
                 token: action.payload
@@ -26,7 +29,7 @@ const constantesSlice = createSlice({
     reducers: {
         setConstantes (state, action){
             console.log('On set le state')
-            console.log(state); 
+            console.log(action.payload); 
             state = {...action.payload}
             return state; 
         }

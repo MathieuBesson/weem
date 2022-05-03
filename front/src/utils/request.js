@@ -20,9 +20,30 @@ export const request = (url, method, data = {}, headers = {}) => {
 
     return fetch(url, requestOptions).then((response) =>
     {
-        // console.log(response.text())
+
         if(!response.ok){
-            return response.json().then(json => { throw new Error(JSON.stringify(json)) })
+            return response.json().then(json => {
+                console.log(JSON.stringify(json))
+
+                let errorMessage = "";
+                switch(true){
+                    case json.hasOwnProperty("message"):
+                        errorMessage = json.message;
+                        if(json.message === "Invalid credentials."){
+                            errorMessage = "La combinaison indentifiant / mot de passe n'est pas valide";
+                        }
+                    break;
+                    case json.hasOwnProperty("violations"):
+                        errorMessage = json.violations[0].message;
+                        if(json.message === "Invalid credentials."){
+                            errorMessage = "La combinaison indentifiant / mot de passe n'est pas valide";
+                        }
+                    break;
+                    default: 
+                        errorMessage = "Erreur par défaut";
+                }
+                throw new Error(errorMessage)
+            })
         } else {
             return response; 
         }

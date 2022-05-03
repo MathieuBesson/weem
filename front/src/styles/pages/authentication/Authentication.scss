@@ -54,11 +54,13 @@
 
     &__error-message {
         font-size: 0.75rem;
-        text-align: right;
         color: red;
         height: 0;
         visibility: hidden;
         margin-bottom: 0;
+        &:not(.text-left){
+            text-align: right;
+        }
         &.invalid {
             margin-top: 0px;
             visibility: visible;

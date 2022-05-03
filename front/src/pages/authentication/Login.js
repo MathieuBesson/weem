@@ -5,19 +5,21 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useFetch } from "../../utils/api";
 import { setToken } from "./../../store/store";
+import { useGetAuthToken } from "./../../utils/auth";
 
 const Login = (props) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { haveStateToken, haveCookieToken } = useGetAuthToken();
 
     const [enteredUsername, setEnteredUsername] = useState("");
     const [enteredPassword, setEnteredPassword] = useState("");
     const [isValid, setIsValid] = useState({
         username: true,
-        password: true
+        password: true,
     });
     const [passwordShown, setPasswordShown] = useState(false);
-    const constantes = useSelector((state) => state.constantes); 
+    const constantes = useSelector((state) => state.constantes);
     const [isLoginLaunchOk, setIsLoginLaunchOk] = useState(false);
 
     const login = useFetch({
@@ -25,11 +27,14 @@ const Login = (props) => {
         launchRequest: isLoginLaunchOk,
         dataBody: {
             username: enteredUsername,
-            password: enteredPassword
+            password: enteredPassword,
         },
     });
 
     useEffect(() => {
+        if (haveStateToken || haveCookieToken) {
+            navigate("/onboarding");
+        }
         if (login.isSucceed) {
             dispatch(setToken(login.data.token));
             navigate("/onboarding");
@@ -44,8 +49,8 @@ const Login = (props) => {
     };
 
     const getUserRegex = (regex) => {
-        return new RegExp(constantes.User[regex]); 
-    }
+        return new RegExp(constantes.User[regex]);
+    };
 
     const usernameChangeHandler = (event) => {
         validOrNotInput(event.target.value.trim().length > 3, "username");
@@ -53,7 +58,10 @@ const Login = (props) => {
     };
 
     const passwordChangeHandler = (event) => {
-        validOrNotInput(getUserRegex("REGEX_PASSWORD").test(event.target.value), "password");
+        validOrNotInput(
+            getUserRegex("REGEX_PASSWORD").test(event.target.value),
+            "password"
+        );
         setEnteredPassword(event.target.value);
     };
 
@@ -63,10 +71,9 @@ const Login = (props) => {
         const allAreValid = Object.values(isValid).every(
             (value) => value === true
         );
-        const allAreNotEmpty = [
-            enteredUsername,
-            enteredPassword,
-        ].every((value) => value !== "");
+        const allAreNotEmpty = [enteredUsername, enteredPassword].every(
+            (value) => value !== ""
+        );
 
         setIsLoginLaunchOk(allAreValid && allAreNotEmpty);
     };
@@ -81,6 +88,13 @@ const Login = (props) => {
 
             <div>
                 <h1 className="authentication-title">Se connecter</h1>
+                {login.error !== null && (
+                    <div>
+                        <p className="authentication__error-message invalid text-left">
+                            {login.error}
+                        </p>
+                    </div>
+                )}
                 <form onSubmit={formSubmitHandler}>
                     <div className="authentication__password-div">
                         <input
