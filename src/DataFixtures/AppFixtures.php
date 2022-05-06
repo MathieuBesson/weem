@@ -73,7 +73,7 @@ class AppFixtures extends Fixture
                     'name' => 'Porsh carrera',
                     'fuel_type' => Car::FUEL_TYPE_ID['DIESEL'],
                     'registration' => '455-SF-45',
-                    'driving_style' => Car::DRIVING_STYLE_ID['AGRESSIVE'],
+                    'driving_style' => Car::DRIVING_STYLE_ID['SPORTIVE'],
                 ],
                 [
                     'user' => [
@@ -85,7 +85,7 @@ class AppFixtures extends Fixture
                     'name' => 'Citroen C3',
                     'fuel_type' => Car::FUEL_TYPE_ID['ESCENCE'],
                     'registration' => '686-KJ-78',
-                    'driving_style' => Car::DRIVING_STYLE_ID['MODERATE'],
+                    'driving_style' => Car::DRIVING_STYLE_ID['NEUTRAL'],
                 ],
                 [
                     'user' => [
@@ -97,7 +97,7 @@ class AppFixtures extends Fixture
                     'name' => 'Ford Couga',
                     'fuel_type' => Car::FUEL_TYPE_ID['HYBRID'],
                     'registration' => '123-GM-98',
-                    'driving_style' => Car::DRIVING_STYLE_ID['SPORTIF'],
+                    'driving_style' => Car::DRIVING_STYLE_ID['SPORTIVE'],
                 ],
                 [
                     'user' => [
@@ -109,7 +109,7 @@ class AppFixtures extends Fixture
                     'name' => 'Renault Picaso',
                     'fuel_type' => Car::FUEL_TYPE_ID['ESCENCE'],
                     'registration' => '654-ML-18',
-                    'driving_style' => Car::DRIVING_STYLE_ID['AGRESSIVE'],
+                    'driving_style' => Car::DRIVING_STYLE_ID['SPORTIVE'],
                 ]
             ]
         ];
