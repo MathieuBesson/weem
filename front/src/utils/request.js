@@ -7,17 +7,22 @@ export const request = ({url, method, token = null, data = {}, headers = {}}) =>
         defaultHeaders.append(headerKey, headers[headerKey]);
     }
 
-    console.log(defaultHeaders)
-    if(token !== null){
-        defaultHeaders = new Headers({
-            "Authorization": "Bearer " + token,
-            ...defaultHeaders
-        });
-    }
+    // console.log(JSON.stringify(defaultHeaders), JSON.stringify(new Headers({
+    //     "Content-Type": "application/json",
+    // })))
+    // // if(token !== null){
+    // //     defaultHeaders = new Headers({
+    // //         "Authorization": "Bearer " + token,
+    // //         ...defaultHeaders
+    // //     });
+    // // }
 
     var requestOptions = {
         method: method,
-        headers: defaultHeaders,
+        headers: new Headers({
+            "Content-Type": "application/json",
+            "Authorization": token !== null ? ("Bearer " + token) : "",
+        }),
         redirect: "follow",
     };
 

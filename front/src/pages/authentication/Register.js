@@ -92,7 +92,7 @@ const Register = (props) => {
             "numberMail"
         );
         setEnteredNumberMail(numberMail);
-    };
+    }; 
 
     const passwordChangeHandler = (event) => {
         validOrNotInput(
