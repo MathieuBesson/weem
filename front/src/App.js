@@ -41,7 +41,7 @@ function App() {
         launchRequest: isLaunchRequestUser,
     });
     const dispatch = useDispatch();
-    const { haveStateToken, haveCookieToken, cookieToken } = useGetAuthToken();
+    const { haveStateToken, haveCookieToken, cookieToken, stateToken } = useGetAuthToken();
     const token = useSelector((state) => state.user.token)
 
     useEffect(() => {
@@ -51,8 +51,8 @@ function App() {
 
     useEffect(() => {
         // Save token in state if have token in cookies
-        if (!haveStateToken && haveCookieToken) {
-            dispatch(setToken(cookieToken));
+        if (haveStateToken || haveCookieToken) {
+            dispatch(setToken(cookieToken ? cookieToken : stateToken)); 
             setIsLaunchRequestUser(true); 
         }
     }, [token]);
@@ -61,9 +61,10 @@ function App() {
     useEffect(() => {
         // Save users datas in store
         if(user.data !== {}){
+            console.log(user.data)
             dispatch(setUserDatas(user.data));
         }
-    }, [user.data]);
+    }, [user.isSucceed]);
 
     return (
         <>

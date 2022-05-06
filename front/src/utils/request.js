@@ -1,27 +1,23 @@
-let defaultHeaders = new Headers({
-    "Content-Type": "application/json",
-});
+
 
 export const request = ({url, method, token = null, data = {}, headers = {}}) => {
-    for (const headerKey in headers) {
-        defaultHeaders.append(headerKey, headers[headerKey]);
-    }
 
-    // console.log(JSON.stringify(defaultHeaders), JSON.stringify(new Headers({
-    //     "Content-Type": "application/json",
-    // })))
-    // // if(token !== null){
-    // //     defaultHeaders = new Headers({
-    // //         "Authorization": "Bearer " + token,
-    // //         ...defaultHeaders
-    // //     });
-    // // }
+    const defaultHeaders = {
+        "Content-Type": "application/json",
+    };
+
+    if(token !== null && token !== ""){
+        headers = {
+            ...headers, 
+            "Authorization": "Bearer " + token
+        }
+    }
 
     var requestOptions = {
         method: method,
         headers: new Headers({
-            "Content-Type": "application/json",
-            "Authorization": token !== null ? ("Bearer " + token) : "",
+            ...defaultHeaders, 
+            ...headers
         }),
         redirect: "follow",
     };

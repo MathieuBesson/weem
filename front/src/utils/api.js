@@ -1,6 +1,7 @@
 import { request } from "./request";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
+import { useGetAuthToken } from "./auth";
 
 export const apiEndPoint = {
     register: {
@@ -49,7 +50,11 @@ export const useFetch = ({ endpoint, launchRequest, dataQuery, dataBody }) => {
     const [isSucceed, setIsSucced] = useState(false);
     const [queryCounter, setQueryCounter] = useState(0);
     const dispatch = useDispatch();
-    const token = useSelector((state) => state.user.token);
+
+
+    const { cookieToken, stateToken} = useGetAuthToken(); 
+
+    const token = stateToken ? stateToken : cookieToken;
 
     const endPointInfo = apiEndPoint[endpoint];
 
