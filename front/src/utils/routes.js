@@ -6,6 +6,9 @@ export const ROUTES = {
         name: "/connexion"
     },
     onboarding : {
-        name: "/welcome"
+        name: "/bienvenue"
+    },
+    carInformation : {
+        name: "/voiture-information"
     }
 }

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { ROUTES } from "./../../utils/routes";
+import { Link } from "react-router-dom";
 
 import carsImg from "../../assets/images/background/car-with-mountain.jpg";
 
@@ -20,7 +22,7 @@ const Onboarding = () => {
         fonctionnalités de l'application.
       </div>
 
-      <button className="btn btn-primary">Créer vorte premier véhicule</button>
+      <Link to={ROUTES.carInformation.name} className="btn btn-primary">Créer vorte premier véhicule</Link>
     </main>
   );
 };

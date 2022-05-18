@@ -1,9 +1,9 @@
 import react, { useState } from "react";
 
 
-import UpdateCar from "./../../components/UpdateCar"
+import UpdateCar from "../../components/UpdateCar"
 
-const CarsInformation = () => {
+const CarInformation = () => {
     return (
         <main className="car-informations">
             <h2 className="car-informations__title">
@@ -14,4 +14,4 @@ const CarsInformation = () => {
     );
 };
 
-export default CarsInformation;
+export default CarInformation;

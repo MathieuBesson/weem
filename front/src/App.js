@@ -6,7 +6,7 @@ import Login from "./pages/authentication/Login";
 import Register from "./pages/authentication/Register";
 import Onboarding from "./pages/authentication/Onboarding";
 import InscriptionChoice from "./pages/authentication/InscriptionChoice";
-import CarsInformation from "./pages/carsCreation/CarsInformation";
+import CarInformation from "./pages/carsCreation/CarInformation";
 import PartsPrincipalInformation from "./pages/carsCreation/PartsPrincipalInformation";
 import Home from "./pages/homeMaintenance/Home";
 import MaintenanceBook from "./pages/homeMaintenance/MaintenanceBook";
@@ -73,6 +73,7 @@ function App() {
                 <Route path={ROUTES.login.name} element={<Login />} />
                 <Route path={ROUTES.registration.name} element={<Register />} />
                 <Route path={ROUTES.onboarding.name} element={<Onboarding />} />
+                <Route path={ROUTES.carInformation.name} element={<CarInformation />} />
             </Routes>
             {/* <InscriptionChoice />
             {console.log(user)} */}

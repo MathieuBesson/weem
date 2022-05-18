@@ -41,7 +41,7 @@ export const request = ({url, method, token = null, data = {}, headers = {}}) =>
                         if(json.message === "Invalid credentials."){
                             errorMessage = "La combinaison indentifiant / mot de passe n'est pas valide";
                         }
-                    break;
+                    break;  
                     case json.hasOwnProperty("violations"):
                         errorMessage = json.violations[0].message;
                         if(json.message === "Invalid credentials."){
