@@ -29,6 +29,7 @@
                     display: flex;
                     flex-direction: column;
                     align-items: center;
+                    text-transform: capitalize;
                     em {
                         margin-bottom: 7px;
                     }
@@ -48,8 +49,8 @@
                 &-diesel,
                 &-essence,
                 &-hybride,
-                &-electric,
-                &-other {
+                &-électrique,
+                &-autre {
                     border-radius: 50%;
                     &-input {
                         cursor: pointer;
@@ -87,15 +88,13 @@
     
                 &-essence,
                 &-hybride,
-                &-electric,
-                &-other {
+                &-électrique,
+                &-autre {
                     color: $white-primary;
                 }
-    
                 &-diesel{
                     color: $blue-secondary;
                 }
-    
                 &-diesel {
                     background-color: $yellow-primary;
                 }
@@ -105,10 +104,10 @@
                 &-hybride {
                     background-color: $green-thirdary;
                 }
-                &-electric {
+                &-électrique {
                     background-color: $blue-thirdary;
                 }
-                &-other {
+                &-autre {
                     background-color: $blue-fourth;
                 }
             }

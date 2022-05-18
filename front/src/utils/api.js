@@ -1,4 +1,4 @@
-import { request } from "./request";
+import { request, formateResponse } from "./request";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { useGetAuthToken } from "./auth";
@@ -22,6 +22,11 @@ export const apiEndPoint = {
     userConnected: {
         method: "GET",
         url: "http://weem.com/api/users/connected",
+        tokenRequired: true,
+    },
+    brands: {
+        method: "GET",
+        url: "http://weem.com/api/car_brands",
         tokenRequired: true,
     },
 };
@@ -69,7 +74,15 @@ export const useFetch = ({ endpoint, launchRequest, dataQuery, dataBody }) => {
                         data: dataBody,
                         token: token,
                     });
-                    setData(await res.json());
+
+                    // setData(await res.json().then((data) =>  {
+                    //     if(){
+
+                    //     }
+
+                    // })));
+
+                    setData(await formateResponse(res)); 
                     setError(null);
                     setIsSucced(true);
                     setQueryCounter(queryCounter + 1);

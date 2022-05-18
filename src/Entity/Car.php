@@ -48,7 +48,7 @@ class Car
             'LABEL' => 'hybride'
         ],
         self::FUEL_TYPE_ID['OTHER'] => [
-            'LABEL' => 'Autre'
+            'LABEL' => 'autre'
         ],
     ];
 

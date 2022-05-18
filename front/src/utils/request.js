@@ -60,3 +60,13 @@ export const request = ({url, method, token = null, data = {}, headers = {}}) =>
     }
     );
 };
+
+
+export const formateResponse = (response) => {
+    return response.json().then((data) =>  {
+        if(data.hasOwnProperty("hydra:member")){
+            return Object.values(data["hydra:member"]); 
+        }
+        return data; 
+    }) 
+};
