@@ -51,7 +51,7 @@ const Register = (props) => {
 
     useEffect(() => {
         if(haveStateToken || haveCookieToken){
-            navigate(ROUTES.onboarding.name);
+            navigate(ROUTES.onboarding.url);
         }
 
         if (registration.error !== null) {
@@ -64,7 +64,7 @@ const Register = (props) => {
 
         if (login.isSucceed) {
             dispatch(setToken(login.data.token));
-            navigate(ROUTES.onboarding.name);
+            navigate(ROUTES.onboarding.url);
         }
     }, [registration.queryCounter, login.isSucceed]);
 
@@ -143,7 +143,7 @@ const Register = (props) => {
                 <h1 className="authentication-title">S'inscrire</h1>
                 {registration.error !== null && (
                     <div>
-                        <p className="authentication__error-message invalid text-left">
+                        <p className="input-standard-error-message invalid text-left">
                             {registration.error}
                         </p>
                     </div>
@@ -158,7 +158,7 @@ const Register = (props) => {
                             onChange={usernameChangeHandler}
                         />
                         <p
-                            className={`authentication__error-message ${
+                            className={`input-standard-error-message ${
                                 !isValid.username && "invalid"
                             }`}
                         >
@@ -175,7 +175,7 @@ const Register = (props) => {
                             onChange={numberMailChangeHandler}
                         />
                         <p
-                            className={`authentication__error-message ${
+                            className={`input-standard-error-message ${
                                 !isValid.numberMail && "invalid"
                             }`}
                         >
@@ -198,7 +198,7 @@ const Register = (props) => {
                             <img className="eye" src={eye} />
                         </a>
                         <p
-                            className={`authentication__error-message ${
+                            className={`input-standard-error-message ${
                                 !isValid.password && "invalid"
                             }`}
                         >
@@ -225,7 +225,7 @@ const Register = (props) => {
                                 <img className="eye" src={eye} />
                             </a>
                             <p
-                                className={`authentication__error-message ${
+                                className={`input-standard-error-message ${
                                     !isValid.confirmPassword && "invalid"
                                 }`}
                             >

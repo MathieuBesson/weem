@@ -3,32 +3,40 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { useGetAuthToken } from "./auth";
 
+const baseUrl = "http://weem.com"; 
 export const apiEndPoint = {
     register: {
         method: "POST",
-        url: "http://weem.com/api/users",
+        url: "/api/users",
         tokenRequired: false,
     },
     login: {
         method: "POST",
-        url: "http://weem.com/api/login_check",
+        url: "/api/login_check",
         tokenRequired: false,
     },
     constantes: {
         method: "GET",
-        url: "http://weem.com/api/constantes",
+        url: "/api/constantes",
         tokenRequired: false,
     },
     userConnected: {
         method: "GET",
-        url: "http://weem.com/api/users/connected",
+        url: "/api/users/connected",
         tokenRequired: true,
     },
     brands: {
         method: "GET",
-        url: "http://weem.com/api/car_brands",
+        url: "/api/car_brands",
         tokenRequired: true,
     },
+    saveCar: {
+        method: "POST",
+        url: "/api/cars",
+        tokenRequired: true,
+    },
+
+    
 };
 
 const generateUrl = (url, dataQuery = null) => {
@@ -46,7 +54,7 @@ const generateUrl = (url, dataQuery = null) => {
             url.slice(0, -1);
         }
     }
-    return url;
+    return baseUrl + url;
 };
 
 export const useFetch = ({ endpoint, launchRequest, dataQuery, dataBody }) => {
@@ -67,26 +75,24 @@ export const useFetch = ({ endpoint, launchRequest, dataQuery, dataBody }) => {
         if (launchRequest) {
             (async () => {
                 try {
-                    console.log("DO REQUEST : " + endPointInfo.url);
+                    console.log("DO REQUEST : " + JSON.stringify({
+                        url: generateUrl(endPointInfo.url, dataQuery),
+                        method: endPointInfo.method,
+                        data: dataBody,
+                        token: token,
+                    }));
                     const res = await request({
                         url: generateUrl(endPointInfo.url, dataQuery),
                         method: endPointInfo.method,
                         data: dataBody,
                         token: token,
                     });
-
-                    // setData(await res.json().then((data) =>  {
-                    //     if(){
-
-                    //     }
-
-                    // })));
-
                     setData(await formateResponse(res)); 
                     setError(null);
                     setIsSucced(true);
                     setQueryCounter(queryCounter + 1);
                 } catch (err) {
+                    console.log(err);
                     console.log(err.message);
                     setError(err.message);
                     setData({});

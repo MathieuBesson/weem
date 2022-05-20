@@ -26,8 +26,8 @@ const InscriptionChoice = () => {
                     importants
                 </div>
 
-                <Link to={ROUTES.registration.name} className="btn btn-primary">S'inscrire</Link>
-                <Link to={ROUTES.login.name} className="btn btn-thirdary">Se connecter</Link>
+                <Link to={ROUTES.registration.url} className="btn btn-primary">S'inscrire</Link>
+                <Link to={ROUTES.login.url} className="btn btn-thirdary">Se connecter</Link>
             </div>
         </main>
     );

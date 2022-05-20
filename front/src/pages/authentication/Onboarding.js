@@ -22,7 +22,7 @@ const Onboarding = () => {
         fonctionnalités de l'application.
       </div>
 
-      <Link to={ROUTES.carInformation.name} className="btn btn-primary">Créer vorte premier véhicule</Link>
+      <Link to={ROUTES.carInformation.url} className="btn btn-primary">Créer vorte premier véhicule</Link>
     </main>
   );
 };

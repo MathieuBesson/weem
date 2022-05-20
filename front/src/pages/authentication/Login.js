@@ -35,11 +35,11 @@ const Login = (props) => {
 
     useEffect(() => {
         if (haveStateToken || haveCookieToken) {
-            navigate(ROUTES.onboarding.name);
+            navigate(ROUTES.onboarding.url);
         }
         if (login.isSucceed) {
             dispatch(setToken(login.data.token));
-            navigate(ROUTES.onboarding.name);
+            navigate(ROUTES.onboarding.url);
         }
     }, [login.isSucceed]);
 
@@ -92,7 +92,7 @@ const Login = (props) => {
                 <h1 className="authentication-title">Se connecter</h1>
                 {login.error !== null && (
                     <div>
-                        <p className="authentication__error-message invalid text-left">
+                        <p className="input-standard-error-message invalid text-left">
                             {login.error}
                         </p>
                     </div>
@@ -107,7 +107,7 @@ const Login = (props) => {
                             onChange={usernameChangeHandler}
                         />
                         <p
-                            className={`authentication__error-message ${
+                            className={`input-standard-error-message ${
                                 !isValid.username && "invalid"
                             }`}
                         >
@@ -129,7 +129,7 @@ const Login = (props) => {
                             <img src={eye} />
                         </a>
                         <p
-                            className={`authentication__error-message ${
+                            className={`input-standard-error-message ${
                                 !isValid.password && "invalid"
                             }`}
                         >
@@ -141,7 +141,7 @@ const Login = (props) => {
                         Mot de passe oublié ?
                     </a>
                     <button className="btn btn-primary">Se connecter</button>
-                    <Link to={ROUTES.registration.name} className="btn btn-transparent">
+                    <Link to={ROUTES.registration.url} className="btn btn-transparent">
                         S'inscrire &nbsp;➜
                     </Link>
                 </form>

@@ -52,24 +52,6 @@
         margin-top: 12px;
     }
 
-    &__error-message {
-        font-size: 0.75rem;
-        color: red;
-        height: 0;
-        visibility: hidden;
-        margin-bottom: 0;
-        &:not(.text-left){
-            text-align: right;
-        }
-        &.invalid {
-            margin-top: 0px;
-            visibility: visible;
-            margin-right: 5px;
-            margin-bottom: 6px;
-            height: 100%;
-        }
-    }
-
     .btn-primary {
         margin-top: 24px;
     }

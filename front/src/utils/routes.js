@@ -1,14 +1,30 @@
+import Login from "./../pages/authentication/Login";
+import Register from "./../pages/authentication/Register";
+import Onboarding from "./../pages/authentication/Onboarding";
+import InscriptionChoice from "./../pages/authentication/InscriptionChoice";
+import CarInformation from "./../pages/carsCreation/CarInformation";
+import PartsPrincipalInformation from "./../pages/carsCreation/PartsPrincipalInformation";
+
 export const ROUTES = {
+    inscriptionChoice : {
+        url: "/"
+    },
     registration : {
-        name: "/inscription"
+        url: "/inscription"
     },
     login : {
-        name: "/connexion"
+        url: "/connexion"
     },
     onboarding : {
-        name: "/bienvenue"
+        url: "/bienvenue"
     },
     carInformation : {
-        name: "/voiture-information"
+        url: "/voiture-information"
+    },
+    partsPrincipalInformation : {
+        url: "/pieces-principales",
+        // params: [
+        //     'carId'
+        // ]
     }
 }
