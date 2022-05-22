@@ -232,6 +232,14 @@ class CarPart extends AbstractCarStandardPart
     }
 
     /**
+    * @Groups({"carPart_read"})
+    */
+    public function isCompleted(): ?bool
+    {
+        return !$this->carPartMaintenances->isEmpty(); 
+    }
+
+    /**
      * Calcul date of future mainteance function of duration choice 
      *
      * @param null|DateTimeInterface $dateReference
@@ -244,6 +252,7 @@ class CarPart extends AbstractCarStandardPart
         }
 
         $timeToChange = null;
+
         switch ($this->calculDurationChoice) {
             case CarPart::CALCUL_DURATION_CHOICE_ID['MILEAGE']:
                 $timeToChange = $dateReference->modify('+' . (int) ($this->maxDistance * 30 / $this->getCar()->getMileageMensual()) . ' days');
@@ -274,21 +283,25 @@ class CarPart extends AbstractCarStandardPart
      * @param CarPartMaintenance $lastCarPartMaintenance
      * @return DateTimeInterface
      */
-    public function getUpdateFutureChange(CarPartMaintenance $lastCarPartMaintenance): DateTimeInterface
+    public function getUpdateFutureChange(?CarPartMaintenance $lastCarPartMaintenance = null): DateTimeInterface
     {
-        $timeToChange = null;
+        $timeToChange = $this->calculDateOfFutureMaintenance(
+            $lastCarPartMaintenance 
+            ?  clone $lastCarPartMaintenance->getDateLastChange()
+            : null
+        );
 
-        switch (true) {
-            case $this->unused && $lastCarPartMaintenance:
-                $timeToChange = $this->calculDateOfFutureMaintenance();
-                break;
-            case $lastCarPartMaintenance:
-                $timeToChange = $this->calculDateOfFutureMaintenance(clone $lastCarPartMaintenance->getDateLastChange());
-                break;
-            default:
-                $timeToChange = null;
-                break;
-        }
+        // switch (true) {
+        //     case $this->unused:
+        //         $timeToChange = $this->calculDateOfFutureMaintenance();
+        //         break;
+        //     case $lastCarPartMaintenance:
+        //         $timeToChange = $this->calculDateOfFutureMaintenance(clone $lastCarPartMaintenance->getDateLastChange());
+        //         break;
+        //     default:
+        //         $timeToChange = null;
+        //         break;
+        // }
 
         return $timeToChange;
     }

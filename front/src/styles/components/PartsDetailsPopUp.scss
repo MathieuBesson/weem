@@ -3,22 +3,29 @@
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 35px 36px 20px 36px;
-    width: $screen-max-width;
-    margin: auto !important;
-    background-color: $grey-primary;
-    &__title {
-        font-weight: $font-weight-bold;
-        font-size: $font-size-medium;
-        margin-bottom: 15px;
+    .outside{
+        &.active{
+            height: 100vh;
+        }
     }
-    &__input {
-        margin-bottom: 12px;
+    &-popup{
+        padding: 35px 36px 20px 36px;
+        width: $screen-max-width;
+        margin: auto !important;
+        background-color: $grey-primary;
+        border-radius: 48px 48px 0px 0px;
+        &__title {
+            font-weight: $font-weight-bold;
+            font-size: $font-size-medium;
+            margin-bottom: 15px;
+        }
+        &__input {
+            margin-bottom: 12px;
+        }
     }
     transform: translateY(100%);
-    transition: all ease-in 0.5s;
+    transition: all ease-in-out 0.8s;
     &.active{
         transform: translateY(0%);
-        transition: all ease-in 0.5s;
     }
 }

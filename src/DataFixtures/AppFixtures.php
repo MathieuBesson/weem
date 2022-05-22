@@ -49,18 +49,54 @@ class AppFixtures extends Fixture
                     'price_min' => 50,
                     'price_max' => 200
                 ],
+                'freins' => [
+                    'importance' =>  AbstractCarStandardPart::IMPORTANCE_ID['PRIMARY'],
+                    'max_duration' => 450,
+                    'price_min' => 50,
+                    'price_max' => 200
+                ],
+                'courroie de distribution' => [
+                    'importance' =>  AbstractCarStandardPart::IMPORTANCE_ID['PRIMARY'],
+                    'max_distance' => 4000,
+                    'price_min' => 50,
+                    'price_max' => 200
+                ],
+                'filtre à air' => [
+                    'importance' =>  AbstractCarStandardPart::IMPORTANCE_ID['SECONDARY'],
+                    'max_duration' => 650,
+                    'price_min' => 50,
+                    'price_max' => 200
+                ],
+                'filtre à carburant' => [
+                    'importance' =>  AbstractCarStandardPart::IMPORTANCE_ID['SECONDARY'],
+                    'max_distance' => 4000,
+                    'price_min' => 50,
+                    'price_max' => 200
+                ],
+                'filtre à huile' => [
+                    'importance' =>  AbstractCarStandardPart::IMPORTANCE_ID['SECONDARY'],
+                    'max_distance' => 4000,
+                    'price_min' => 50,
+                    'price_max' => 200
+                ],
+                'filtre déshydratant' => [
+                    'importance' =>  AbstractCarStandardPart::IMPORTANCE_ID['SECONDARY'],
+                    'max_duration' => 250,
+                    'price_min' => 50,
+                    'price_max' => 200
+                ],
                 'vidange' => [
+                    'importance' =>  AbstractCarStandardPart::IMPORTANCE_ID['MAINTENANCE'],
+                    'max_duration' => 300,
+                    'price_min' => 50,
+                    'price_max' => 200
+                ],
+                'controle technique' => [
                     'importance' =>  AbstractCarStandardPart::IMPORTANCE_ID['MAINTENANCE'],
                     'max_distance' => 9000,
                     'price_min' => 50,
                     'price_max' => 200
                 ],
-                'revision' => [
-                    'importance' =>  AbstractCarStandardPart::IMPORTANCE_ID['MAINTENANCE'],
-                    'max_duration' => 1440,
-                    'price_min' => 50,
-                    'price_max' => 200
-                ]
             ],
             'vehicles' => [
                 [

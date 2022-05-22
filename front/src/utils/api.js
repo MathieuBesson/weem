@@ -35,21 +35,28 @@ export const apiEndPoint = {
         url: "/api/cars",
         tokenRequired: true,
     },
-
+    carParts: {
+        method: "GET",
+        url: "/api/car_parts",
+        tokenRequired: true,
+    },
     
 };
 
 const generateUrl = (url, dataQuery = null) => {
     if (dataQuery) {
-        if (dataQuery.hasOnePropriety("justValue")) {
-            url += dataQuery.justValue;
+        console.log(dataQuery.hasOnePropriety)
+        if (dataQuery.hasOwnProperty("justValue")) {
+            url += '/' + dataQuery.justValue;
         }
 
-        if (dataQuery.hasOnePropriety("keyValue")) {
+        if (dataQuery.hasOwnProperty("keyValue")) {
             url += "?";
             for (const dataQueryKey in dataQuery.keyValue) {
-                url +=
-                    dataQueryKey + "=" + dataQuery.keyValue[dataQueryKey] + "&";
+                if(url.slice(-1) !== "?"){
+                    url += "&";
+                }
+                url += dataQueryKey + "=" + dataQuery.keyValue[dataQueryKey];
             }
             url.slice(0, -1);
         }

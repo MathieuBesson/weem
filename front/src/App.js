@@ -75,39 +75,18 @@ function App() {
         partsPrincipalInformation: <PartsPrincipalInformation />,
     };
 
+    const generateParamsRoute = (params) => params.map(param => '/:' + param); 
+
+
     return (
         <>
-            {/* {console.log(Object.keys(routeComponents))} */}
-            {/* {Object.keys(routeComponents).map((key) => {
-                console.log(routeComponents[key]);
-                console.log(ROUTES[key]);
-                // const params = ROUTES[key].params?.map(param => '/:' + param)
-                // return <Route path={ROUTES[routeKeys[key]].url} element={component} />
-            })} */}
             <Routes>
-                {/* {Object.keys(routeComponents).map((key, id) => {
-                    // console.log(routeComponents[key]);
-                    // console.log(ROUTES[key]);
-                    
-                    const params = ROUTES[key].params?.join('/:'); 
-                    console.log(ROUTES[key].url + (params ? '/:' + params : '' ))
-                    return <Route key={id} path={ROUTES[key].url} element={routeComponents[key]} />
-                })} */}
-
-                {/* {Object.keys(routeComponents).map((component, key) => {
-                    console.log(key)
-                    return '';
-                    // const params = ROUTES[key].params?.map(param => '/:' + param)
-                    // return <Route path={ROUTES[key].url} element={component} />
-                })} */}
                 <Route path="/" element={<InscriptionChoice />} />
                 <Route path={ROUTES.login.url} element={<Login />} />
                 <Route path={ROUTES.registration.url} element={<Register />} />
                 <Route path={ROUTES.onboarding.url} element={<Onboarding />} />
                 <Route path={ROUTES.carInformation.url} element={<CarInformation />} />
-                {/* <Route path={ROUTES.carInformation.url + ROUTES.carInformation.params.map(param => )} element={<CarInformation />} /> */}
-
-                {/* path=":handle" */}
+                <Route path={ROUTES.partsPrincipalInformation.url} element={<PartsPrincipalInformation />} />
             </Routes>
             {/* <InscriptionChoice />
             {console.log(user)} */}

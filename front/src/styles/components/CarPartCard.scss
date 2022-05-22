@@ -1,16 +1,39 @@
 .car-part-card {
     display: block;
     width: 48%;
-    
-    &__img-block{
+
+    &__img-block {
+        height: 146px;
         background-color: $grey-primary;
-        width: 100%;
-        padding: 20px;
+        padding: 15%;
         border-radius: 24px;
-        &.selected{
+        display: flex;
+        justify-content: center;
+        position: relative;
+        cursor: pointer;
+        img {
+            width: 80%;
+            margin: auto;
+        }
+        &::before {
+            position: absolute;
+            content: "";
+            display: block;
+            bottom: 15px;
+            width: 75px;
+            height: 10px;
+            background: radial-gradient(
+                50% 50% at 50% 50%,
+                #868db0 0%,
+                rgba(47, 51, 72, 0) 100%
+            );
+            opacity: 0.2;
+            border-radius: 50%;
+        }
+        &.selected {
             background-color: $green-fourth;
             position: relative;
-            .icon-tick-green{
+            .icon-tick-green {
                 position: absolute;
                 display: block;
                 top: 14px;
@@ -19,8 +42,8 @@
         }
     }
 
-    &__title{
-        margin-top:8px;
+    &__title {
+        margin-top: 8px;
         font-weight: $font-weight-bold;
         font-size: $font-size-normal;
     }

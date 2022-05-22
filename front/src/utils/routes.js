@@ -23,8 +23,8 @@ export const ROUTES = {
     },
     partsPrincipalInformation : {
         url: "/pieces-principales",
-        // params: [
-        //     'carId'
-        // ]
+        params: [
+            'carId'
+        ]
     }
 }

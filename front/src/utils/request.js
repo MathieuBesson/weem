@@ -29,7 +29,7 @@ export const request = ({url, method, token = null, data = {}, headers = {}}) =>
 
     return fetch(url, requestOptions).then((response) =>
     {
-
+        console.log(response)
         if(!response.ok){
             return response.json().then(json => {
                 console.log(JSON.stringify(json))
@@ -64,6 +64,7 @@ export const request = ({url, method, token = null, data = {}, headers = {}}) =>
 
 export const formateResponse = (response) => {
     return response.json().then((data) =>  {
+        console.log(data)
         if(data.hasOwnProperty("hydra:member")){
             return Object.values(data["hydra:member"]); 
         }

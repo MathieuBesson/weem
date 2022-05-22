@@ -1,6 +1,8 @@
-import react, { useState } from "react";
+import react, { useState, useEffect } from "react";
+import { useParams, useLocation } from "react-router-dom";
+import { useFetch } from "../../utils/api";
 
-// Pictures 
+// Pictures
 import iconBackArrow from "./../../assets/images/icons/back-arrow.svg";
 import iconNextArrow from "./../../assets/images/icons/next-arrow.svg";
 import carWithMountain from "./../../assets/images/background/car-with-mountain.jpg";
@@ -12,57 +14,96 @@ import PartsExplanation from "../../components/PartsExplanation";
 import FlashMessage from "./../../components/FlashMessage";
 import PartsDetailsPopUp from "./../../components/PartsDetailsPopUp";
 import HeaderGoToBack from "../../components/HeaderGotToBack";
+import voca from "voca";
+import { useSelector } from "react-redux";
 
 const PartsPrincipalInformation = () => {
+    const carPartConstantes = useSelector(
+        (state) => state.constantes.AbstractCarStandardPart
+    );
+    const location = useLocation();
+    const { carId } = location.state ? location.state : { carId: 70 };
+    const [currentPartChangeSelected, setCurrentPartChangeSelected] =
+        useState(null);
+    const [popupActive, setPopupActive] = useState(false);
+
+    const parts = useFetch({
+        endpoint: "carParts",
+        launchRequest: true,
+        dataQuery: {
+            keyValue: {
+                "car.id": carId,
+            },
+        },
+    });
+
+    const handleCreateChange = (carPart) => {
+        setCurrentPartChangeSelected(carPart);
+        setPopupActive(true);
+    };
+
+    const setNotActivePopup = () => {
+        setPopupActive(false);
+    };
+
+    console.log(parts);
+
+    const dataLoad =
+        carPartConstantes !== undefined && Array.isArray(parts.data);
+
     return (
-        <main className="parts-principal-information">
-            <HeaderGoToBack>Renseignements des pièces et des entretiens</HeaderGoToBack>
-            <div className="parts-principal-information__part-recurrent">
-                <h3 className="parts-principal-information__part-recurrent-title">
-                    Entretiens récurrents
-                </h3>
-                <div className="parts-principal-information__part-recurrent-group d-flex flex-wrap justify-content-between">
-                    <button className="parts-principal-information__part-recurrent-group-btn">
-                        Contrôle technique
-                    </button>
-                    <button className="parts-principal-information__part-recurrent-group-btn">
-                        Contrôle technique
-                    </button>
-                    <button className="parts-principal-information__part-recurrent-group-btn">
-                        Vidange
-                    </button>
-                    <button className="parts-principal-information__part-recurrent-group-btn">
-                        Vidange
-                    </button>
+        dataLoad && (
+            <main className="parts-principal-information">
+                <HeaderGoToBack>
+                    Renseignements des pièces et des entretiens
+                </HeaderGoToBack>
+                <div className="parts-principal-information__part-recurrent">
+                    <h3 className="parts-principal-information__part-recurrent-title">
+                        Entretiens récurrents
+                    </h3>
+                    <div className="parts-principal-information__part-recurrent-group d-flex flex-wrap justify-content-between">
+                        {parts.data.map(
+                            (part, id) =>
+                                part.importance ===
+                                    carPartConstantes.IMPORTANCE_ID
+                                        .MAINTENANCE && (
+                                    <button
+                                        key={id}
+                                        className="parts-principal-information__part-recurrent-group-btn"
+                                        onClick={() => handleCreateChange(part)}
+                                    >
+                                        {voca.capitalize(part.name)}
+                                    </button>
+                                )
+                        )}
+                    </div>
                 </div>
-            </div>
-            <div className="parts-principal-information__part-principal">
-                <h3 className="parts-principal-information__part-principal-title">
-                    Pièces principales
-                </h3>
-                <div className="parts-principal-information__part-principal-group d-flex flex-wrap justify-content-between">
-                    <CarPartCard
-                        carPartImg="./logo192.png"
-                        carPartName="Pneus avant"
-                    />
-                    <CarPartCard
-                        carPartImg="./logo192.png"
-                        carPartName="Pneus arrières"
-                    />
-                    <CarPartCard
-                        carPartImg="./logo192.png"
-                        carPartName="Freins"
-                    />
+                <div className="parts-principal-information__part-principal">
+                    <h3 className="parts-principal-information__part-principal-title">
+                        Pièces principales
+                    </h3>
+                    <div className="parts-principal-information__part-principal-group d-flex flex-wrap justify-content-between">
+                        {parts.data.map(
+                            (part, id) =>
+                                part.importance ===
+                                    carPartConstantes.IMPORTANCE_ID.PRIMARY && (
+                                    <CarPartCard
+                                        key={id}
+                                        carPart={part}
+                                        handleCreateChange={handleCreateChange}
+                                    />
+                                )
+                        )}
+                    </div>
                 </div>
-            </div>
-            <p className="parts-principal-information__disclaimer">
-                Texte de warning sur l’impact de ces changements sur les
-                résultats de l’appli
-            </p>
-            <div className="car-informations__form-buttons d-flex">
-                <button className="btn btn-primary col-12">Suivant</button>
-            </div>
-            {/* <PartsExplanation 
+                <p className="parts-principal-information__disclaimer">
+                    Texte de warning sur l’impact de ces changements sur les
+                    résultats de l’appli
+                </p>
+                <div className="car-informations__form-buttons d-flex">
+                    <button className="btn btn-primary col-12">Suivant</button>
+                </div>
+                {/* <PartsExplanation 
                 title="Courroie de distribution"
                 content="Une courroie de distribution permet de distribuer la puissance du moteur aux quatres roues grâce à une bande en caoutchouc appelée “Courroie”. En moyenne, une courroie de distribution tient 120 000km."
             />
@@ -83,9 +124,14 @@ const PartsPrincipalInformation = () => {
             <FlashMessage type="success" active={true}>
                 Changements enregistrés, vous pouvez les modifier à tout moment depuis la tab-bar
             </FlashMessage>
-            <PartsDetailsPopUp title="Pneus avant" active={true} />
         */}
-        </main>
+                <PartsDetailsPopUp
+                    carPart={currentPartChangeSelected}
+                    active={popupActive}
+                    setNotActivePopup={setNotActivePopup}
+                />
+            </main>
+        )
     );
 };
 

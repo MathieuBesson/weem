@@ -13,52 +13,24 @@ use App\Repository\CarPartMaintenanceRepository;
 use App\Repository\CarStandardPartRepository;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class CarPartSubscriber implements EventSubscriberInterface
+class CarPartMaintenanceSubscriber implements EventSubscriberInterface
 {
     private EntityManagerInterface $em;
-    private CarStandardPartRepository $carStandardPartRepository;
     private CarPartMaintenanceRepository $carPartMaintenanceRepository;
 
     public function __construct(
         EntityManagerInterface $em, 
-        CarStandardPartRepository $carStandardPartRepository,
         CarPartMaintenanceRepository $carPartMaintenanceRepository
     ){
         $this->em = $em;
-        $this->carStandardPartRepository = $carStandardPartRepository;
         $this->carPartMaintenanceRepository = $carPartMaintenanceRepository;
     }
 
     public static function getSubscribedEvents()
     {
         return [
-            KernelEvents::VIEW => ['createCarPartList', EventPriorities::PRE_WRITE],
-            KernelEvents::VIEW => ['calculateDurationBeforeChangeForCarPart', EventPriorities::PRE_WRITE],
+            KernelEvents::VIEW => ['calculateDurationBeforeChangeForCarPart', EventPriorities::PRE_WRITE]
         ];
-    }
-
-    /**
-     * Add car part list on Car POST 
-     *
-     * @param ViewEvent $event - Event subscriber catch 
-     * @return void
-     */
-    public function createCarPartList(ViewEvent $event)
-    {
-        $car = $event->getControllerResult();
-        $method = $event->getRequest()->getMethod();
-
-        // On Car POST create all car part
-        if ($car instanceof Car && $method === "POST") {
-
-            foreach ($this->carStandardPartRepository->findAll() as $carStandardPartItem) {
-                $carPart = new CarPart();
-                $carPart->setCarStandardPart($carStandardPartItem);
-
-                $this->em->persist($carPart);
-                $car->addCarPart($carPart);
-            }
-        }
     }
 
     /**
@@ -69,6 +41,7 @@ class CarPartSubscriber implements EventSubscriberInterface
      */
     public function calculateDurationBeforeChangeForCarPart(ViewEvent $event)
     {
+        // dd();
         $carPartMaintenance = $event->getControllerResult();
         $method = $event->getRequest()->getMethod();
 

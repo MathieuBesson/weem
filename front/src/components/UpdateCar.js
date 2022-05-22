@@ -11,6 +11,7 @@ import iconSportive from "./../assets/images/icons/sportive.svg";
 import iconNeutre from "./../assets/images/icons/neutre.svg";
 
 export default function UpdateCar({ create = false }) {
+    console.log(create);
     const navigate = useNavigate();
     const iconsDrivingStyle = {
         souple: iconSoupe,
@@ -84,13 +85,13 @@ export default function UpdateCar({ create = false }) {
     }, [carConstantes]);
 
     useEffect(() => {
-        console.log(saveCar)
-        if (saveCar.isSucceed) {
+        if (saveCar.isSucceed && saveCar.data?.['@id']) {
             const destination = create
-                ? ROUTES.onboarding.url
-                : ROUTES.partsPrincipalInformation.url;
+            ? ROUTES.partsPrincipalInformation.url
+            : ROUTES.onboarding.url;
             // if(haveStateToken || haveCookieToken){
-            navigate(destination);
+                console.log(saveCar.data['@id'].split('/').pop());
+            navigate(destination, {state:{carId: parseInt(saveCar.data['@id'].split('/').pop())}});
             // }
         }
 
@@ -106,7 +107,7 @@ export default function UpdateCar({ create = false }) {
         //     dispatch(setToken(login.data.token));
         //     navigate(ROUTES.onboarding.url);
         // }
-    }, [saveCar.isSucceed]);
+    }, [saveCar.isSucceed, saveCar.data]);
 
     const validOrNotInput = (condition, varName) => {
         setIsValid({
@@ -209,6 +210,7 @@ export default function UpdateCar({ create = false }) {
                     id="car-model"
                     name="car-model"
                     required
+                    maxLength={25}
                     placeholder="Peugeot 407"
                     onChange={(e) => formValueChangeHandler(e, "model")}
                 />
@@ -234,6 +236,7 @@ export default function UpdateCar({ create = false }) {
                     id="car-registration"
                     name="car-registration"
                     required
+                    maxLength={25}
                     placeholder="XX-111-XX"
                     onChange={(e) => formValueChangeHandler(e, "registration")}
                 />
