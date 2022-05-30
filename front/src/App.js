@@ -24,26 +24,42 @@ import Car from "./pages/car/Car";
 import { useFetch } from "./utils/api";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setConstantes, setToken, setUserDatas } from "./store/store";
+import {
+    setConstantes,
+    setToken,
+    setUserDatas,
+    setCurrentCar,
+} from "./store/store";
 import { Routes, Route } from "react-router-dom";
 import { useGetAuthToken } from "./utils/auth";
 import { ROUTES } from "./utils/routes";
 
 function App() {
+    const dispatch = useDispatch();
+    const [isLaunchRequestUser, setIsLaunchRequestUser] = useState(false);
+    const [isLaunchRequestCurrentCar, setIsLaunchRequestCurrentCar] =
+        useState(false);
+    const { haveStateToken, haveCookieToken, cookieToken, stateToken } =
+        useGetAuthToken();
+    const token = useSelector((state) => state.user.token);
+
     const constanteRequest = useFetch({
         endpoint: "constantes",
         launchRequest: true,
     });
-
-    const [isLaunchRequestUser, setIsLaunchRequestUser] = useState(false);
     const user = useFetch({
         endpoint: "userConnected",
         launchRequest: isLaunchRequestUser,
     });
-    const dispatch = useDispatch();
-    const { haveStateToken, haveCookieToken, cookieToken, stateToken } =
-        useGetAuthToken();
-    const token = useSelector((state) => state.user.token);
+    const currentCar = useFetch({
+        endpoint: "cars",
+        launchRequest: isLaunchRequestCurrentCar,
+        dataQuery: {
+            keyValue: {
+                count: 1,
+            },
+        },
+    });
 
     useEffect(() => {
         // Load const of application
@@ -60,23 +76,17 @@ function App() {
 
     useEffect(() => {
         // Save users datas in store
-        if (user.data !== {}) {
+        if (Object.keys(user.data) !== 0) {
             console.log(user.data);
             dispatch(setUserDatas(user.data));
+            setIsLaunchRequestCurrentCar(user.data.cars !== []);
         }
     }, [user.isSucceed]);
 
-    const routeComponents = {
-        inscriptionChoice: <InscriptionChoice />,
-        registration: <Register />,
-        login: <Login />,
-        onboarding: <Onboarding />,
-        carInformation: <CarInformation />,
-        partsPrincipalInformation: <PartsPrincipalInformation />,
-    };
-
-    const generateParamsRoute = (params) => params.map(param => '/:' + param); 
-
+    useEffect(() => {
+        console.log(currentCar.data[0]);
+        dispatch(setCurrentCar(currentCar.data[0]));
+    }, [currentCar.isSucceed]);
 
     return (
         <>
@@ -85,8 +95,15 @@ function App() {
                 <Route path={ROUTES.login.url} element={<Login />} />
                 <Route path={ROUTES.registration.url} element={<Register />} />
                 <Route path={ROUTES.onboarding.url} element={<Onboarding />} />
-                <Route path={ROUTES.carInformation.url} element={<CarInformation />} />
-                <Route path={ROUTES.partsPrincipalInformation.url} element={<PartsPrincipalInformation />} />
+                <Route
+                    path={ROUTES.carInformation.url}
+                    element={<CarInformation />}
+                />
+                <Route
+                    path={ROUTES.partsPrincipalInformation.url}
+                    element={<PartsPrincipalInformation />}
+                />
+                <Route path={ROUTES.home.url} element={<Home />} />
             </Routes>
             {/* <InscriptionChoice />
             {console.log(user)} */}
@@ -107,7 +124,6 @@ function App() {
             {/* <AddMaintenance /> */}
             {/* <Car /> */}
             {/* <CarSwitcher /> */}
-            {/* <NavBar /> */}
             {/* <Car /> */}
             {/* <Login /> */}
             {/* <Register/> */}

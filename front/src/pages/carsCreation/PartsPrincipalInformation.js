@@ -1,6 +1,9 @@
 import react, { useState, useEffect } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, Link } from "react-router-dom";
 import { useFetch } from "../../utils/api";
+import { useSelector } from "react-redux";
+import voca from "voca";
+import { ROUTES } from "./../../utils/routes";
 
 // Pictures
 import iconBackArrow from "./../../assets/images/icons/back-arrow.svg";
@@ -14,8 +17,7 @@ import PartsExplanation from "../../components/PartsExplanation";
 import FlashMessage from "./../../components/FlashMessage";
 import PartsDetailsPopUp from "./../../components/PartsDetailsPopUp";
 import HeaderGoToBack from "../../components/HeaderGotToBack";
-import voca from "voca";
-import { useSelector } from "react-redux";
+
 
 const PartsPrincipalInformation = () => {
     const carPartConstantes = useSelector(
@@ -26,6 +28,7 @@ const PartsPrincipalInformation = () => {
     const [currentPartChangeSelected, setCurrentPartChangeSelected] =
         useState(null);
     const [popupActive, setPopupActive] = useState(false);
+    const [partSelectedListe, setPartSelectedListe] = useState([]);
 
     const parts = useFetch({
         endpoint: "carParts",
@@ -46,7 +49,24 @@ const PartsPrincipalInformation = () => {
         setPopupActive(false);
     };
 
-    console.log(parts);
+    useEffect(() => {
+        if (parts.isSucceed) {
+            setPartSelectedListe(
+                parts.data.reduce(
+                    (acc, cur) => ({ ...acc, [cur.id]: false }),
+                    {}
+                )
+            );
+        }
+    }, [parts.isSucceed]);
+
+    const addSelectClassToSubmitPart = (id) => {
+        console.log(id);
+        setPartSelectedListe({
+            ...partSelectedListe,
+            [id]: true,
+        });
+    };
 
     const dataLoad =
         carPartConstantes !== undefined && Array.isArray(parts.data);
@@ -91,6 +111,7 @@ const PartsPrincipalInformation = () => {
                                         key={id}
                                         carPart={part}
                                         handleCreateChange={handleCreateChange}
+                                        selected={partSelectedListe[part.id]}
                                     />
                                 )
                         )}
@@ -101,7 +122,12 @@ const PartsPrincipalInformation = () => {
                     résultats de l’appli
                 </p>
                 <div className="car-informations__form-buttons d-flex">
-                    <button className="btn btn-primary col-12">Suivant</button>
+                    <Link
+                        to={ROUTES.home.url}
+                        className="btn btn-primary col-12"
+                    >
+                        Suivant
+                    </Link>
                 </div>
                 {/* <PartsExplanation 
                 title="Courroie de distribution"
@@ -129,6 +155,7 @@ const PartsPrincipalInformation = () => {
                     carPart={currentPartChangeSelected}
                     active={popupActive}
                     setNotActivePopup={setNotActivePopup}
+                    addSelectClassToSubmitPart={addSelectClassToSubmitPart}
                 />
             </main>
         )

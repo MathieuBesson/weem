@@ -1,16 +1,18 @@
 import react, { useState, useEffect } from "react";
 
 import iconNext from "./../assets/images/icons/next.svg";
+import { icons } from "./../utils/iconLoader";
 
-const CarPartPreview = ({ icon, name, time, active = true }) => {
+
+const CarPartPreview = ({ carPart, active = true }) => {
     const [colorAlert, setColorAlert] = useState("green");
 
     useEffect(() => {
         switch (true) {
-            case time <= 2:
+            case carPart.daysBeforeFutureChange <= 2:
                 setColorAlert("red");
                 break;
-            case time <= 6:
+            case carPart.daysBeforeFutureChange <= 6:
                 setColorAlert("orange");
                 break;
             default:
@@ -20,13 +22,13 @@ const CarPartPreview = ({ icon, name, time, active = true }) => {
     }, []);
 
     return (
-        <section className={`car-part-preview ${!active && 'active'} d-flex justify-content-between align-items-center`}>
+        <section className={`car-part-preview ${!active ? 'active' : ''} d-flex justify-content-between align-items-center`}>
             <div className="d-flex">
-                <img className="car-part-preview__img" src={icon} />
+                <img className="car-part-preview__img" src={icons[carPart.name]} />
                 <div className="car-part-preview__content">
-                    <h4 className="car-part-preview__content-name">{name}</h4>
+                    <h4 className="car-part-preview__content-name">{carPart.name}</h4>
                     <em className={`car-part-preview__content-time ${colorAlert}`}>
-                        {time} mois restant{time > 1 && "s"}
+                        {carPart.daysBeforeFutureChange} mois restant{carPart.daysBeforeFutureChange > 1 && "s"}
                     </em>
                 </div>
             </div>

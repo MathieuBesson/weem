@@ -10,22 +10,32 @@
     left: 0;
     right: 0;
     padding: 12px 28px;
+    width: $screen-max-width;
+    margin: auto !important;
     &__item-car {
         display: flex;
         flex-direction: column;
         align-items: center;
     }
-    &__item{
+    &__item {
         display: flex;
         flex-direction: column;
         align-items: center;
-        opacity: 0.3;
+        cursor: pointer;
 
-        &.active{
-            opacity: 1;
+        &.active {
+            div {
+                background-color: $green-primary;
+                opacity: 1;
+            }
+            span {
+                font-weight: $font-weight-bold;
+                opacity: 1;
+            }
         }
 
-        &-nav, &-car-nav{
+        &-nav,
+        &-car-nav {
             border-radius: 10px;
             height: 40px;
             width: 40px;
@@ -38,19 +48,21 @@
             }
         }
         &-nav {
+            opacity: 0.3;
             background-color: $grey-secondary;
         }
 
-        &-car-nav{
+        &-car-nav {
             border: 2px solid $green-primary;
-            .icon{
+            .icon {
                 mask-size: 100% 100%;
             }
         }
 
-        &-label{
+        &-label {
             font-weight: $font-weight-normal;
             font-size: $font-size-extra-small;
+            opacity: 0.3;
         }
     }
 }

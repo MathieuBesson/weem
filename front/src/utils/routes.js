@@ -26,5 +26,8 @@ export const ROUTES = {
         params: [
             'carId'
         ]
-    }
+    },
+    home : {
+        url: "/home"
+    },
 }

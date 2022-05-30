@@ -40,7 +40,21 @@ export const apiEndPoint = {
         url: "/api/car_parts",
         tokenRequired: true,
     },
-    
+    carPartsChange: {
+        method: "POST",
+        url: "/api/car_part_maintenances",
+        tokenRequired: true,
+    },
+    cars: {
+        method: "GET",
+        url: "/api/cars",
+        tokenRequired: true,
+    },
+    carParts: {
+        method: "GET",
+        url: "/api/car_parts",
+        tokenRequired: true,
+    },    
 };
 
 const generateUrl = (url, dataQuery = null) => {

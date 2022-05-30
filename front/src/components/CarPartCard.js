@@ -10,7 +10,7 @@ import filtreHuile from "./../assets/images/icons/car-parts/filtre-huile.svg";
 import freins from "./../assets/images/icons/car-parts/freins.svg";
 import pneuAvant from "./../assets/images/icons/car-parts/pneu-avant.svg";
 
-const CarPartCard = ({ carPart, handleCreateChange }) => {
+const CarPartCard = ({ carPart, handleCreateChange, selected }) => {
     const standardPartImg = {
         "pneus arrières": pneuArriere,
         "pneus avants": pneuAvant,
@@ -21,15 +21,16 @@ const CarPartCard = ({ carPart, handleCreateChange }) => {
         filtreDeshydratant: filtreDeshydratant,
         filtreHuile: filtreHuile,
     };
+    console.log(selected)
 
     return (
         <div className="car-part-card" onClick={() => handleCreateChange(carPart)}>
             <div
                 className={`car-part-card__img-block ${
-                    carPart.completed ? "selected" : ""
+                    carPart.completed || selected ? "selected" : ""
                 }`}
             >
-                {carPart.completed ? (
+                {carPart.completed || selected ? (
                     <span
                         className="icon icon-tick-green"
                         style={{ maskImage: `url(${tick})` }}
