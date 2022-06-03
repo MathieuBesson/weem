@@ -7,4 +7,15 @@
         font-weight: $font-weight-bold;
         width: 75%;
     }
+    .icon {
+        cursor: pointer;
+    }
+}
+
+.test {
+    background-color: red;
+    display: flex;
+    &-test {
+        width: 500px;
+    }
 }

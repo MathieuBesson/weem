@@ -127,7 +127,7 @@ Pour récupérer des pièces, changements (maintenance) il faut préciser la voi
 
 ### CARNET D'ENTRETIEN 
 
-- [X] Récupération des 4 derniers pièces à changer
+- [X] Récupération des 3 derniers pièces à changer
 	- GET /api/car_parts?car.id=2&count=3
 - [X] Récupération des coûts à venir sur 1 an (entretiens à faire sur un an)
 	- GET /api/car_parts?car.id=2&count=3

@@ -27,7 +27,24 @@ export const ROUTES = {
             'carId'
         ]
     },
+    maintenanceUpcoming: {
+        url: "/entretiens-a-venir",
+    },
+    maintenanceHistory: {
+        url: "/historique-changements",
+    },
+
+    // Nav Bar
     home : {
         url: "/home"
+    },
+    blog : {
+        url: "/blog"
+    },
+    maintenanceBook : {
+        url: "/carnet-entretien"
+    },
+    docs : {
+        url: "/documents"
     },
 }

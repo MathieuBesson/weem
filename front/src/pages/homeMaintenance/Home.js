@@ -10,31 +10,12 @@ import ButtonIcon from "./../../components/ButtonIcon";
 import MaintenanceUpcomingPreview from "./../../components/MaintenanceUpcomingPreview";
 import InvoicePreview from './../../components/InvoicePreview'
 import BlogPreview from "./../../components/BlogPreview"
-import NavBar from "./../../components/NavBar"
+
 
 const Home = () => {
 
     const user = useSelector((state) => state.user.datas);
-    // const currentCar = useSelector((state) => state.currentCar);
-    // const [isLaunchRequestCarParts, setIsLaunchRequestCarParts] = useState(false);
 
-    // const carPartList = useFetch({
-    //     endpoint: "carParts",
-    //     launchRequest: isLaunchRequestCarParts,
-    //     dataQuery: {
-    //         keyValue: {
-    //             "car.id": currentCar?.id ?? null,
-    //             count: 3,
-    //         },
-    //     },
-    // });
-
-    // useEffect(() => {
-    //     setIsLaunchRequestCarParts(true)
-    // }, [currentCar]);
-
-
-    // console.log(carPartList)
     return (
         <main className="home">
             <header className="home__header d-flex justify-content-between">
@@ -52,7 +33,6 @@ const Home = () => {
             <MaintenanceUpcomingPreview />
             <InvoicePreview carPartNames={['Pneus avants', 'Filtre à air']}/>
             <BlogPreview />
-            <NavBar />
         </main>
     );
 };

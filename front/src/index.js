@@ -17,14 +17,14 @@ const startApp = () => {
                 <Routes>
                     <Route path="*" element={<App />}></Route>
                 </Routes>
-            </BrowserRouter>
+            </BrowserRouter>,
         </Provider>,
         document.getElementById("root")
     );
 };
 
-if (window.cordona) {
-    document.addEventListener("deviceready", startApp, false);
-} else {
+// if (window.cordona) {
+//     document.addEventListener("deviceready", startApp, false);
+// } else {
     startApp();
-}
+// }

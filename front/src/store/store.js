@@ -10,7 +10,7 @@ const userSlice = createSlice({
     reducers: {
         setToken(state, action) {
             console.log("On set le state");
-            console.log(action.payload);
+            // console.log(action.payload);
             const cookies = new Cookies();
             cookies.set("token", action.payload, { path: "/" });
             state = {
@@ -21,7 +21,7 @@ const userSlice = createSlice({
         },
         setUserDatas(state, action) {
             console.log("On set le state");
-            console.log(action.payload);
+            // console.log(action.payload);
             state = {
                 ...state,
                 datas: action.payload,

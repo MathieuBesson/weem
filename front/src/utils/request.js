@@ -22,14 +22,13 @@ export const request = ({url, method, token = null, data = {}, headers = {}}) =>
         redirect: "follow",
     };
 
-    console.log(data)
     if(data !== null && Object.keys(data).length !== 0){
         requestOptions.body = JSON.stringify(data); 
     }
 
     return fetch(url, requestOptions).then((response) =>
     {
-        console.log(response)
+        // console.log(response)
         if(!response.ok){
             return response.json().then(json => {
                 console.log(JSON.stringify(json))

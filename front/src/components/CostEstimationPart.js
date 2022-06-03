@@ -1,18 +1,14 @@
 import react, { useState, useEffect } from "react";
+import voca from "voca";
+import { daysToMonth } from './../utils/date'
 
-import pneuAvant from "./../assets/images/icons/pneu-avant.svg";
+import { icons } from "./../utils/iconLoader";
 
-const CostEstimationPart = ({
-    icon,
-    carPartName,
-    priceMin,
-    priceMax,
-    nbMois,
-}) => {
-
+const CostEstimationPart = ({ carPart }) => {
     const [colorAlert, setColorAlert] = useState("green");
 
     useEffect(() => {
+        const nbMois = daysToMonth(carPart.daysBeforeFutureChange);
         switch (true) {
             case nbMois <= 2:
                 setColorAlert("red");
@@ -26,19 +22,24 @@ const CostEstimationPart = ({
         }
     }, []);
 
-
     return (
         <div className="cost-estimation-part d-flex align-items-center justify-content-between">
             <div className="d-flex col-8 align-items-center">
-                <img className="cost-estimation-part__img" src={icon} />
-                <h4 className="cost-estimation-part__title">{carPartName}</h4>
+                <img
+                    className="cost-estimation-part__img"
+                    src={icons[carPart.name]}
+                />
+                <h4 className="cost-estimation-part__title">{voca.capitalize(carPart.name)}</h4>
             </div>
             <div className="cost-estimation-part__content d-flex flex-column">
                 <span className="cost-estimation-part__content-price">
-                    {priceMin}-{priceMax}€
+                    {carPart.carStandardPart.priceMin}-
+                    {carPart.carStandardPart.priceMax}€
                 </span>
-                <span className={`cost-estimation-part__content-time ${colorAlert}`}>
-                    d'ici {nbMois}mois
+                <span
+                    className={`cost-estimation-part__content-time ${colorAlert}`}
+                >
+                    d'ici {daysToMonth(carPart.daysBeforeFutureChange)} mois
                 </span>
             </div>
         </div>

@@ -44,8 +44,8 @@ export default function UpdateCar({ create = false }) {
         launchRequest: true,
     });
 
-    const saveCar = useFetch({
-        endpoint: "saveCar",
+    const carSave = useFetch({
+        endpoint: "carSave",
         launchRequest: isSaveCarLaunchOk,
         dataBody: {
             name: model,
@@ -85,13 +85,13 @@ export default function UpdateCar({ create = false }) {
     }, [carConstantes]);
 
     useEffect(() => {
-        if (saveCar.isSucceed && saveCar.data?.['@id']) {
+        if (carSave.isSucceed && carSave.data?.['@id']) {
             const destination = create
             ? ROUTES.partsPrincipalInformation.url
             : ROUTES.onboarding.url;
             // if(haveStateToken || haveCookieToken){
-                console.log(saveCar.data['@id'].split('/').pop());
-            navigate(destination, {state:{carId: parseInt(saveCar.data['@id'].split('/').pop())}});
+                console.log(carSave.data['@id'].split('/').pop());
+            navigate(destination, {state:{carId: parseInt(carSave.data['@id'].split('/').pop())}});
             // }
         }
 
@@ -107,7 +107,7 @@ export default function UpdateCar({ create = false }) {
         //     dispatch(setToken(login.data.token));
         //     navigate(ROUTES.onboarding.url);
         // }
-    }, [saveCar.isSucceed, saveCar.data]);
+    }, [carSave.isSucceed, carSave.data]);
 
     const validOrNotInput = (condition, varName) => {
         setIsValid({

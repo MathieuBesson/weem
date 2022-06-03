@@ -1,0 +1,22 @@
+.not-found {
+    padding-top: 65%;
+    position: relative;
+    &__title {
+        font-size: 36;
+        font-weight: $font-weight-bold;
+        text-align: center;
+    }
+
+    &__404 {
+        color: $green-primary;
+        font-size: 100px;
+        font-weight: $font-weight-bold;
+        text-align: center;
+    }
+
+    .btn {
+        position: absolute;
+        bottom: 90px;
+        width: 80%;
+    }
+}

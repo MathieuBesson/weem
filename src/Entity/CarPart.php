@@ -3,8 +3,10 @@
 namespace App\Entity;
 
 use DateTime;
+use DateTimeInterface;
 use App\Entity\CarStandardPart;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\CarPartMaintenance;
 use App\Repository\CarPartRepository;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use Doctrine\Common\Collections\Collection;
@@ -12,9 +14,8 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
-use App\Entity\CarPartMaintenance; 
-use DateTimeInterface;
 
 /**
  * @ApiResource(
@@ -27,6 +28,7 @@ use DateTimeInterface;
  *  attributes={"order"={"futureChangeDate"}}
  * )
  * @ApiFilter(SearchFilter::class, properties={"car.id": "exact"})
+ * @ApiFilter(DateFilter::class, properties={"futureChangeDate"})
  * @ORM\Entity(repositoryClass=CarPartRepository::class)
  */
 class CarPart extends AbstractCarStandardPart
@@ -232,11 +234,11 @@ class CarPart extends AbstractCarStandardPart
     }
 
     /**
-    * @Groups({"carPart_read"})
-    */
+     * @Groups({"carPart_read"})
+     */
     public function isCompleted(): ?bool
     {
-        return !$this->carPartMaintenances->isEmpty(); 
+        return !$this->carPartMaintenances->isEmpty();
     }
 
     /**
@@ -286,9 +288,9 @@ class CarPart extends AbstractCarStandardPart
     public function getUpdateFutureChange(?CarPartMaintenance $lastCarPartMaintenance = null): DateTimeInterface
     {
         $timeToChange = $this->calculDateOfFutureMaintenance(
-            $lastCarPartMaintenance 
-            ?  clone $lastCarPartMaintenance->getDateLastChange()
-            : null
+            $lastCarPartMaintenance
+                ?  clone $lastCarPartMaintenance->getDateLastChange()
+                : null
         );
 
         // switch (true) {
@@ -323,7 +325,16 @@ class CarPart extends AbstractCarStandardPart
      */
     public function getDaysBeforeFutureChange(): int
     {
-        return (int) (new DateTime)->diff($this->futureChangeDate)->format("%m");
+
+        // $start = new DateTime;
+        // $end = new DateTime('2021-03-15 00:00:00');
+        $diff = (new DateTime)->diff($this->futureChangeDate);
+
+        $yearsInDays = $diff->format('%r%y') * 12 * 30;
+        $monthsInDays = $diff->format('%r%m') * 30;
+        $totalDays = $yearsInDays + $monthsInDays +  $diff->format('%r%d');
+
+        return $totalDays;
     }
 
     /**

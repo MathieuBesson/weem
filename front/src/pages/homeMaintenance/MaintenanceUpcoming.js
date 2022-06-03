@@ -1,22 +1,47 @@
-import react, { useState } from "react";
-
-// Pictures
-import pneuAvant from "./../../assets/images/icons/pneu-avant.svg";
+import react, { useEffect, useState } from "react";
 
 // Components
-import ButtonIcon from "./../../components/ButtonIcon";
 import HeaderGoToBack from "./../../components/HeaderGotToBack";
 import CarPartPreview from "./../../components/CarPartPreview";
+import { useSelector } from "react-redux";
+import { useFetch } from "../../utils/api";
 
 const MaintenanceUpcoming = () => {
+    const currentCar = useSelector((state) => state.currentCar);
+    const [isLaunchRequestCarParts, setIsLaunchRequestCarParts] =
+        useState(false);
+
+    const carPartList = useFetch({
+        endpoint: "carPart",
+        launchRequest: isLaunchRequestCarParts,
+        dataQuery: {
+            keyValue: {
+                "car.id": currentCar?.id ?? null,
+            },
+        },
+    });
+
+    useEffect(() => {
+        if (currentCar !== null) {
+            setIsLaunchRequestCarParts(true);
+        }
+    }, [currentCar]);
+
     return (
-        <main className="maintenance-upcomming">
-            <HeaderGoToBack>Vos entretien à venir</HeaderGoToBack>
-            <CarPartPreview icon={pneuAvant} name="Pneus avants" time={1} />
-            <CarPartPreview icon={pneuAvant} name="Pneus avants" time={2} />
-            <CarPartPreview icon={pneuAvant} name="Pneus avants" time={6} />
-            <CarPartPreview icon={pneuAvant} name="Pneus avants" time={10} active={false}/>
-        </main>
+        <>
+            {Object.keys(carPartList.data).length !== 0 && (
+                <main className="maintenance-upcomming">
+                    <HeaderGoToBack>Vos entretien à venir</HeaderGoToBack>
+                    {carPartList.data.map((carPart, id) => (
+                        <CarPartPreview
+                            key={carPart.id}
+                            carPart={carPart}
+                            active={id % 5 !== 0}
+                        />
+                    ))}
+                </main>
+            )}
+        </>
     );
 };
 

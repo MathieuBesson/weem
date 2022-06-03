@@ -18,7 +18,7 @@ const PartsDetailsPopUp = ({
         useState(false);
 
     const registerPartChange = useFetch({
-        endpoint: "carPartsChange",
+        endpoint: "carPartMaintenanceSave",
         launchRequest: launchRegisterPartChange,
         dataBody: {
             mileage: mileageLastChange === "" ? null : mileageLastChange,

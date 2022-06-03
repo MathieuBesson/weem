@@ -5,6 +5,7 @@ import "./styles/app.scss";
 import Login from "./pages/authentication/Login";
 import Register from "./pages/authentication/Register";
 import Onboarding from "./pages/authentication/Onboarding";
+import NotFound from "./pages/authentication/NotFound";
 import InscriptionChoice from "./pages/authentication/InscriptionChoice";
 import CarInformation from "./pages/carsCreation/CarInformation";
 import PartsPrincipalInformation from "./pages/carsCreation/PartsPrincipalInformation";
@@ -19,6 +20,7 @@ import DetailPart from "./pages/part/DetailPart";
 import AddMaintenance from "./components/AddMaintenance";
 import CarSwitcher from "./components/CarSwitcher";
 import NavBar from "./components/NavBar";
+import Loader from "./components/Loader";
 import Car from "./pages/car/Car";
 
 import { useFetch } from "./utils/api";
@@ -33,27 +35,34 @@ import {
 import { Routes, Route } from "react-router-dom";
 import { useGetAuthToken } from "./utils/auth";
 import { ROUTES } from "./utils/routes";
+import MaintenanceHistory from "./components/MaintenanceHistory";
 
 function App() {
+    // Store
     const dispatch = useDispatch();
-    const [isLaunchRequestUser, setIsLaunchRequestUser] = useState(false);
-    const [isLaunchRequestCurrentCar, setIsLaunchRequestCurrentCar] =
-        useState(false);
-    const { haveStateToken, haveCookieToken, cookieToken, stateToken } =
-        useGetAuthToken();
     const token = useSelector((state) => state.user.token);
 
+    console.log(token);
+
+    // State
+    // const [isLaunchRequestUser, setIsLaunchRequestUser] = useState(false);
+    // const [isLaunchRequestCurrentCar, setIsLaunchRequestCurrentCar] =
+    //     useState(false);
+    const { haveStateToken, haveCookieToken, cookieToken, stateToken } =
+        useGetAuthToken();
+
+    // // Fetch
     const constanteRequest = useFetch({
         endpoint: "constantes",
         launchRequest: true,
     });
+
     const user = useFetch({
         endpoint: "userConnected",
-        launchRequest: isLaunchRequestUser,
     });
+
     const currentCar = useFetch({
-        endpoint: "cars",
-        launchRequest: isLaunchRequestCurrentCar,
+        endpoint: "car",
         dataQuery: {
             keyValue: {
                 count: 1,
@@ -61,50 +70,108 @@ function App() {
         },
     });
 
+    // Use effect
     useEffect(() => {
-        // Load const of application
         dispatch(setConstantes(constanteRequest.data));
-    }, [constanteRequest.data]);
+    }, [constanteRequest.isSucceed]);
 
     useEffect(() => {
-        // Save token in state if have token in cookies
         if (haveStateToken || haveCookieToken) {
+            // Save token (from Cookie or store)
             dispatch(setToken(cookieToken ? cookieToken : stateToken));
-            setIsLaunchRequestUser(true);
+            user.setLaunchRequest(true);
         }
     }, [token]);
 
     useEffect(() => {
         // Save users datas in store
-        if (Object.keys(user.data) !== 0) {
-            console.log(user.data);
+        console.log(user.isSucceed);
+
+        if (user.isSucceed) {
             dispatch(setUserDatas(user.data));
-            setIsLaunchRequestCurrentCar(user.data.cars !== []);
+            currentCar.setLaunchRequest(true);
         }
     }, [user.isSucceed]);
 
     useEffect(() => {
-        console.log(currentCar.data[0]);
-        dispatch(setCurrentCar(currentCar.data[0]));
+        if (currentCar.isSucceed) {
+            dispatch(setCurrentCar(currentCar.data[0]));
+        }
     }, [currentCar.isSucceed]);
+
+    const isAccessLoggedOk = () => {
+        return (
+            constanteRequest.isSucceed && user.isSucceed && currentCar.isSucceed
+        );
+    };
+
+    const isAccessNotLoggedOk = () => {
+        return constanteRequest.isSucceed;
+    };
 
     return (
         <>
-            <Routes>
-                <Route path="/" element={<InscriptionChoice />} />
-                <Route path={ROUTES.login.url} element={<Login />} />
-                <Route path={ROUTES.registration.url} element={<Register />} />
-                <Route path={ROUTES.onboarding.url} element={<Onboarding />} />
-                <Route
-                    path={ROUTES.carInformation.url}
-                    element={<CarInformation />}
-                />
-                <Route
-                    path={ROUTES.partsPrincipalInformation.url}
-                    element={<PartsPrincipalInformation />}
-                />
-                <Route path={ROUTES.home.url} element={<Home />} />
-            </Routes>
+            {!isAccessNotLoggedOk() ? (
+                <Loader />
+            ) : (
+                <>
+                    <Routes>
+                        {isAccessNotLoggedOk() && (
+                            <>
+                                <Route
+                                    path="/"
+                                    element={<InscriptionChoice />}
+                                />
+                                <Route
+                                    path={ROUTES.login.url}
+                                    element={<Login />}
+                                />
+                                <Route
+                                    path={ROUTES.registration.url}
+                                    element={<Register />}
+                                />
+                            </>
+                        )}
+
+                        {isAccessLoggedOk() && (
+                            <>
+                                <Route
+                                    path={ROUTES.onboarding.url}
+                                    element={<Onboarding />}
+                                />
+                                <Route
+                                    path={ROUTES.carInformation.url}
+                                    element={<CarInformation />}
+                                />
+                                <Route
+                                    path={ROUTES.partsPrincipalInformation.url}
+                                    element={<PartsPrincipalInformation />}
+                                />
+                                <Route
+                                    path={ROUTES.home.url}
+                                    element={<Home />}
+                                />
+                                <Route
+                                    path={ROUTES.maintenanceBook.url}
+                                    element={<MaintenanceBook />}
+                                />
+                                <Route
+                                    path={ROUTES.maintenanceUpcoming.url}
+                                    element={<MaintenanceUpcoming />}
+                                />
+                                <Route
+                                    path={ROUTES.maintenanceHistory.url}
+                                    element={<CompleteHistory />}
+                                />
+                            </>
+                        )}
+                        <Route path="*" element={<NotFound />} />
+                    </Routes>
+
+                    {isAccessLoggedOk() && <NavBar />}
+                </>
+            )}
+
             {/* <InscriptionChoice />
             {console.log(user)} */}
             {/* <InscriptionChoice /> */}

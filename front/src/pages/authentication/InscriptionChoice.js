@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Logo from "../../assets/images/icons/logo.svg";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { ROUTES } from "./../../utils/routes";
 
 import bgImageWelcome from "./../../assets/images/background/background-welcome.webp";
+import { useDispatch, useSelector } from "react-redux";
 
 const InscriptionChoice = () => {
+
+    const navigate = useNavigate();
+
+    const user = useSelector((state) => state.user);
+
+    useEffect(() => {
+        console.log(user)
+        if (user.datas !== undefined && Object.keys(user.datas).length !== 0) {
+            navigate(ROUTES.home.url);
+        }
+    }, [user]);
+
     return (
         <main className="inscription-choice bg-cover">
             <img className="inscription-choice__bg bg-cover__img" src={bgImageWelcome} />

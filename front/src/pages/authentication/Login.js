@@ -35,11 +35,11 @@ const Login = (props) => {
 
     useEffect(() => {
         if (haveStateToken || haveCookieToken) {
-            navigate(ROUTES.onboarding.url);
+            navigate(ROUTES.home.url);
         }
         if (login.isSucceed) {
             dispatch(setToken(login.data.token));
-            navigate(ROUTES.onboarding.url);
+            navigate(ROUTES.home.url);
         }
     }, [login.isSucceed]);
 

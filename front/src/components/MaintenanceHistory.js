@@ -1,21 +1,55 @@
-import react, { useState } from "react";
+import react, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { useFetch } from "../utils/api";
+import { ROUTES } from "../utils/routes";
 
-import MaintenanceHistoryItem from "./../components/MaintenanceHistoryItem"
+import MaintenanceHistoryItem from "./../components/MaintenanceHistoryItem";
 
-const MaintenanceHistory = ({ items }) => {
+const MaintenanceHistory = () => {
+    const currentCar = useSelector((state) => state.currentCar);
+
+    const carPartMaintenanceList = useFetch({
+        endpoint: "carPartMaintenance",
+        dataQuery: {
+            keyValue: {
+                "carPart.car.id": currentCar?.id ?? null,
+            },
+        },
+    });
+
+    useEffect(() => {
+        if (currentCar !== null) {
+            carPartMaintenanceList.setLaunchRequest(true);
+        }
+    }, [currentCar]);
+
     return (
-        <div className="maintenance-history">
-            <h3 className="maintenance-history__title">
-                Historique et transfert des entretiens
-            </h3>
-            <div className="maintenance-history__list">
-                <MaintenanceHistoryItem date="02/08/2021"/>
-                <MaintenanceHistoryItem date="02/08/2021"/>
-            </div>
-            <button className="btn btn-primary w-100">
-                Voir l'historique complet
-            </button>
-        </div>
+        <>
+            {carPartMaintenanceList.isSucceed && (
+                <div className="maintenance-history">
+                    <h3 className="maintenance-history__title">
+                        Historique et transfert des entretiens
+                    </h3>
+                    <div className="maintenance-history__list">
+                        {console.log(carPartMaintenanceList.data)}
+                        {carPartMaintenanceList.data.map(
+                            (carPartMaintenance) => (
+                                <MaintenanceHistoryItem
+                                    date={carPartMaintenance.dateLastChange}
+                                />
+                            )
+                        )}
+                    </div>
+                    <Link
+                        to={ROUTES.maintenanceHistory.url}
+                        className="btn btn-primary w-100"
+                    >
+                        Voir l'historique complet
+                    </Link>
+                </div>
+            )}
+        </>
     );
 };
 

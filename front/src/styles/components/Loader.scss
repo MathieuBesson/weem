@@ -1,0 +1,40 @@
+//Ripple
+.loader-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    &__ripple {
+        display: inline-block;
+        position: relative;
+        width: 128px;
+        height: 128px;
+        div {
+            position: absolute;
+            border: 8px solid $green-primary;
+            opacity: 1;
+            border-radius: 50%;
+            animation: loader-ripple 1.3s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+            &:nth-child(2) {
+                animation-delay: -0.6s;
+            }
+        }
+    }
+}
+
+@keyframes loader-ripple {
+    0% {
+        top: 56px;
+        left: 56px;
+        width: 0;
+        height: 0;
+        opacity: 1;
+    }
+    100% {
+        top: -1px;
+        left: -1px;
+        width: 116px;
+        height: 116px;
+        opacity: 0;
+    }
+}

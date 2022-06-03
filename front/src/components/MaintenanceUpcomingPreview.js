@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { ROUTES } from "../utils/routes";
 import { useFetch } from "./../utils/api";
 
 // Pictures
@@ -11,7 +13,7 @@ const MaintenanceUpcomingPreview = () => {
         useState(false);
 
     const carPartList = useFetch({
-        endpoint: "carParts",
+        endpoint: "carPart",
         launchRequest: isLaunchRequestCarParts,
         dataQuery: {
             keyValue: {
@@ -22,7 +24,9 @@ const MaintenanceUpcomingPreview = () => {
     });
 
     useEffect(() => {
-        setIsLaunchRequestCarParts(true);
+        if (currentCar !== null) {
+            setIsLaunchRequestCarParts(true);
+        }
     }, [currentCar]);
 
     return (
@@ -34,12 +38,15 @@ const MaintenanceUpcomingPreview = () => {
                     </h3>
                     <div className="maintenance-upcomming-preview__car-part-group">
                         {carPartList.data.map((carPart) => (
-                            <CarPartPreview key={carPart.id} carPart={carPart} />
+                            <CarPartPreview
+                                key={carPart.id}
+                                carPart={carPart}
+                            />
                         ))}
                     </div>
-                    <button className="btn btn-thirdary w-100">
+                    <Link className="btn btn-thirdary w-100" to={ROUTES.maintenanceUpcoming.url}>
                         Voir l'état des autres pièces
-                    </button>
+                    </Link>
                 </div>
             )}
         </>

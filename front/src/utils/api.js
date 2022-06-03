@@ -1,9 +1,8 @@
 import { request, formateResponse } from "./request";
-import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { useGetAuthToken } from "./auth";
 
-const baseUrl = "http://weem.com"; 
+const baseUrl = "http://weem.com";
 export const apiEndPoint = {
     register: {
         method: "POST",
@@ -30,44 +29,43 @@ export const apiEndPoint = {
         url: "/api/car_brands",
         tokenRequired: true,
     },
-    saveCar: {
+    car: {
+        method: "GET",
+        url: "/api/cars",
+        tokenRequired: true,
+    },
+    carSave: {
         method: "POST",
         url: "/api/cars",
         tokenRequired: true,
     },
-    carParts: {
+    carPart: {
         method: "GET",
         url: "/api/car_parts",
         tokenRequired: true,
     },
-    carPartsChange: {
+    carPartMaintenance: {
+        method: "GET",
+        url: "/api/car_part_maintenances",
+        tokenRequired: true,
+    },
+    carPartsMaintenanceSave: {
         method: "POST",
         url: "/api/car_part_maintenances",
         tokenRequired: true,
     },
-    cars: {
-        method: "GET",
-        url: "/api/cars",
-        tokenRequired: true,
-    },
-    carParts: {
-        method: "GET",
-        url: "/api/car_parts",
-        tokenRequired: true,
-    },    
 };
 
 const generateUrl = (url, dataQuery = null) => {
     if (dataQuery) {
-        console.log(dataQuery.hasOnePropriety)
         if (dataQuery.hasOwnProperty("justValue")) {
-            url += '/' + dataQuery.justValue;
+            url += "/" + dataQuery.justValue;
         }
 
         if (dataQuery.hasOwnProperty("keyValue")) {
             url += "?";
             for (const dataQueryKey in dataQuery.keyValue) {
-                if(url.slice(-1) !== "?"){
+                if (url.slice(-1) !== "?") {
                     url += "&";
                 }
                 url += dataQueryKey + "=" + dataQuery.keyValue[dataQueryKey];
@@ -78,85 +76,80 @@ const generateUrl = (url, dataQuery = null) => {
     return baseUrl + url;
 };
 
-export const useFetch = ({ endpoint, launchRequest, dataQuery, dataBody }) => {
-    const [data, setData] = useState({});
-    const [error, setError] = useState(null);
-    const [isSucceed, setIsSucced] = useState(false);
-    const [queryCounter, setQueryCounter] = useState(0);
-    const dispatch = useDispatch();
+export const useFetch = ({ endpoint, launchRequest = false, dataQuery, dataBody }) => {
+    // console.log("FETCH", generateUrl( apiEndPoint[endpoint].url, dataQuery), launchRequest);
 
+    const defaultQuesryState = {
+        data: {},
+        error: null,
+        isSucceed: false,
+        queryCounter: 0,
+        launchRequest: false,
+    };
 
-    const { cookieToken, stateToken} = useGetAuthToken(); 
+    const [queryState, setQueryState] = useState(defaultQuesryState);
 
+    const resetQuery = () => {
+        setQueryState({
+            ...queryState,
+            isSucceed: false,
+            launchRequest: false,
+        });
+    };
+
+    const setLaunchRequest = (value) => {
+        setQueryState({
+            ...queryState,
+            launchRequest: value,
+        });
+    };
+
+    const { cookieToken, stateToken } = useGetAuthToken();
     const token = stateToken ? stateToken : cookieToken;
-
     const endPointInfo = apiEndPoint[endpoint];
 
     useEffect(() => {
-        if (launchRequest) {
+        if (launchRequest || queryState.launchRequest) {
             (async () => {
                 try {
-                    console.log("DO REQUEST : " + JSON.stringify({
-                        url: generateUrl(endPointInfo.url, dataQuery),
-                        method: endPointInfo.method,
-                        data: dataBody,
-                        token: token,
-                    }));
-                    const res = await request({
-                        url: generateUrl(endPointInfo.url, dataQuery),
-                        method: endPointInfo.method,
-                        data: dataBody,
-                        token: token,
+                    console.log(
+                        "DO REQUEST : " +
+                            JSON.stringify({
+                                url: generateUrl(endPointInfo.url, dataQuery),
+                                method: endPointInfo.method,
+                                data: dataBody,
+                                token: token?.slice(0, 10),
+                            })
+                    );
+
+                    setQueryState({
+                        data: await formateResponse(
+                            await request({
+                                url: generateUrl(endPointInfo.url, dataQuery),
+                                method: endPointInfo.method,
+                                data: dataBody,
+                                token: token ? token : null,
+                            })
+                        ),
+                        error: null,
+                        isSucceed: true,
+                        queryCounter: queryState.queryCounter + 1,
+                        launchRequest: false
                     });
-                    setData(await formateResponse(res)); 
-                    setError(null);
-                    setIsSucced(true);
-                    setQueryCounter(queryCounter + 1);
                 } catch (err) {
                     console.log(err);
                     console.log(err.message);
-                    setError(err.message);
-                    setData({});
-                    setIsSucced(false);
-                    setQueryCounter(queryCounter + 1);
+
+                    setQueryState({
+                        data: {},
+                        error: err.message,
+                        isSucceed: false,
+                        queryCounter: queryState.queryCounter + 1,
+                        launchRequest: false
+                    });
                 }
             })();
         }
-    }, [launchRequest]);
-    return { data, error, isSucceed, queryCounter };
+    }, [launchRequest, queryState.launchRequest]);
+    return { ...queryState, resetQuery, setLaunchRequest };
 };
-
-// export const register = (username, password, number = null, mail = null) => {
-//     return post("http://weem.com/api/users", {
-//         email: mail,
-//         password: password,
-//         name: username,
-//         phone: number,
-//     }).then((result) => {
-//         return login(mail, password);
-//     });
-// };
-
-// export const login = (username, password) => {
-
-//     // const user = useSelector((state) => console.log(JSON.stringify(state.user)))
-//     return post("http://weem.com/api/login_check", {
-//         username: username,
-//         password: password,
-//     }).then(result => {
-
-//         return result;
-//     });
-// };
-
-// export const useRegister = (username, password, number = null, mail = null) => {
-//     return request("http://weem.com/api/users", {
-//         email: mail,
-//         password: password,
-//         name: username,
-//         phone: number,
-//     }).then((result) => {
-//         return result;
-//         // return login(mail, password);
-//     });
-// };

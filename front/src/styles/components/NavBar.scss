@@ -12,6 +12,10 @@
     padding: 12px 28px;
     width: $screen-max-width;
     margin: auto !important;
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
     &__item-car {
         display: flex;
         flex-direction: column;
@@ -25,10 +29,12 @@
 
         &.active {
             div {
+                transition: background-color, opacity 1s ease;
                 background-color: $green-primary;
                 opacity: 1;
             }
             span {
+                transition: background-color, opacity 1s ease;
                 font-weight: $font-weight-bold;
                 opacity: 1;
             }

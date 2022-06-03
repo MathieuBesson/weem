@@ -31,7 +31,7 @@ const PartsPrincipalInformation = () => {
     const [partSelectedListe, setPartSelectedListe] = useState([]);
 
     const parts = useFetch({
-        endpoint: "carParts",
+        endpoint: "carPart",
         launchRequest: true,
         dataQuery: {
             keyValue: {
