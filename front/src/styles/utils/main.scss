@@ -4,21 +4,19 @@ main {
     width: $screen-max-width;
     padding: 45px 36px 70px 36px;
     margin: auto !important;
-    min-height: 100vh;
+    min-height: 95vh;
     position: relative;
 
-    &:not(.bg-cover){
-        background-color: #F5F7FF;
-    } 
+    &:not(.bg-cover) {
+        background-color: #f5f7ff;
+    }
 
     * {
         font-family: "object-sans", sans-serif;
     }
 }
 
-
-
-.bg-cover{
+.bg-cover {
     object-fit: cover;
     &__img {
         position: absolute;
@@ -37,7 +35,7 @@ main {
     height: 0;
     visibility: hidden;
     margin-bottom: 0;
-    &:not(.text-left){
+    &:not(.text-left) {
         text-align: right;
     }
     &.invalid {
@@ -46,5 +44,13 @@ main {
         margin-right: 5px;
         margin-bottom: 6px;
         height: 100%;
+    }
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    &:hover {
+        color: inherit;
     }
 }

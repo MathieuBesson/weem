@@ -5,6 +5,7 @@ import HeaderGoToBack from "./../../components/HeaderGotToBack";
 import CarPartPreview from "./../../components/CarPartPreview";
 import { useSelector } from "react-redux";
 import { useFetch } from "../../utils/api";
+import { generateParamsRoutes, ROUTES } from "../../utils/routes";
 
 const MaintenanceUpcoming = () => {
     const currentCar = useSelector((state) => state.currentCar);
@@ -33,11 +34,25 @@ const MaintenanceUpcoming = () => {
                 <main className="maintenance-upcomming">
                     <HeaderGoToBack>Vos entretien à venir</HeaderGoToBack>
                     {carPartList.data.map((carPart, id) => (
-                        <CarPartPreview
-                            key={carPart.id}
-                            carPart={carPart}
-                            active={id % 5 !== 0}
-                        />
+                        <>
+                            {console.log(
+                                ROUTES.detailPart.url +
+                                    generateParamsRoutes(ROUTES.detailPart, [
+                                        carPart.id,
+                                    ])
+                            )}
+                            <CarPartPreview
+                                link={
+                                    ROUTES.detailPart.url +
+                                    generateParamsRoutes(ROUTES.detailPart, [
+                                        carPart.id,
+                                    ])
+                                }
+                                key={carPart.id}
+                                carPart={carPart}
+                                active={id % 5 !== 0}
+                            />
+                        </>
                     ))}
                 </main>
             )}

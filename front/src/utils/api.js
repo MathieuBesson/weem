@@ -49,8 +49,18 @@ export const apiEndPoint = {
         url: "/api/car_part_maintenances",
         tokenRequired: true,
     },
-    carPartsMaintenanceSave: {
+    carPartMaintenanceSave: {
+        method: "PATCH",
+        url: "/api/car_part_maintenances",
+        tokenRequired: true,
+    },
+    carPartMaintenanceCreate: {
         method: "POST",
+        url: "/api/car_part_maintenances",
+        tokenRequired: true,
+    },
+    carPartMaintenanceDelete: {
+        method: "DELETE",
         url: "/api/car_part_maintenances",
         tokenRequired: true,
     },
@@ -76,7 +86,12 @@ const generateUrl = (url, dataQuery = null) => {
     return baseUrl + url;
 };
 
-export const useFetch = ({ endpoint, launchRequest = false, dataQuery, dataBody }) => {
+export const useFetch = ({
+    endpoint,
+    launchRequest = false,
+    dataQuery,
+    dataBody,
+}) => {
     // console.log("FETCH", generateUrl( apiEndPoint[endpoint].url, dataQuery), launchRequest);
 
     const defaultQuesryState = {
@@ -134,7 +149,7 @@ export const useFetch = ({ endpoint, launchRequest = false, dataQuery, dataBody 
                         error: null,
                         isSucceed: true,
                         queryCounter: queryState.queryCounter + 1,
-                        launchRequest: false
+                        launchRequest: false,
                     });
                 } catch (err) {
                     console.log(err);
@@ -145,7 +160,7 @@ export const useFetch = ({ endpoint, launchRequest = false, dataQuery, dataBody 
                         error: err.message,
                         isSucceed: false,
                         queryCounter: queryState.queryCounter + 1,
-                        launchRequest: false
+                        launchRequest: false,
                     });
                 }
             })();

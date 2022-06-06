@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { ROUTES } from "../utils/routes";
+import { generateParamsRoutes, ROUTES } from "../utils/routes";
 import { useFetch } from "./../utils/api";
 
 // Pictures
@@ -41,10 +41,19 @@ const MaintenanceUpcomingPreview = () => {
                             <CarPartPreview
                                 key={carPart.id}
                                 carPart={carPart}
+                                link={
+                                    ROUTES.detailPart.url +
+                                    generateParamsRoutes(ROUTES.detailPart, [
+                                        carPart.id,
+                                    ])
+                                }
                             />
                         ))}
                     </div>
-                    <Link className="btn btn-thirdary w-100" to={ROUTES.maintenanceUpcoming.url}>
+                    <Link
+                        className="btn btn-thirdary w-100"
+                        to={ROUTES.maintenanceUpcoming.url}
+                    >
                         Voir l'état des autres pièces
                     </Link>
                 </div>

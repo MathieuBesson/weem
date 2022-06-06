@@ -75,7 +75,7 @@ class CarPart extends AbstractCarStandardPart
     private $maxDistance;
 
     /**
-     * @Groups({"carPart_read"})
+     * @Groups({"carPart_read", "carPartMaintenance_read"})
      * @ORM\Column(type="integer", nullable=true)
      * @Assert\Choice(choices=AbstractCarStandardPart::CALCUL_DURATION_CHOICE_ID, message="Choisissez un choix du type de calcul valide")
      */

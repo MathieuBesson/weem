@@ -1,24 +1,24 @@
 Dossier
-    →Fichier.js (Nom de la page sur Figma)
-        →Route: back
-    →Sous Dossier
-        →Fichier.js (Nom de la page sur Figma)
-            -Route: back
+→Fichier.js (Nom de la page sur Figma)
+→Route: back
+→Sous Dossier
+→Fichier.js (Nom de la page sur Figma)
+-Route: back
 
 Implentation:
 
 →pages
-    →authentication
-        →SplashScreen.js (Spash screen)
-            Route:
-        →InscriptionChoice.js (Choix inscription/connexion)
-            Route:
-        →Login.js (Connexion)
-            Route:
-        →Register.js (Inscription)
-            Route:
-        →Onboarding.js (Onboarding)
-            Route:
+→authentication
+→SplashScreen.js (Spash screen)
+Route:
+→InscriptionChoice.js (Choix inscription/connexion)
+Route:
+→Login.js (Connexion)
+Route:
+→Register.js (Inscription)
+Route:
+→Onboarding.js (Onboarding)
+Route:
 
     →carsCreation
         →PartsPrincipalInformation.js (Renseignements de pièces)
@@ -82,7 +82,6 @@ Implentation:
     →NavBar.js
     →SpecialistRecommendation.js
     →UpdateCar.js
-
 
 A voir a la fin:
 →Blog

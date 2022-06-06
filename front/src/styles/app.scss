@@ -1,11 +1,10 @@
-@import './utils/variables';
-@import './utils/fonts';
-@import './standardComponents/colors';
-@import './utils/main';
-@import './standardComponents/inputs';
-@import './standardComponents/icons';
-@import './standardComponents/buttons';
-
+@import "./utils/variables";
+@import "./utils/fonts";
+@import "./standardComponents/colors";
+@import "./utils/main";
+@import "./standardComponents/inputs";
+@import "./standardComponents/icons";
+@import "./standardComponents/buttons";
 
 // Pages
 @import "./pages/authentication/InscriptionChoice";
@@ -24,7 +23,6 @@
 @import "./pages/maintenance/ListMaintenanceParts";
 @import "./pages/maintenance/UpdateMaintenance";
 @import "./pages/car/Car";
-
 
 // Components
 @import "./components/AddMaintenance";
@@ -49,12 +47,3 @@
 @import "./components/CarSwitcher";
 @import "./components/NavBar";
 @import "./components/Loader";
-
-
-
-
-
-
-
-
-

@@ -9,18 +9,19 @@ use App\Repository\CarPartMaintenanceRepository;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
-use App\Entity\CarPart; 
+use App\Entity\CarPart;
 
 /**
  * @ApiResource(
  *  collectionOperations={"GET","POST"},
- *  itemOperations={"GET","PATCH"},
+ *  itemOperations={"GET","PATCH", "DELETE"},
  *  normalizationContext={
  *      "groups"={"carPartMaintenance_read"}
  *  },
- *  denormalizationContext={"disable_type_enforcement"=true}
+ *  denormalizationContext={"disable_type_enforcement"=true},
+ *  attributes={"order"={"dateLastChange": "DESC"}}
  * )
- * @ApiFilter(SearchFilter::class, properties={"carPart.car.id": "exact"})
+ * @ApiFilter(SearchFilter::class, properties={"carPart.car.id": "exact", "carPart.id": "exact"})
  * @ORM\Entity(repositoryClass=CarPartMaintenanceRepository::class)
  */
 class CarPartMaintenance
@@ -48,6 +49,7 @@ class CarPartMaintenance
     private $dateLastChange;
 
     /**
+     * @Groups({"carPartMaintenance_read","carPart_read"})
      * @ORM\Column(type="text", nullable=true)
      */
     private $note;

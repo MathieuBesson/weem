@@ -41,12 +41,14 @@ const CompleteHistory = () => {
                             (carPartMaintenance) => (
                                 <MaintenanceHistoryItem
                                     date={carPartMaintenance.dateLastChange}
+                                    id={carPartMaintenance.id}
+                                    key={carPartMaintenance.id}
                                 />
                             )
                         )}
+                        {/* <MaintenanceHistoryItem date="02/08/2021" />
                         <MaintenanceHistoryItem date="02/08/2021" />
-                        <MaintenanceHistoryItem date="02/08/2021" />
-                        <MaintenanceHistoryItem date="02/08/2021" />
+                        <MaintenanceHistoryItem date="02/08/2021" /> */}
                     </div>
                     <button className="btn btn-primary w-100">
                         Exporter le carnet d'entretien

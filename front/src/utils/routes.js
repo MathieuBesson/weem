@@ -6,26 +6,24 @@ import CarInformation from "./../pages/carsCreation/CarInformation";
 import PartsPrincipalInformation from "./../pages/carsCreation/PartsPrincipalInformation";
 
 export const ROUTES = {
-    inscriptionChoice : {
-        url: "/"
+    inscriptionChoice: {
+        url: "/",
     },
-    registration : {
-        url: "/inscription"
+    registration: {
+        url: "/inscription",
     },
-    login : {
-        url: "/connexion"
+    login: {
+        url: "/connexion",
     },
-    onboarding : {
-        url: "/bienvenue"
+    onboarding: {
+        url: "/bienvenue",
     },
-    carInformation : {
-        url: "/voiture-information"
+    carInformation: {
+        url: "/voiture-information",
     },
-    partsPrincipalInformation : {
+    partsPrincipalInformation: {
         url: "/pieces-principales",
-        params: [
-            'carId'
-        ]
+        params: ["carId"],
     },
     maintenanceUpcoming: {
         url: "/entretiens-a-venir",
@@ -33,18 +31,35 @@ export const ROUTES = {
     maintenanceHistory: {
         url: "/historique-changements",
     },
+    detailPart: {
+        url: "/detail-piece",
+        params: ["carPartId"],
+    },
+    maintenanceSave: {
+        url: "/entretien",
+        params: ["carPartMaintenanceId"],
+    },
 
     // Nav Bar
-    home : {
-        url: "/home"
+    home: {
+        url: "/home",
     },
-    blog : {
-        url: "/blog"
+    blog: {
+        url: "/blog",
     },
-    maintenanceBook : {
-        url: "/carnet-entretien"
+    maintenanceBook: {
+        url: "/carnet-entretien",
     },
-    docs : {
-        url: "/documents"
+    docs: {
+        url: "/documents",
     },
-}
+};
+
+export const generateParamsRoutes = (route, params = [], model = false) => {
+    const arrayParams = model ? route.params : params;
+    return arrayParams.reduce(
+        (previousValue, currentValue) =>
+            previousValue + "/" + (model ? ":" : "") + currentValue,
+        ""
+    );
+};

@@ -22,6 +22,7 @@ import CarSwitcher from "./components/CarSwitcher";
 import NavBar from "./components/NavBar";
 import Loader from "./components/Loader";
 import Car from "./pages/car/Car";
+import { Helmet } from "react-helmet";
 
 import { useFetch } from "./utils/api";
 import { useEffect, useState } from "react";
@@ -34,7 +35,7 @@ import {
 } from "./store/store";
 import { Routes, Route } from "react-router-dom";
 import { useGetAuthToken } from "./utils/auth";
-import { ROUTES } from "./utils/routes";
+import { generateParamsRoutes, ROUTES } from "./utils/routes";
 import MaintenanceHistory from "./components/MaintenanceHistory";
 
 function App() {
@@ -115,6 +116,9 @@ function App() {
                 <Loader />
             ) : (
                 <>
+                    <Helmet>
+                        <title>Weem</title>
+                    </Helmet>
                     <Routes>
                         {isAccessNotLoggedOk() && (
                             <>
@@ -162,6 +166,28 @@ function App() {
                                 <Route
                                     path={ROUTES.maintenanceHistory.url}
                                     element={<CompleteHistory />}
+                                />
+                                <Route
+                                    path={
+                                        ROUTES.detailPart.url +
+                                        generateParamsRoutes(
+                                            ROUTES.detailPart,
+                                            [],
+                                            true
+                                        )
+                                    }
+                                    element={<DetailPart />}
+                                />
+                                <Route
+                                    path={
+                                        ROUTES.maintenanceSave.url +
+                                        generateParamsRoutes(
+                                            ROUTES.maintenanceSave,
+                                            [],
+                                            true
+                                        )
+                                    }
+                                    element={<UpdateMaintenance />}
                                 />
                             </>
                         )}

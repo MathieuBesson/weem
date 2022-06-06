@@ -36,6 +36,8 @@ const MaintenanceHistory = () => {
                         {carPartMaintenanceList.data.map(
                             (carPartMaintenance) => (
                                 <MaintenanceHistoryItem
+                                    key={carPartMaintenance.id}
+                                    id={carPartMaintenance.id}
                                     date={carPartMaintenance.dateLastChange}
                                 />
                             )
