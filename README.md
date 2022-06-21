@@ -25,9 +25,6 @@ Le projet d'organise en 2 niveaux :
 - La partie frontend composé de : 
     - Du framework ReactJS (https://fr.reactjs.org/)
 
-- La partie mobile composé de : 
-    - Du framework Capacitor (https://capacitorjs.com/)
-
 ## Lancement de la partie API Backend (2 choix possibles)
 
 ### 1. Avec le Makefile (en 1 commande)
@@ -116,7 +113,6 @@ sudo php -S 0.0.0.0:80
 ## Makers 
 
 - 💻 Developpeurs : 
-    - [Jeff Labillois](https://github.com/Valknu-t)
     - [Mathieu Besson](https://github.com/MathieuBesson)
 - 🔬🖌 UX/UI Designer : 
     - [Alexandre Kling](https://www.linkedin.com/in/alexandre-kling-964577187/)
