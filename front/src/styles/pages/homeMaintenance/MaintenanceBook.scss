@@ -6,6 +6,7 @@
         }
 
         &-car {
+            cursor: pointer;
             margin: 10px 0 30px 0;
             position: relative;
             display: inline-block;
@@ -19,12 +20,12 @@
             }
         }
     }
-    .btn-thirdary{
+    .btn-thirdary {
         margin-top: 10px;
         text-align: left;
         padding-left: 13px;
         position: relative;
-        .icon{
+        .icon {
             position: absolute;
             right: 15px;
             top: 28%;
@@ -32,7 +33,7 @@
             transform: rotate(0deg);
             transition: background-color ease 0.3s;
         }
-        &:hover .icon{
+        &:hover .icon {
             background-color: $white-primary;
         }
     }

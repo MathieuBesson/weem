@@ -34,25 +34,17 @@ const MaintenanceUpcoming = () => {
                 <main className="maintenance-upcomming">
                     <HeaderGoToBack>Vos entretien à venir</HeaderGoToBack>
                     {carPartList.data.map((carPart, id) => (
-                        <>
-                            {console.log(
+                        <CarPartPreview
+                            link={
                                 ROUTES.detailPart.url +
-                                    generateParamsRoutes(ROUTES.detailPart, [
-                                        carPart.id,
-                                    ])
-                            )}
-                            <CarPartPreview
-                                link={
-                                    ROUTES.detailPart.url +
-                                    generateParamsRoutes(ROUTES.detailPart, [
-                                        carPart.id,
-                                    ])
-                                }
-                                key={carPart.id}
-                                carPart={carPart}
-                                active={id % 5 !== 0}
-                            />
-                        </>
+                                generateParamsRoutes(ROUTES.detailPart, [
+                                    carPart.id,
+                                ])
+                            }
+                            key={carPart.id}
+                            carPart={carPart}
+                            active={id % 5 !== 0}
+                        />
                     ))}
                 </main>
             )}

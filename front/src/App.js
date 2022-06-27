@@ -33,7 +33,7 @@ import {
     setUserDatas,
     setCurrentCar,
 } from "./store/store";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { useGetAuthToken } from "./utils/auth";
 import { generateParamsRoutes, ROUTES } from "./utils/routes";
 import MaintenanceHistory from "./components/MaintenanceHistory";
@@ -42,6 +42,8 @@ function App() {
     // Store
     const dispatch = useDispatch();
     const token = useSelector((state) => state.user.token);
+    const currentCar = useSelector((state) => state.currentCar);
+    const location = useLocation();
 
     console.log(token);
 
@@ -62,7 +64,7 @@ function App() {
         endpoint: "userConnected",
     });
 
-    const currentCar = useFetch({
+    const currentCarFetch = useFetch({
         endpoint: "car",
         dataQuery: {
             keyValue: {
@@ -90,19 +92,21 @@ function App() {
 
         if (user.isSucceed) {
             dispatch(setUserDatas(user.data));
-            currentCar.setLaunchRequest(true);
+            currentCarFetch.setLaunchRequest(true);
         }
     }, [user.isSucceed]);
 
     useEffect(() => {
-        if (currentCar.isSucceed) {
-            dispatch(setCurrentCar(currentCar.data[0]));
+        if (currentCarFetch.isSucceed) {
+            dispatch(setCurrentCar(currentCarFetch.data[0]));
         }
-    }, [currentCar.isSucceed]);
+    }, [currentCarFetch.isSucceed]);
 
     const isAccessLoggedOk = () => {
         return (
-            constanteRequest.isSucceed && user.isSucceed && currentCar.isSucceed
+            constanteRequest.isSucceed &&
+            user.isSucceed &&
+            currentCarFetch.isSucceed
         );
     };
 
@@ -189,12 +193,29 @@ function App() {
                                     }
                                     element={<UpdateMaintenance />}
                                 />
+                                <Route
+                                    path={
+                                        ROUTES.carSave.url +
+                                        generateParamsRoutes(
+                                            ROUTES.carSave,
+                                            [],
+                                            true
+                                        )
+                                    }
+                                    element={<Car />}
+                                />
                             </>
                         )}
                         <Route path="*" element={<NotFound />} />
                     </Routes>
+                    {console.log(currentCar)}
+                    {console.log(location.pathname)}
 
-                    {isAccessLoggedOk() && <NavBar />}
+                    {isAccessLoggedOk() &&
+                        currentCar !== undefined &&
+                        currentCar !== null &&
+                        location.pathname !==
+                            ROUTES.partsPrincipalInformation.url && <NavBar />}
                 </>
             )}
 

@@ -7,11 +7,14 @@ import iconShare from "./../../assets/images/icons/share.svg";
 import MaintenanceUpcomingPreview from "./../../components/MaintenanceUpcomingPreview";
 import HeaderGoToBack from "./../../components/HeaderGotToBack";
 import MaintenanceHistoryItem from "./../../components/MaintenanceHistoryItem";
-import { useFetch } from "../../utils/api";
+import { apiEndPoint, generateUrl, useFetch } from "../../utils/api";
 import { useSelector } from "react-redux";
+import { generateParamsRoutes, ROUTES } from "../../utils/routes";
+import { Link } from "react-router-dom";
 
 const CompleteHistory = () => {
     const currentCar = useSelector((state) => state.currentCar);
+    const token = useSelector((state) => state.user.token);
 
     const carPartMaintenanceList = useFetch({
         endpoint: "carPartMaintenance",
@@ -46,40 +49,32 @@ const CompleteHistory = () => {
                                 />
                             )
                         )}
-                        {/* <MaintenanceHistoryItem date="02/08/2021" />
-                        <MaintenanceHistoryItem date="02/08/2021" />
-                        <MaintenanceHistoryItem date="02/08/2021" /> */}
+
+                        {carPartMaintenanceList.data.length === 0 && (
+                            <p className="maintenance-history__list-no-data">
+                                Pas encore de changements sauvegardé{" "}
+                            </p>
+                        )}
                     </div>
-                    <button className="btn btn-primary w-100">
+                    <a
+                        className="btn btn-primary w-100"
+                        href={generateUrl(apiEndPoint.maintenanceSummary.url, {
+                            justValue: currentCar.id,
+                            keyValue: {
+                                token,
+                            },
+                        })}
+                        target="_blank"
+                    >
                         Exporter le carnet d'entretien
                         <span
                             className="icon icon-bottom"
                             style={{ maskImage: `url(${iconShare})` }}
                         ></span>
-                    </button>
+                    </a>
                 </main>
             )}
         </>
-        // {carPartMaintenanceList.isSucceed && (
-        //     <div className="maintenance-history">
-        //         <h3 className="maintenance-history__title">
-        //             Historique et transfert des entretiens
-        //         </h3>
-        //         <div className="maintenance-history__list">
-        //             {console.log(carPartMaintenanceList.data)}
-        //             {carPartMaintenanceList.data.map(
-        //                 (carPartMaintenance) => (
-        //                     <MaintenanceHistoryItem
-        //                         date={carPartMaintenance.dateLastChange}
-        //                     />
-        //                 )
-        //             )}
-        //         </div>
-        //         <button className="btn btn-primary w-100">
-        //             Voir l'historique complet
-        //         </button>
-        //     </div>
-        // )}
     );
 };
 

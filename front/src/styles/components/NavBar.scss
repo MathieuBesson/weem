@@ -59,7 +59,8 @@
         }
 
         &-car-nav {
-            border: 2px solid $green-primary;
+            border-width: 2px;
+            border-style: solid;
             .icon {
                 mask-size: 100% 100%;
             }

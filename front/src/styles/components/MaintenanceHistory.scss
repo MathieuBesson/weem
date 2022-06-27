@@ -1,11 +1,16 @@
-.maintenance-history{
+.maintenance-history {
     margin-top: 40px;
-    &__title{
+    &__title {
         font-size: $font-size-medium;
         font-weight: $font-weight-bold;
         margin-bottom: 20px;
     }
-    .btn-primary{
+    .btn-primary {
         margin-top: 20px;
+    }
+
+    &__list-no-data {
+        font-size: $font-size-small;
+        text-align: center;
     }
 }

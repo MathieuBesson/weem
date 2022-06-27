@@ -76,10 +76,15 @@ const CostEstimation = () => {
             </ul>
 
             <div className="cost-estimation__parts">
-                {Object.keys(carPartList.data).length !== 0 &&
+                {Object.keys(carPartList.data).length !== 0 ? (
                     carPartList.data.map((carPart, id) => (
                         <CostEstimationPart key={id} carPart={carPart} />
-                    ))}
+                    ))
+                ) : (
+                    <p className="cost-estimation__parts-no-data">
+                        Pas de changement dans les {activeTime} mois
+                    </p>
+                )}
             </div>
             <div className="cost-estimation__total d-flex justify-content-between">
                 <span className="cost-estimation__total-content">Total</span>

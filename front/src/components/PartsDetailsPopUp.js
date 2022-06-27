@@ -18,7 +18,7 @@ const PartsDetailsPopUp = ({
         useState(false);
 
     const registerPartChange = useFetch({
-        endpoint: "carPartMaintenanceSave",
+        endpoint: "carPartMaintenanceCreate",
         launchRequest: launchRegisterPartChange,
         dataBody: {
             mileage: mileageLastChange === "" ? null : mileageLastChange,
@@ -60,7 +60,7 @@ const PartsDetailsPopUp = ({
         ) {
             setLaunchRegisterPartChange(true);
             addSelectClassToSubmitPart(carPart.id);
-            setNotActivePopup()
+            setNotActivePopup();
         }
     };
 

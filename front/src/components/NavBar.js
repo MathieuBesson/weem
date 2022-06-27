@@ -7,8 +7,13 @@ import docIcon from "./../assets/images/icons/doc.svg";
 import homeIcon from "./../assets/images/icons/home.svg";
 import noteBookIcon from "./../assets/images/icons/notebook.svg";
 import coupe from "./../assets/images/icons/coupe.svg";
+import { useSelector } from "react-redux";
+import { icons } from "../utils/iconLoader";
 
 const NavBar = () => {
+    const currentCar = useSelector((state) => state.currentCar);
+    const constantes = useSelector((state) => state.constantes.Car);
+
     const menuItems = [
         {
             name: "Blog",
@@ -39,39 +44,60 @@ const NavBar = () => {
         },
     ];
 
+    const carTypeList = {
+        [constantes?.MODEL_TYPE_ID.BERLINE]: icons.iconBerline,
+        [constantes?.MODEL_TYPE_ID.CITADINE]: icons.iconCitadine,
+        [constantes?.MODEL_TYPE_ID.COUPE]: icons.iconCoupe,
+        [constantes?.MODEL_TYPE_ID.SUV]: icons.iconSuv,
+    };
+
     const location = useLocation()?.pathname;
 
     return (
-        <ul className="nav-bar">
-            {menuItems.map((item, id) => (
-                <Link key={id} to={item.route}>
-                    <li
-                        className={`nav-bar__item ${
-                            item.routeListActive.includes(location)
-                                ? "active"
-                                : ""
+        constantes !== undefined && (
+            <ul className="nav-bar">
+                {menuItems.map((item, id) => (
+                    <Link key={id} to={item.route}>
+                        <li
+                            className={`nav-bar__item ${
+                                item.routeListActive.includes(location)
+                                    ? "active"
+                                    : ""
+                            }`}
+                        >
+                            <div className="nav-bar__item-nav">
+                                <img
+                                    className="nav-bar__item-nav-icon"
+                                    src={item.icon}
+                                />
+                            </div>
+                            <span className="nav-bar__item-label">
+                                {item.name}
+                            </span>
+                        </li>
+                    </Link>
+                ))}
+                <li className="nav-bar__item-car">
+                    <div
+                        className={`nav-bar__item-car-nav border-${
+                            constantes.COLOR[currentCar.colorId].LABEL
                         }`}
                     >
-                        <div className="nav-bar__item-nav">
-                            <img
-                                className="nav-bar__item-nav-icon"
-                                src={item.icon}
-                            />
-                        </div>
-                        <span className="nav-bar__item-label">{item.name}</span>
-                    </li>
-                </Link>
-            ))}
-            <li className="nav-bar__item-car">
-                <div className="nav-bar__item-car-nav">
-                    <span
-                        className=" icon mask-green"
-                        style={{ maskImage: `url(${coupe})` }}
-                    ></span>
-                </div>
-                <span className="nav-bar__item-label">Véhicule</span>
-            </li>
-        </ul>
+                        <span
+                            className={`icon mask-${
+                                constantes.COLOR[currentCar.colorId].LABEL
+                            }`}
+                            style={{
+                                maskImage: `url(${
+                                    carTypeList[currentCar.modelType]
+                                })`,
+                            }}
+                        ></span>
+                    </div>
+                    <span className="nav-bar__item-label">Véhicule</span>
+                </li>
+            </ul>
+        )
     );
 };
 

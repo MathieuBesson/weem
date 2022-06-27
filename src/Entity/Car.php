@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ApiResource(
  *  collectionOperations={"GET", "POST"},
- *  itemOperations={"GET","PATCH"},
+ *  itemOperations={"GET", "PATCH"},
  *  normalizationContext={
  *      "groups"={"cars_read"}
  *  },
@@ -24,8 +24,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Car
 {
-    const REGEX_COLOR_HEXA = "/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/";
-
     const FUEL_TYPE_ID = [
         'ELECTRIC' => 1,
         'ESCENCE' => 2,
@@ -93,6 +91,32 @@ class Car
         ],
         self::MODEL_TYPE_ID['CITADINE'] => [
             'LABEL' => 'citadine',
+        ]
+    ];
+
+    const COLOR_ID = [
+        'YELLOW' => 1,
+        'RED' => 2,
+        'GREEN' => 3,
+        'BLUE' => 4,
+        'VIOLET' => 5,
+    ];
+
+    const COLOR = [
+        self::COLOR_ID['YELLOW'] => [
+            'LABEL' => 'yellow',
+        ],
+        self::COLOR_ID['RED'] => [
+            'LABEL' => 'red',
+        ],
+        self::COLOR_ID['GREEN'] => [
+            'LABEL' => 'green',
+        ],
+        self::COLOR_ID['BLUE'] => [
+            'LABEL' => 'blue',
+        ],
+        self::COLOR_ID['VIOLET'] => [
+            'LABEL' => 'violet',
         ]
     ];
 
@@ -173,18 +197,13 @@ class Car
      * @Groups({"cars_read"})
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $modelType;
+    private $modelType = self::MODEL_TYPE_ID['COUPE'];
 
     /**
      * @Groups({"cars_read"})
-     * @ORM\Column(type="string", nullable=true)
-     * @Assert\Regex(
-     *     pattern=Car::REGEX_COLOR_HEXA,
-     *     match=true,
-     *     message="La couleur doit être au format hexadecimal"
-     * )
+     * @ORM\Column(type="integer", nullable=true)
      */
-    private $color;
+    private $colorId = self::COLOR_ID['BLUE'];
 
     /**
      * @Groups({"cars_read"})
@@ -301,14 +320,14 @@ class Car
         return $this;
     }
 
-    public function getColor(): ?string
+    public function getColorId(): ?int
     {
-        return $this->color;
+        return $this->colorId;
     }
 
-    public function setColor(string $color): self
+    public function setColorId(int $colorId): self
     {
-        $this->color = $color;
+        $this->colorId = $colorId;
 
         return $this;
     }

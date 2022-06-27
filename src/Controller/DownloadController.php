@@ -40,13 +40,7 @@ class DownloadController extends AbstractController
      */
     public function maintenanceSummary(Request $request, int $carId)
     {
-        // En prod
-        // $token = substr($request->headers->get('Authorization'), 7);
-
-        // En dev
-        $token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2NDU0MzUyNzUsImV4cCI6MTY0NTQzODg3NSwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoibGVtZWMuc3ltcGFAbWFpbC5jb20ifQ.yYkjuUoJqVMQQ5jUoDwr4JFpmgA4Pp8ZL3PloNxT6d5Vtioqr4BENvCllwBKwajKkuvUwWc2g6FpdPBuwQbFVImFalIH1wiwrQgEehz7CAzSXWGEhuhqAik-f_1FIiL_KWxrRmBSKJ6DySlkGHO-595wV96bghRiCpwaawbEzxctIxlHEdodU7O88w3DAXRhZFYkYy6NsYtjNy0so6fwJ0k8HzFKJCKe4k8WbpQ-R8K6xKBN-TUTyBorLjalovcxaZVQIe1nXJ5Q1KWJ-y1-T0oeHpMIKBC--wNJIxQyaYWSlFKDzB-HtgKL0-MZ6I0XRGLDAqYOpMsgA3HIRhYVvw";
-
-        $userData = JwtUtil::tokenDecode($token);
+        $userData = JwtUtil::tokenDecode($request->query->get('token'));
 
         if (!$userData) {
             throw new NotFoundHttpException();
@@ -80,6 +74,6 @@ class DownloadController extends AbstractController
         $dompdf->loadHtml($html);
         $dompdf->setPaper('A4', 'portrait');
         $dompdf->render();
-        $dompdf->stream("mypdf.pdf", ["Attachment" => false]);
+        $dompdf->stream("export-" . $car->getName() . ".pdf", ["Attachment" => false]);
     }
 }

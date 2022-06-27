@@ -32,7 +32,6 @@ const MaintenanceHistory = () => {
                         Historique et transfert des entretiens
                     </h3>
                     <div className="maintenance-history__list">
-                        {console.log(carPartMaintenanceList.data)}
                         {carPartMaintenanceList.data.map(
                             (carPartMaintenance) => (
                                 <MaintenanceHistoryItem
@@ -41,6 +40,12 @@ const MaintenanceHistory = () => {
                                     date={carPartMaintenance.dateLastChange}
                                 />
                             )
+                        )}
+
+                        {carPartMaintenanceList.data.length === 0 && (
+                            <p className="maintenance-history__list-no-data">
+                                Pas encore de changements sauvegardé{" "}
+                            </p>
                         )}
                     </div>
                     <Link

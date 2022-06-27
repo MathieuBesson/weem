@@ -25,6 +25,7 @@ class CarBrand
 {
     /**
      * @Groups({"carBrand_read"})
+     * @Groups({"cars_read"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")

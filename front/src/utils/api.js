@@ -35,6 +35,11 @@ export const apiEndPoint = {
         tokenRequired: true,
     },
     carSave: {
+        method: "PATCH",
+        url: "/api/cars",
+        tokenRequired: true,
+    },
+    carCreate: {
         method: "POST",
         url: "/api/cars",
         tokenRequired: true,
@@ -64,9 +69,12 @@ export const apiEndPoint = {
         url: "/api/car_part_maintenances",
         tokenRequired: true,
     },
+    maintenanceSummary: {
+        url: "/maintenance_summary",
+    },
 };
 
-const generateUrl = (url, dataQuery = null) => {
+export const generateUrl = (url, dataQuery = null) => {
     if (dataQuery) {
         if (dataQuery.hasOwnProperty("justValue")) {
             url += "/" + dataQuery.justValue;

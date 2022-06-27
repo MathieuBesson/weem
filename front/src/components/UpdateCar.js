@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useFetch } from "../utils/api";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import voca from "voca";
 import { ROUTES } from "./../utils/routes";
@@ -9,9 +9,9 @@ import { useNavigate } from "react-router-dom";
 import iconSoupe from "./../assets/images/icons/souple.svg";
 import iconSportive from "./../assets/images/icons/sportive.svg";
 import iconNeutre from "./../assets/images/icons/neutre.svg";
+import { setCurrentCar } from "../store/store";
 
 export default function UpdateCar({ create = false }) {
-    console.log(create);
     const navigate = useNavigate();
     const iconsDrivingStyle = {
         souple: iconSoupe,
@@ -19,6 +19,9 @@ export default function UpdateCar({ create = false }) {
         neutre: iconNeutre,
     };
     const carConstantes = useSelector((state) => state.constantes.Car);
+    const currentCar = useSelector((state) => state.currentCar);
+    const dispatch = useDispatch();
+
     const [brand, setBrand] = useState(null);
     const [model, setModel] = useState("");
     const [registration, setRegistration] = useState("");
@@ -44,9 +47,18 @@ export default function UpdateCar({ create = false }) {
         launchRequest: true,
     });
 
+    const fetchQueryId = create
+        ? {}
+        : {
+              dataQuery: {
+                  justValue: currentCar?.id,
+              },
+          };
+
     const carSave = useFetch({
-        endpoint: "carSave",
+        endpoint: create ? "carCreate" : "carSave",
         launchRequest: isSaveCarLaunchOk,
+        ...fetchQueryId,
         dataBody: {
             name: model,
             dateReleased,
@@ -85,28 +97,34 @@ export default function UpdateCar({ create = false }) {
     }, [carConstantes]);
 
     useEffect(() => {
-        if (carSave.isSucceed && carSave.data?.['@id']) {
-            const destination = create
-            ? ROUTES.partsPrincipalInformation.url
-            : ROUTES.onboarding.url;
-            // if(haveStateToken || haveCookieToken){
-                console.log(carSave.data['@id'].split('/').pop());
-            navigate(destination, {state:{carId: parseInt(carSave.data['@id'].split('/').pop())}});
-            // }
+        console.log(currentCar);
+        if (currentCar !== null && !create) {
+            console.log(currentCar.registration);
+            setBrand(currentCar.carBrand.id);
+            setModel(currentCar.name);
+            setRegistration(currentCar.registration);
+            setDateReleased(
+                moment(currentCar.dateReleased).format("YYYY-MM-DD")
+            );
+            setMileageGlobale(currentCar.mileageGlobale);
+            setFuelType(currentCar.fuelType);
+            setDrivingStyle(currentCar.drivingStyle);
+            setMileageMensual(currentCar.mileageMensual);
         }
+    }, [currentCar]);
 
-        // if (registration.error !== null) {
-        //     setIsRegistrationLaunchOk(false);
-        // }
-
-        // if (registration.isSucceed) {
-        //     setIsLoginLaunchOk(true);
-        // }
-
-        // if (login.isSucceed) {
-        //     dispatch(setToken(login.data.token));
-        //     navigate(ROUTES.onboarding.url);
-        // }
+    useEffect(() => {
+        if (carSave.isSucceed && carSave.data?.["@id"]) {
+            const destination = create
+                ? ROUTES.partsPrincipalInformation.url
+                : ROUTES.home.url;
+            dispatch(setCurrentCar(carSave.data));
+            navigate(destination, {
+                state: {
+                    carId: parseInt(carSave.data["@id"].split("/").pop()),
+                },
+            });
+        }
     }, [carSave.isSucceed, carSave.data]);
 
     const validOrNotInput = (condition, varName) => {
@@ -146,19 +164,6 @@ export default function UpdateCar({ create = false }) {
             return value !== "" && value !== null;
         });
 
-        console.log([
-            brand,
-            model,
-            registration,
-            dateReleased,
-            mileageGlobale,
-            fuelType,
-            drivingStyle,
-            mileageMensual,
-        ]);
-        console.log(isValid);
-        console.log(allAreValid && allAreNotEmpty);
-
         setIsSaveCarLaunchOk(allAreValid && allAreNotEmpty);
     };
 
@@ -191,6 +196,7 @@ export default function UpdateCar({ create = false }) {
                             <option
                                 key={currentBrand.id}
                                 value={currentBrand.id}
+                                selected={currentBrand.id === brand}
                             >
                                 {currentBrand.name}
                             </option>
@@ -213,6 +219,7 @@ export default function UpdateCar({ create = false }) {
                     maxLength={25}
                     placeholder="Peugeot 407"
                     onChange={(e) => formValueChangeHandler(e, "model")}
+                    value={model}
                 />
                 <p
                     className={`input-standard-error-message ${
@@ -239,6 +246,7 @@ export default function UpdateCar({ create = false }) {
                     maxLength={25}
                     placeholder="XX-111-XX"
                     onChange={(e) => formValueChangeHandler(e, "registration")}
+                    value={registration}
                 />
                 <p
                     className={`input-standard-error-message ${
@@ -265,6 +273,7 @@ export default function UpdateCar({ create = false }) {
                     name="car-date-released"
                     required
                     onChange={(e) => formValueChangeHandler(e, "dateReleased")}
+                    value={dateReleased}
                 ></input>
                 <p
                     className={`input-standard-error-message ${
@@ -471,21 +480,9 @@ export default function UpdateCar({ create = false }) {
                 informations au plus proche de la réalité !
             </p>
             <div className="update-car__form-buttons">
-                {create ? (
-                    <>
-                        <button
-                            onClick={formSubmitHandler}
-                            className="btn btn-primary"
-                        >
-                            Valider
-                        </button>
-                        {/* <button className="btn btn-thirdary">
-                            Continuer plus tard
-                        </button> */}
-                    </>
-                ) : (
-                    <button className="btn btn-primary">Mettre à jour</button>
-                )}
+                <button className="btn btn-primary" onClick={formSubmitHandler}>
+                    {create ? "Valider" : "Mettre à jour"}
+                </button>
             </div>
         </form>
     );

@@ -24,6 +24,7 @@ const MaintenanceUpcomingPreview = () => {
     });
 
     useEffect(() => {
+        console.log(currentCar);
         if (currentCar !== null) {
             setIsLaunchRequestCarParts(true);
         }

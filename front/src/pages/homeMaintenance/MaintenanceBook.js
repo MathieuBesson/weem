@@ -10,12 +10,17 @@ import iconShare from "./../../assets/images/icons/share.svg";
 import MaintenanceUpcomingPreview from "./../../components/MaintenanceUpcomingPreview";
 import CostEstimation from "./../../components/CostEstimation";
 import MaintenanceHistory from "./../../components/MaintenanceHistory";
-import { useFetch } from "../../utils/api";
+import { apiEndPoint, generateUrl, useFetch } from "../../utils/api";
 import Loader from "../../components/Loader";
 import NavBar from "../../components/NavBar";
+import CarSwitcher from "../../components/CarSwitcher";
 
 const MaintenanceBook = () => {
     const currentCar = useSelector((state) => state.currentCar);
+    const token = useSelector((state) => state.user.token);
+
+    const [popupActive, setPopupActive] = useState(true);
+
     console.log(currentCar);
 
     return (
@@ -28,7 +33,10 @@ const MaintenanceBook = () => {
                                 Votre carnet d'entretien
                             </h2>
 
-                            <p className="maintenance-book__header-car green">
+                            <p
+                                className="maintenance-book__header-car green"
+                                onClick={() => setPopupActive(!popupActive)}
+                            >
                                 {voca.capitalize(currentCar?.name)}
                                 <span
                                     className="icon icon-bottom"
@@ -42,14 +50,30 @@ const MaintenanceBook = () => {
                         <MaintenanceUpcomingPreview />
                         <CostEstimation />
                         <MaintenanceHistory />
-                        <button className="btn btn-thirdary w-100">
+                        <a
+                            className="btn btn-thirdary w-100"
+                            href={generateUrl(
+                                apiEndPoint.maintenanceSummary.url,
+                                {
+                                    justValue: currentCar.id,
+                                    keyValue: {
+                                        token,
+                                    },
+                                }
+                            )}
+                            target="_blank"
+                        >
                             Exporter le carnet d'entretien
                             <span
                                 className="icon icon-bottom"
                                 style={{ maskImage: `url(${iconShare})` }}
                             ></span>
-                        </button>
+                        </a>
                     </main>
+                    <CarSwitcher
+                        popupActive={popupActive}
+                        setPopupActive={setPopupActive}
+                    />
                     <NavBar />
                 </>
             ) : (

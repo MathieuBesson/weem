@@ -1,17 +1,16 @@
-.green{
-    color: $green-primary
+.green {
+    color: $green-primary;
 }
 
-.orange{
-    color: $orange-primary
+.orange {
+    color: $orange-primary;
 }
 
-.red{
-    color: $red-primary
+.red {
+    color: $red-primary;
 }
 
-
-.border {
+.border-before {
     &-yellow::before {
         border-color: $yellow-secondary;
     }
@@ -44,5 +43,23 @@
     }
     &-violet {
         background-color: $violet-primary;
+    }
+}
+
+.border {
+    &-yellow {
+        border-color: $yellow-secondary;
+    }
+    &-red {
+        border-color: $red-secondary;
+    }
+    &-green {
+        border-color: $green-primary;
+    }
+    &-blue {
+        border-color: $blue-five;
+    }
+    &-violet {
+        border-color: $violet-primary;
     }
 }

@@ -9,16 +9,25 @@ import pneuAvant from "./../assets/images/icons/car-parts/pneu-avant.svg";
 import vidange from "./../assets/images/icons/car-parts/vidange.svg";
 import controleTechnique from "./../assets/images/icons/car-parts/controle-technique.svg";
 
+import iconSuv from "./../assets/images/icons/suv.svg";
+import iconCoupe from "./../assets/images/icons/coupe.svg";
+import iconCitadine from "./../assets/images/icons/citadine.svg";
+import iconBerline from "./../assets/images/icons/berline.svg";
+
 export const icons = {
     "pneus arrières": pneuArriere,
     "pneus avants": pneuAvant,
     "courroie de distribution": courroieDistribution,
-    "freins": freins,
-    "filtreAir": filtreAir,
+    freins: freins,
+    filtreAir: filtreAir,
     "filtre à carburant": filtreCarburant,
     "filtre déshydratant": filtreDeshydratant,
     "filtre à huile": filtreHuile,
     "filtre à air": filtreAir,
-    "vidange": vidange,
+    vidange: vidange,
     "controle technique": controleTechnique,
+    iconSuv,
+    iconCoupe,
+    iconCitadine,
+    iconBerline,
 };

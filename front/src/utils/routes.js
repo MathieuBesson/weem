@@ -39,6 +39,10 @@ export const ROUTES = {
         url: "/entretien",
         params: ["carPartMaintenanceId"],
     },
+    carSave: {
+        url: "/voiture-mise-a-jour",
+        params: ["carId"],
+    },
 
     // Nav Bar
     home: {
