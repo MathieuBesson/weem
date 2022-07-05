@@ -16,13 +16,7 @@ const UpdateMaintenance = () => {
     const navigate = useNavigate();
     const [date, setDate] = useState("");
     const [note, setNote] = useState("");
-    const [mileage, setMileage] = useState("");
     const [isValidDate, setIsValidDate] = useState(true);
-    const [isValidMileage, setIsValidMileage] = useState(true);
-    const carPartConstantes = useSelector(
-        (state) =>
-            state.constantes.AbstractCarStandardPart?.CALCUL_DURATION_CHOICE_ID
-    );
 
     const { carPartMaintenanceId } = useParams();
     console.log(carPartMaintenanceId);
@@ -41,7 +35,6 @@ const UpdateMaintenance = () => {
         },
         dataBody: {
             dateLastChange: date !== "" ? date : null,
-            mileage: mileage !== "" ? mileage : null,
             note: note !== "" ? note : null,
         },
     });
@@ -57,7 +50,6 @@ const UpdateMaintenance = () => {
             const maintenance = carPartMaintenance.data;
             setDate(moment(maintenance.dateLastChange).format("YYYY-MM-DD"));
             setNote(maintenance.note);
-            setMileage(maintenance.mileage);
         }
     }, [carPartMaintenance.isSucceed]);
 
@@ -67,36 +59,13 @@ const UpdateMaintenance = () => {
         setIsValidDate(moment(value, "YYYY-MM-DD", true).isValid());
     };
 
-    const handleChangeMileage = (e) => {
-        const value = parseInt(e.target.value);
-        setMileage(isNaN(value) ? "" : value);
-        setIsValidDate(value >= 0);
-    };
-
     const handleChangeNote = (e) => {
         setNote(e.target.value);
     };
 
     const handleSaveChange = (e) => {
         e.preventDefault();
-        let condition = null;
-        console.log(isValidMileage, mileage);
-        switch (true) {
-            case isDisplayInputDate() && isDisplayInputNumber():
-                condition =
-                    isValidDate &&
-                    isValidMileage &&
-                    (mileage !== "" || date !== "");
-                break;
-            case isDisplayInputDate():
-                condition = isValidDate && date !== "";
-                break;
-            case isDisplayInputNumber():
-                condition = isValidMileage && mileage !== "";
-                break;
-        }
-
-        if (condition) {
+        if (isValidDate && date !== "") {
             carPartMaintenanceSave.setLaunchRequest(true);
             navigate(-1);
         }
@@ -108,21 +77,6 @@ const UpdateMaintenance = () => {
         navigate(-1);
     };
 
-    const isDisplayInputDate = () =>
-        Object.keys(carPartMaintenance.data).length !== 0 &&
-        (carPartMaintenance.data?.carPart.calculDurationChoice ===
-            carPartConstantes.DURATION ||
-            carPartMaintenance.data?.carPart.calculDurationChoice ===
-                carPartConstantes.BOTH);
-
-    const isDisplayInputNumber = () =>
-        Object.keys(carPartMaintenance.data).length !== 0 &&
-        (carPartMaintenance.data?.carPart.calculDurationChoice ===
-            carPartConstantes.MILEAGE ||
-            carPartMaintenance.data?.carPart.calculDurationChoice ===
-                carPartConstantes.BOTH);
-
-    console.log(carPartMaintenance.data);
     return (
         <main className="update-maintenance">
             <HeaderGoToBack>Modifier le changement</HeaderGoToBack>
@@ -135,39 +89,23 @@ const UpdateMaintenance = () => {
             </h2>
             <form className="update-maintenance__form">
                 <div className="update-maintenance__form-group">
-                    {isDisplayInputDate() && (
-                        <div className="input-date">
-                            <input
-                                className="input-standard"
-                                type="date"
-                                id="car-part-recurrence"
-                                name="car-part-recurrence"
-                                placeholder="Nom de l'entretien*"
-                                required
-                                value={date}
-                                onChange={handleChangeDate}
-                            ></input>
-                            <span
-                                className="icon icon-date"
-                                style={{ backgroundImage: `url(${iconDate})` }}
-                            ></span>
-                        </div>
-                    )}
-                    {isDisplayInputNumber() && (
-                        <div className="input-number">
-                            <input
-                                className="add-maintenance__form-input input-standard"
-                                type="number"
-                                required
-                                placeholder="Kilométrage de la voiture*"
-                                min="0"
-                                value={mileage}
-                                onChange={handleChangeMileage}
-                            ></input>
-                            <span className="input-number-moins">-</span>
-                            <span className="input-number-plus">+</span>
-                        </div>
-                    )}
+                    <div className="input-date">
+                        <input
+                            className="input-standard"
+                            type="date"
+                            id="car-part-recurrence"
+                            name="car-part-recurrence"
+                            placeholder="Nom de l'entretien*"
+                            required
+                            value={date}
+                            onChange={handleChangeDate}
+                        ></input>
+                        <span
+                            className="icon icon-date"
+                            style={{ backgroundImage: `url(${iconDate})` }}
+                        ></span>
+                    </div>
+
                     <textarea
                         className="input-standard"
                         name="history-note"

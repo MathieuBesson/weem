@@ -19,9 +19,9 @@ class CarPartMaintenanceSubscriber implements EventSubscriberInterface
     private CarPartMaintenanceRepository $carPartMaintenanceRepository;
 
     public function __construct(
-        EntityManagerInterface $em, 
+        EntityManagerInterface $em,
         CarPartMaintenanceRepository $carPartMaintenanceRepository
-    ){
+    ) {
         $this->em = $em;
         $this->carPartMaintenanceRepository = $carPartMaintenanceRepository;
     }
@@ -46,17 +46,32 @@ class CarPartMaintenanceSubscriber implements EventSubscriberInterface
         $method = $event->getRequest()->getMethod();
 
         // On carPartMaintenance update, actualize the future date change of the car part
-        if ($carPartMaintenance instanceof CarPartMaintenance && in_array($method, ["POST", "PATCH", "PUT"])) {
-            $carPart = $carPartMaintenance->getCarPart(); 
+        if ($carPartMaintenance instanceof CarPartMaintenance) {
+
+            $carPart = $carPartMaintenance->getCarPart();
             $carPartId = $carPart->getId();
             $lastCarPartMaintenance = $this->carPartMaintenanceRepository->getLastByCarPart($carPartId);
 
-            $dateBeforeFutureChangeInBdd = $carPart->getUpdateFutureChange($lastCarPartMaintenance);
-            $dateBeforeFutureChangeComeIn = $carPart->getUpdateFutureChange($carPartMaintenance);
+            if (in_array($method, ["POST", "PATCH", "PUT"])) {
+                $dateBeforeFutureChangeInBdd = $carPart->getUpdateFutureChange($lastCarPartMaintenance);
+                $dateBeforeFutureChangeComeIn = $carPart->getUpdateFutureChange($carPartMaintenance);
 
-            // if new date is smaller than old
-            if($dateBeforeFutureChangeComeIn > $dateBeforeFutureChangeInBdd){
-                $carPart->setFutureChangeDate($dateBeforeFutureChangeComeIn);
+                // if new date is smaller than old
+                if ($dateBeforeFutureChangeComeIn >= $dateBeforeFutureChangeInBdd) {
+                    $carPart->setFutureChangeDate($dateBeforeFutureChangeComeIn);
+                    $this->em->persist($carPart);
+                    $this->em->flush();
+                }
+            }
+
+            if (in_array($method, ["DELETE"])) {
+                $carPart->setFutureChangeDate(
+                    $carPart->getUpdateFutureChange(
+                        $lastCarPartMaintenance->getId() !== $carPartMaintenance->getId()
+                            ? $lastCarPartMaintenance
+                            : null
+                    )
+                );
                 $this->em->persist($carPart);
                 $this->em->flush();
             }

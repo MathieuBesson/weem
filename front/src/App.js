@@ -37,6 +37,8 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { useGetAuthToken } from "./utils/auth";
 import { generateParamsRoutes, ROUTES } from "./utils/routes";
 import MaintenanceHistory from "./components/MaintenanceHistory";
+import Blog from "./pages/blog/Blog";
+import Article from "./pages/blog/Article";
 
 function App() {
     // Store
@@ -172,6 +174,10 @@ function App() {
                                     element={<CompleteHistory />}
                                 />
                                 <Route
+                                    path={ROUTES.listMaintenanceParts.url}
+                                    element={<ListMaintenanceParts />}
+                                />
+                                <Route
                                     path={
                                         ROUTES.detailPart.url +
                                         generateParamsRoutes(
@@ -203,6 +209,14 @@ function App() {
                                         )
                                     }
                                     element={<Car />}
+                                />
+                                <Route
+                                    path={ROUTES.blog.url}
+                                    element={<Blog />}
+                                />
+                                <Route
+                                    path={ROUTES.article.url}
+                                    element={<Article />}
                                 />
                             </>
                         )}

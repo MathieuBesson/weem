@@ -1,6 +1,6 @@
 import react, { useState } from "react";
 import { useRoutes, useLocation, Link } from "react-router-dom";
-import { ROUTES } from "./../utils/routes";
+import { generateParamsRoutes, ROUTES } from "./../utils/routes";
 
 import blogIcon from "./../assets/images/icons/blog.svg";
 import docIcon from "./../assets/images/icons/doc.svg";
@@ -19,7 +19,7 @@ const NavBar = () => {
             name: "Blog",
             icon: blogIcon,
             route: ROUTES.blog.url,
-            routeListActive: [ROUTES.blog.url],
+            routeListActive: [ROUTES.blog.url, ROUTES.article.url],
         },
         {
             name: "Docs",
@@ -77,25 +77,34 @@ const NavBar = () => {
                         </li>
                     </Link>
                 ))}
-                <li className="nav-bar__item-car">
-                    <div
-                        className={`nav-bar__item-car-nav border-${
-                            constantes.COLOR[currentCar.colorId].LABEL
-                        }`}
-                    >
-                        <span
-                            className={`icon mask-${
+                <Link
+                    to={
+                        ROUTES.carSave.url +
+                        generateParamsRoutes(ROUTES.carSave, [currentCar.id])
+                    }
+                >
+                    <li className="nav-bar__item-car">
+                        <div
+                            className={`nav-bar__item-car-nav border-${
                                 constantes.COLOR[currentCar.colorId].LABEL
                             }`}
-                            style={{
-                                maskImage: `url(${
-                                    carTypeList[currentCar.modelType]
-                                })`,
-                            }}
-                        ></span>
-                    </div>
-                    <span className="nav-bar__item-label">Véhicule</span>
-                </li>
+                        >
+                            <span
+                                className={`icon mask-${
+                                    constantes.COLOR[currentCar.colorId].LABEL
+                                }`}
+                                style={{
+                                    maskImage: `url(${
+                                        carTypeList[currentCar.modelType]
+                                    })`,
+                                }}
+                            ></span>
+                        </div>
+                        <span className="nav-bar__item-label">
+                            {currentCar.name}
+                        </span>
+                    </li>
+                </Link>
             </ul>
         )
     );

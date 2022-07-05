@@ -104,33 +104,23 @@
 			</tbody>
 		</table>
 
+		<h2 class="car-maintenances-title">Historique des entretiens</h2>
 		<table class="car-maintenances">
-			<h2 class="car-maintenances-title">Historique des entretiens</h2>
 			{% if carMaintenances is null or carMaintenances is empty %}
 				<p>Pas encore d'entretiens pour ce véhicule</p>
 			{% endif %}
 			<tbody>
 				{% for carMaintenance in carMaintenances %}
 					<tr>
-						<td class="car-maintenances-label">{{ carMaintenance.carPart.name }}</td>
-						<td class="car-maintenances-item" width="15%">{{ carMaintenance.dateLastChange|date("m/d/Y")}}</td>
-						<td class="car-maintenances-item" width="15%">
-							{% if carMaintenance.mileage is not null %}
-								{{ carMaintenance.mileage|number_format(0, '.', ' ') }}km
-							{% else %}
-								--- ---
-							{% endif %}
-						</td>
-
-					</tr>
-					{% if carMaintenance.note is not null and carMaintenance.note is not empty %}
-						<tr>
-							<td class="description" width="95%" colspan="3">
+						<td class="car-maintenances-label" width="20%">{{ carMaintenance.carPart.name }}</td>
+						<td class="car-maintenances-item" width="20%">{{ carMaintenance.dateLastChange|date("m/d/Y")}}</td>
+						{% if carMaintenance.note is not null and carMaintenance.note is not empty %}
+							<td class="description" width="60%">
 								"{{ carMaintenance.note }}"
 							</td>
-						</tr>
-					{% endif %}
-				{% endfor %}
+						{% endif %}
+					{% endfor %}
+				</tbody>
 			</tbody>
 		</table>
 	</body>

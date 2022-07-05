@@ -31,6 +31,9 @@ export const ROUTES = {
     maintenanceHistory: {
         url: "/historique-changements",
     },
+    listMaintenanceParts: {
+        url: "/liste-changements",
+    },
     detailPart: {
         url: "/detail-piece",
         params: ["carPartId"],
@@ -50,6 +53,9 @@ export const ROUTES = {
     },
     blog: {
         url: "/blog",
+    },
+    article: {
+        url: "/article",
     },
     maintenanceBook: {
         url: "/carnet-entretien",

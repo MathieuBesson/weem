@@ -1,23 +1,24 @@
 import react, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { setCurrentCar } from "../store/store";
 import { useFetch } from "../utils/api";
 import { icons } from "../utils/iconLoader";
+import { generateParamsRoutes, ROUTES } from "../utils/routes";
 
 import iconCoupe from "./../assets/images/icons/coupe.svg";
 
 const CarSwitcher = ({ popupActive, setPopupActive }) => {
-    const [idCarSelected, setIdCarSelected] = useState(1);
+    const [idCarSelected, setIdCarSelected] = useState(null);
     const constantes = useSelector((state) => state.constantes.Car);
+    const currentCar = useSelector((state) => state.currentCar);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    // Récupérer la liste des véhicules
     const carList = useFetch({
         endpoint: "car",
         launchRequest: true,
     });
-
-    // Au clique sur une véhicule changer le véhicule courant et recharger la page
-
-    // Charger les constantes
 
     const carTypeList = {
         [constantes?.MODEL_TYPE_ID.BERLINE]: icons.iconBerline,
@@ -26,10 +27,24 @@ const CarSwitcher = ({ popupActive, setPopupActive }) => {
         [constantes?.MODEL_TYPE_ID.SUV]: icons.iconSuv,
     };
 
+    useEffect(() => {
+        setIdCarSelected(currentCar.id);
+    }, [currentCar]);
+
+    useEffect(() => {
+        carList.resetQuery();
+        carList.setLaunchRequest(true);
+    }, [popupActive]);
+
     console.log(carList);
 
-    const handleChangeActiveCar = (carId) => {
-        console.log(carId);
+    const handleChangeActiveCar = async (carId) => {
+        if (carId !== idCarSelected) {
+            await dispatch(
+                setCurrentCar(carList.data.find((car) => car.id === carId))
+            );
+            navigate(ROUTES.home.url);
+        }
         setIdCarSelected(carId);
     };
 
@@ -44,7 +59,6 @@ const CarSwitcher = ({ popupActive, setPopupActive }) => {
             <div className="car-switcher-popup">
                 <h2 className="car-switcher-popup__title">Vos véhicules</h2>
                 <div className="car-switcher-popup__car-list">
-                    {console.log(constantes)}
                     {carList.isSucceed &&
                         constantes !== undefined &&
                         carList.data.map((car, key) => (
@@ -55,13 +69,6 @@ const CarSwitcher = ({ popupActive, setPopupActive }) => {
                                 key={key}
                                 onClick={() => handleChangeActiveCar(car.id)}
                             >
-                                {/* <span
-                                    className={`car-switcher-popup__icon icon mask-${
-                                        constantes.COLOR[car.colorId].LABEL
-                                    }`}
-                                    style={{ maskImage: `url(${car.image})` }}
-                                ></span> */}
-
                                 <span
                                     className={`car-switcher-popup__icon icon mask-${
                                         constantes.COLOR[car.colorId].LABEL
@@ -87,18 +94,25 @@ const CarSwitcher = ({ popupActive, setPopupActive }) => {
                                             }`
                                         }`}
                                         type="radio"
-                                        id="diesel"
-                                        name="fuel-type"
+                                        id={car.id}
+                                        name="car-id"
                                         value={car.id}
                                         required
                                         checked={isCarSelected(car.id)}
-                                        onChange={() => true}
+                                        onChange={() =>
+                                            handleChangeActiveCar(car.id)
+                                        }
                                     />
                                 </div>
                             </section>
                         ))}
                 </div>
-                <button className="btn btn-primary">Ajouter un véhicule</button>
+                <Link
+                    className="btn btn-primary"
+                    to={ROUTES.carInformation.url}
+                >
+                    Ajouter un véhicule
+                </Link>
             </div>
         </div>
     );

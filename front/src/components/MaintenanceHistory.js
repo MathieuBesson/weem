@@ -1,6 +1,6 @@
 import react, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useFetch } from "../utils/api";
 import { ROUTES } from "../utils/routes";
 

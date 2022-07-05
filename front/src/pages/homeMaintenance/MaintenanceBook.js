@@ -14,14 +14,14 @@ import { apiEndPoint, generateUrl, useFetch } from "../../utils/api";
 import Loader from "../../components/Loader";
 import NavBar from "../../components/NavBar";
 import CarSwitcher from "../../components/CarSwitcher";
+import { Link } from "react-router-dom";
+import { ROUTES } from "../../utils/routes";
 
 const MaintenanceBook = () => {
     const currentCar = useSelector((state) => state.currentCar);
     const token = useSelector((state) => state.user.token);
 
-    const [popupActive, setPopupActive] = useState(true);
-
-    console.log(currentCar);
+    const [popupActive, setPopupActive] = useState(false);
 
     return (
         <>
@@ -44,9 +44,12 @@ const MaintenanceBook = () => {
                                 ></span>
                             </p>
                         </header>
-                        <button className="btn btn-secondary w-100">
+                        <Link
+                            className="btn btn-secondary w-100"
+                            to={ROUTES.maintenanceUpcoming.url}
+                        >
                             Ajouter un nouveau changement
-                        </button>
+                        </Link>
                         <MaintenanceUpcomingPreview />
                         <CostEstimation />
                         <MaintenanceHistory />

@@ -11,9 +11,6 @@ const PartsDetailsPopUp = ({
 }) => {
     const [dateLastChange, setDateLastChange] = useState("");
     const [isValidDateLastChange, setIsValidDateLastChange] = useState(true);
-    const [mileageLastChange, setMileageLastChange] = useState("");
-    const [isValidMileageLastChange, setIsValidMileageLastChange] =
-        useState(true);
     const [launchRegisterPartChange, setLaunchRegisterPartChange] =
         useState(false);
 
@@ -21,7 +18,6 @@ const PartsDetailsPopUp = ({
         endpoint: "carPartMaintenanceCreate",
         launchRequest: launchRegisterPartChange,
         dataBody: {
-            mileage: mileageLastChange === "" ? null : mileageLastChange,
             dateLastChange: dateLastChange === "" ? null : dateLastChange,
             carPart: `/api/car_parts/${carPart?.id ?? ""}`,
         },
@@ -45,19 +41,8 @@ const PartsDetailsPopUp = ({
         setDateLastChange(event.target.value);
     };
 
-    const mileageLastChangeHandler = (event) => {
-        const value = parseInt(event.target.value);
-        setIsValidMileageLastChange(value >= 0);
-        setMileageLastChange(value);
-    };
-
     const handleValideChange = () => {
-        if (
-            isValidMileageLastChange &&
-            isValidDateLastChange &&
-            dateLastChange !== "" &&
-            mileageLastChange !== ""
-        ) {
+        if (isValidDateLastChange && dateLastChange !== "") {
             setLaunchRegisterPartChange(true);
             addSelectClassToSubmitPart(carPart.id);
             setNotActivePopup();
@@ -78,12 +63,6 @@ const PartsDetailsPopUp = ({
                     type="date"
                     className="part-detail-popup__input input-secondary"
                     onChange={dateLastChangeHandler}
-                />
-                <input
-                    className="part-detail-popup__input input-secondary"
-                    type="number"
-                    placeholder="Kilométrage actuel de la voiture*"
-                    onChange={mileageLastChangeHandler}
                 />
                 <button
                     className="btn btn-secondary w-100"

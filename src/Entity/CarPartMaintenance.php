@@ -36,13 +36,6 @@ class CarPartMaintenance
 
     /**
      * @Groups({"carPartMaintenance_read","carPart_read"})
-     * @ORM\Column(type="float", nullable=true)
-     * @Assert\Positive(message="Le kilometrage doit être un entier ou flottant supérieur à 0")
-     */
-    private $mileage;
-
-    /**
-     * @Groups({"carPartMaintenance_read","carPart_read"})
      * @ORM\Column(type="datetime")
      * @Assert\NotBlank(message="La date de dernier changement ne peux pas être null")
      */
@@ -65,18 +58,6 @@ class CarPartMaintenance
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getMileage(): ?float
-    {
-        return $this->mileage;
-    }
-
-    public function setMileage($mileage): self
-    {
-        $this->mileage = $mileage;
-
-        return $this;
     }
 
     public function getDateLastChange(): ?\DateTimeInterface

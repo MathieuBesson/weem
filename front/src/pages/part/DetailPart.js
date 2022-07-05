@@ -1,5 +1,5 @@
 import react, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import voca from "voca";
 import AddMaintenance from "../../components/AddMaintenance";
 import { useFetch } from "../../utils/api";
@@ -18,6 +18,7 @@ import SpecialistRecommendation from "./../../components/SpecialistRecommendatio
 
 const DetailPart = ({ name }) => {
     let { carPartId } = useParams();
+    const location = useLocation();
     const [popupActive, setPopupActive] = useState(false);
     const [carPartMaintenanceList, setCarPartMaintenanceList] = useState([]);
 
@@ -44,6 +45,7 @@ const DetailPart = ({ name }) => {
                 a.dateLastChange < b.dateLastChange ? 1 : -1
             )
         );
+        reloadCarPart();
     };
 
     useEffect(() => {
@@ -59,6 +61,15 @@ const DetailPart = ({ name }) => {
     }, [carPartMaintenanceListFetch.isSucceed]);
 
     console.log(carPart);
+
+    const reloadCarPart = () => {
+        carPart.resetQuery();
+        carPart.setLaunchRequest(true);
+    };
+
+    useEffect(() => {
+        reloadCarPart();
+    }, [location.state]);
 
     return (
         <>

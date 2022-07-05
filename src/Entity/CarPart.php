@@ -16,6 +16,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\ExistsFilter;
 
 /**
  * @ApiResource(
@@ -29,6 +30,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  * )
  * @ApiFilter(SearchFilter::class, properties={"car.id": "exact"})
  * @ApiFilter(DateFilter::class, properties={"futureChangeDate"})
+ * @ApiFilter(ExistsFilter::class, properties={"carPartMaintenances"})
  * @ORM\Entity(repositoryClass=CarPartRepository::class)
  */
 class CarPart extends AbstractCarStandardPart
@@ -249,10 +251,6 @@ class CarPart extends AbstractCarStandardPart
      */
     private function calculDateOfFutureMaintenance(DateTimeInterface $dateReference = null): DateTimeInterface
     {
-        if (!$dateReference) {
-            $dateReference = clone $this->getCar()->getDateReleased();
-        }
-
         $timeToChange = null;
 
         switch ($this->calculDurationChoice) {
@@ -287,25 +285,11 @@ class CarPart extends AbstractCarStandardPart
      */
     public function getUpdateFutureChange(?CarPartMaintenance $lastCarPartMaintenance = null): DateTimeInterface
     {
-        $timeToChange = $this->calculDateOfFutureMaintenance(
+        return $this->calculDateOfFutureMaintenance(
             $lastCarPartMaintenance
-                ?  clone $lastCarPartMaintenance->getDateLastChange()
-                : null
+                ? clone $lastCarPartMaintenance->getDateLastChange()
+                : clone $this->getCar()->getDateReleased()
         );
-
-        // switch (true) {
-        //     case $this->unused:
-        //         $timeToChange = $this->calculDateOfFutureMaintenance();
-        //         break;
-        //     case $lastCarPartMaintenance:
-        //         $timeToChange = $this->calculDateOfFutureMaintenance(clone $lastCarPartMaintenance->getDateLastChange());
-        //         break;
-        //     default:
-        //         $timeToChange = null;
-        //         break;
-        // }
-
-        return $timeToChange;
     }
 
     public function getFutureChangeDate(): ?\DateTimeInterface

@@ -1,6 +1,7 @@
 .car {
     &__title {
         color: $green-primary;
+        cursor: pointer;
         display: flex;
         align-items: center;
         font-size: $font-size-medium;
@@ -51,7 +52,7 @@
                 flex-direction: column;
                 &-label {
                     margin-bottom: 8px;
-                    img{
+                    img {
                         height: 20px;
                     }
                 }

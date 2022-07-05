@@ -8,6 +8,8 @@ import { useFetch } from "../../utils/api";
 import { icons } from "../../utils/iconLoader";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentCar } from "../../store/store";
+import voca from "voca";
+import CarSwitcher from "../../components/CarSwitcher";
 
 const Car = () => {
     let { carId } = useParams();
@@ -16,6 +18,7 @@ const Car = () => {
     const [carDataToUpdate, setCarDataToUpdate] = useState();
     const [carColorId, setCarColorId] = useState(null);
     const [carModelType, setCarModelType] = useState(null);
+    const [popupActive, setPopupActive] = useState(false);
 
     const car = useFetch({
         endpoint: "car",
@@ -72,8 +75,11 @@ const Car = () => {
         carColorId &&
         carModelType && (
             <main className="car">
-                <h1 className="car__title">
-                    {car.data.name}
+                <h1
+                    className="car__title"
+                    onClick={() => setPopupActive(!popupActive)}
+                >
+                    {voca.capitalize(car.data.name)}
                     <span
                         className="icon icon-bottom"
                         style={{ maskImage: `url(${iconBottom})` }}
@@ -175,6 +181,10 @@ const Car = () => {
                     </h2>
                     <UpdateCar />
                 </div>
+                <CarSwitcher
+                    popupActive={popupActive}
+                    setPopupActive={setPopupActive}
+                />
             </main>
         )
     );

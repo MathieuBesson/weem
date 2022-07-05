@@ -11,8 +11,9 @@ const MaintenanceUpcoming = () => {
     const currentCar = useSelector((state) => state.currentCar);
     const [isLaunchRequestCarParts, setIsLaunchRequestCarParts] =
         useState(false);
+    const [carPartList, setCarPartList] = useState([]);
 
-    const carPartList = useFetch({
+    const carPartListRequest = useFetch({
         endpoint: "carPart",
         launchRequest: isLaunchRequestCarParts,
         dataQuery: {
@@ -28,12 +29,24 @@ const MaintenanceUpcoming = () => {
         }
     }, [currentCar]);
 
+    useEffect(() => {
+        if (carPartListRequest.isSucceed) {
+            setCarPartList(
+                carPartListRequest.data.sort(
+                    (a, b) =>
+                        a.carPartMaintenances.length <=
+                        b.carPartMaintenances.length
+                )
+            );
+        }
+    }, [carPartListRequest.isSucceed]);
+
     return (
         <>
-            {Object.keys(carPartList.data).length !== 0 && (
+            {Object.keys(carPartListRequest.data).length !== 0 && (
                 <main className="maintenance-upcomming">
                     <HeaderGoToBack>Vos entretien à venir</HeaderGoToBack>
-                    {carPartList.data.map((carPart, id) => (
+                    {carPartList.map((carPart) => (
                         <CarPartPreview
                             link={
                                 ROUTES.detailPart.url +
@@ -43,7 +56,7 @@ const MaintenanceUpcoming = () => {
                             }
                             key={carPart.id}
                             carPart={carPart}
-                            active={id % 5 !== 0}
+                            active={carPart.carPartMaintenances.length !== 0}
                         />
                     ))}
                 </main>

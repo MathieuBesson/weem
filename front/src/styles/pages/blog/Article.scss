@@ -1,0 +1,82 @@
+.article-detail {
+    &__cover {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 475px;
+        cursor: pointer;
+        background: linear-gradient(
+                180deg,
+                rgba(47, 51, 72, 0.4) 0%,
+                #2f3348 100%
+            ),
+            url("../../../assets/images/background/bg-maintenance.png");
+
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 38px;
+        padding-bottom: 15px;
+        &-back {
+            justify-self: flex-start;
+            background-color: $green-primary;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            &-icon {
+                background-color: $blue-secondary;
+                mask-position: center;
+            }
+        }
+        &-presentation {
+            display: flex;
+            flex-direction: column;
+            &-title {
+                color: $white-primary;
+            }
+            &-type-block {
+                margin-bottom: 20px;
+                &-label {
+                    background-color: $green-primary;
+                    text-transform: uppercase;
+                    color: $white-primary;
+                    padding: 8px 16px;
+                    border-radius: 24px;
+                }
+            }
+        }
+    }
+    &__content {
+        margin-top: 475px;
+        font-size: $font-size-medium;
+        h4 {
+            font-size: $font-size-medium;
+            font-weight: $font-weight-bold;
+            margin: 45px 0;
+        }
+        em {
+            font-size: $font-size-small;
+        }
+    }
+    .share-btn {
+        background-color: $blue-secondary;
+        color: $white-primary;
+        border: 0;
+        padding: 12px 18px;
+        margin-bottom: 30px;
+        margin-top: 20px;
+        border-radius: 50px;
+        display: flex;
+        align-items: center;
+        &__icon {
+            background-color: $white-primary;
+            mask-position: center;
+            margin-left: 15px;
+        }
+    }
+}

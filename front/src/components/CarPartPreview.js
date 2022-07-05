@@ -10,6 +10,9 @@ import { getColorAlert } from "../utils/string";
 const CarPartPreview = ({ carPart, link = "", active = true }) => {
     const months = daysToMonth(carPart.daysBeforeFutureChange);
 
+    const isCarPartWithoutMaintenance = () =>
+        carPart.carPartMaintenances.length === 0;
+
     return (
         <Link to={link}>
             <section
@@ -24,16 +27,20 @@ const CarPartPreview = ({ carPart, link = "", active = true }) => {
                     />
                     <div className="car-part-preview__content">
                         <h4 className="car-part-preview__content-name">
-                            {voca.capitalize(carPart.name)}
+                            {isCarPartWithoutMaintenance()
+                                ? "Ajouter la pièce " + carPart.name
+                                : voca.capitalize(carPart.name)}
                         </h4>
-                        <em
-                            className={`car-part-preview__content-time ${getColorAlert(
-                                months
-                            )}`}
-                        >
-                            {months} mois restant
-                            {months > 1 && "s"}
-                        </em>
+                        {!isCarPartWithoutMaintenance() && (
+                            <em
+                                className={`car-part-preview__content-time ${getColorAlert(
+                                    months
+                                )}`}
+                            >
+                                {months} mois restant
+                                {months > 1 && "s"}
+                            </em>
+                        )}
                     </div>
                 </div>
                 <span

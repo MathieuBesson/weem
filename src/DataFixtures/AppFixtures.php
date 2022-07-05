@@ -34,68 +34,85 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
 
+        //max_duration
         $data = [
             'brandList' => ['Audi', 'BMW', 'Citroën', 'Mercedes', 'Peugeot', 'Renault'],
             'carStandardPart' => [
+                // OK 
                 'pneus avants' => [
                     'importance' =>  AbstractCarStandardPart::IMPORTANCE_ID['PRIMARY'],
-                    'max_distance' => 6000,
-                    'price_min' => 50,
+                    'max_distance' => 50000,
+                    'max_duration' => 3650,
+                    'price_min' => 120,
                     'price_max' => 200
                 ],
+                // OK
                 'pneus arrières' => [
                     'importance' =>  AbstractCarStandardPart::IMPORTANCE_ID['PRIMARY'],
-                    'max_distance' => 4000,
-                    'price_min' => 50,
+                    'max_distance' => 50000,
+                    'max_duration' => 3650,
+                    'price_min' => 120,
                     'price_max' => 200
                 ],
+                // OK
                 'freins' => [
                     'importance' =>  AbstractCarStandardPart::IMPORTANCE_ID['PRIMARY'],
-                    'max_duration' => 450,
-                    'price_min' => 50,
+                    'max_distance' => 70000,
+                    'price_min' => 150,
                     'price_max' => 200
                 ],
+                // OK
                 'courroie de distribution' => [
                     'importance' =>  AbstractCarStandardPart::IMPORTANCE_ID['PRIMARY'],
-                    'max_distance' => 4000,
-                    'price_min' => 50,
-                    'price_max' => 200
+                    'max_distance' => 100000,
+                    'max_duration' => 1825,
+                    'price_min' => 400,
+                    'price_max' => 600
                 ],
+                // OK
                 'filtre à air' => [
                     'importance' =>  AbstractCarStandardPart::IMPORTANCE_ID['SECONDARY'],
-                    'max_duration' => 650,
-                    'price_min' => 50,
-                    'price_max' => 200
+                    'max_distance' => 20000,
+                    'max_duration' => 360,
+                    'price_min' => 20,
+                    'price_max' => 40
                 ],
+                // OK
                 'filtre à carburant' => [
                     'importance' =>  AbstractCarStandardPart::IMPORTANCE_ID['SECONDARY'],
-                    'max_distance' => 4000,
-                    'price_min' => 50,
-                    'price_max' => 200
+                    'max_distance' => 30000,
+                    'price_min' => 30,
+                    'price_max' => 60
                 ],
+                // OK
                 'filtre à huile' => [
                     'importance' =>  AbstractCarStandardPart::IMPORTANCE_ID['SECONDARY'],
-                    'max_distance' => 4000,
-                    'price_min' => 50,
-                    'price_max' => 200
+                    'max_distance' => 20000,
+                    'max_duration' => 360,
+                    'price_min' => 20,
+                    'price_max' => 40
                 ],
+                // OK
                 'filtre déshydratant' => [
                     'importance' =>  AbstractCarStandardPart::IMPORTANCE_ID['SECONDARY'],
-                    'max_duration' => 250,
-                    'price_min' => 50,
-                    'price_max' => 200
+                    'max_duration' => 720,
+                    'price_min' => 30,
+                    'price_max' => 70
                 ],
+                // OK 
                 'vidange' => [
                     'importance' =>  AbstractCarStandardPart::IMPORTANCE_ID['MAINTENANCE'],
-                    'max_duration' => 300,
+                    'max_distance' => 20000,
+                    'max_duration' => 365,
                     'price_min' => 50,
-                    'price_max' => 200
+                    'price_max' => 150
                 ],
+                // OK 
                 'controle technique' => [
                     'importance' =>  AbstractCarStandardPart::IMPORTANCE_ID['MAINTENANCE'],
-                    'max_distance' => 9000,
-                    'price_min' => 50,
-                    'price_max' => 200
+                    'max_duration' => 730,
+                    'price_min' => 70,
+                    'price_max' => 80
                 ],
             ],
             // 'vehicles' => [

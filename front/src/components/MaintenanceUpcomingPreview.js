@@ -19,6 +19,7 @@ const MaintenanceUpcomingPreview = () => {
             keyValue: {
                 "car.id": currentCar?.id ?? null,
                 count: 3,
+                "exists[carPartMaintenances]": true,
             },
         },
     });
