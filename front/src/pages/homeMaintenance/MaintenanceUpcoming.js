@@ -31,13 +31,19 @@ const MaintenanceUpcoming = () => {
 
     useEffect(() => {
         if (carPartListRequest.isSucceed) {
-            setCarPartList(
-                carPartListRequest.data.sort(
+            const carPartWithChange = carPartListRequest.data
+                .filter((carPart) => carPart.carPartMaintenances.length !== 0)
+                .sort(
                     (a, b) =>
-                        a.carPartMaintenances.length <=
-                        b.carPartMaintenances.length
-                )
+                        Date.parse(a.futurChangeDate) >=
+                        Date.parse(b.futurChangeDate)
+                );
+
+            const carPartWithoutChange = carPartListRequest.data.filter(
+                (carPart) => carPart.carPartMaintenances.length === 0
             );
+
+            setCarPartList([...carPartWithChange, ...carPartWithoutChange]);
         }
     }, [carPartListRequest.isSucceed]);
 

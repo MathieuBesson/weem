@@ -8,7 +8,6 @@ import { setToken } from "./../../store/store";
 import { useGetAuthToken } from "./../../utils/auth";
 import { ROUTES } from "./../../utils/routes";
 
-
 const Login = (props) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -41,7 +40,20 @@ const Login = (props) => {
             dispatch(setToken(login.data.token));
             navigate(ROUTES.home.url);
         }
+
+        console.log(login);
+        if (!login.isSucceed && login.queryCounter !== 0) {
+            login.resetQuery();
+        }
     }, [login.isSucceed]);
+
+    useEffect(() => {
+        console.log(login);
+        if (!login.isSucceed && login.queryCounter !== 0) {
+            login.resetQuery();
+            setIsLoginLaunchOk(false);
+        }
+    }, [login.queryCounter]);
 
     const validOrNotInput = (condition, varName) => {
         setIsValid({
@@ -76,6 +88,7 @@ const Login = (props) => {
         const allAreNotEmpty = [enteredUsername, enteredPassword].every(
             (value) => value !== ""
         );
+        console.log(allAreValid && allAreNotEmpty);
 
         setIsLoginLaunchOk(allAreValid && allAreNotEmpty);
     };
@@ -141,7 +154,10 @@ const Login = (props) => {
                         Mot de passe oublié ?
                     </a>
                     <button className="btn btn-primary">Se connecter</button>
-                    <Link to={ROUTES.registration.url} className="btn btn-transparent">
+                    <Link
+                        to={ROUTES.registration.url}
+                        className="btn btn-transparent"
+                    >
                         S'inscrire &nbsp;➜
                     </Link>
                 </form>

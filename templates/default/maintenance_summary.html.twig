@@ -115,7 +115,8 @@
 						<td class="car-maintenances-label" width="20%">{{ carMaintenance.carPart.name }}</td>
 						<td class="car-maintenances-item" width="20%">{{ carMaintenance.dateLastChange|date("m/d/Y")}}</td>
 						{% if carMaintenance.note is not null and carMaintenance.note is not empty %}
-							<td class="description" width="60%">
+							<td width="5%"></td>
+							<td class="description" width="60%" style="text-align:left">
 								"{{ carMaintenance.note }}"
 							</td>
 						{% endif %}
